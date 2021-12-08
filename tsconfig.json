@@ -5,10 +5,23 @@
     "emitDecoratorMetadata": true,
     "module": "commonjs",
     "resolveJsonModule": true,
+    "rootDir": "./",
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@database": [
+        "database/*"
+      ],
+      "@errors": [
+        "erros/*"
+      ],
+      "@employees/*": [
+        "modules/employees/*"
+      ],
+    }
   }
 }
