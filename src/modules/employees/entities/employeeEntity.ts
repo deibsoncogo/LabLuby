@@ -31,10 +31,14 @@ export class EmployeeEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @Column()
+  off: boolean;
+
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
       this.isAdmin = false;
+      this.off = false;
     }
   }
 }
