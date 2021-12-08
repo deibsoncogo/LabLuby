@@ -6,4 +6,5 @@ export interface IEmployeeRepository {
   findOneCpf(cpf: number): Promise<EmployeeEntity>;
   findOneEmail(email: string): Promise<EmployeeEntity>;
   findOneId(id: string): Promise<EmployeeEntity>;
+  list(): Promise<EmployeeEntity[]>;
 }
