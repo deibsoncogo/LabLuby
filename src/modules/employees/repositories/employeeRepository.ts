@@ -13,27 +13,27 @@ export class EmployeeRepository implements IEmployeeRepository {
   async create(
     { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto,
   ): Promise<EmployeeEntity> {
-    const employee = this.employeeRepository.create({ name, cpf, email, password, avatarUrl });
+    const employee = await this.employeeRepository.create({ name, cpf, email, password, avatarUrl });
 
     await this.employeeRepository.save(employee);
 
     return employee;
   }
 
-  findOneCpf(cpf: number): Promise<EmployeeEntity> {
-    const employee = this.employeeRepository.findOne({ cpf });
+  async findOneCpf(cpf: number): Promise<EmployeeEntity> {
+    const employee = await this.employeeRepository.findOne({ cpf });
 
     return employee;
   }
 
-  findOneEmail(email: string): Promise<EmployeeEntity> {
-    const employee = this.employeeRepository.findOne({ email });
+  async findOneEmail(email: string): Promise<EmployeeEntity> {
+    const employee = await this.employeeRepository.findOne({ email });
 
     return employee;
   }
 
-  findOneId(id: string): Promise<EmployeeEntity> {
-    const employee = this.employeeRepository.findOne({ id });
+  async findOneId(id: string): Promise<EmployeeEntity> {
+    const employee = await this.employeeRepository.findOne({ id });
 
     return employee;
   }
