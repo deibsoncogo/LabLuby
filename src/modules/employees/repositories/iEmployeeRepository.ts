@@ -5,4 +5,5 @@ export interface IEmployeeRepository {
   create({ name, cpf, email, password, avatarUrl }: ICreateEmployeeDto): Promise<EmployeeEntity>;
   findOneCpf(cpf: number): Promise<EmployeeEntity>;
   findOneEmail(email: string): Promise<EmployeeEntity>;
+  findOneId(id: string): Promise<EmployeeEntity>;
 }

@@ -31,4 +31,10 @@ export class EmployeeRepository implements IEmployeeRepository {
 
     return employee;
   }
+
+  findOneId(id: string): Promise<EmployeeEntity> {
+    const employee = this.employeeRepository.findOne({ id });
+
+    return employee;
+  }
 }
