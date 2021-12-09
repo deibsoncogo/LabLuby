@@ -1,56 +1,55 @@
-import { hash } from "bcryptjs";
+import { compare, hash } from "bcryptjs";
 import { AppError } from "errors/appError";
 import { inject, injectable } from "tsyringe";
+import { IUpdateEmployeeDto } from "@employees/dtos/iUpdateEmployeeDto";
 import { EmployeeEntity } from "@employees/entities/employeeEntity";
 import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository";
 
-interface IEmployeeUpdate {
-  name?: string;
-  cpf?: number;
-  email?: string;
-  password?: string;
-  avatarUrl?: string;
-}
-
-export interface IUpdateEmployeeDto {
-  employeeUpdate: IEmployeeUpdate;
-  idEmployee: string;
-}
-
 @injectable()
 export class UpdateEmployeeService {
-  constructor(
-    @inject("EmployeeRepository")
-    private employeeRepository: IEmployeeRepository,
-  ) { }
+  constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
-  async execute({ employeeUpdate, idEmployee }: IUpdateEmployeeDto): Promise<EmployeeEntity> {
-    if (!employeeUpdate) {
-      throw new AppError("Não existe alteração para realizar", 200);
-    }
-
-    const employee = await this.employeeRepository.findOneId(idEmployee);
+  async execute(
+    { id, name, cpf, email, passwordOld, passwordNew, avatarUrl }: IUpdateEmployeeDto,
+  ): Promise<EmployeeEntity> {
+    const employee = await this.employeeRepository.findOneId(id);
 
     if (!employee) {
       throw new AppError("ID do funcionário inválido");
     }
 
-    const emailAlreadyExists = await this.employeeRepository.findOneEmail(employeeUpdate.email);
+    const emailAlreadyExists = await this.employeeRepository.findOneEmail(email);
 
     if (emailAlreadyExists) {
       throw new AppError("Já existe este email no sistema");
     }
 
-    const cpfAlreadyExists = await this.employeeRepository.findOneCpf(employeeUpdate.cpf);
+    const cpfAlreadyExists = await this.employeeRepository.findOneCpf(cpf);
 
     if (cpfAlreadyExists) {
       throw new AppError("Já existe este CPF no sistema");
     }
 
-    const passwordHash = await hash(employeeUpdate.password, 8);
-    employeeUpdate.password = passwordHash;
+    if (passwordOld && passwordNew) {
+      const passwordMatch = await compare(passwordOld, employee.password);
 
-    const employeeNew = await this.employeeRepository.update({ employeeUpdate, idEmployee });
+      if (!passwordMatch) {
+        throw new AppError("Senha antiga inválida!");
+      }
+
+      passwordNew = await hash(passwordNew, 8);
+    }
+
+    const employeeNew = await this.employeeRepository.update({
+      id,
+      name,
+      cpf,
+      email,
+      passwordNew,
+      avatarUrl,
+    });
+
+    delete employeeNew.password;
 
     return employeeNew;
   }

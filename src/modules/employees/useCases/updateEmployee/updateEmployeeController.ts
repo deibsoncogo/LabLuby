@@ -4,13 +4,21 @@ import { UpdateEmployeeService } from "./updateEmployeeService";
 
 export class UpdateEmployeeController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { idEmployee } = request.params;
-    const employeeUpdate = request.body;
+    const { id } = request.params;
+    const { name, cpf, email, passwordOld, passwordNew, avatarUrl } = request.query;
 
     const updateEmployeeService = container.resolve(UpdateEmployeeService);
 
-    const employeeNew = await updateEmployeeService.execute({ employeeUpdate, idEmployee });
-
-    return response.status(201).json(employeeNew);
+    return response.status(201).json(
+      await updateEmployeeService.execute({
+        id: id as string,
+        name: name as string,
+        cpf: Number(cpf as string),
+        email: email as string,
+        passwordOld: passwordOld as string,
+        passwordNew: passwordNew as string,
+        avatarUrl: avatarUrl as string,
+      }),
+    );
   }
 }
