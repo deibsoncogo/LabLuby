@@ -1,5 +1,6 @@
 import { ICreateEmployeeDto } from "@employees/dtos/iCreateEmployeeDto";
 import { EmployeeEntity } from "@employees/entities/employeeEntity";
+import { IToggleEmployeeAdmin } from "@employees/useCases/toggleEmployeeAdmin/toggleEmployeeAdminService";
 import { IUpdateEmployeeDto } from "@employees/useCases/updateEmployee/updateEmployeeService";
 
 export interface IEmployeeRepository {
@@ -9,4 +10,5 @@ export interface IEmployeeRepository {
   findOneId(id: string): Promise<EmployeeEntity>;
   list(): Promise<EmployeeEntity[]>;
   update({ employeeUpdate, idEmployee }: IUpdateEmployeeDto): Promise<EmployeeEntity>;
+  toggleAdmin({ cpf }: IToggleEmployeeAdmin): Promise<EmployeeEntity>;
 }

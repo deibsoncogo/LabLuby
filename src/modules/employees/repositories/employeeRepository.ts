@@ -2,6 +2,7 @@ import { getRepository, Repository } from "typeorm";
 import { ICreateEmployeeDto } from "@employees/dtos/iCreateEmployeeDto";
 import { EmployeeEntity } from "@employees/entities/employeeEntity";
 import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository";
+import { IToggleEmployeeAdmin } from "@employees/useCases/toggleEmployeeAdmin/toggleEmployeeAdminService";
 import { IUpdateEmployeeDto } from "@employees/useCases/updateEmployee/updateEmployeeService";
 
 export class EmployeeRepository implements IEmployeeRepository {
@@ -54,6 +55,16 @@ export class EmployeeRepository implements IEmployeeRepository {
     employee.password = employeeUpdate.password && employeeUpdate.password;
     employee.avatarUrl = employeeUpdate.avatarUrl && employeeUpdate.avatarUrl;
     employee.updatedAt = new Date();
+
+    const employeeNew = await this.employeeRepository.save(employee);
+
+    return employeeNew;
+  }
+
+  async toggleAdmin({ cpf }: IToggleEmployeeAdmin): Promise<EmployeeEntity> {
+    const employee = await this.findOneCpf(cpf);
+
+    employee.isAdmin = !employee.isAdmin;
 
     const employeeNew = await this.employeeRepository.save(employee);
 
