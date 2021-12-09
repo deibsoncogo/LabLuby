@@ -10,7 +10,6 @@ import { UpdateEmployeeController } from "@employees/useCases/updateEmployee/upd
 
 const employeeRouter = Router();
 
-const createEmployeeController = new CreateEmployeeController();
 const authenticateEmployeeController = new AuthenticateEmployeeController();
 const listOneEmployeeController = new ListOneEmployeeController();
 const listEmployeeController = new ListEmployeeController();
@@ -18,7 +17,7 @@ const toggleEmployeeController = new ToggleEmployeeController();
 const updateEmployeeController = new UpdateEmployeeController();
 const toggleEmployeeAdminController = new ToggleEmployeeAdminController();
 
-employeeRouter.post("/create", createEmployeeController.handle);
+employeeRouter.post("/create", new CreateEmployeeController().handle);
 employeeRouter.post("/authenticate", authenticateEmployeeController.handle);
 
 employeeRouter.use(EnsuredAuthorizedUserMiddleware);

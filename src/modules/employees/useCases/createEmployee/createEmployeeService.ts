@@ -7,23 +7,26 @@ import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository
 
 @injectable()
 export class CreateEmployeeService {
-  constructor(
-    @inject("EmployeeRepository")
-    private employeeRepository: IEmployeeRepository,
-  ) { }
+  constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(
     { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto,
   ): Promise<EmployeeEntity> {
-    const cpfAlreadyExist = await this.employeeRepository.findOneCpf(cpf);
+    const cpfAlreadyExists = await this.employeeRepository.findOneCpf(cpf);
 
-    if (cpfAlreadyExist) {
+    if (cpfAlreadyExists) {
       throw new AppError("Já existe um funcionário com este CPF!");
+    }
+
+    const emailAlreadyExists = await this.employeeRepository.findOneEmail(email);
+
+    if (emailAlreadyExists) {
+      throw new AppError("Já existe um funcionário com este email!");
     }
 
     const passwordHash = await hash(password, 8);
 
-    const employee = this.employeeRepository.create({
+    const employeeNew = await this.employeeRepository.create({
       name,
       cpf,
       email,
@@ -31,6 +34,8 @@ export class CreateEmployeeService {
       avatarUrl,
     });
 
-    return employee;
+    delete employeeNew.password;
+
+    return employeeNew;
   }
 }

@@ -8,8 +8,8 @@ export class CreateEmployeeController {
 
     const createEmployeeService = container.resolve(CreateEmployeeService);
 
-    const employee = await createEmployeeService.execute({ name, cpf, email, password, avatarUrl });
-
-    return response.status(201).json(employee);
+    return response.status(201).json(
+      await createEmployeeService.execute({ name, cpf, email, password, avatarUrl }),
+    );
   }
 }
