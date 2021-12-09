@@ -5,13 +5,10 @@ import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository
 
 @injectable()
 export class ListEmployeeService {
-  constructor(
-    @inject("EmployeeRepository")
-    private employeeRepository: IEmployeeRepository,
-  ) { }
+  constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
-  async execute(isAdmin: boolean): Promise<EmployeeEntity[]> {
-    if (!isAdmin) {
+  async execute(employeeIsAdmin: boolean): Promise<EmployeeEntity[]> {
+    if (!employeeIsAdmin) {
       throw new AppError("Funcionário não é administrador", 401);
     }
 
