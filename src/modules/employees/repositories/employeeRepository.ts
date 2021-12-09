@@ -7,9 +7,7 @@ import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository
 export class EmployeeRepository implements IEmployeeRepository {
   private employeeRepository: Repository<EmployeeEntity>;
 
-  constructor() {
-    this.employeeRepository = getRepository(EmployeeEntity);
-  }
+  constructor() { this.employeeRepository = getRepository(EmployeeEntity); }
 
   async create(
     { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto,
