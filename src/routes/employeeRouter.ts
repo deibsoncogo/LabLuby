@@ -16,9 +16,9 @@ employeeRouter.post("/authenticate", new AuthenticateEmployeeController().handle
 
 employeeRouter.use(EnsuredAuthorizedMiddleware);
 employeeRouter.get("/one/:cpf", new ListOneEmployeeController().handle);
+employeeRouter.get("/all", new ListEmployeeController().handle);
 
 employeeRouter.use(EmployeeIsAdminMiddleware);
-employeeRouter.get("/all", new ListEmployeeController().handle);
 employeeRouter.put("/:id", new UpdateEmployeeController().handle);
 employeeRouter.patch("/toggle", new ToggleEmployeeController().handle);
 employeeRouter.patch("/toggleAdmin", new ToggleEmployeeAdminController().handle);
