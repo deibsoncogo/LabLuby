@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { EnsuredAuthorizedUserMiddleware } from "middlewares/ensuredAuthorizedUserMiddleware";
+import { EnsuredAuthorizedMiddleware } from "middlewares/ensuredAuthorizedMiddleware";
 import { AuthenticateEmployeeController } from "@employees/useCases/authenticateEmployee/authenticateEmployeeController";
 import { CreateEmployeeController } from "@employees/useCases/createEmployee/createEmployeeController";
 import { ListEmployeeController } from "@employees/useCases/listEmployee/listEmployeeController";
@@ -10,7 +10,6 @@ import { UpdateEmployeeController } from "@employees/useCases/updateEmployee/upd
 
 const employeeRouter = Router();
 
-const authenticateEmployeeController = new AuthenticateEmployeeController();
 const listOneEmployeeController = new ListOneEmployeeController();
 const listEmployeeController = new ListEmployeeController();
 const toggleEmployeeController = new ToggleEmployeeController();
@@ -18,9 +17,9 @@ const updateEmployeeController = new UpdateEmployeeController();
 const toggleEmployeeAdminController = new ToggleEmployeeAdminController();
 
 employeeRouter.post("/create", new CreateEmployeeController().handle);
-employeeRouter.post("/authenticate", authenticateEmployeeController.handle);
+employeeRouter.post("/authenticate", new AuthenticateEmployeeController().handle);
 
-employeeRouter.use(EnsuredAuthorizedUserMiddleware);
+employeeRouter.use(EnsuredAuthorizedMiddleware);
 employeeRouter.get("/one/:id", listOneEmployeeController.handle);
 employeeRouter.get("/all", listEmployeeController.handle);
 employeeRouter.patch("/toggle", toggleEmployeeController.handle);

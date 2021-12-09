@@ -8,8 +8,8 @@ export class AuthenticateEmployeeController {
 
     const authenticateEmployeeService = container.resolve(AuthenticateEmployeeService);
 
-    const token = await authenticateEmployeeService.execute({ email, password });
-
-    return response.status(201).json(token);
+    return response.status(201).json(
+      await authenticateEmployeeService.execute({ email, password }),
+    );
   }
 }

@@ -4,13 +4,10 @@ import { AppError } from "../errors/appError";
 
 interface IToken {
   name: string;
-  email: string;
-  avatarUrl: string;
-  isAdmin: boolean;
   sub: string;
 }
 
-export async function EnsuredAuthorizedUserMiddleware(
+export async function EnsuredAuthorizedMiddleware(
   request: Request, response: Response, next: NextFunction,
 ): Promise<void> {
   const authHeader = request.headers.authorization;
@@ -24,15 +21,7 @@ export async function EnsuredAuthorizedUserMiddleware(
   try {
     const tokenVerify = verify(token, "fa5473530e4d1a5a1e1eb53d2fedb10c") as IToken;
 
-    const employeeToken = {
-      id: tokenVerify.sub,
-      name: tokenVerify.name,
-      email: tokenVerify.email,
-      avatarUrl: tokenVerify.avatarUrl,
-      isAdmin: tokenVerify.isAdmin,
-    };
-
-    request.employeeToken = employeeToken;
+    request.idEmployeeAuthorized = tokenVerify.sub;
 
     return next();
   } catch (error) {

@@ -11,10 +11,7 @@ interface IToken {
 
 @injectable()
 export class AuthenticateEmployeeService {
-  constructor(
-    @inject("EmployeeRepository")
-    private employeeRepository: IEmployeeRepository,
-  ) { }
+  constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute({ email, password }: IAuthenticateEmployeeDto): Promise<IToken> {
     const messageAuthenticateInvalid = "Email ou senha inválido";
@@ -32,17 +29,7 @@ export class AuthenticateEmployeeService {
     }
 
     const token = sign(
-      {
-        name: employee.name,
-        email: employee.email,
-        avatarUrl: employee.avatarUrl,
-        isAdmin: employee.isAdmin,
-      },
-      "fa5473530e4d1a5a1e1eb53d2fedb10c",
-      {
-        subject: employee.id,
-        expiresIn: "5d",
-      },
+      {}, "fa5473530e4d1a5a1e1eb53d2fedb10c", { subject: employee.id, expiresIn: "12h" },
     );
 
     return { token };
