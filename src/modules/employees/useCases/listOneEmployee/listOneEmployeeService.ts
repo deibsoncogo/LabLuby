@@ -5,16 +5,13 @@ import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository
 
 @injectable()
 export class ListOneEmployeeService {
-  constructor(
-    @inject("EmployeeRepository")
-    private employeeRepository: IEmployeeRepository,
-  ) { }
+  constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
-  async execute(id: string): Promise<EmployeeEntity> {
-    const employee = await this.employeeRepository.findOneId(id);
+  async execute(cpf: number): Promise<EmployeeEntity> {
+    const employee = await this.employeeRepository.findOneCpf(cpf);
 
     if (!employee) {
-      throw new AppError("ID inválido");
+      throw new AppError("CPF inválido");
     }
 
     delete employee.password;

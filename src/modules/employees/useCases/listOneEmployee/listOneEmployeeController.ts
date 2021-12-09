@@ -4,12 +4,12 @@ import { ListOneEmployeeService } from "./listOneEmployeeService";
 
 export class ListOneEmployeeController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const { cpf } = request.params;
 
     const listOneEmployeeService = container.resolve(ListOneEmployeeService);
 
-    const employee = await listOneEmployeeService.execute(id);
-
-    return response.status(200).json(employee);
+    return response.status(200).json(
+      await listOneEmployeeService.execute(Number(cpf)),
+    );
   }
 }
