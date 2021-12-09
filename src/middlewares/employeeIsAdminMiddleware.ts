@@ -15,7 +15,9 @@ export async function EmployeeIsAdminMiddleware(
     throw new AppError("ID do funcionário autorizado inválido!", 401);
   }
 
-  request.employeeIsAdmin = employee.isAdmin;
+  if (!employee.isAdmin) {
+    throw new AppError("Funcionário não é administrador!", 401);
+  }
 
   return next();
 }
