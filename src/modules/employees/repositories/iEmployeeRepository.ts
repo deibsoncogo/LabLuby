@@ -9,6 +9,7 @@ export interface IEmployeeRepository {
   findOneId(id: string): Promise<EmployeeEntity>;
   list(): Promise<EmployeeEntity[]>;
   toggleAdmin(cpf: number): Promise<boolean>;
+  toggleOff(cpf: number): Promise<boolean>;
 
   update(
     { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateEmployeeDto
