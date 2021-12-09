@@ -3,7 +3,6 @@ import { ICreateEmployeeDto } from "@employees/dtos/iCreateEmployeeDto";
 import { IUpdateEmployeeDto } from "@employees/dtos/iUpdateEmployeeDto";
 import { EmployeeEntity } from "@employees/entities/employeeEntity";
 import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository";
-import { IToggleEmployeeAdmin } from "@employees/useCases/toggleEmployeeAdmin/toggleEmployeeAdminService";
 
 export class EmployeeRepository implements IEmployeeRepository {
   private employeeRepository: Repository<EmployeeEntity>;
@@ -46,6 +45,16 @@ export class EmployeeRepository implements IEmployeeRepository {
     return employeeAll;
   }
 
+  async toggleAdmin(cpf: number): Promise<boolean> {
+    const employee = await this.findOneCpf(cpf);
+
+    employee.isAdmin = !employee.isAdmin;
+
+    const { isAdmin } = await this.employeeRepository.save(employee);
+
+    return isAdmin;
+  }
+
   async update(
     { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateEmployeeDto,
   ): Promise<EmployeeEntity> {
@@ -61,15 +70,5 @@ export class EmployeeRepository implements IEmployeeRepository {
     const employeeSave = await this.employeeRepository.save(employee);
 
     return employeeSave;
-  }
-
-  async toggleAdmin({ cpf }: IToggleEmployeeAdmin): Promise<EmployeeEntity> {
-    const employee = await this.findOneCpf(cpf);
-
-    employee.isAdmin = !employee.isAdmin;
-
-    const employeeNew = await this.employeeRepository.save(employee);
-
-    return employeeNew;
   }
 }

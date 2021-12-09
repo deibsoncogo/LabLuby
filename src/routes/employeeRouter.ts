@@ -12,7 +12,6 @@ import { UpdateEmployeeController } from "@employees/useCases/updateEmployee/upd
 const employeeRouter = Router();
 
 const toggleEmployeeController = new ToggleEmployeeController();
-const toggleEmployeeAdminController = new ToggleEmployeeAdminController();
 
 employeeRouter.post("/create", new CreateEmployeeController().handle);
 employeeRouter.post("/authenticate", new AuthenticateEmployeeController().handle);
@@ -20,10 +19,10 @@ employeeRouter.post("/authenticate", new AuthenticateEmployeeController().handle
 employeeRouter.use(EnsuredAuthorizedMiddleware);
 employeeRouter.get("/one/:cpf", new ListOneEmployeeController().handle);
 employeeRouter.patch("/toggle", toggleEmployeeController.handle);
-employeeRouter.patch("/toggleAdmin", toggleEmployeeAdminController.handle);
 
 employeeRouter.use(EmployeeIsAdminMiddleware);
 employeeRouter.get("/all", new ListEmployeeController().handle);
 employeeRouter.put("/:id", new UpdateEmployeeController().handle);
+employeeRouter.patch("/toggleAdmin", new ToggleEmployeeAdminController().handle);
 
 export { employeeRouter };

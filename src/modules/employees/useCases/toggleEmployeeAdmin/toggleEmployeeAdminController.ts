@@ -8,8 +8,8 @@ export class ToggleEmployeeAdminController {
 
     const toggleEmployeeAdminService = container.resolve(ToggleEmployeeAdminService);
 
-    const employee = await toggleEmployeeAdminService.execute({ cpf });
-
-    return response.status(201).json(employee);
+    return response.status(201).json(
+      await toggleEmployeeAdminService.execute(cpf),
+    );
   }
 }
