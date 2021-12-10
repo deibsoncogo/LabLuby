@@ -12,16 +12,6 @@
     "strict": false,
     "skipLibCheck": true,
     "baseUrl": "./src",
-    "paths": {
-      "@database": [
-        "database/*"
-      ],
-      "@errors": [
-        "erros/*"
-      ],
-      "@employees/*": [
-        "modules/employees/*"
-      ],
-    }
+    "paths": {}
   }
 }

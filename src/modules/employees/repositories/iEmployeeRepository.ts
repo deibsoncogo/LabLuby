@@ -1,6 +1,6 @@
-import { ICreateEmployeeDto } from "@employees/dtos/iCreateEmployeeDto";
-import { IUpdateEmployeeDto } from "@employees/dtos/iUpdateEmployeeDto";
-import { EmployeeEntity } from "@employees/entities/employeeEntity";
+import { ICreateEmployeeDto } from "../dtos/iCreateEmployeeDto";
+import { IUpdateEmployeeDto } from "../dtos/iUpdateEmployeeDto";
+import { EmployeeEntity } from "../entities/employeeEntity";
 
 export interface IEmployeeRepository {
   create({ name, cpf, email, password, avatarUrl }: ICreateEmployeeDto): Promise<EmployeeEntity>;

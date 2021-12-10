@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { EmployeeIsAdminMiddleware } from "middlewares/employeeIsAdminMiddleware";
-import { EnsuredAuthorizedMiddleware } from "middlewares/ensuredAuthorizedMiddleware";
-import { AuthenticateEmployeeController } from "@employees/useCases/authenticateEmployee/authenticateEmployeeController";
-import { CreateEmployeeController } from "@employees/useCases/createEmployee/createEmployeeController";
-import { ListEmployeeController } from "@employees/useCases/listEmployee/listEmployeeController";
-import { ListOneEmployeeController } from "@employees/useCases/listOneEmployee/listOneEmployeeController";
-import { ToggleEmployeeController } from "@employees/useCases/toggleEmployee/toggleEmployeeController";
-import { ToggleEmployeeAdminController } from "@employees/useCases/toggleEmployeeAdmin/toggleEmployeeAdminController";
-import { UpdateEmployeeController } from "@employees/useCases/updateEmployee/updateEmployeeController";
+import { EmployeeIsAdminMiddleware } from "../middlewares/employeeIsAdminMiddleware";
+import { EnsuredAuthorizedMiddleware } from "../middlewares/ensuredAuthorizedMiddleware";
+import { AuthenticateEmployeeController } from "../modules/employees/useCases/authenticateEmployee/authenticateEmployeeController";
+import { CreateEmployeeController } from "../modules/employees/useCases/createEmployee/createEmployeeController";
+import { ListEmployeeController } from "../modules/employees/useCases/listEmployee/listEmployeeController";
+import { ListOneEmployeeController } from "../modules/employees/useCases/listOneEmployee/listOneEmployeeController";
+import { ToggleEmployeeController } from "../modules/employees/useCases/toggleEmployee/toggleEmployeeController";
+import { ToggleEmployeeAdminController } from "../modules/employees/useCases/toggleEmployeeAdmin/toggleEmployeeAdminController";
+import { UpdateEmployeeController } from "../modules/employees/useCases/updateEmployee/updateEmployeeController";
 
 const employeeRouter = Router();
 

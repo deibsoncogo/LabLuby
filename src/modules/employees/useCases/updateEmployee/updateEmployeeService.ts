@@ -1,9 +1,9 @@
 import { compare, hash } from "bcryptjs";
 import { AppError } from "errors/appError";
 import { inject, injectable } from "tsyringe";
-import { IUpdateEmployeeDto } from "@employees/dtos/iUpdateEmployeeDto";
-import { EmployeeEntity } from "@employees/entities/employeeEntity";
-import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository";
+import { IUpdateEmployeeDto } from "../../dtos/iUpdateEmployeeDto";
+import { EmployeeEntity } from "../../entities/employeeEntity";
+import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 @injectable()
 export class UpdateEmployeeService {

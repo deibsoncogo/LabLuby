@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
-import { EmployeeEntity } from "@employees/entities/employeeEntity";
-import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository";
+import { EmployeeEntity } from "../../entities/employeeEntity";
+import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 @injectable()
 export class ListEmployeeService {

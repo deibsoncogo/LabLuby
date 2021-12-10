@@ -1,8 +1,8 @@
 import { getRepository, Repository } from "typeorm";
-import { ICreateEmployeeDto } from "@employees/dtos/iCreateEmployeeDto";
-import { IUpdateEmployeeDto } from "@employees/dtos/iUpdateEmployeeDto";
-import { EmployeeEntity } from "@employees/entities/employeeEntity";
-import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository";
+import { ICreateEmployeeDto } from "../dtos/iCreateEmployeeDto";
+import { IUpdateEmployeeDto } from "../dtos/iUpdateEmployeeDto";
+import { EmployeeEntity } from "../entities/employeeEntity";
+import { IEmployeeRepository } from "./iEmployeeRepository";
 
 export class EmployeeRepository implements IEmployeeRepository {
   private employeeRepository: Repository<EmployeeEntity>;

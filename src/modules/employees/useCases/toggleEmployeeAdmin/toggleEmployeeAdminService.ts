@@ -1,6 +1,6 @@
 import { AppError } from "errors/appError";
 import { inject, injectable } from "tsyringe";
-import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository";
+import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 @injectable()
 export class ToggleEmployeeAdminService {

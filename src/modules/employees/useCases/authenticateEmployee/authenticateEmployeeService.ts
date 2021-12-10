@@ -2,8 +2,8 @@ import { compare } from "bcryptjs";
 import { AppError } from "errors/appError";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
-import { IAuthenticateEmployeeDto } from "@employees/dtos/iAuthenticateEmployeeDto";
-import { IEmployeeRepository } from "@employees/repositories/iEmployeeRepository";
+import { IAuthenticateEmployeeDto } from "../../dtos/iAuthenticateEmployeeDto";
+import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 interface IToken {
   token: string;
