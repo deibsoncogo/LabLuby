@@ -1,6 +1,7 @@
 import { VehicleEntity } from "modules/vehicles/entities/vehicleEntity";
 import { IVehicleRepository } from "modules/vehicles/repositories/iVehicleRepository";
 import { inject, injectable } from "tsyringe";
+import { FormatDate } from "utils/formatDate";
 
 export interface IFindAllVehicleFilterDto {
   category?: string;
@@ -20,7 +21,7 @@ export class FindAllVehicleFilterService {
   async execute(
     { category, brand, model, year, km, color, purchasePrice, status }: IFindAllVehicleFilterDto,
   ): Promise<VehicleEntity[]> {
-    const vehicle = await this.vehicleRepository.findAllFilter({
+    const vehicleAll = await this.vehicleRepository.findAllFilter({
       category,
       brand,
       model,
@@ -31,6 +32,13 @@ export class FindAllVehicleFilterService {
       status,
     });
 
-    return vehicle;
+    vehicleAll.map((vehicle) => {
+      vehicle.createdAt = FormatDate(vehicle.createdAt);
+      vehicle.updatedAt = FormatDate(vehicle.updatedAt);
+
+      return vehicle;
+    });
+
+    return vehicleAll;
   }
 }

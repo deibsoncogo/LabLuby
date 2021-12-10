@@ -1,5 +1,6 @@
 import { AppError } from "errors/appError";
 import { inject, injectable } from "tsyringe";
+import { FormatDate } from "utils/formatDate";
 import { EmployeeEntity } from "../../entities/employeeEntity";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
@@ -15,6 +16,8 @@ export class ListOneEmployeeService {
     }
 
     delete employee.password;
+    employee.createdAt = FormatDate(employee.createdAt);
+    employee.updatedAt = FormatDate(employee.updatedAt);
 
     return employee;
   }

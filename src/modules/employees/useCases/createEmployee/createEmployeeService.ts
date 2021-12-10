@@ -1,6 +1,7 @@
 import { hash } from "bcryptjs";
 import { AppError } from "errors/appError";
 import { inject, injectable } from "tsyringe";
+import { FormatDate } from "utils/formatDate";
 import { ICreateEmployeeDto } from "../../dtos/iCreateEmployeeDto";
 import { EmployeeEntity } from "../../entities/employeeEntity";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
@@ -35,6 +36,8 @@ export class CreateEmployeeService {
     });
 
     delete employeeNew.password;
+    employeeNew.createdAt = FormatDate(employeeNew.createdAt);
+    employeeNew.updatedAt = FormatDate(employeeNew.updatedAt);
 
     return employeeNew;
   }
