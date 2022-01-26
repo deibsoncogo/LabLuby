@@ -1,8 +1,6 @@
 # Programa LabLuby JS - Remoto
 Este teste lógico consiste na resolução de 10 métodos
 
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=LabLuby%20Teste%20L%C3%B3gico&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fdeibsoncogo%2FLabLubyTesteLogico%2Fmaster%2Fsrc%2Fassets%2FInsomniaLabLubyTesteLogico%3Ftoken%3DAO7NLS47XAAJS3XXEA2HO5DBWP7LI)
-
 ## Ambiente de trabalho
 Para instalar as dependências necessárias temos que executar o seguinte comando
 ```bash
@@ -17,18 +15,15 @@ yarn ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --respawn
 O servidor vai rodar na porta 3333
 
 ## Ferramentas e dependências utilizado
-As ferramentas utilizadas foram: `Yarn`, `Node JS`, `TypeScript`
-
-As dependências utilizadas foram: `express`
-
-Dependências usadas em modo de desenvolvimento: `eslint`, `ts-node-dev` e `typescript`
+  * As ferramentas utilizadas foram: `Yarn`, `Node JS`, `TypeScript`
+  * As dependências utilizadas foram: `express`
+  * Dependências usadas em modo de desenvolvimento: `eslint`, `ts-node-dev` e `typescript`
 
 ## Documentação
 Endereço principal: `http://localhost/3333`
 
 ### Método 1
 Implemente um método que crie um novo array baseado nos valores passados
-
   * Entradas: (3, a)
   * Resultado: ["a", "a", "a"]
 
@@ -45,7 +40,6 @@ status(201).json(["a", "a", "a"])
 
 ### Método 2
 Implemente um método que inverta um array, não utilize métodos nativos do array
-
   * Entrada: [1, 2, 3, 4]
   * Resultado: [4, 3, 2, 1]
 
@@ -61,7 +55,6 @@ status(201).json([4, 3, 2, 1])
 
 ### Método 3
 Implemente um método que limpe os itens desnecessários de um array (false, undefined, strings vazias, zero, null)
-
   * Entrada: [1, 2, '', undefined]
   * Resultado: [1, 2]
 
@@ -77,9 +70,8 @@ status(201).json([1, 2])
 
 ### Método 4
 Implemente um método que a partir de um array de arrays, converta em um objeto com chave e valor
-
   * Entrada: [["c", 2], ["d", 4]]
-  * Resultado: {"c": 2, "d": 4}
+  * Resultado: { "c": 2, "d": 4 }
 
 **POST** /method4
 ```ts
@@ -88,12 +80,11 @@ Implemente um método que a partir de um array de arrays, converta em um objeto 
 }
 
 // resposta
-status(201).json({"c": 2, "d": 4})
+status(201).json({ "c": 2, "d": 4 })
 ```
 
 ### Método 5
 Implemente um método que retorne um array, sem os itens passados por parâmetro depois do array de entrada
-
   * Entrada: ([5, 4, 3, 2, 5], [5, 3])
   * Resultado: [4, 2]
 
@@ -110,7 +101,6 @@ status(201).json([4, 2])
 
 ### Método 6
 Implemente um método que retorne um array, sem valores duplicados
-
   * Entrada: [1, 2, 3, 3, 2, 4, 5, 4, 7, 3]
   * Resultado: [1, 2, 3, 4, 5, 7]
 
@@ -126,7 +116,6 @@ status(201).json([1, 2, 3, 4, 5, 7])
 
 ### Método 7
 Implemente um método que compare a igualdade de dois arrays e retorne um valor booleano
-
   * Entrada: ([1, 2, 3, 4], [1, 2, 3, 4])
   * Resultado: true
 
@@ -143,7 +132,6 @@ status(201).json(true)
 
 ### Método 8
 Implemente um método que remova os aninhamentos de um array de arrays para um array unico
-
   * Entrada: [1, 2, [3], [4, 5]]
   * Resultado: [1, 2, 3, 4, 5]
 
@@ -159,7 +147,6 @@ status(201).json([1, 2, 3, 4, 5])
 
 ### Método 9
 Implemente um método divida um array por uma quantidade passada por parâmetro
-
   * Entrada: ([1, 2, 3, 4, 5], 2)
   * Resultado: [[1, 2], [3, 4], [5]]
 
@@ -176,7 +163,6 @@ status(201).json([[1, 2], [3, 4], [5]])
 
 ### Método 10
 Implemente um método que encontre os valores comuns entre dois arrays
-
   * Entrada: ([6, 8], [8, 9])
   * Resultado: [8]
 
