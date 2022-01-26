@@ -11,7 +11,7 @@ async function CreateInternalUserAdmin() {
   const connection = await CreateConnection("localhost");
 
   const id = uuidV4();
-  const password = await hash("labluby", 8);
+  const password = await hash("lablubytestetecnico", 8);
 
   await connection.query(
     `INSERT INTO EMPLOYEES(
