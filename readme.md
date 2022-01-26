@@ -1,6 +1,8 @@
 # Programa LabLuby JS - Remoto
 Este teste lógico consiste na resolução de 10 métodos
 
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=LabLuby%20Teste%20L%C3%B3gico&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fdeibsoncogo%2FLabLubyTesteLogico%2Fmaster%2Fsrc%2Fassets%2FInsomniaLabLubyTesteLogico.json%3Ftoken%3DGHSAT0AAAAAABO7EHOY3PO3DFKFUUIHNG2UYPRLNEQ)
+
 ## Ambiente de trabalho
 Para instalar as dependências necessárias temos que executar o seguinte comando
 ```bash
