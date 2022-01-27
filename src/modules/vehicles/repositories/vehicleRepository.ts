@@ -11,17 +11,17 @@ export class VehicleRepository implements IVehicleRepository {
 
   constructor() { this.vehicleRepository = getRepository(VehicleEntity); }
 
-  async deleteId({ id }: IDeleteVehicleDto): Promise<void> {
+  async deleteIdVehicle({ id }: IDeleteVehicleDto): Promise<void> {
     await this.vehicleRepository.delete(id);
   }
 
-  async findOneId({ id }: IFindOneVehicleDto): Promise<VehicleEntity> {
+  async findOneIdVehicle({ id }: IFindOneVehicleDto): Promise<VehicleEntity> {
     const vehicle = await this.vehicleRepository.findOne(id);
 
     return vehicle;
   }
 
-  async findAllFilter(
+  async findAllFilterVehicle(
     { category, brand, model, year, km, color, purchasePrice, status }: IFindAllVehicleFilterDto,
   ): Promise<VehicleEntity[]> {
     const vehicleQueryBuilder = await this.vehicleRepository.createQueryBuilder("vehicle");
@@ -42,7 +42,7 @@ export class VehicleRepository implements IVehicleRepository {
     return vehicleGetMany;
   }
 
-  async create(
+  async createVehicle(
     { category, brand, model, year, km, color, purchasePrice }: ICreateVehicleDto,
   ): Promise<VehicleEntity> {
     const vehicle = await this.vehicleRepository.create({

@@ -13,7 +13,7 @@ export class FindOneVehicleService {
   constructor(@inject("VehicleRepository") private vehicleRepository: IVehicleRepository) { }
 
   async execute({ id }: IFindOneVehicleDto): Promise<VehicleEntity> {
-    const vehicle = await this.vehicleRepository.findOneId({ id });
+    const vehicle = await this.vehicleRepository.findOneIdVehicle({ id });
 
     if (!vehicle) {
       throw new AppError("Não existe um veículo cadastrado com este ID!");

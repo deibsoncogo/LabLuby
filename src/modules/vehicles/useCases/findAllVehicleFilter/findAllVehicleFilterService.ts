@@ -21,7 +21,7 @@ export class FindAllVehicleFilterService {
   async execute(
     { category, brand, model, year, km, color, purchasePrice, status }: IFindAllVehicleFilterDto,
   ): Promise<VehicleEntity[]> {
-    const vehicleAll = await this.vehicleRepository.findAllFilter({
+    const vehicleAll = await this.vehicleRepository.findAllFilterVehicle({
       category,
       brand,
       model,

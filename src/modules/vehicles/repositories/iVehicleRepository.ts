@@ -5,14 +5,14 @@ import { IFindAllVehicleFilterDto } from "../useCases/findAllVehicleFilter/findA
 import { IFindOneVehicleDto } from "../useCases/findOneVehicle/findOneVehicleService";
 
 export interface IVehicleRepository {
-  deleteId({ id }: IDeleteVehicleDto): Promise<void>;
-  findOneId({ id }: IFindOneVehicleDto): Promise<VehicleEntity>;
+  deleteIdVehicle({ id }: IDeleteVehicleDto): Promise<void>;
+  findOneIdVehicle({ id }: IFindOneVehicleDto): Promise<VehicleEntity>;
 
-  findAllFilter(
+  findAllFilterVehicle(
     { category, brand, model, year, km, color, purchasePrice, status }: IFindAllVehicleFilterDto
   ): Promise<VehicleEntity[]>
 
-  create(
+  createVehicle(
     { category, brand, model, year, km, color, purchasePrice }: ICreateVehicleDto
   ): Promise<VehicleEntity>
 }

@@ -21,7 +21,7 @@ export class CreateVehicleService {
   async execute(
     { category, brand, model, year, km, color, purchasePrice }: ICreateVehicleDto,
   ): Promise<VehicleEntity> {
-    const vehicleAlreadyExists = await this.vehicleRepository.findAllFilter({
+    const vehicleAlreadyExists = await this.vehicleRepository.findAllFilterVehicle({
       category,
       brand,
       model,
@@ -33,7 +33,7 @@ export class CreateVehicleService {
       throw new AppError("Já existe um veículo com estas especificações!");
     }
 
-    const vehicle = await this.vehicleRepository.create({
+    const vehicle = await this.vehicleRepository.createVehicle({
       category,
       brand,
       model,
