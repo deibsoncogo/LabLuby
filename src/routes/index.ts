@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { vehicleRouter } from "modules/vehicles/vehicleRouter";
 import { employeeRouter } from "./employeeRouter";
+import { vehicleRouter } from "./vehicleRouter";
 
 const indexRouter = Router();
 
