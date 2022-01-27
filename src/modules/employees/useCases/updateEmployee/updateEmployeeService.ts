@@ -51,8 +51,8 @@ export class UpdateEmployeeService {
     });
 
     delete employeeNew.password;
-    employee.createdAt = FormatDate(employee.createdAt);
-    employee.updatedAt = FormatDate(employee.updatedAt);
+    employeeNew.createdAt = FormatDate(employeeNew.createdAt);
+    employeeNew.updatedAt = FormatDate(employeeNew.updatedAt);
 
     return employeeNew;
   }

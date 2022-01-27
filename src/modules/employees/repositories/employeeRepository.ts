@@ -76,8 +76,8 @@ export class EmployeeRepository implements IEmployeeRepository {
     employee.avatarUrl = avatarUrl || employee.avatarUrl;
     employee.updatedAt = new Date();
 
-    const employeeSave = await this.employeeRepository.save(employee);
+    const employeeNew = await this.employeeRepository.save(employee);
 
-    return employeeSave;
+    return employeeNew;
   }
 }
