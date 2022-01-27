@@ -5,8 +5,8 @@ import { AuthenticateEmployeeController } from "../modules/employees/useCases/au
 import { CreateEmployeeController } from "../modules/employees/useCases/createEmployee/createEmployeeController";
 import { ListEmployeeController } from "../modules/employees/useCases/listEmployee/listEmployeeController";
 import { ListOneEmployeeController } from "../modules/employees/useCases/listOneEmployee/listOneEmployeeController";
-import { ToggleEmployeeOffController } from "../modules/employees/useCases/toggleEmployee/toggleEmployeeOffController";
 import { ToggleEmployeeAdminController } from "../modules/employees/useCases/toggleEmployeeAdmin/toggleEmployeeAdminController";
+import { ToggleEmployeeOffController } from "../modules/employees/useCases/toggleEmployeeOff/toggleEmployeeOffController";
 import { UpdateEmployeeController } from "../modules/employees/useCases/updateEmployee/updateEmployeeController";
 
 const employeeRouter = Router();
