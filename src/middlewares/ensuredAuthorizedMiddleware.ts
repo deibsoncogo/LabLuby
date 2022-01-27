@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
+import { EmployeeRepository } from "modules/employees/repositories/employeeRepository";
 import { AppError } from "../errors/appError";
 
 interface IToken {
@@ -18,13 +19,20 @@ export async function EnsuredAuthorizedMiddleware(
 
   const [, token] = authHeader.split(" ");
 
-  try {
-    const tokenVerify = verify(token, "fa5473530e4d1a5a1e1eb53d2fedb10c") as IToken;
+  const tokenVerify = verify(token, "fa5473530e4d1a5a1e1eb53d2fedb10c") as IToken;
 
-    request.idEmployeeAuthorized = tokenVerify.sub;
-
-    return next();
-  } catch (error) {
+  if (!tokenVerify) {
     throw new AppError("Token inválido", 401);
   }
+  const employeeRepository = new EmployeeRepository();
+
+  const existsEmployee = await employeeRepository.findOneId(tokenVerify.sub);
+
+  if (!existsEmployee) {
+    throw new AppError("ID do funcionário no token é inválido", 401);
+  }
+
+  request.idEmployeeAuthorized = tokenVerify.sub;
+
+  return next();
 }
