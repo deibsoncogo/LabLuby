@@ -8,7 +8,7 @@ export interface IEmployeeRepository {
   findOneEmail(email: string): Promise<EmployeeEntity>;
   findOneId(id: string): Promise<EmployeeEntity>;
   list(): Promise<EmployeeEntity[]>;
-  toggleAdmin(cpf: number): Promise<boolean>;
+  toggleAdmin(cpf: number): Promise<EmployeeEntity>;
   toggleOff(cpf: number): Promise<EmployeeEntity>;
 
   update(

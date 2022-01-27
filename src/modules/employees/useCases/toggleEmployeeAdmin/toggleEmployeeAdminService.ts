@@ -1,4 +1,5 @@
 import { AppError } from "errors/appError";
+import { EmployeeEntity } from "modules/employees/entities/employeeEntity";
 import { inject, injectable } from "tsyringe";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
@@ -6,7 +7,7 @@ import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 export class ToggleEmployeeAdminService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
-  async execute(cpf: number): Promise<boolean> {
+  async execute(cpf: number): Promise<EmployeeEntity> {
     const cpfAlreadyExists = await this.employeeRepository.findOneCpf(cpf);
 
     if (!cpfAlreadyExists) {
@@ -17,8 +18,10 @@ export class ToggleEmployeeAdminService {
       throw new AppError("Este funcionário está desligado", 401);
     }
 
-    const statusAdmin = await this.employeeRepository.toggleAdmin(cpf);
+    const employeeSave = await this.employeeRepository.toggleAdmin(cpf);
 
-    return statusAdmin;
+    delete employeeSave.password;
+
+    return employeeSave;
   }
 }

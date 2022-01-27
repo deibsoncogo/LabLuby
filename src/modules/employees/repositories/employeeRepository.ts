@@ -43,14 +43,14 @@ export class EmployeeRepository implements IEmployeeRepository {
     return employeeAll;
   }
 
-  async toggleAdmin(cpf: number): Promise<boolean> {
+  async toggleAdmin(cpf: number): Promise<EmployeeEntity> {
     const employee = await this.findOneCpf(cpf);
 
     employee.isAdmin = !employee.isAdmin;
 
-    const { isAdmin } = await this.employeeRepository.save(employee);
+    const employeeSave = await this.employeeRepository.save(employee);
 
-    return isAdmin;
+    return employeeSave;
   }
 
   async toggleOff(cpf: number): Promise<EmployeeEntity> {
