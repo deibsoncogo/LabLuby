@@ -38,7 +38,7 @@ export class EmployeeRepository implements IEmployeeRepository {
   }
 
   async list(): Promise<EmployeeEntity[]> {
-    const employeeAll = await this.employeeRepository.find();
+    const employeeAll = await this.employeeRepository.find({ order: { createdAt: "ASC" } });
 
     return employeeAll;
   }
