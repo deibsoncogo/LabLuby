@@ -12,7 +12,7 @@ export class EmployeeRepository implements IEmployeeRepository {
   async create(
     { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto,
   ): Promise<EmployeeEntity> {
-    const employee = await this.employeeRepository.create({ name, cpf, email, password, avatarUrl });
+    const employee = this.employeeRepository.create({ name, cpf, email, password, avatarUrl });
 
     await this.employeeRepository.save(employee);
 

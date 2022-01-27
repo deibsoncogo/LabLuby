@@ -1,45 +1,46 @@
-/* eslint-disable indent */
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity("vehicles")
 export class VehicleEntity {
   @PrimaryColumn()
-  id: string;
+    id: string;
 
   @Column()
-  category: string;
+    category: string;
 
   @Column()
-  brand: string;
+    brand: string;
 
   @Column()
-  model: string;
+    model: string;
 
   @Column()
-  year: number;
+    year: number;
 
   @Column()
-  km: number;
+    km: number;
 
   @Column()
-  color: string;
+    color: string;
 
   @Column()
-  purchasePrice: number;
+    purchasePrice: number;
 
   @Column()
-  status: string;
+    status: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+    createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+    updatedAt: Date;
 
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
+      this.createdAt = new Date();
+      this.updatedAt = new Date();
     }
   }
 }

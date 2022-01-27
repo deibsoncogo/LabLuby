@@ -1,42 +1,43 @@
-/* eslint-disable indent */
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 @Entity("employees")
 export class EmployeeEntity {
   @PrimaryColumn()
-  id: string;
+    id: string;
 
   @Column()
-  name: string;
+    name: string;
 
   @Column()
-  cpf: number;
+    cpf: number;
 
   @Column()
-  email: string;
+    email: string;
 
   @Column()
-  password: string;
+    password: string;
 
   @Column()
-  avatarUrl: string;
+    avatarUrl: string;
 
   @Column()
-  isAdmin: boolean;
+    isAdmin: boolean;
 
   @CreateDateColumn()
-  createdAt: Date;
+    createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+    updatedAt: Date;
 
   @Column()
-  off: boolean;
+    off: boolean;
 
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
+      this.createdAt = new Date();
+      this.updatedAt = new Date();
       this.isAdmin = false;
       this.off = false;
     }
