@@ -9,7 +9,7 @@ export class FindOneVehicleController {
     const findOneVehicleService = container.resolve(FindOneVehicleService);
 
     return response.status(200).json(
-      await findOneVehicleService.execute({ id }),
+      await findOneVehicleService.execute(id),
     );
   }
 }

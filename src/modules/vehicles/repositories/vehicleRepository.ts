@@ -1,9 +1,7 @@
 import { getRepository, Repository } from "typeorm";
+import { ICreateVehicleDto } from "../dtos/iCreateVehicleDto";
+import { IFindAllVehicleFilterDto } from "../dtos/iFindAllVehicleFilterDto";
 import { VehicleEntity } from "../entities/vehicleEntity";
-import { ICreateVehicleDto } from "../useCases/createVehicle/createVehicleService";
-import { IDeleteVehicleDto } from "../useCases/deleteVehicle/deleteVehicleService";
-import { IFindAllVehicleFilterDto } from "../useCases/findAllVehicleFilter/findAllVehicleFilterService";
-import { IFindOneVehicleDto } from "../useCases/findOneVehicle/findOneVehicleService";
 import { IVehicleRepository } from "./iVehicleRepository";
 
 export class VehicleRepository implements IVehicleRepository {
@@ -11,11 +9,11 @@ export class VehicleRepository implements IVehicleRepository {
 
   constructor() { this.vehicleRepository = getRepository(VehicleEntity); }
 
-  async deleteIdVehicle({ id }: IDeleteVehicleDto): Promise<void> {
+  async deleteIdVehicle(id: string): Promise<void> {
     await this.vehicleRepository.delete(id);
   }
 
-  async findOneIdVehicle({ id }: IFindOneVehicleDto): Promise<VehicleEntity> {
+  async findOneIdVehicle(id: string): Promise<VehicleEntity> {
     const vehicle = await this.vehicleRepository.findOne(id);
 
     return vehicle;

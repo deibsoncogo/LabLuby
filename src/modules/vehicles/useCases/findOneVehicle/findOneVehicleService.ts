@@ -4,16 +4,12 @@ import { IVehicleRepository } from "modules/vehicles/repositories/iVehicleReposi
 import { inject, injectable } from "tsyringe";
 import { FormatDate } from "utils/formatDate";
 
-export interface IFindOneVehicleDto {
-  id: string
-}
-
 @injectable()
 export class FindOneVehicleService {
   constructor(@inject("VehicleRepository") private vehicleRepository: IVehicleRepository) { }
 
-  async execute({ id }: IFindOneVehicleDto): Promise<VehicleEntity> {
-    const vehicle = await this.vehicleRepository.findOneIdVehicle({ id });
+  async execute(id: string): Promise<VehicleEntity> {
+    const vehicle = await this.vehicleRepository.findOneIdVehicle(id);
 
     if (!vehicle) {
       throw new AppError("Não existe um veículo cadastrado com este ID!");

@@ -1,18 +1,8 @@
+import { IFindAllVehicleFilterDto } from "modules/vehicles/dtos/iFindAllVehicleFilterDto";
 import { VehicleEntity } from "modules/vehicles/entities/vehicleEntity";
 import { IVehicleRepository } from "modules/vehicles/repositories/iVehicleRepository";
 import { inject, injectable } from "tsyringe";
 import { FormatDate } from "utils/formatDate";
-
-export interface IFindAllVehicleFilterDto {
-  category?: string;
-  brand?: string;
-  model?: string;
-  year?: number;
-  km?: number;
-  color?: string;
-  purchasePrice?: number;
-  status?: string;
-}
 
 @injectable()
 export class FindAllVehicleFilterService {

@@ -8,7 +8,7 @@ export class DeleteVehicleController {
 
     const deleteVehicleService = container.resolve(DeleteVehicleService);
 
-    await deleteVehicleService.execute({ id });
+    await deleteVehicleService.execute(id);
 
     return response.status(202).json();
   }

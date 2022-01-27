@@ -1,18 +1,9 @@
 import { AppError } from "errors/appError";
+import { ICreateVehicleDto } from "modules/vehicles/dtos/iCreateVehicleDto";
 import { VehicleEntity } from "modules/vehicles/entities/vehicleEntity";
 import { IVehicleRepository } from "modules/vehicles/repositories/iVehicleRepository";
 import { inject, injectable } from "tsyringe";
 import { FormatDate } from "utils/formatDate";
-
-export interface ICreateVehicleDto {
-  category: string;
-  brand: string;
-  model: string;
-  year: number;
-  km: number;
-  color: string;
-  purchasePrice: number;
-}
 
 @injectable()
 export class CreateVehicleService {
