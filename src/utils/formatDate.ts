@@ -1,4 +1,4 @@
-export function FormatDate(date) {
+export function FormatDate(date: Date) {
   const locale = "pt-BR";
 
   const format = Intl.DateTimeFormat(locale, { dateStyle: "short" });
