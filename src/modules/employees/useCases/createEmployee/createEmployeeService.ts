@@ -13,13 +13,13 @@ export class CreateEmployeeService {
   async execute(
     { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto,
   ): Promise<EmployeeEntity> {
-    const cpfAlreadyExists = await this.employeeRepository.findOneCpf(cpf);
+    const cpfAlreadyExists = await this.employeeRepository.findOneCpfEmployee(cpf);
 
     if (cpfAlreadyExists) {
       throw new AppError("Já existe um funcionário com este CPF!");
     }
 
-    const emailAlreadyExists = await this.employeeRepository.findOneEmail(email);
+    const emailAlreadyExists = await this.employeeRepository.findOneEmailEmployee(email);
 
     if (emailAlreadyExists) {
       throw new AppError("Já existe um funcionário com este email!");
@@ -27,7 +27,7 @@ export class CreateEmployeeService {
 
     const passwordHash = await hash(password, 8);
 
-    const employeeNew = await this.employeeRepository.create({
+    const employeeNew = await this.employeeRepository.createEmployee({
       name,
       cpf,
       email,

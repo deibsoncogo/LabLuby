@@ -16,7 +16,7 @@ export class AuthenticateEmployeeService {
   async execute({ email, password }: IAuthenticateEmployeeDto): Promise<IToken> {
     const messageAuthenticateInvalid = "Email ou senha inválido";
 
-    const employee = await this.employeeRepository.findOneEmail(email);
+    const employee = await this.employeeRepository.findOneEmailEmployee(email);
 
     if (employee.off) {
       throw new AppError("Este funcionário está desligado", 401);

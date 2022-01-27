@@ -5,11 +5,11 @@ import { EmployeeEntity } from "../../entities/employeeEntity";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 @injectable()
-export class ListOneEmployeeService {
+export class FindOneEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(cpf: number): Promise<EmployeeEntity> {
-    const employee = await this.employeeRepository.findOneCpf(cpf);
+    const employee = await this.employeeRepository.findOneCpfEmployee(cpf);
 
     if (!employee) {
       throw new AppError("CPF inválido");

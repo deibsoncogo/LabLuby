@@ -4,11 +4,11 @@ import { EmployeeEntity } from "../../entities/employeeEntity";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 @injectable()
-export class ListEmployeeService {
+export class FindEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(): Promise<EmployeeEntity[]> {
-    const employeeAll = await this.employeeRepository.list();
+    const employeeAll = await this.employeeRepository.findEmployee();
 
     employeeAll.map(async (employee) => {
       delete employee.password;

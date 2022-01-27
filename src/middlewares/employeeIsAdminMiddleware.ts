@@ -9,7 +9,7 @@ export async function EmployeeIsAdminMiddleware(
 
   const employeeRepository = new EmployeeRepository();
 
-  const employee = await employeeRepository.findOneId(idEmployeeAuthorized);
+  const employee = await employeeRepository.findOneIdEmployee(idEmployeeAuthorized);
 
   if (!employee) {
     throw new AppError("ID do funcionário autenticado inválido!", 401);

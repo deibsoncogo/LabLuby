@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { ListOneEmployeeService } from "./listOneEmployeeService";
+import { FindOneEmployeeService } from "./findOneEmployeeService";
 
-export class ListOneEmployeeController {
+export class FindOneEmployeeController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { cpf } = request.params;
 
-    const listOneEmployeeService = container.resolve(ListOneEmployeeService);
+    const findOneEmployeeService = container.resolve(FindOneEmployeeService);
 
     return response.status(200).json(
-      await listOneEmployeeService.execute(Number(cpf)),
+      await findOneEmployeeService.execute(Number(cpf)),
     );
   }
 }

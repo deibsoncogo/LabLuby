@@ -8,7 +8,7 @@ export class ToggleEmployeeAdminService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(cpf: number): Promise<EmployeeEntity> {
-    const cpfAlreadyExists = await this.employeeRepository.findOneCpf(cpf);
+    const cpfAlreadyExists = await this.employeeRepository.findOneCpfEmployee(cpf);
 
     if (!cpfAlreadyExists) {
       throw new AppError("Não existe este CPF cadastrado");
@@ -18,7 +18,7 @@ export class ToggleEmployeeAdminService {
       throw new AppError("Este funcionário está desligado", 401);
     }
 
-    const employeeSave = await this.employeeRepository.toggleAdmin(cpf);
+    const employeeSave = await this.employeeRepository.toggleAdminEmployee(cpf);
 
     delete employeeSave.password;
 

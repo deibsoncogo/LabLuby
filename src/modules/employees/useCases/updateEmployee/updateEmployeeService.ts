@@ -13,19 +13,19 @@ export class UpdateEmployeeService {
   async execute(
     { id, name, cpf, email, passwordOld, passwordNew, avatarUrl }: IUpdateEmployeeDto,
   ): Promise<EmployeeEntity> {
-    const employee = await this.employeeRepository.findOneId(id);
+    const employee = await this.employeeRepository.findOneIdEmployee(id);
 
     if (!employee) {
       throw new AppError("ID do funcionário inválido");
     }
 
-    const emailAlreadyExists = await this.employeeRepository.findOneEmail(email);
+    const emailAlreadyExists = await this.employeeRepository.findOneEmailEmployee(email);
 
     if (emailAlreadyExists) {
       throw new AppError("Já existe este email no sistema");
     }
 
-    const cpfAlreadyExists = await this.employeeRepository.findOneCpf(cpf);
+    const cpfAlreadyExists = await this.employeeRepository.findOneCpfEmployee(cpf);
 
     if (cpfAlreadyExists) {
       throw new AppError("Já existe este CPF no sistema");
@@ -41,7 +41,7 @@ export class UpdateEmployeeService {
       passwordNew = await hash(passwordNew, 8);
     }
 
-    const employeeNew = await this.employeeRepository.update({
+    const employeeNew = await this.employeeRepository.updateEmployee({
       id,
       name,
       cpf,

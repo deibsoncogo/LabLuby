@@ -2,16 +2,20 @@ import { ICreateEmployeeDto } from "../dtos/iCreateEmployeeDto";
 import { IUpdateEmployeeDto } from "../dtos/iUpdateEmployeeDto";
 import { EmployeeEntity } from "../entities/employeeEntity";
 
+// interface que servira como contrato do repositório
 export interface IEmployeeRepository {
-  create({ name, cpf, email, password, avatarUrl }: ICreateEmployeeDto): Promise<EmployeeEntity>;
-  findOneCpf(cpf: number): Promise<EmployeeEntity>;
-  findOneEmail(email: string): Promise<EmployeeEntity>;
-  findOneId(id: string): Promise<EmployeeEntity>;
-  list(): Promise<EmployeeEntity[]>;
-  toggleAdmin(cpf: number): Promise<EmployeeEntity>;
-  toggleOff(cpf: number): Promise<EmployeeEntity>;
+  toggleOffEmployee(cpf: number): Promise<EmployeeEntity>;
+  toggleAdminEmployee(cpf: number): Promise<EmployeeEntity>;
+  findOneEmailEmployee(email: string): Promise<EmployeeEntity>;
+  findOneCpfEmployee(cpf: number): Promise<EmployeeEntity>;
+  findOneIdEmployee(id: string): Promise<EmployeeEntity>;
+  findEmployee(): Promise<EmployeeEntity[]>;
 
-  update(
+  updateEmployee(
     { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateEmployeeDto
+  ): Promise<EmployeeEntity>;
+
+  createEmployee(
+    { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto
   ): Promise<EmployeeEntity>;
 }

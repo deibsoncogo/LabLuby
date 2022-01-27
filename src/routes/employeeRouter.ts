@@ -3,8 +3,8 @@ import { EmployeeIsAdminMiddleware } from "../middlewares/employeeIsAdminMiddlew
 import { EnsuredAuthorizedMiddleware } from "../middlewares/ensuredAuthorizedMiddleware";
 import { AuthenticateEmployeeController } from "../modules/employees/useCases/authenticateEmployee/authenticateEmployeeController";
 import { CreateEmployeeController } from "../modules/employees/useCases/createEmployee/createEmployeeController";
-import { ListEmployeeController } from "../modules/employees/useCases/listEmployee/listEmployeeController";
-import { ListOneEmployeeController } from "../modules/employees/useCases/listOneEmployee/listOneEmployeeController";
+import { FindEmployeeController } from "../modules/employees/useCases/findEmployee/findEmployeeController";
+import { FindOneEmployeeController } from "../modules/employees/useCases/findOneEmployee/findOneEmployeeController";
 import { ToggleEmployeeAdminController } from "../modules/employees/useCases/toggleEmployeeAdmin/toggleEmployeeAdminController";
 import { ToggleEmployeeOffController } from "../modules/employees/useCases/toggleEmployeeOff/toggleEmployeeOffController";
 import { UpdateEmployeeController } from "../modules/employees/useCases/updateEmployee/updateEmployeeController";
@@ -15,8 +15,8 @@ employeeRouter.post("/create", new CreateEmployeeController().handle);
 employeeRouter.post("/authenticate", new AuthenticateEmployeeController().handle);
 
 employeeRouter.use(EnsuredAuthorizedMiddleware);
-employeeRouter.get("/one/:cpf", new ListOneEmployeeController().handle);
-employeeRouter.get("/all", new ListEmployeeController().handle);
+employeeRouter.get("/one/:cpf", new FindOneEmployeeController().handle);
+employeeRouter.get("/all", new FindEmployeeController().handle);
 
 employeeRouter.use(EmployeeIsAdminMiddleware);
 employeeRouter.put("/:id", new UpdateEmployeeController().handle);
