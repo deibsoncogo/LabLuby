@@ -29,7 +29,11 @@ export async function EnsuredAuthorizedMiddleware(
   const existsEmployee = await employeeRepository.findOneId(tokenVerify.sub);
 
   if (!existsEmployee) {
-    throw new AppError("ID do funcionário no token é inválido", 401);
+    throw new AppError("ID do funcionário do token é inválido", 401);
+  }
+
+  if (existsEmployee.off) {
+    throw new AppError("Funcionário do token está desligado", 401);
   }
 
   request.idEmployeeAuthorized = tokenVerify.sub;

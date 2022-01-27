@@ -18,14 +18,18 @@ export class AuthenticateEmployeeService {
 
     const employee = await this.employeeRepository.findOneEmail(email);
 
+    if (employee.off) {
+      throw new AppError("Este funcionário está desligado", 401);
+    }
+
     if (!employee) {
-      throw new AppError(messageAuthenticateInvalid);
+      throw new AppError(messageAuthenticateInvalid, 401);
     }
 
     const passwordMatch = await compare(password, employee.password);
 
     if (!passwordMatch) {
-      throw new AppError(messageAuthenticateInvalid);
+      throw new AppError(messageAuthenticateInvalid, 401);
     }
 
     const token = sign(

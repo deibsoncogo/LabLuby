@@ -13,6 +13,10 @@ export class ToggleEmployeeAdminService {
       throw new AppError("Não existe este CPF cadastrado");
     }
 
+    if (cpfAlreadyExists.off) {
+      throw new AppError("Este funcionário está desligado", 401);
+    }
+
     const statusAdmin = await this.employeeRepository.toggleAdmin(cpf);
 
     return statusAdmin;
