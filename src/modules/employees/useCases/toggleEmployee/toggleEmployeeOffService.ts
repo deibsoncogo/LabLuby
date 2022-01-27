@@ -1,20 +1,23 @@
 import { AppError } from "errors/appError";
+import { EmployeeEntity } from "modules/employees/entities/employeeEntity";
 import { inject, injectable } from "tsyringe";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 @injectable()
-export class ToggleEmployeeService {
+export class ToggleEmployeeOffService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
-  async execute(cpf: number): Promise<boolean> {
+  async execute(cpf: number): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.findOneCpf(cpf);
 
     if (!employee) {
       throw new AppError("CPF do funcionário inválido");
     }
 
-    const off = this.employeeRepository.toggleOff(cpf);
+    const employeeSave = await this.employeeRepository.toggleOff(cpf);
 
-    return off;
+    delete employeeSave.password;
+
+    return employeeSave;
   }
 }

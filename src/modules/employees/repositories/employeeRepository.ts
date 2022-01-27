@@ -12,7 +12,7 @@ export class EmployeeRepository implements IEmployeeRepository {
   async create(
     { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto,
   ): Promise<EmployeeEntity> {
-    const employee = this.employeeRepository.create({ name, cpf, email, password, avatarUrl });
+    const employee = await this.employeeRepository.create({ name, cpf, email, password, avatarUrl });
 
     await this.employeeRepository.save(employee);
 
@@ -53,15 +53,15 @@ export class EmployeeRepository implements IEmployeeRepository {
     return isAdmin;
   }
 
-  async toggleOff(cpf: number): Promise<boolean> {
+  async toggleOff(cpf: number): Promise<EmployeeEntity> {
     const employee = await this.findOneCpf(cpf);
 
     employee.isAdmin = false;
     employee.off = !employee.off;
 
-    const { off } = await this.employeeRepository.save(employee);
+    const employeeSave = await this.employeeRepository.save(employee);
 
-    return off;
+    return employeeSave;
   }
 
   async update(
