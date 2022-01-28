@@ -1,4 +1,4 @@
-export interface IFindAllVehicleFilterDto {
+export interface IFindAllFilterVehicleDto {
   category?: string;
   brand?: string;
   model?: string;

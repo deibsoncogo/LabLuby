@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { FindAllVehicleFilterService } from "./findAllVehicleFilterService";
+import { FindAllFilterVehicleService } from "./findAllFilterVehicleService";
 
-export class FindAllVehicleFilterController {
+export class FindAllFilterVehicleController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { category, brand, model, year, km, color, purchasePrice, status } = request.query;
 
-    const findAllVehicleFilterService = container.resolve(FindAllVehicleFilterService);
+    const findAllFilterVehicleService = container.resolve(FindAllFilterVehicleService);
 
     return response.status(200).json(
-      await findAllVehicleFilterService.execute({
+      await findAllFilterVehicleService.execute({
         category: category as string,
         brand: brand as string,
         model: model as string,

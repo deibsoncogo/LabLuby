@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 import { ICreateVehicleDto } from "../dtos/iCreateVehicleDto";
-import { IFindAllVehicleFilterDto } from "../dtos/iFindAllVehicleFilterDto";
+import { IFindAllFilterVehicleDto } from "../dtos/iFindAllFilterVehicleDto";
 import { VehicleEntity } from "../entities/vehicleEntity";
 import { IVehicleRepository } from "./iVehicleRepository";
 
@@ -20,7 +20,7 @@ export class VehicleRepository implements IVehicleRepository {
   }
 
   async findAllFilterVehicle(
-    { category, brand, model, year, km, color, purchasePrice, status }: IFindAllVehicleFilterDto,
+    { category, brand, model, year, km, color, purchasePrice, status }: IFindAllFilterVehicleDto,
   ): Promise<VehicleEntity[]> {
     const vehicleQueryBuilder = await this.vehicleRepository.createQueryBuilder("vehicle");
 
