@@ -16,6 +16,10 @@ export class TransactionRepository implements ITransactionRepository {
     this.vehicleRepository = getRepository(VehicleEntity);
   }
 
+  async deleteOneIdTransaction(id: string): Promise<void> {
+    await this.transactionRepository.delete({ id });
+  }
+
   async findOneIdTransaction(id: string): Promise<TransactionEntity> {
     const transaction = await this.transactionRepository.findOne({ id });
 

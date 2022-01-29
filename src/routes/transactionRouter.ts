@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { CreateTransactionController } from "../modules/transactions/useCases/createTransaction/createTransactionController";
+import { DeleteOneIdTransactionController } from "../modules/transactions/useCases/deleteOneIdTransaction/deleteOneIdTransactionController";
 import { FindAllFilterTransactionController } from "../modules/transactions/useCases/findAllFilterTransaction/findAllFilterTransactionController";
 import { FindOneIdTransactionController } from "../modules/transactions/useCases/findOneIdTransaction/findOneIdTransactionController";
 import { UpdateOneIdTransactionController } from "../modules/transactions/useCases/updateOneIdTransaction/updateOneIdTransactionController";
@@ -10,5 +11,6 @@ transactionRouter.post("/create", new CreateTransactionController().execute);
 transactionRouter.get("/one/:id", new FindOneIdTransactionController().handle);
 transactionRouter.get("/filter", new FindAllFilterTransactionController().handle);
 transactionRouter.put("/one/:id", new UpdateOneIdTransactionController().handle);
+transactionRouter.delete("/one/:id", new DeleteOneIdTransactionController().handle);
 
 export { transactionRouter };
