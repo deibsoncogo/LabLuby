@@ -2,6 +2,7 @@ import { getRepository, Repository } from "typeorm";
 import { VehicleEntity } from "../../vehicles/entities/vehicleEntity";
 import { ICreateTransactionDto } from "../dtos/iCreateTransactionDto";
 import { iFindAllFilterTransactionDto } from "../dtos/iFindAllFilterTransactionDto";
+import { IUpdateOneIdTransactionDto } from "../dtos/iUpdateOneIdTransactionDto";
 import { TransactionEntity } from "../entities/transactionEntity";
 import { ITransactionRepository } from "./iTransactionRepository";
 
@@ -25,6 +26,23 @@ export class TransactionRepository implements ITransactionRepository {
     const transaction = await this.transactionRepository.findOne({ idVehicle });
 
     return transaction;
+  }
+
+  async updateOneIdTransaction(
+    { id, type, idEmployee, idVehicle, date, amount }: IUpdateOneIdTransactionDto,
+  ): Promise<TransactionEntity> {
+    const transaction = await this.transactionRepository.findOne({ id });
+
+    transaction.type = type || transaction.type;
+    transaction.idEmployee = idEmployee || transaction.idEmployee;
+    transaction.idVehicle = idVehicle || transaction.idVehicle;
+    transaction.date = date || transaction.date;
+    transaction.amount = amount || transaction.amount;
+    transaction.updatedAt = new Date();
+
+    const transactionSave = await this.transactionRepository.save(transaction);
+
+    return transactionSave;
   }
 
   async findAllFilterTransaction(
