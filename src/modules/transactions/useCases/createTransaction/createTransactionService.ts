@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/appError";
+import { FormatDate } from "../../../../utils/formatDate";
 import { IEmployeeRepository } from "../../../employees/repositories/iEmployeeRepository";
 import { IVehicleRepository } from "../../../vehicles/repositories/iVehicleRepository";
 import { ICreateTransactionDto } from "../../dtos/iCreateTransactionDto";
@@ -52,6 +53,10 @@ export class CreateTransactionService {
       date,
       amount,
     });
+
+    transaction.createdAt = FormatDate(transaction.createdAt);
+    transaction.updatedAt = FormatDate(transaction.updatedAt);
+    transaction.date = FormatDate(transaction.updatedAt);
 
     return transaction;
   }
