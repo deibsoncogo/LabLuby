@@ -1,3 +1,10 @@
+import { ICreateTransactionDto } from "../dtos/iCreateTransactionDto";
+import { TransactionEntity } from "../entities/transactionEntity";
+
 export interface ITransactionRepository {
-  teste(): Promise<void>;
+  findOneIdVehicleTransaction(idVehicle: string): Promise<TransactionEntity>;
+
+  createTransaction(
+    { type, idEmployee, idVehicle, date, amount }:ICreateTransactionDto
+  ): Promise<TransactionEntity>;
 }
