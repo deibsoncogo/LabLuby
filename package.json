@@ -7,9 +7,9 @@
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --respawn --ignore-watch node_modules src/server.ts",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "seed:admin": "ts-node-dev src/seed/createFirstAdminUser.ts"
+    "dev": "ts-node-dev --inspect --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "seed:admin": "ts-node-dev src/seeds/createFirstAdminUser.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -18,7 +18,6 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
-    "tsconfig-paths": "^3.12.0",
     "tsyringe": "^4.6.0",
     "typeorm": "^0.2.41",
     "uuid": "^8.3.2"

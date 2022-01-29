@@ -1,7 +1,7 @@
 import { compare } from "bcryptjs";
-import { AppError } from "errors/appError";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/appError";
 import { IAuthenticateEmployeeDto } from "../../dtos/iAuthenticateEmployeeDto";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 

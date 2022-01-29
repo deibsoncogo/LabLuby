@@ -1,10 +1,10 @@
-import { AppError } from "errors/appError";
-import { IEmployeeRepository } from "modules/employees/repositories/iEmployeeRepository";
-import { ICreateTransactionDto } from "modules/transactions/dtos/iCreateTransactionDto";
-import { TransactionEntity } from "modules/transactions/entities/transactionEntity";
-import { ITransactionRepository } from "modules/transactions/repositories/iTransactionRepository";
-import { IVehicleRepository } from "modules/vehicles/repositories/iVehicleRepository";
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/appError";
+import { IEmployeeRepository } from "../../../employees/repositories/iEmployeeRepository";
+import { IVehicleRepository } from "../../../vehicles/repositories/iVehicleRepository";
+import { ICreateTransactionDto } from "../../dtos/iCreateTransactionDto";
+import { TransactionEntity } from "../../entities/transactionEntity";
+import { ITransactionRepository } from "../../repositories/iTransactionRepository";
 
 @injectable()
 export class CreateTransactionService {

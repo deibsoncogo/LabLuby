@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
-import { EmployeeEntity } from "modules/employees/entities/employeeEntity";
-import { VehicleEntity } from "modules/vehicles/entities/vehicleEntity";
 import { v4 as uuidV4 } from "uuid";
+import { EmployeeEntity } from "../../employees/entities/employeeEntity";
+import { VehicleEntity } from "../../vehicles/entities/vehicleEntity";
 
 @Entity("transactions")
 export class TransactionEntity {
