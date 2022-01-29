@@ -1,6 +1,7 @@
 import { getRepository, Repository } from "typeorm";
 import { VehicleEntity } from "../../vehicles/entities/vehicleEntity";
 import { ICreateTransactionDto } from "../dtos/iCreateTransactionDto";
+import { iFindAllFilterTransactionDto } from "../dtos/iFindAllFilterTransactionDto";
 import { TransactionEntity } from "../entities/transactionEntity";
 import { ITransactionRepository } from "./iTransactionRepository";
 
@@ -24,6 +25,22 @@ export class TransactionRepository implements ITransactionRepository {
     const transaction = await this.transactionRepository.findOne({ idVehicle });
 
     return transaction;
+  }
+
+  async findAllFilterTransaction(
+    { type, idEmployee, idVehicle, date, amount }: iFindAllFilterTransactionDto,
+  ): Promise<TransactionEntity[]> {
+    const transactionQuery = await this.transactionRepository.createQueryBuilder("transaction");
+
+    type && transactionQuery.andWhere("transaction.type = :type", { type });
+    idVehicle && transactionQuery.andWhere("transaction.idVehicle = :idVehicle", { idVehicle });
+    date && transactionQuery.andWhere("transaction.date = :date", { date });
+    amount && transactionQuery.andWhere("transaction.amount = :amount", { amount });
+    idEmployee && transactionQuery.andWhere("transaction.idEmployee = :idEmployee", { idEmployee });
+
+    const transactionFilter = transactionQuery.getMany();
+
+    return transactionFilter;
   }
 
   async createTransaction(
