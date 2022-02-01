@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { UpdateEmployeeService } from "./updateEmployeeService";
+import { UpdateOneEmployeeService } from "./updateOneEmployeeService";
 
-export class UpdateEmployeeController {
+export class UpdateOneEmployeeController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const { name, cpf, email, passwordOld, passwordNew, avatarUrl } = request.query;
 
-    const updateEmployeeService = container.resolve(UpdateEmployeeService);
+    const updateOneEmployeeService = container.resolve(UpdateOneEmployeeService);
 
     return response.status(201).json(
-      await updateEmployeeService.execute({
+      await updateOneEmployeeService.execute({
         id: id as string,
         name: name as string,
         cpf: Number(cpf as string),

@@ -7,7 +7,7 @@ import { EmployeeEntity } from "../../entities/employeeEntity";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 @injectable()
-export class CreateEmployeeService {
+export class CreateOneEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(

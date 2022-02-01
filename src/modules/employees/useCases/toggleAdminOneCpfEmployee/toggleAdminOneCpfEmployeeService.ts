@@ -5,7 +5,7 @@ import { EmployeeEntity } from "../../entities/employeeEntity";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 @injectable()
-export class ToggleEmployeeAdminService {
+export class ToggleAdminOneCpfEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(cpf: number): Promise<EmployeeEntity> {

@@ -10,7 +10,7 @@ interface IToken {
 }
 
 @injectable()
-export class AuthenticateEmployeeService {
+export class CreateAuthenticateOneEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute({ email, password }: ICreateAuthenticateOneEmployeeDto): Promise<IToken> {

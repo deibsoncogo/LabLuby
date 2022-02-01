@@ -5,7 +5,7 @@ import { EmployeeEntity } from "../../entities/employeeEntity";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 @injectable()
-export class ToggleEmployeeOffService {
+export class ToggleOffOneCpfEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(cpf: number): Promise<EmployeeEntity> {
@@ -17,9 +17,9 @@ export class ToggleEmployeeOffService {
 
     const employeeSave = await this.employeeRepository.toggleOffOneCpfEmployee(cpf);
 
-    delete employeeSave.password;
     employeeSave.createdAt = FormatDate(employeeSave.createdAt);
     employeeSave.updatedAt = FormatDate(employeeSave.updatedAt);
+    delete employeeSave.password;
 
     return employeeSave;
   }
