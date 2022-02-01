@@ -2,7 +2,7 @@ import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/appError";
-import { IAuthenticateEmployeeDto } from "../../dtos/iAuthenticateEmployeeDto";
+import { ICreateAuthenticateOneEmployeeDto } from "../../dtos/iCreateAuthenticateOneEmployeeDto";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
 interface IToken {
@@ -13,7 +13,7 @@ interface IToken {
 export class AuthenticateEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
-  async execute({ email, password }: IAuthenticateEmployeeDto): Promise<IToken> {
+  async execute({ email, password }: ICreateAuthenticateOneEmployeeDto): Promise<IToken> {
     const messageAuthenticateInvalid = "E-mail ou senha inválido";
 
     const employee = await this.employeeRepository.findOneEmailEmployee(email);

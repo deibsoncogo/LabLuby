@@ -2,7 +2,7 @@ import { hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/appError";
 import { FormatDate } from "../../../../utils/formatDate";
-import { ICreateEmployeeDto } from "../../dtos/iCreateEmployeeDto";
+import { ICreateOneEmployeeDto } from "../../dtos/iCreateOneEmployeeDto";
 import { EmployeeEntity } from "../../entities/employeeEntity";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
@@ -11,7 +11,7 @@ export class CreateEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(
-    { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto,
+    { name, cpf, email, password, avatarUrl }: ICreateOneEmployeeDto,
   ): Promise<EmployeeEntity> {
     const cpfAlreadyExists = await this.employeeRepository.findOneCpfEmployee(cpf);
 

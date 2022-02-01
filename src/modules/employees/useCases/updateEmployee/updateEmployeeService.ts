@@ -2,7 +2,7 @@ import { compare, hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/appError";
 import { FormatDate } from "../../../../utils/formatDate";
-import { IUpdateEmployeeDto } from "../../dtos/iUpdateEmployeeDto";
+import { IUpdateOneEmployeeDto } from "../../dtos/iUpdateOneEmployeeDto";
 import { EmployeeEntity } from "../../entities/employeeEntity";
 import { IEmployeeRepository } from "../../repositories/iEmployeeRepository";
 
@@ -11,7 +11,7 @@ export class UpdateEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(
-    { id, name, cpf, email, passwordOld, passwordNew, avatarUrl }: IUpdateEmployeeDto,
+    { id, name, cpf, email, passwordOld, passwordNew, avatarUrl }: IUpdateOneEmployeeDto,
   ): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.findOneIdEmployee(id);
 

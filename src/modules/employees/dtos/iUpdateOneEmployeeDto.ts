@@ -1,4 +1,4 @@
-export interface IUpdateEmployeeDto {
+export interface IUpdateOneEmployeeDto {
   id: string;
   name: string;
   cpf: number;

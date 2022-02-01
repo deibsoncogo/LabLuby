@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
-import { ICreateEmployeeDto } from "../dtos/iCreateEmployeeDto";
-import { IUpdateEmployeeDto } from "../dtos/iUpdateEmployeeDto";
+import { ICreateOneEmployeeDto } from "../dtos/iCreateOneEmployeeDto";
+import { IUpdateOneEmployeeDto } from "../dtos/iUpdateOneEmployeeDto";
 import { EmployeeEntity } from "../entities/employeeEntity";
 import { IEmployeeRepository } from "./iEmployeeRepository";
 
@@ -67,7 +67,7 @@ export class EmployeeRepository implements IEmployeeRepository {
 
   // função que vai alterar os dados de um funcionário
   async updateOneEmployee(
-    { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateEmployeeDto,
+    { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateOneEmployeeDto,
   ): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.findOne({ id });
 
@@ -85,7 +85,7 @@ export class EmployeeRepository implements IEmployeeRepository {
 
   // função que vai criar um funcionário
   async createOneEmployee(
-    { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto,
+    { name, cpf, email, password, avatarUrl }: ICreateOneEmployeeDto,
   ): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.create({
       name,

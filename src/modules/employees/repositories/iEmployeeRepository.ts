@@ -1,5 +1,5 @@
-import { ICreateEmployeeDto } from "../dtos/iCreateEmployeeDto";
-import { IUpdateEmployeeDto } from "../dtos/iUpdateEmployeeDto";
+import { ICreateOneEmployeeDto } from "../dtos/iCreateOneEmployeeDto";
+import { IUpdateOneEmployeeDto } from "../dtos/iUpdateOneEmployeeDto";
 import { EmployeeEntity } from "../entities/employeeEntity";
 
 // interface que servira como contrato do repositório
@@ -12,10 +12,10 @@ export interface IEmployeeRepository {
   findAllEmployee(): Promise<EmployeeEntity[]>;
 
   updateOneEmployee(
-    { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateEmployeeDto
+    { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateOneEmployeeDto
   ): Promise<EmployeeEntity>;
 
   createOneEmployee(
-    { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto
+    { name, cpf, email, password, avatarUrl }: ICreateOneEmployeeDto
   ): Promise<EmployeeEntity>;
 }
