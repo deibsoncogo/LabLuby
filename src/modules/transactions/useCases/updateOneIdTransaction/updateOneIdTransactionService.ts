@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/appError";
+import { FormatDate } from "../../../../utils/formatDate";
 import { IEmployeeRepository } from "../../../employees/repositories/iEmployeeRepository";
 import { IVehicleRepository } from "../../../vehicles/repositories/iVehicleRepository";
 import { IUpdateOneIdTransactionDto } from "../../dtos/iUpdateOneIdTransactionDto";
@@ -28,20 +29,24 @@ export class UpdateOneIdTransactionService {
       throw new AppError("ID da transação inválida");
     }
 
-    if (type !== "venda" && type !== "reserva") {
+    if (type === "venda" || type === "reserva" || type === "undefined") {
       throw new AppError("Tipo de transação inválida, utilize venda ou reserva");
     }
 
-    const employee = await this.employeeRepository.findOneIdEmployee(idEmployee);
+    if (idEmployee) {
+      const employee = await this.employeeRepository.findOneIdEmployee(idEmployee);
 
-    if (!employee) {
-      throw new AppError("ID do funcionário inválido");
+      if (!employee) {
+        throw new AppError("ID do funcionário inválido");
+      }
     }
 
-    const vehicle = await this.vehicleRepository.findOneIdVehicle(idVehicle);
+    if (idVehicle) {
+      const vehicle = await this.vehicleRepository.findOneIdVehicle(idVehicle);
 
-    if (!vehicle) {
-      throw new AppError("ID do veiculo inválido");
+      if (!vehicle) {
+        throw new AppError("ID do veiculo inválido");
+      }
     }
 
     const transaction = await this.transactionRepository.updateOneIdTransaction({
@@ -52,6 +57,15 @@ export class UpdateOneIdTransactionService {
       date,
       amount,
     });
+
+    transaction.createdAt = FormatDate(transaction.createdAt);
+    transaction.updatedAt = FormatDate(transaction.updatedAt);
+    transaction.date = FormatDate(transaction.date);
+    transaction.employee.createdAt = FormatDate(transaction.employee.createdAt);
+    transaction.employee.updatedAt = FormatDate(transaction.employee.updatedAt);
+    transaction.vehicle.createdAt = FormatDate(transaction.vehicle.createdAt);
+    transaction.vehicle.updatedAt = FormatDate(transaction.vehicle.updatedAt);
+    delete transaction.employee.password;
 
     return transaction;
   }

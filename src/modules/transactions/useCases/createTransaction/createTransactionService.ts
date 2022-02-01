@@ -56,7 +56,7 @@ export class CreateTransactionService {
 
     transaction.createdAt = FormatDate(transaction.createdAt);
     transaction.updatedAt = FormatDate(transaction.updatedAt);
-    transaction.date = FormatDate(transaction.updatedAt);
+    // transaction.date = FormatDate(transaction.updatedAt);
 
     return transaction;
   }
