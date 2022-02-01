@@ -1,5 +1,5 @@
-import { ICreateVehicleDto } from "../dtos/iCreateVehicleDto";
-import { IFindAllFilterVehicleDto } from "../dtos/iFindAllFilterVehicleDto";
+import { ICreateOneVehicleDto } from "../dtos/iCreateOneVehicleDto";
+import { IFindFilterVehicleDto } from "../dtos/iFindFilterVehicleDto";
 import { VehicleEntity } from "../entities/vehicleEntity";
 
 export interface IVehicleRepository {
@@ -7,10 +7,10 @@ export interface IVehicleRepository {
   findOneIdVehicle(id: string): Promise<VehicleEntity>;
 
   findAllFilterVehicle(
-    { category, brand, model, year, km, color, purchasePrice, status }: IFindAllFilterVehicleDto
+    { category, brand, model, year, km, color, purchasePrice, status }: IFindFilterVehicleDto
   ): Promise<VehicleEntity[]>
 
   createVehicle(
-    { category, brand, model, year, km, color, purchasePrice }: ICreateVehicleDto
+    { category, brand, model, year, km, color, purchasePrice }: ICreateOneVehicleDto
   ): Promise<VehicleEntity>
 }

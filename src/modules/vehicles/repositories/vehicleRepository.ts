@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
-import { ICreateVehicleDto } from "../dtos/iCreateVehicleDto";
-import { IFindAllFilterVehicleDto } from "../dtos/iFindAllFilterVehicleDto";
+import { ICreateOneVehicleDto } from "../dtos/iCreateOneVehicleDto";
+import { IFindFilterVehicleDto } from "../dtos/iFindFilterVehicleDto";
 import { VehicleEntity } from "../entities/vehicleEntity";
 import { IVehicleRepository } from "./iVehicleRepository";
 
@@ -20,7 +20,7 @@ export class VehicleRepository implements IVehicleRepository {
   }
 
   async findAllFilterVehicle(
-    { category, brand, model, year, km, color, purchasePrice, status }: IFindAllFilterVehicleDto,
+    { category, brand, model, year, km, color, purchasePrice, status }: IFindFilterVehicleDto,
   ): Promise<VehicleEntity[]> {
     const vehicleQueryBuilder = await this.vehicleRepository.createQueryBuilder("vehicle");
 
@@ -41,7 +41,7 @@ export class VehicleRepository implements IVehicleRepository {
   }
 
   async createVehicle(
-    { category, brand, model, year, km, color, purchasePrice }: ICreateVehicleDto,
+    { category, brand, model, year, km, color, purchasePrice }: ICreateOneVehicleDto,
   ): Promise<VehicleEntity> {
     const vehicle = await this.vehicleRepository.create({
       category,

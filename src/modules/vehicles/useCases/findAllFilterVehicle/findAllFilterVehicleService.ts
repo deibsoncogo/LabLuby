@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { FormatDate } from "../../../../utils/formatDate";
-import { IFindAllFilterVehicleDto } from "../../dtos/iFindAllFilterVehicleDto";
+import { IFindFilterVehicleDto } from "../../dtos/iFindFilterVehicleDto";
 import { VehicleEntity } from "../../entities/vehicleEntity";
 import { IVehicleRepository } from "../../repositories/iVehicleRepository";
 
@@ -9,7 +9,7 @@ export class FindAllFilterVehicleService {
   constructor(@inject("VehicleRepository") private vehicleRepository: IVehicleRepository) { }
 
   async execute(
-    { category, brand, model, year, km, color, purchasePrice, status }: IFindAllFilterVehicleDto,
+    { category, brand, model, year, km, color, purchasePrice, status }: IFindFilterVehicleDto,
   ): Promise<VehicleEntity[]> {
     const vehicleAll = await this.vehicleRepository.findAllFilterVehicle({
       category,

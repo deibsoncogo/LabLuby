@@ -1,4 +1,4 @@
-export interface ICreateVehicleDto {
+export interface ICreateOneVehicleDto {
   category: string;
   brand: string;
   model: string;
