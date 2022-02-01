@@ -19,7 +19,7 @@ export class ToggleEmployeeAdminService {
       throw new AppError("Este funcionário está desligado", 401);
     }
 
-    const employeeSave = await this.employeeRepository.toggleAdminEmployee(cpf);
+    const employeeSave = await this.employeeRepository.toggleAdminOneCpfEmployee(cpf);
 
     delete employeeSave.password;
     employeeSave.createdAt = FormatDate(employeeSave.createdAt);

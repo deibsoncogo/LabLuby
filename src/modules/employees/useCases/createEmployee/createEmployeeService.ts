@@ -27,7 +27,7 @@ export class CreateEmployeeService {
 
     const passwordHash = await hash(password, 8);
 
-    const employeeNew = await this.employeeRepository.createEmployee({
+    const employeeNew = await this.employeeRepository.createOneEmployee({
       name,
       cpf,
       email,

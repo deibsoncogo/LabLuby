@@ -15,7 +15,7 @@ export class ToggleEmployeeOffService {
       throw new AppError("CPF do funcionário inválido");
     }
 
-    const employeeSave = await this.employeeRepository.toggleOffEmployee(cpf);
+    const employeeSave = await this.employeeRepository.toggleOffOneCpfEmployee(cpf);
 
     delete employeeSave.password;
     employeeSave.createdAt = FormatDate(employeeSave.createdAt);

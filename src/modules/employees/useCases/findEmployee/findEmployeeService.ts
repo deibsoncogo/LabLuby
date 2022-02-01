@@ -8,7 +8,7 @@ export class FindEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(): Promise<EmployeeEntity[]> {
-    const employeeAll = await this.employeeRepository.findEmployee();
+    const employeeAll = await this.employeeRepository.findAllEmployee();
 
     employeeAll.map(async (employee) => {
       delete employee.password;

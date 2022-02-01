@@ -41,7 +41,7 @@ export class UpdateEmployeeService {
       passwordNew = await hash(passwordNew, 8);
     }
 
-    const employeeNew = await this.employeeRepository.updateEmployee({
+    const employeeNew = await this.employeeRepository.updateOneEmployee({
       id,
       name,
       cpf,

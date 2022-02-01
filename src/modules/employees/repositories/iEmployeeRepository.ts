@@ -4,18 +4,18 @@ import { EmployeeEntity } from "../entities/employeeEntity";
 
 // interface que servira como contrato do repositório
 export interface IEmployeeRepository {
-  toggleOffEmployee(cpf: number): Promise<EmployeeEntity>;
-  toggleAdminEmployee(cpf: number): Promise<EmployeeEntity>;
+  toggleOffOneCpfEmployee(cpf: number): Promise<EmployeeEntity>;
+  toggleAdminOneCpfEmployee(cpf: number): Promise<EmployeeEntity>;
   findOneEmailEmployee(email: string): Promise<EmployeeEntity>;
   findOneCpfEmployee(cpf: number): Promise<EmployeeEntity>;
   findOneIdEmployee(id: string): Promise<EmployeeEntity>;
-  findEmployee(): Promise<EmployeeEntity[]>;
+  findAllEmployee(): Promise<EmployeeEntity[]>;
 
-  updateEmployee(
+  updateOneEmployee(
     { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateEmployeeDto
   ): Promise<EmployeeEntity>;
 
-  createEmployee(
+  createOneEmployee(
     { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto
   ): Promise<EmployeeEntity>;
 }

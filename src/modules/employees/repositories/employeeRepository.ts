@@ -13,7 +13,7 @@ export class EmployeeRepository implements IEmployeeRepository {
   constructor() { this.employeeRepository = getRepository(EmployeeEntity); }
 
   // função que vai alterar o desligamento do funcionário
-  async toggleOffEmployee(cpf: number): Promise<EmployeeEntity> {
+  async toggleOffOneCpfEmployee(cpf: number): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.findOne({ cpf });
 
     employee.isAdmin = false;
@@ -25,7 +25,7 @@ export class EmployeeRepository implements IEmployeeRepository {
   }
 
   // função que vai alterar se o funcionário é administrador
-  async toggleAdminEmployee(cpf: number): Promise<EmployeeEntity> {
+  async toggleAdminOneCpfEmployee(cpf: number): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.findOne({ cpf });
 
     employee.isAdmin = !employee.isAdmin;
@@ -57,7 +57,7 @@ export class EmployeeRepository implements IEmployeeRepository {
   }
 
   // função que vai buscar todos os funcionários
-  async findEmployee(): Promise<EmployeeEntity[]> {
+  async findAllEmployee(): Promise<EmployeeEntity[]> {
     const employeeAll = await this.employeeRepository.find(
       { order: { createdAt: "ASC" } },
     );
@@ -66,7 +66,7 @@ export class EmployeeRepository implements IEmployeeRepository {
   }
 
   // função que vai alterar os dados de um funcionário
-  async updateEmployee(
+  async updateOneEmployee(
     { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateEmployeeDto,
   ): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.findOne({ id });
@@ -78,13 +78,13 @@ export class EmployeeRepository implements IEmployeeRepository {
     employee.avatarUrl = avatarUrl || employee.avatarUrl;
     employee.updatedAt = new Date();
 
-    const employeeNew = await this.employeeRepository.save(employee);
+    const employeeSave = await this.employeeRepository.save(employee);
 
-    return employeeNew;
+    return employeeSave;
   }
 
   // função que vai criar um funcionário
-  async createEmployee(
+  async createOneEmployee(
     { name, cpf, email, password, avatarUrl }: ICreateEmployeeDto,
   ): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.create({
@@ -95,8 +95,8 @@ export class EmployeeRepository implements IEmployeeRepository {
       avatarUrl,
     });
 
-    await this.employeeRepository.save(employee);
+    const employeeSave = await this.employeeRepository.save(employee);
 
-    return employee;
+    return employeeSave;
   }
 }
