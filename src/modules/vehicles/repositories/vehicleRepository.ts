@@ -9,38 +9,40 @@ export class VehicleRepository implements IVehicleRepository {
 
   constructor() { this.vehicleRepository = getRepository(VehicleEntity); }
 
-  async deleteIdVehicle(id: string): Promise<void> {
-    await this.vehicleRepository.delete(id);
+  async deleteOneIdVehicle(id: string): Promise<void> {
+    await this.vehicleRepository.delete({ id });
   }
 
   async findOneIdVehicle(id: string): Promise<VehicleEntity> {
-    const vehicle = await this.vehicleRepository.findOne(id);
+    const vehicle = await this.vehicleRepository.findOne({ id });
 
     return vehicle;
   }
 
-  async findAllFilterVehicle(
+  async findFilterVehicle(
     { category, brand, model, year, km, color, purchasePrice, status }: IFindFilterVehicleDto,
   ): Promise<VehicleEntity[]> {
-    const vehicleQueryBuilder = await this.vehicleRepository.createQueryBuilder("vehicle");
+    const vehicleQuery = await this.vehicleRepository
+      .createQueryBuilder("vehicle")
+      .addOrderBy("vehicle.createdAt", "ASC");
 
-    category && vehicleQueryBuilder.andWhere("vehicle.category = :category", { category });
-    brand && vehicleQueryBuilder.andWhere("vehicle.brand = :brand", { brand });
-    model && vehicleQueryBuilder.andWhere("vehicle.model = :model", { model });
-    year && vehicleQueryBuilder.andWhere("vehicle.year = :year", { year });
-    km && vehicleQueryBuilder.andWhere("vehicle.km = :km", { km });
-    color && vehicleQueryBuilder.andWhere("vehicle.color = :color", { color });
-    status && vehicleQueryBuilder.andWhere("vehicle.status = :status", { status });
-    purchasePrice && vehicleQueryBuilder.andWhere(
+    category && vehicleQuery.andWhere("vehicle.category = :category", { category });
+    brand && vehicleQuery.andWhere("vehicle.brand = :brand", { brand });
+    model && vehicleQuery.andWhere("vehicle.model = :model", { model });
+    year && vehicleQuery.andWhere("vehicle.year = :year", { year });
+    km && vehicleQuery.andWhere("vehicle.km = :km", { km });
+    color && vehicleQuery.andWhere("vehicle.color = :color", { color });
+    status && vehicleQuery.andWhere("vehicle.status = :status", { status });
+    purchasePrice && vehicleQuery.andWhere(
       "vehicle.purchasePrice = :purchasePrice", { purchasePrice },
     );
 
-    const vehicleGetMany = await vehicleQueryBuilder.getMany();
+    const vehicleGetMany = await vehicleQuery.getMany();
 
     return vehicleGetMany;
   }
 
-  async createVehicle(
+  async createOneVehicle(
     { category, brand, model, year, km, color, purchasePrice }: ICreateOneVehicleDto,
   ): Promise<VehicleEntity> {
     const vehicle = await this.vehicleRepository.create({
@@ -54,8 +56,8 @@ export class VehicleRepository implements IVehicleRepository {
       status: "disponível",
     });
 
-    await this.vehicleRepository.save(vehicle);
+    const vehicleSave = await this.vehicleRepository.save(vehicle);
 
-    return vehicle;
+    return vehicleSave;
   }
 }

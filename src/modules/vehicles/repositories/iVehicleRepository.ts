@@ -3,14 +3,14 @@ import { IFindFilterVehicleDto } from "../dtos/iFindFilterVehicleDto";
 import { VehicleEntity } from "../entities/vehicleEntity";
 
 export interface IVehicleRepository {
-  deleteIdVehicle(id: string): Promise<void>;
+  deleteOneIdVehicle(id: string): Promise<void>;
   findOneIdVehicle(id: string): Promise<VehicleEntity>;
 
-  findAllFilterVehicle(
+  findFilterVehicle(
     { category, brand, model, year, km, color, purchasePrice, status }: IFindFilterVehicleDto
   ): Promise<VehicleEntity[]>
 
-  createVehicle(
+  createOneVehicle(
     { category, brand, model, year, km, color, purchasePrice }: ICreateOneVehicleDto
   ): Promise<VehicleEntity>
 }

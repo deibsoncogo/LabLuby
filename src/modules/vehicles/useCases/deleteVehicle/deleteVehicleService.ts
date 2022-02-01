@@ -13,6 +13,6 @@ export class DeleteVehicleService {
       throw new AppError("Não existe um veículo com este ID!");
     }
 
-    await this.vehicleRepository.deleteIdVehicle(id);
+    await this.vehicleRepository.deleteOneIdVehicle(id);
   }
 }
