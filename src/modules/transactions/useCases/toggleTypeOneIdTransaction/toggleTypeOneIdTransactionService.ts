@@ -1,5 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/appError";
+import { employeeRouter } from "../../../../routes/employeeRouter";
+import { IEmployeeRepository } from "../../../employees/repositories/iEmployeeRepository";
 import { TransactionEntity } from "../../entities/transactionEntity";
 import { ITransactionRepository } from "../../repositories/iTransactionRepository";
 
@@ -8,17 +10,28 @@ export class ToggleTypeOneIdTransactionService {
   constructor(
     @inject("TransactionRepository")
     private transactionRepository: ITransactionRepository,
+
+    @inject("EmployeeRepository")
+    private employeeRepository: IEmployeeRepository,
   ) {}
 
   async execute(id: string): Promise<TransactionEntity> {
-    const idExists = await this.transactionRepository.findOneIdTransaction(id);
+    const transaction = await this.transactionRepository.findOneIdTransaction(id);
 
-    if (!idExists) {
+    if (!transaction) {
       throw new AppError("Não existe uma transação com este ID");
     }
 
-    const transaction = await this.transactionRepository.toggleTypeOneIdTransaction(id);
+    const employee = await this.employeeRepository.findOneIdEmployee(transaction.idEmployee);
 
-    return transaction;
+    if (employee) {
+      if (employee.off) {
+        throw new AppError("Este funcionário está desligado");
+      }
+    }
+
+    const transactionRepository = await this.transactionRepository.toggleTypeOneIdTransaction(id);
+
+    return transactionRepository;
   }
 }
