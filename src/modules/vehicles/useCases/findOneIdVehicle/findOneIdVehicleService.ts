@@ -5,7 +5,7 @@ import { VehicleEntity } from "../../entities/vehicleEntity";
 import { IVehicleRepository } from "../../repositories/iVehicleRepository";
 
 @injectable()
-export class FindOneVehicleService {
+export class FindOneIdVehicleService {
   constructor(@inject("VehicleRepository") private vehicleRepository: IVehicleRepository) { }
 
   async execute(id: string): Promise<VehicleEntity> {

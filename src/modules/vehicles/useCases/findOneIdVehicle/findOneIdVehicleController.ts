@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { FindOneVehicleService } from "./findOneVehicleService";
+import { FindOneIdVehicleService } from "./findOneIdVehicleService";
 
-export class FindOneVehicleController {
+export class FindOneIdVehicleController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const findOneVehicleService = container.resolve(FindOneVehicleService);
+    const findOneIdVehicleService = container.resolve(FindOneIdVehicleService);
 
     return response.status(200).json(
-      await findOneVehicleService.execute(id),
+      await findOneIdVehicleService.execute(id),
     );
   }
 }

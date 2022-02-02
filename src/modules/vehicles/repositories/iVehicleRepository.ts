@@ -8,9 +8,9 @@ export interface IVehicleRepository {
 
   findFilterVehicle(
     { category, brand, model, year, km, color, purchasePrice, status }: IFindFilterVehicleDto
-  ): Promise<VehicleEntity[]>
+  ): Promise<VehicleEntity[]>;
 
   createOneVehicle(
     { category, brand, model, year, km, color, purchasePrice }: ICreateOneVehicleDto
-  ): Promise<VehicleEntity>
+  ): Promise<VehicleEntity>;
 }

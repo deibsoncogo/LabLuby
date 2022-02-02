@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { DeleteVehicleService } from "./deleteVehicleService";
+import { DeleteVehicleService } from "./deleteOneIdVehicleService";
 
-export class DeleteVehicleController {
+export class DeleteOneIdVehicleController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const deleteVehicleService = container.resolve(DeleteVehicleService);
+    const deleteOneIdVehicleService = container.resolve(DeleteVehicleService);
 
-    await deleteVehicleService.execute(id);
+    await deleteOneIdVehicleService.execute(id);
 
     return response.status(202).json();
   }
