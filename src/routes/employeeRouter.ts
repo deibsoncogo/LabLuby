@@ -11,16 +11,16 @@ import { UpdateOneEmployeeController } from "../modules/employees/useCases/updat
 
 const employeeRouter = Router();
 
-employeeRouter.post("/create", new CreateOneEmployeeController().handle);
-employeeRouter.post("/authenticate", new CreateAuthenticateOneEmployeeController().handle);
+employeeRouter.post("/createOne", new CreateOneEmployeeController().handle);
+employeeRouter.post("/createAuthenticateOne", new CreateAuthenticateOneEmployeeController().handle);
 
 employeeRouter.use(EnsuredAuthorizedMiddleware);
-employeeRouter.get("/one/:cpf", new FindOneIdEmployeeController().handle);
-employeeRouter.get("/all", new FindAllEmployeeController().handle);
+employeeRouter.get("/findAll", new FindAllEmployeeController().handle);
+employeeRouter.get("/findOne/:cpf", new FindOneIdEmployeeController().handle);
 
 employeeRouter.use(EmployeeIsAdminMiddleware);
-employeeRouter.put("/:id", new UpdateOneEmployeeController().handle);
-employeeRouter.patch("/toggleOff", new ToggleOffOneCpfEmployeeController().handle);
-employeeRouter.patch("/toggleAdmin", new ToggleAdminOneCpfEmployeeController().handle);
+employeeRouter.put("/updateOne/:id", new UpdateOneEmployeeController().handle);
+employeeRouter.patch("/toggleAdminOne", new ToggleAdminOneCpfEmployeeController().handle);
+employeeRouter.patch("/toggleOffOne", new ToggleOffOneCpfEmployeeController().handle);
 
 export { employeeRouter };
