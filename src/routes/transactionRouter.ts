@@ -10,12 +10,12 @@ import { UpdateOneTransactionController } from "../modules/transactions/useCases
 const transactionRouter = Router();
 
 transactionRouter.use(EnsuredAuthorizedMiddleware);
-transactionRouter.post("/create", new CreateOneTransactionController().execute);
-transactionRouter.get("/one/:id", new FindOneIdTransactionController().handle);
-transactionRouter.get("/filter", new FindFilterTransactionController().handle);
-transactionRouter.put("/one/:id", new UpdateOneTransactionController().handle);
+transactionRouter.post("/createOne", new CreateOneTransactionController().execute);
+transactionRouter.get("/findFilter", new FindFilterTransactionController().handle);
+transactionRouter.get("/findOne/:id", new FindOneIdTransactionController().handle);
 
 transactionRouter.use(EmployeeIsAdminMiddleware);
-transactionRouter.delete("/one/:id", new DeleteOneIdTransactionController().handle);
+transactionRouter.put("/updateOne/:id", new UpdateOneTransactionController().handle);
+transactionRouter.delete("/deleteOne/:id", new DeleteOneIdTransactionController().handle);
 
 export { transactionRouter };
