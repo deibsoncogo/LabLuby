@@ -14,7 +14,7 @@ export class FindAllFilterTransactionService {
   async execute(
     { type, idEmployee, idVehicle, date, amount }: IFindFilterTransactionDto,
   ): Promise<TransactionEntity[]> {
-    const transactionFilter = await this.transactionRepository.findAllFilterTransaction({
+    const transactionFilter = await this.transactionRepository.findFilterTransaction({
       type,
       idEmployee,
       idVehicle,

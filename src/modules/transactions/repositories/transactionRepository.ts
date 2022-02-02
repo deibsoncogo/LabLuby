@@ -49,10 +49,12 @@ export class TransactionRepository implements ITransactionRepository {
     return transactionSave;
   }
 
-  async findAllFilterTransaction(
+  async findFilterTransaction(
     { type, idEmployee, idVehicle, date, amount }: IFindFilterTransactionDto,
   ): Promise<TransactionEntity[]> {
-    const transactionQuery = await this.transactionRepository.createQueryBuilder("transaction");
+    const transactionQuery = await this.transactionRepository
+      .createQueryBuilder("transaction")
+      .addOrderBy("transaction.createdAt", "ASC");
 
     type && transactionQuery.andWhere("transaction.type = :type", { type });
     idVehicle && transactionQuery.andWhere("transaction.idVehicle = :idVehicle", { idVehicle });
@@ -60,12 +62,12 @@ export class TransactionRepository implements ITransactionRepository {
     amount && transactionQuery.andWhere("transaction.amount = :amount", { amount });
     idEmployee && transactionQuery.andWhere("transaction.idEmployee = :idEmployee", { idEmployee });
 
-    const transactionFilter = transactionQuery.getMany();
+    const transactionGetMany = transactionQuery.getMany();
 
-    return transactionFilter;
+    return transactionGetMany;
   }
 
-  async createTransaction(
+  async createOneTransaction(
     { type, idEmployee, idVehicle, date, amount }: ICreateOneTransactionDto,
   ): Promise<TransactionEntity> {
     const vehicle = await this.vehicleRepository.findOne({ id: idVehicle });
@@ -88,8 +90,8 @@ export class TransactionRepository implements ITransactionRepository {
       amount,
     });
 
-    await this.transactionRepository.save(transaction);
+    const transactionSave = await this.transactionRepository.save(transaction);
 
-    return transaction;
+    return transactionSave;
   }
 }

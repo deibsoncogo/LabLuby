@@ -12,11 +12,11 @@ export interface ITransactionRepository {
     { id, type, idEmployee, idVehicle, date, amount }: IUpdateOneIdTransactionDto
   ): Promise<TransactionEntity>;
 
-  findAllFilterTransaction(
+  findFilterTransaction(
     { type, idEmployee, idVehicle, date, amount }: IFindFilterTransactionDto
   ): Promise<TransactionEntity[]>;
 
-  createTransaction(
+  createOneTransaction(
     { type, idEmployee, idVehicle, date, amount }:ICreateOneTransactionDto
   ): Promise<TransactionEntity>;
 }

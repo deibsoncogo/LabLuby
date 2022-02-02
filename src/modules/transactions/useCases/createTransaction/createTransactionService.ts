@@ -46,7 +46,7 @@ export class CreateTransactionService {
       throw new AppError("Já existe uma transação para este veiculo");
     }
 
-    const transaction = await this.transactionRepository.createTransaction({
+    const transaction = await this.transactionRepository.createOneTransaction({
       type,
       idEmployee,
       idVehicle,
