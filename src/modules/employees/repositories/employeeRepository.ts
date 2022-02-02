@@ -12,6 +12,12 @@ export class EmployeeRepository implements IEmployeeRepository {
   // cria a conexão com o banco de dados
   constructor() { this.employeeRepository = getRepository(EmployeeEntity); }
 
+  async findOneAvatarUrlEmployee(avatarUrl: string): Promise<EmployeeEntity> {
+    const employee = await this.employeeRepository.findOne({ avatarUrl });
+
+    return employee;
+  }
+
   // função que vai alterar o desligamento do funcionário
   async toggleOffOneCpfEmployee(cpf: number): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.findOne({ cpf });

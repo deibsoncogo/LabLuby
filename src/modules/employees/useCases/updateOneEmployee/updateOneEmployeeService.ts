@@ -31,6 +31,12 @@ export class UpdateOneEmployeeService {
       throw new AppError("Já existe este CPF no sistema");
     }
 
+    const avatarUrlAlreadyExists = await this.employeeRepository.findOneAvatarUrlEmployee(avatarUrl);
+
+    if (avatarUrlAlreadyExists) {
+      throw new AppError("Já existe um funcionário com está foto!");
+    }
+
     if (passwordOld && passwordNew) {
       const passwordMatch = await compare(passwordOld, employee.password);
 

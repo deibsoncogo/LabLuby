@@ -25,6 +25,12 @@ export class CreateOneEmployeeService {
       throw new AppError("Já existe um funcionário com este email!");
     }
 
+    const avatarUrlAlreadyExists = await this.employeeRepository.findOneAvatarUrlEmployee(avatarUrl);
+
+    if (avatarUrlAlreadyExists) {
+      throw new AppError("Já existe um funcionário com está foto!");
+    }
+
     const passwordHash = await hash(password, 8);
 
     const employeeNew = await this.employeeRepository.createOneEmployee({
