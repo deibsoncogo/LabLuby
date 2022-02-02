@@ -1,4 +1,4 @@
-export interface IUpdateOneIdTransactionDto {
+export interface IUpdateOneTransactionDto {
   id: string;
   type?: string;
   idEmployee?: string;

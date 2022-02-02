@@ -1,6 +1,6 @@
 import { ICreateOneTransactionDto } from "../dtos/iCreateOneTransactionDto";
 import { IFindFilterTransactionDto } from "../dtos/iFindFilterTransactionDto";
-import { IUpdateOneIdTransactionDto } from "../dtos/iUpdateOneIdTransactionDto";
+import { IUpdateOneTransactionDto } from "../dtos/iUpdateOneTransactionDto";
 import { TransactionEntity } from "../entities/transactionEntity";
 
 export interface ITransactionRepository {
@@ -8,8 +8,8 @@ export interface ITransactionRepository {
   findOneIdTransaction(id: string): Promise<TransactionEntity>;
   findOneIdVehicleTransaction(idVehicle: string): Promise<TransactionEntity>;
 
-  updateOneIdTransaction(
-    { id, type, idEmployee, idVehicle, date, amount }: IUpdateOneIdTransactionDto
+  updateOneTransaction(
+    { id, type, idEmployee, idVehicle, date, amount }: IUpdateOneTransactionDto
   ): Promise<TransactionEntity>;
 
   findFilterTransaction(

@@ -3,7 +3,7 @@ import { AppError } from "../../../../errors/appError";
 import { FormatDate } from "../../../../utils/formatDate";
 import { IEmployeeRepository } from "../../../employees/repositories/iEmployeeRepository";
 import { IVehicleRepository } from "../../../vehicles/repositories/iVehicleRepository";
-import { IUpdateOneIdTransactionDto } from "../../dtos/iUpdateOneIdTransactionDto";
+import { IUpdateOneTransactionDto } from "../../dtos/iUpdateOneTransactionDto";
 import { TransactionEntity } from "../../entities/transactionEntity";
 import { ITransactionRepository } from "../../repositories/iTransactionRepository";
 
@@ -21,7 +21,7 @@ export class UpdateOneIdTransactionService {
   ) {}
 
   async execute(
-    { id, type, idEmployee, idVehicle, date, amount }: IUpdateOneIdTransactionDto,
+    { id, type, idEmployee, idVehicle, date, amount }: IUpdateOneTransactionDto,
   ): Promise<TransactionEntity> {
     const alreadyExistsTransaction = await this.transactionRepository.findOneIdTransaction(id);
 
@@ -49,7 +49,7 @@ export class UpdateOneIdTransactionService {
       }
     }
 
-    const transaction = await this.transactionRepository.updateOneIdTransaction({
+    const transaction = await this.transactionRepository.updateOneTransaction({
       id,
       type,
       idEmployee,
