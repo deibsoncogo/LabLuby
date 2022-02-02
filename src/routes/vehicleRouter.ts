@@ -10,12 +10,12 @@ import { UpdateOneVehicleController } from "../modules/vehicles/useCases/updateO
 const vehicleRouter = Router();
 
 vehicleRouter.use(EnsuredAuthorizedMiddleware);
-vehicleRouter.post("/create", new CreateOneVehicleController().handle);
-vehicleRouter.get("/one/:id", new FindOneIdVehicleController().handle);
-vehicleRouter.get("/allFilter", new FindFilterVehicleController().handle);
+vehicleRouter.post("/createOne", new CreateOneVehicleController().handle);
+vehicleRouter.get("/findFilter", new FindFilterVehicleController().handle);
+vehicleRouter.get("/findOne/:id", new FindOneIdVehicleController().handle);
 
 vehicleRouter.use(EmployeeIsAdminMiddleware);
-vehicleRouter.put("/one/:id", new UpdateOneVehicleController().handle);
-vehicleRouter.delete("/delete/:id", new DeleteOneIdVehicleController().handle);
+vehicleRouter.put("/updateOne/:id", new UpdateOneVehicleController().handle);
+vehicleRouter.delete("/deleteOne/:id", new DeleteOneIdVehicleController().handle);
 
 export { vehicleRouter };
