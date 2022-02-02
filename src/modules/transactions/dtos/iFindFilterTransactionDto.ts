@@ -1,4 +1,4 @@
-export interface iFindAllFilterTransactionDto {
+export interface IFindFilterTransactionDto {
   type?: string;
   idEmployee?: string;
   idVehicle?: string;

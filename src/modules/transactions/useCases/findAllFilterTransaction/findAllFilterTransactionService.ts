@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { FormatDate } from "../../../../utils/formatDate";
-import { iFindAllFilterTransactionDto } from "../../dtos/iFindAllFilterTransactionDto";
+import { IFindFilterTransactionDto } from "../../dtos/iFindFilterTransactionDto";
 import { TransactionEntity } from "../../entities/transactionEntity";
 import { ITransactionRepository } from "../../repositories/iTransactionRepository";
 
@@ -12,7 +12,7 @@ export class FindAllFilterTransactionService {
   ) {}
 
   async execute(
-    { type, idEmployee, idVehicle, date, amount }: iFindAllFilterTransactionDto,
+    { type, idEmployee, idVehicle, date, amount }: IFindFilterTransactionDto,
   ): Promise<TransactionEntity[]> {
     const transactionFilter = await this.transactionRepository.findAllFilterTransaction({
       type,

@@ -3,7 +3,7 @@ import { AppError } from "../../../../errors/appError";
 import { FormatDate } from "../../../../utils/formatDate";
 import { IEmployeeRepository } from "../../../employees/repositories/iEmployeeRepository";
 import { IVehicleRepository } from "../../../vehicles/repositories/iVehicleRepository";
-import { ICreateTransactionDto } from "../../dtos/iCreateTransactionDto";
+import { ICreateOneTransactionDto } from "../../dtos/iCreateOneTransactionDto";
 import { TransactionEntity } from "../../entities/transactionEntity";
 import { ITransactionRepository } from "../../repositories/iTransactionRepository";
 
@@ -21,7 +21,7 @@ export class CreateTransactionService {
   ) {}
 
   async execute(
-    { type, idEmployee, idVehicle, date, amount }: ICreateTransactionDto,
+    { type, idEmployee, idVehicle, date, amount }: ICreateOneTransactionDto,
   ): Promise<TransactionEntity> {
     if (type !== "venda" && type !== "reserva") {
       throw new AppError("Tipo de transação inválida, utilize venda ou reserva");

@@ -1,4 +1,4 @@
-export interface ICreateTransactionDto {
+export interface ICreateOneTransactionDto {
   type: string;
   idEmployee: string;
   idVehicle: string;

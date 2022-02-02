@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm";
 import { VehicleEntity } from "../../vehicles/entities/vehicleEntity";
-import { ICreateTransactionDto } from "../dtos/iCreateTransactionDto";
-import { iFindAllFilterTransactionDto } from "../dtos/iFindAllFilterTransactionDto";
+import { ICreateOneTransactionDto } from "../dtos/iCreateOneTransactionDto";
+import { IFindFilterTransactionDto } from "../dtos/iFindFilterTransactionDto";
 import { IUpdateOneIdTransactionDto } from "../dtos/iUpdateOneIdTransactionDto";
 import { TransactionEntity } from "../entities/transactionEntity";
 import { ITransactionRepository } from "./iTransactionRepository";
@@ -50,7 +50,7 @@ export class TransactionRepository implements ITransactionRepository {
   }
 
   async findAllFilterTransaction(
-    { type, idEmployee, idVehicle, date, amount }: iFindAllFilterTransactionDto,
+    { type, idEmployee, idVehicle, date, amount }: IFindFilterTransactionDto,
   ): Promise<TransactionEntity[]> {
     const transactionQuery = await this.transactionRepository.createQueryBuilder("transaction");
 
@@ -66,7 +66,7 @@ export class TransactionRepository implements ITransactionRepository {
   }
 
   async createTransaction(
-    { type, idEmployee, idVehicle, date, amount }: ICreateTransactionDto,
+    { type, idEmployee, idVehicle, date, amount }: ICreateOneTransactionDto,
   ): Promise<TransactionEntity> {
     const vehicle = await this.vehicleRepository.findOne({ id: idVehicle });
 
