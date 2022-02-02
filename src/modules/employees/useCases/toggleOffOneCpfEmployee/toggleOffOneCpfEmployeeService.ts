@@ -25,8 +25,10 @@ export class ToggleOffOneCpfEmployeeService {
     const transaction = await this.transactionRepository
       .findOneIdEmployeeTransaction(employee.id);
 
-    if (transaction.type === "reserva") {
-      throw new AppError("Existe uma transação reservada deste funcionário");
+    if (transaction !== undefined) {
+      if (transaction.type === "reserva") {
+        throw new AppError("Existe uma transação reservada deste funcionário");
+      }
     }
 
     const employeeSave = await this.employeeRepository.toggleOffOneCpfEmployee(cpf);
