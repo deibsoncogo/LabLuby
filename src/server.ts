@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use(indexRouter);
 
-app.get("/", (request, response) => response.json({ message: "Hello word!" }));
+app.get("/", (request, response) => response.json({ message: "Hello word" }));
 
 // middleware de tipo erro para lidar com eles
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {

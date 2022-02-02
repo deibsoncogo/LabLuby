@@ -12,7 +12,7 @@ export class FindOneIdVehicleService {
     const vehicle = await this.vehicleRepository.findOneIdVehicle(id);
 
     if (!vehicle) {
-      throw new AppError("Não existe um veículo cadastrado com este ID!");
+      throw new AppError("Não existe um veículo cadastrado com este ID");
     }
 
     vehicle.createdAt = FormatDate(vehicle.createdAt);

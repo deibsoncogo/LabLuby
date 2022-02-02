@@ -12,11 +12,11 @@ export async function EmployeeIsAdminMiddleware(
   const employee = await employeeRepository.findOneIdEmployee(idEmployeeAuthorized);
 
   if (!employee) {
-    throw new AppError("ID do funcionário autenticado inválido!", 401);
+    throw new AppError("ID do funcionário autenticado inválido", 401);
   }
 
   if (!employee.isAdmin) {
-    throw new AppError("Funcionário autenticado não é administrador!", 401);
+    throw new AppError("Funcionário autenticado não é administrador", 401);
   }
 
   return next();

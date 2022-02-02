@@ -17,7 +17,7 @@ export class DeleteVehicleService {
     const idExists = await this.vehicleRepository.findOneIdVehicle(id);
 
     if (!idExists) {
-      throw new AppError("Não existe um veículo com este ID!");
+      throw new AppError("Não existe um veículo com este ID");
     }
 
     const transactionExists = await this.transactionRepository.findOneIdVehicleTransaction(id);

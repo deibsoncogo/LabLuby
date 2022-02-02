@@ -16,19 +16,19 @@ export class CreateOneEmployeeService {
     const cpfAlreadyExists = await this.employeeRepository.findOneCpfEmployee(cpf);
 
     if (cpfAlreadyExists) {
-      throw new AppError("Já existe um funcionário com este CPF!");
+      throw new AppError("Já existe um funcionário com este CPF");
     }
 
     const emailAlreadyExists = await this.employeeRepository.findOneEmailEmployee(email);
 
     if (emailAlreadyExists) {
-      throw new AppError("Já existe um funcionário com este email!");
+      throw new AppError("Já existe um funcionário com este e-mail");
     }
 
     const avatarUrlAlreadyExists = await this.employeeRepository.findOneAvatarUrlEmployee(avatarUrl);
 
     if (avatarUrlAlreadyExists) {
-      throw new AppError("Já existe um funcionário com está foto!");
+      throw new AppError("Já existe um funcionário com está foto");
     }
 
     const passwordHash = await hash(password, 8);

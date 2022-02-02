@@ -21,7 +21,7 @@ export class CreateOneVehicleService {
     });
 
     if (vehicleAlreadyExists.length !== 0) {
-      throw new AppError("Já existe um veículo com estas especificações!");
+      throw new AppError("Já existe um veículo com estas especificações");
     }
 
     const vehicle = await this.vehicleRepository.createOneVehicle({

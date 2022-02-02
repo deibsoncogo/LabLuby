@@ -22,7 +22,7 @@ export class UpdateOneEmployeeService {
     const emailAlreadyExists = await this.employeeRepository.findOneEmailEmployee(email);
 
     if (emailAlreadyExists) {
-      throw new AppError("Já existe este email no sistema");
+      throw new AppError("Já existe este e-mail no sistema");
     }
 
     const cpfAlreadyExists = await this.employeeRepository.findOneCpfEmployee(cpf);
@@ -34,14 +34,14 @@ export class UpdateOneEmployeeService {
     const avatarUrlAlreadyExists = await this.employeeRepository.findOneAvatarUrlEmployee(avatarUrl);
 
     if (avatarUrlAlreadyExists) {
-      throw new AppError("Já existe um funcionário com está foto!");
+      throw new AppError("Já existe um funcionário com está foto");
     }
 
     if (passwordOld && passwordNew) {
       const passwordMatch = await compare(passwordOld, employee.password);
 
       if (!passwordMatch) {
-        throw new AppError("Senha antiga inválida!");
+        throw new AppError("Senha antiga inválida");
       }
 
       passwordNew = await hash(passwordNew, 8);
