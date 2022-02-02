@@ -40,6 +40,14 @@ export class TransactionRepository implements ITransactionRepository {
   }
 
   async deleteOneIdTransaction(id: string): Promise<void> {
+    const transaction = await this.transactionRepository.findOne({ id });
+    const vehicle = await this.vehicleRepository.findOne({ id: transaction.idVehicle });
+
+    vehicle.status = "disponível";
+    vehicle.updatedAt = new Date();
+
+    await this.vehicleRepository.save(vehicle);
+
     await this.transactionRepository.delete({ id });
   }
 
@@ -56,11 +64,10 @@ export class TransactionRepository implements ITransactionRepository {
   }
 
   async updateOneTransaction(
-    { id, type, idEmployee, idVehicle, date, amount }: IUpdateOneTransactionDto,
+    { id, idEmployee, idVehicle, date, amount }: IUpdateOneTransactionDto,
   ): Promise<TransactionEntity> {
     const transaction = await this.transactionRepository.findOne({ id });
 
-    transaction.type = type || transaction.type;
     transaction.idEmployee = idEmployee || transaction.idEmployee;
     transaction.idVehicle = idVehicle || transaction.idVehicle;
     transaction.date = date || transaction.date;

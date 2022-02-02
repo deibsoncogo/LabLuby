@@ -21,16 +21,12 @@ export class UpdateOneTransactionService {
   ) {}
 
   async execute(
-    { id, type, idEmployee, idVehicle, date, amount }: IUpdateOneTransactionDto,
+    { id, idEmployee, idVehicle, date, amount }: IUpdateOneTransactionDto,
   ): Promise<TransactionEntity> {
     const alreadyExistsTransaction = await this.transactionRepository.findOneIdTransaction(id);
 
     if (!alreadyExistsTransaction) {
       throw new AppError("ID da transação inválida");
-    }
-
-    if (type === "venda" || type === "reserva" || type === "undefined") {
-      throw new AppError("Tipo de transação inválida, utilize venda ou reserva");
     }
 
     if (idEmployee) {
@@ -51,7 +47,6 @@ export class UpdateOneTransactionService {
 
     const transaction = await this.transactionRepository.updateOneTransaction({
       id,
-      type,
       idEmployee,
       idVehicle,
       date,
