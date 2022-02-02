@@ -16,6 +16,29 @@ export class TransactionRepository implements ITransactionRepository {
     this.vehicleRepository = getRepository(VehicleEntity);
   }
 
+  async toggleTypeOneIdTransaction(id: string): Promise<TransactionEntity> {
+    const transaction = await this.transactionRepository.findOne({ id });
+    const vehicle = await this.vehicleRepository.findOne({ id: transaction.idVehicle });
+
+    if (transaction.type === "venda") {
+      transaction.type = "reserva";
+      vehicle.status = "reservado";
+    } else {
+      transaction.type = "venda";
+      vehicle.status = "vendido";
+    }
+
+    transaction.updatedAt = new Date();
+    vehicle.updatedAt = new Date();
+
+    await this.transactionRepository.save(transaction);
+    await this.vehicleRepository.save(vehicle);
+
+    const transactionSave = await this.transactionRepository.findOne({ id });
+
+    return transactionSave;
+  }
+
   async deleteOneIdTransaction(id: string): Promise<void> {
     await this.transactionRepository.delete({ id });
   }

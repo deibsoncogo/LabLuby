@@ -4,6 +4,7 @@ import { IUpdateOneTransactionDto } from "../dtos/iUpdateOneTransactionDto";
 import { TransactionEntity } from "../entities/transactionEntity";
 
 export interface ITransactionRepository {
+  toggleTypeOneIdTransaction(id: string): Promise<TransactionEntity>;
   deleteOneIdTransaction(id: string): Promise<void>;
   findOneIdTransaction(id: string): Promise<TransactionEntity>;
   findOneIdVehicleTransaction(idVehicle: string): Promise<TransactionEntity>;
