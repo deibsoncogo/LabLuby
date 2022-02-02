@@ -19,25 +19,27 @@ export async function EnsuredAuthorizedMiddleware(
 
   const [, token] = authHeader.split(" ");
 
+  let tokenVerify: IToken;
+
   try {
-    const tokenVerify = verify(token, "fa5473530e4d1a5a1e1eb53d2fedb10c") as IToken;
-
-    const employeeRepository = new EmployeeRepository();
-
-    const existsEmployee = await employeeRepository.findOneIdEmployee(tokenVerify.sub);
-
-    if (!existsEmployee) {
-      throw new AppError("ID do funcionário do token é inválido", 401);
-    }
-
-    if (existsEmployee.off) {
-      throw new AppError("Funcionário do token está desligado", 401);
-    }
-
-    request.idEmployeeAuthorized = tokenVerify.sub;
+    tokenVerify = verify(token, "fa5473530e4d1a5a1e1eb53d2fedb10c") as IToken;
   } catch (error) {
     throw new AppError("Token inválido", 401);
   }
+
+  const employeeRepository = new EmployeeRepository();
+
+  const existsEmployee = await employeeRepository.findOneIdEmployee(tokenVerify.sub);
+
+  if (!existsEmployee) {
+    throw new AppError("ID do funcionário do token é inexistente", 401);
+  }
+
+  if (existsEmployee.off) {
+    throw new AppError("Funcionário do token está desligado", 401);
+  }
+
+  request.idEmployeeAuthorized = tokenVerify.sub;
 
   return next();
 }
