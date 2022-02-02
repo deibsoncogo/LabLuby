@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { CreateTransactionService } from "./createTransactionService";
+import { CreateOneTransactionService } from "./createOneTransactionService";
 
-export class CreateTransactionController {
+export class CreateOneTransactionController {
   async execute(request: Request, response: Response): Promise<Response> {
     const { type, idEmployee, idVehicle, date, amount } = request.body;
 
-    const createTransactionService = container.resolve(CreateTransactionService);
+    const createOneTransactionService = container.resolve(CreateOneTransactionService);
 
     return response.status(201).json(
-      await createTransactionService.execute({
+      await createOneTransactionService.execute({
         type,
         idEmployee,
         idVehicle,

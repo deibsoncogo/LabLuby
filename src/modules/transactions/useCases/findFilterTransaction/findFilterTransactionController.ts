@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { FindAllFilterTransactionService } from "./findAllFilterTransactionService";
+import { FindFilterTransactionService } from "./findFilterTransactionService";
 
-export class FindAllFilterTransactionController {
+export class FindFilterTransactionController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { type, idEmployee, idVehicle, date, amount } = request.query;
 
-    const findAllFilterTransactionService = container.resolve(FindAllFilterTransactionService);
+    const findFilterTransactionService = container.resolve(FindFilterTransactionService);
 
     return response.status(200).json(
-      await findAllFilterTransactionService.execute({
+      await findFilterTransactionService.execute({
         type: type as string,
         idEmployee: idEmployee as string,
         idVehicle: idVehicle as string,

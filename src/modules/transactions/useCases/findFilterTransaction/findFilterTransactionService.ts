@@ -5,7 +5,7 @@ import { TransactionEntity } from "../../entities/transactionEntity";
 import { ITransactionRepository } from "../../repositories/iTransactionRepository";
 
 @injectable()
-export class FindAllFilterTransactionService {
+export class FindFilterTransactionService {
   constructor(
     @inject("TransactionRepository")
     private transactionRepository: ITransactionRepository,
