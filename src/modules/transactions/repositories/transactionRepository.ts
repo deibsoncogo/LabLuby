@@ -16,6 +16,12 @@ export class TransactionRepository implements ITransactionRepository {
     this.vehicleRepository = getRepository(VehicleEntity);
   }
 
+  async findOneIdEmployeeTransaction(idEmployee: string): Promise<TransactionEntity> {
+    const transaction = await this.transactionRepository.findOne({ idEmployee });
+
+    return transaction;
+  }
+
   async toggleTypeOneIdTransaction(id: string): Promise<TransactionEntity> {
     const transaction = await this.transactionRepository.findOne({ id });
     const vehicle = await this.vehicleRepository.findOne({ id: transaction.idVehicle });
