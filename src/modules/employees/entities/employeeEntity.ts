@@ -1,10 +1,16 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
-import { v4 as uuidV4 } from "uuid";
+import { v1 as uuid } from "uuid";
 
 @Entity("employees")
 export class EmployeeEntity {
   @PrimaryColumn()
     id: string;
+
+  @CreateDateColumn()
+    createdAt: Date;
+
+  @UpdateDateColumn()
+    updatedAt: Date;
 
   @Column()
     name: string;
@@ -19,27 +25,18 @@ export class EmployeeEntity {
     password: string;
 
   @Column()
-    avatarUrl: string;
-
-  @Column()
     isAdmin: boolean;
 
-  @CreateDateColumn()
-    createdAt: Date;
-
-  @UpdateDateColumn()
-    updatedAt: Date;
-
   @Column()
-    off: boolean;
+    isOff: boolean;
 
   constructor() {
     if (!this.id) {
-      this.id = uuidV4();
+      this.id = uuid();
       this.createdAt = new Date();
       this.updatedAt = new Date();
       this.isAdmin = false;
-      this.off = false;
+      this.isOff = false;
     }
   }
 }

@@ -1,10 +1,17 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
-import { v4 as uuidV4 } from "uuid";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { v1 as uuid } from "uuid";
+import { EmployeeEntity } from "../../employees/entities/employeeEntity";
 
 @Entity("vehicles")
 export class VehicleEntity {
   @PrimaryColumn()
     id: string;
+
+  @CreateDateColumn()
+    createdAt: Date;
+
+  @UpdateDateColumn()
+    updatedAt: Date;
 
   @Column()
     category: string;
@@ -19,9 +26,6 @@ export class VehicleEntity {
     year: number;
 
   @Column()
-    km: number;
-
-  @Column()
     color: string;
 
   @Column()
@@ -30,17 +34,19 @@ export class VehicleEntity {
   @Column()
     status: string;
 
-  @CreateDateColumn()
-    createdAt: Date;
+  @ManyToOne(() => EmployeeEntity, { eager: true })
+  @JoinColumn({ name: "idEmployee" })
+    employee: EmployeeEntity;
 
-  @UpdateDateColumn()
-    updatedAt: Date;
+  @Column()
+    idEmployee: string;
 
   constructor() {
     if (!this.id) {
-      this.id = uuidV4();
+      this.id = uuid();
       this.createdAt = new Date();
       this.updatedAt = new Date();
+      this.status = "disponível";
     }
   }
 }

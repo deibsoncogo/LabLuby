@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
-import { v4 as uuidV4 } from "uuid";
+import { v1 as uuid } from "uuid";
 import { EmployeeEntity } from "../../employees/entities/employeeEntity";
 import { VehicleEntity } from "../../vehicles/entities/vehicleEntity";
 
@@ -17,12 +17,11 @@ export class TransactionEntity {
   @Column()
     type: string;
 
-  @ManyToOne(() => EmployeeEntity, { eager: true })
-  @JoinColumn({ name: "idEmployee" })
-    employee: EmployeeEntity;
+  @Column()
+    date: Date;
 
   @Column()
-    idEmployee: string;
+    amount: number;
 
   @ManyToOne(() => VehicleEntity, { eager: true })
   @JoinColumn({ name: "idVehicle" })
@@ -31,15 +30,16 @@ export class TransactionEntity {
   @Column()
     idVehicle: string;
 
-  @Column()
-    date: Date;
+  @ManyToOne(() => EmployeeEntity, { eager: true })
+  @JoinColumn({ name: "idEmployee" })
+    employee: EmployeeEntity;
 
   @Column()
-    amount: number;
+    idEmployee: string;
 
   constructor() {
     if (!this.id) {
-      this.id = uuidV4();
+      this.id = uuid();
       this.createdAt = new Date();
       this.updatedAt = new Date();
     }
