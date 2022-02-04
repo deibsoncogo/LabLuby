@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/appError";
-import { employeeRouter } from "../../../../routes/employeeRouter";
 import { IEmployeeRepository } from "../../../employees/repositories/iEmployeeRepository";
 import { TransactionEntity } from "../../entities/transactionEntity";
 import { ITransactionRepository } from "../../repositories/iTransactionRepository";
