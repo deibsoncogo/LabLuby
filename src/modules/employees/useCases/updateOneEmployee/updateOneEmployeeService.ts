@@ -11,12 +11,12 @@ export class UpdateOneEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(
-    { id, name, cpf, email, passwordOld, passwordNew, avatarUrl }: IUpdateOneEmployeeDto,
+    { id, name, cpf, email, passwordOld, passwordNew }: IUpdateOneEmployeeDto,
   ): Promise<EmployeeEntity> {
     const employee = await this.employeeRepository.findOneIdEmployee(id);
 
     if (!employee) {
-      throw new AppError("ID do funcionário inválido");
+      throw new AppError("Não existe um funcionário cadastrado com este ID");
     }
 
     const emailAlreadyExists = await this.employeeRepository.findOneEmailEmployee(email);
@@ -31,17 +31,11 @@ export class UpdateOneEmployeeService {
       throw new AppError("Já existe este CPF no sistema");
     }
 
-    const avatarUrlAlreadyExists = await this.employeeRepository.findOneAvatarUrlEmployee(avatarUrl);
-
-    if (avatarUrlAlreadyExists) {
-      throw new AppError("Já existe um funcionário com está foto");
-    }
-
     if (passwordOld && passwordNew) {
       const passwordMatch = await compare(passwordOld, employee.password);
 
       if (!passwordMatch) {
-        throw new AppError("Senha antiga inválida");
+        throw new AppError("Senha antiga incorreta");
       }
 
       passwordNew = await hash(passwordNew, 8);
@@ -52,13 +46,13 @@ export class UpdateOneEmployeeService {
       name,
       cpf,
       email,
+      passwordOld,
       passwordNew,
-      avatarUrl,
     });
 
-    delete employeeNew.password;
     employeeNew.createdAt = FormatDate(employeeNew.createdAt);
     employeeNew.updatedAt = FormatDate(employeeNew.updatedAt);
+    delete employeeNew.password;
 
     return employeeNew;
   }

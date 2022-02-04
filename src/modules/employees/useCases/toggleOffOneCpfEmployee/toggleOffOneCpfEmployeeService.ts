@@ -19,7 +19,7 @@ export class ToggleOffOneCpfEmployeeService {
     const employee = await this.employeeRepository.findOneCpfEmployee(cpf);
 
     if (!employee) {
-      throw new AppError("Não existe um funcionário com este CPF");
+      throw new AppError("Não existe um funcionário cadastrado com este CPF");
     }
 
     const transaction = await this.transactionRepository

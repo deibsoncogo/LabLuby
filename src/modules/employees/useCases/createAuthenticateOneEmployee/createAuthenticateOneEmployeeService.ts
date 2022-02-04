@@ -28,7 +28,7 @@ export class CreateAuthenticateOneEmployeeService {
       throw new AppError(messageAuthenticateInvalid, 401);
     }
 
-    if (employee.off) {
+    if (employee.isOff) {
       throw new AppError("Este funcionário está desligado", 401);
     }
 

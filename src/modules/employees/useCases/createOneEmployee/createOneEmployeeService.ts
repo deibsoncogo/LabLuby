@@ -11,7 +11,7 @@ export class CreateOneEmployeeService {
   constructor(@inject("EmployeeRepository") private employeeRepository: IEmployeeRepository) { }
 
   async execute(
-    { name, cpf, email, password, avatarUrl }: ICreateOneEmployeeDto,
+    { name, cpf, email, password }: ICreateOneEmployeeDto,
   ): Promise<EmployeeEntity> {
     const cpfAlreadyExists = await this.employeeRepository.findOneCpfEmployee(cpf);
 
@@ -25,26 +25,19 @@ export class CreateOneEmployeeService {
       throw new AppError("Já existe um funcionário com este e-mail");
     }
 
-    const avatarUrlAlreadyExists = await this.employeeRepository.findOneAvatarUrlEmployee(avatarUrl);
-
-    if (avatarUrlAlreadyExists) {
-      throw new AppError("Já existe um funcionário com está foto");
-    }
-
     const passwordHash = await hash(password, 8);
 
-    const employeeNew = await this.employeeRepository.createOneEmployee({
+    const employee = await this.employeeRepository.createOneEmployee({
       name,
       cpf,
       email,
       password: passwordHash,
-      avatarUrl,
     });
 
-    delete employeeNew.password;
-    employeeNew.createdAt = FormatDate(employeeNew.createdAt);
-    employeeNew.updatedAt = FormatDate(employeeNew.updatedAt);
+    employee.createdAt = FormatDate(employee.createdAt);
+    employee.updatedAt = FormatDate(employee.updatedAt);
+    delete employee.password;
 
-    return employeeNew;
+    return employee;
   }
 }

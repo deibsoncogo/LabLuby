@@ -4,12 +4,12 @@ import { CreateOneEmployeeService } from "./createOneEmployeeService";
 
 export class CreateOneEmployeeController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, cpf, email, password, avatarUrl } = request.body;
+    const { name, cpf, email, password } = request.body;
 
     const createOneEmployeeService = container.resolve(CreateOneEmployeeService);
 
     return response.status(201).json(
-      await createOneEmployeeService.execute({ name, cpf, email, password, avatarUrl }),
+      await createOneEmployeeService.execute({ name, cpf, email, password }),
     );
   }
 }

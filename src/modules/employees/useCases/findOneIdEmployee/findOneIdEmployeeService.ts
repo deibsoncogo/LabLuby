@@ -12,12 +12,12 @@ export class FindOneIdEmployeeService {
     const employee = await this.employeeRepository.findOneCpfEmployee(cpf);
 
     if (!employee) {
-      throw new AppError("CPF inválido");
+      throw new AppError("Não existe um funcionário cadastrado com este CPF");
     }
 
-    delete employee.password;
     employee.createdAt = FormatDate(employee.createdAt);
     employee.updatedAt = FormatDate(employee.updatedAt);
+    delete employee.password;
 
     return employee;
   }

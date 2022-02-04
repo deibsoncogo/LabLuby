@@ -5,7 +5,7 @@ import { UpdateOneEmployeeService } from "./updateOneEmployeeService";
 export class UpdateOneEmployeeController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { name, cpf, email, passwordOld, passwordNew, avatarUrl } = request.query;
+    const { name, cpf, email, passwordOld, passwordNew } = request.query;
 
     const updateOneEmployeeService = container.resolve(UpdateOneEmployeeService);
 
@@ -17,7 +17,6 @@ export class UpdateOneEmployeeController {
         email: email as string,
         passwordOld: passwordOld as string,
         passwordNew: passwordNew as string,
-        avatarUrl: avatarUrl as string,
       }),
     );
   }

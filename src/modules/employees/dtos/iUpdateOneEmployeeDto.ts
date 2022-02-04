@@ -5,5 +5,4 @@ export interface IUpdateOneEmployeeDto {
   email: string;
   passwordOld?: string;
   passwordNew: string;
-  avatarUrl: string;
 }

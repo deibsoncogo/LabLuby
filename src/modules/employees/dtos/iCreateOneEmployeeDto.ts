@@ -3,5 +3,4 @@ export interface ICreateOneEmployeeDto {
   cpf: number;
   email: string;
   password: string;
-  avatarUrl: string;
 }

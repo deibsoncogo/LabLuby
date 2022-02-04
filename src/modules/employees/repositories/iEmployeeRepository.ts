@@ -4,7 +4,6 @@ import { EmployeeEntity } from "../entities/employeeEntity";
 
 // interface que servira como contrato do repositório
 export interface IEmployeeRepository {
-  findOneAvatarUrlEmployee(avatarUrl: string): Promise<EmployeeEntity>;
   toggleOffOneCpfEmployee(cpf: number): Promise<EmployeeEntity>;
   toggleAdminOneCpfEmployee(cpf: number): Promise<EmployeeEntity>;
   findOneEmailEmployee(email: string): Promise<EmployeeEntity>;
@@ -13,10 +12,10 @@ export interface IEmployeeRepository {
   findAllEmployee(): Promise<EmployeeEntity[]>;
 
   updateOneEmployee(
-    { id, name, cpf, email, passwordNew, avatarUrl }: IUpdateOneEmployeeDto
+    { id, name, cpf, email, passwordNew }: IUpdateOneEmployeeDto
   ): Promise<EmployeeEntity>;
 
   createOneEmployee(
-    { name, cpf, email, password, avatarUrl }: ICreateOneEmployeeDto
+    { name, cpf, email, password }: ICreateOneEmployeeDto
   ): Promise<EmployeeEntity>;
 }

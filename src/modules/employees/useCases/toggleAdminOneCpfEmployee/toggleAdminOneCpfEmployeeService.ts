@@ -12,18 +12,18 @@ export class ToggleAdminOneCpfEmployeeService {
     const cpfAlreadyExists = await this.employeeRepository.findOneCpfEmployee(cpf);
 
     if (!cpfAlreadyExists) {
-      throw new AppError("Não existe este CPF cadastrado");
+      throw new AppError("Não existe um funcionário cadastrado com este CPF");
     }
 
-    if (cpfAlreadyExists.off) {
+    if (cpfAlreadyExists.isOff) {
       throw new AppError("Este funcionário está desligado", 401);
     }
 
     const employeeSave = await this.employeeRepository.toggleAdminOneCpfEmployee(cpf);
 
-    delete employeeSave.password;
     employeeSave.createdAt = FormatDate(employeeSave.createdAt);
     employeeSave.updatedAt = FormatDate(employeeSave.updatedAt);
+    delete employeeSave.password;
 
     return employeeSave;
   }
