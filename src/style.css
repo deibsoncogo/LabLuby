@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  border: 2px solid #EBEBEB;
+  margin: 20px auto;
+
+  height: calc(100vh - 40px);
+  max-width: 1366px;
+  max-height: 1050px;
+
+  background: #F7F7F7;
+  font-family: "Roboto", sans-serif;
+  font-size: 100%;
+}
+
+/* HEADER -------------------------------------- */
+
+header {
+  border-bottom: 2px solid #EBEBEB;
+  height: 75px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 125px;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 100px
+}
+
+.headerLeft div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.divYellow {
+  font-size: 1px;
+  color: #B5C401;
+
+  background-color: #B5C401;
+  border-radius: 50px;
+  width: 107px;
+  height: 7px;
+
+  position: absolute;
+  margin-top: 60px;
+}
+
+header h1 {
+  color: #707070;
+  text-align: center;
+  font: italic normal bold 44px Roboto;
+}
+
+header h2 {
+  color: #707070;
+  text-align: center;
+  font: italic normal bold 20px/70px Roboto;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 100px
+}
+
+.divLogOut {
+  display: flex;
+  gap: 5px;
+}
