@@ -56,14 +56,12 @@ header {
 
 header h1 {
   color: #707070;
-  text-align: center;
   font: italic normal bold 44px Roboto;
 }
 
 header h2 {
   color: #707070;
-  text-align: center;
-  font: italic normal bold 20px/70px Roboto;
+  font: italic normal bold 20px Roboto;
 }
 
 .headerRight {
@@ -75,4 +73,161 @@ header h2 {
 .divLogOut {
   display: flex;
   gap: 5px;
+}
+
+/* MAIN ---------------------------------------- */
+main {
+  display: flex;
+  padding: 0px 110px;
+}
+
+.containerGame {
+  border: 1px solid blue;
+  width: 70%;
+  margin-top: 50px;
+  padding-right: 10px;
+}
+
+.headerGame {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.headerGame p {
+  color: #707070;
+  font: italic normal 300 24px Roboto;
+}
+
+.headerGame strong {
+  color: #707070;
+  font: italic normal bold 24px Roboto;
+}
+
+.headerGame p:nth-child(2) {
+  color: #868686;
+  font: italic normal bold 17px Roboto;
+  margin-top: 50px;
+}
+
+.gameTypeGame {
+  display: flex;
+  gap: 50px;
+  margin: 20px 0px;
+}
+
+.gameTypeGame button {
+  border: 0;
+  cursor: pointer;
+  border-radius: 50px;
+
+  width: 113px;
+  height: 34px;
+
+  font: italic normal bold 14px Roboto;
+  color: #ffffff;
+  background: transparent;
+}
+
+.gameTypeGame button.lotofacil {
+  color: #7F3992;
+  border: 2px solid #7F3992;
+}
+
+.gameTypeGame button.lotofacil:hover {
+  color: #ffffff;
+  background: #7F3992;
+}
+
+.gameTypeGame button.megasena {
+  color: #01AC66;
+  border: 2px solid #01AC66;
+}
+
+.gameTypeGame button.megasena:hover {
+  color: #ffffff;
+  background: #01AC66;
+}
+
+.gameTypeGame button.quina {
+  color: #F79C31;
+  border: 2px solid #F79C31;
+}
+
+.gameTypeGame button.quina:hover {
+  color: #ffffff;
+  background: #F79C31;
+}
+
+.ruleGame strong {
+  color: #868686;
+  font: italic normal bold 17px Roboto;
+}
+
+.ruleGame p {
+  color: #868686;
+  font: italic normal normal 17px Roboto;
+}
+
+.numberAllGame {
+  display: flex;
+  gap: 15px;
+  margin: 22px 0px;
+}
+
+.numberAllGame .numberGame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 65px;
+  height: 65px;
+
+  border-radius: 50px;
+  background: #ADC0C4;
+
+  color: #FFFFFF;
+  font: normal normal bold 20px Roboto;
+
+  cursor: pointer;
+}
+
+.numberAllGame .numberGame:hover {
+  background: #9faeb1;
+}
+
+.footerGame {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.footerGame .backgroundTransparentGame {
+  display: flex;
+  gap: 30px;
+}
+
+.footerGame .backgroundTransparentGame button {
+  width: auto;
+  height: 52px;
+  padding: 0px 30px;
+  border: 1px solid #27C383;
+  border-radius: 10px;
+
+  background: transparent;
+
+  color: #27C383;
+  font-size: 16px;
+}
+
+.footerGame .backgroundTransparentGame button:hover {
+  background: #27C383;
+  color: #FFFFFF;
+}
+
+.containerCart {
+  border: 1px solid green;
+  width: 30%;
+  margin-top: 30px;
 }
