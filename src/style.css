@@ -2,12 +2,21 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  text-decoration: none;
+  cursor: default;
 }
 
 body {
-  height: calc(100vh - 40px);
-  max-height: 1050px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100vw;
+  min-width: 800px;
   max-width: 1366px;
+  /* height: calc(100vh - 40px); */
+  /* max-height: 1050px; */
 
   margin: 20px auto;
   border: 2px solid #EBEBEB;
@@ -75,22 +84,24 @@ header h2 {
 }
 
 /* MAIN ---------------------------------------- */
+
 main {
   display: flex;
-  padding: 0px 110px;
+  min-width: 500px;
+  margin: 0px 100px;
 }
+
+/* MAIN GAME ----------------------------------- */
 
 .containerGame {
   width: 70%;
   margin-top: 50px;
-  border: 1px solid blue;
   padding-right: 10px;
 }
 
 .headerGame {
   display: flex;
   flex-direction: column;
-  align-items: baseline;
   justify-content: flex-start;
 }
 
@@ -173,8 +184,13 @@ main {
 
 .numberAllGame {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
   margin: 22px 0px;
-  gap: 15px;
+  gap: 10px;
 }
 
 .numberAllGame .numberGame {
@@ -182,8 +198,8 @@ main {
   align-items: center;
   justify-content: center;
 
-  width: 65px;
-  height: 65px;
+  width: 50px;
+  height: 50px;
   border-radius: 50px;
 
   color: #FFFFFF;
@@ -210,6 +226,7 @@ main {
 
 .footerGame .buttonTransparentGame {
   width: auto;
+  min-width: 100px;
   height: 52px;
   border: 1px solid #27C383;
   border-radius: 10px;
@@ -231,8 +248,215 @@ main {
   background: #27C383;
 }
 
+.footerGame .buttonGreenGame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  min-width: 175px;
+  height: 52px;
+  margin-left: 20px;
+  border: 1px solid #27C383;
+  border-radius: 10px;
+  padding: 0px 30px;
+  gap: 25px;
+
+  color: #FFFFFF;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: bold;
+  font-size: 16px;
+  font-family: "Roboto";
+
+  background: #27C383;
+  cursor: pointer;
+}
+
+.footerGame .buttonGreenGame:hover {
+  background: #21AC72;
+}
+
+/* MAIN CART ----------------------------------- */
+
 .containerCart {
-  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   width: 30%;
+  min-width: 275px;
+  height: 50vh;
+  min-height: 400px;
+  max-height: 600px;
   margin-top: 30px;
+  border: 1px solid #E2E2E2;
+  border-radius: 10px;
+
+  background: #FFFFFF;
+}
+
+.headerCart {
+  display: flex;
+  margin: 20px;
+
+  color: #707070;
+  font: italic normal bold 24px "Roboto";
+}
+
+.gameAllCart {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0px 20px;
+  gap: 20px;
+}
+
+.gameCart {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.trashCart {
+  font-size: 0px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: filter(0.2s);
+}
+
+.trashCart:hover {
+  filter: brightness(0.7);
+}
+
+.borderCart {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 4px;
+  height: 90px;
+  margin: 2px 10px 2px 3px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+
+  color: transparent;
+}
+
+.lotofacil .borderCart {
+  background: #7F3992;
+}
+
+.megasena .borderCart {
+  background: #01AC66;
+}
+
+.quina .borderCart {
+  background: #F79C31;
+}
+
+.valueCart {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px
+}
+
+.numberCart {
+  margin-bottom: 5px;
+
+  color: #868686;
+  font: italic normal bold 15px "Roboto";
+}
+
+.valueExtraCart {
+  display: flex;
+  gap: 20px;
+}
+
+.valueExtraCart p:nth-child(1) {
+  font: italic normal bold 16px "Roboto";
+}
+
+.lotofacil .valueExtraCart p:nth-child(1) {
+  color: #7F3992;
+}
+
+.megasena .valueExtraCart p:nth-child(1) {
+  color: #01AC66;
+}
+
+.quina .valueExtraCart p:nth-child(1) {
+  color: #F79C31;
+}
+
+
+.valueExtraCart p:nth-child(2) {
+  color: #868686;
+  font: normal normal normal 16px "Roboto";
+}
+
+.totalCart {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.totalCart strong {
+  color: #707070;
+  font: italic normal bold 24px "Roboto";
+}
+
+.totalCart p {
+  color: #707070;
+  font: normal normal 300 24px "Roboto";
+}
+
+.saveCart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 10vh;
+  min-height: 50px;
+  max-height: 70px;
+  border-top: 1px solid #E2E2E2;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  gap: 10px;
+
+  color: #27C383;
+  font: italic normal bold 35px "Roboto";
+
+  background: #F4F4F4;
+  cursor: pointer;
+}
+
+.saveCart img {
+  fill: #27C383;
+}
+
+.saveCart:hover {
+  background: #ebe7e7;
+}
+
+/* FOOTER -------------------------------------- */
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 10vh;
+  max-height: 70px;
+  margin-top: 20px;
+  border-top: 2px solid #EBEBEB;
+
+  color: #707070;
+  font: normal normal normal 10px "Roboto";
 }
