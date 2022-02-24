@@ -1,31 +1,29 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  border: 2px solid #EBEBEB;
-  margin: 20px auto;
-
   height: calc(100vh - 40px);
-  max-width: 1366px;
   max-height: 1050px;
+  max-width: 1366px;
+
+  margin: 20px auto;
+  border: 2px solid #EBEBEB;
 
   background: #F7F7F7;
-  font-family: "Roboto", sans-serif;
-  font-size: 100%;
 }
 
 /* HEADER -------------------------------------- */
 
 header {
-  border-bottom: 2px solid #EBEBEB;
-  height: 75px;
-
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  height: 75px;
+  border-bottom: 2px solid #EBEBEB;
   padding: 0px 125px;
 }
 
@@ -42,26 +40,27 @@ header {
 }
 
 .divYellow {
-  font-size: 1px;
-  color: #B5C401;
-
-  background-color: #B5C401;
-  border-radius: 50px;
   width: 107px;
   height: 7px;
 
   position: absolute;
   margin-top: 60px;
+  border-radius: 50px;
+
+  color: #B5C401;
+  font-size: 1px;
+
+  background-color: #B5C401;
 }
 
 header h1 {
   color: #707070;
-  font: italic normal bold 44px Roboto;
+  font: italic normal bold 44px "Roboto";
 }
 
 header h2 {
   color: #707070;
-  font: italic normal bold 20px Roboto;
+  font: italic normal bold 20px "Roboto";
 }
 
 .headerRight {
@@ -82,57 +81,59 @@ main {
 }
 
 .containerGame {
-  border: 1px solid blue;
   width: 70%;
   margin-top: 50px;
+  border: 1px solid blue;
   padding-right: 10px;
 }
 
 .headerGame {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: baseline;
+  justify-content: flex-start;
 }
 
 .headerGame p {
   color: #707070;
-  font: italic normal 300 24px Roboto;
+  font: italic normal 300 24px "Roboto";
 }
 
 .headerGame strong {
   color: #707070;
-  font: italic normal bold 24px Roboto;
+  font: italic normal bold 24px "Roboto";
 }
 
 .headerGame p:nth-child(2) {
-  color: #868686;
-  font: italic normal bold 17px Roboto;
   margin-top: 50px;
+
+  color: #868686;
+  font: italic normal bold 17px "Roboto";
 }
 
 .gameTypeGame {
   display: flex;
-  gap: 50px;
+
   margin: 20px 0px;
+  gap: 50px;
 }
 
 .gameTypeGame button {
-  border: 0;
-  cursor: pointer;
-  border-radius: 50px;
-
   width: 113px;
   height: 34px;
+  border: 0;
+  border-radius: 50px;
 
-  font: italic normal bold 14px Roboto;
   color: #ffffff;
+  font: italic normal bold 14px "Roboto";
+
   background: transparent;
+  cursor: pointer;
 }
 
 .gameTypeGame button.lotofacil {
-  color: #7F3992;
   border: 2px solid #7F3992;
+  color: #7F3992;
 }
 
 .gameTypeGame button.lotofacil:hover {
@@ -141,8 +142,8 @@ main {
 }
 
 .gameTypeGame button.megasena {
-  color: #01AC66;
   border: 2px solid #01AC66;
+  color: #01AC66;
 }
 
 .gameTypeGame button.megasena:hover {
@@ -151,8 +152,8 @@ main {
 }
 
 .gameTypeGame button.quina {
-  color: #F79C31;
   border: 2px solid #F79C31;
+  color: #F79C31;
 }
 
 .gameTypeGame button.quina:hover {
@@ -162,18 +163,18 @@ main {
 
 .ruleGame strong {
   color: #868686;
-  font: italic normal bold 17px Roboto;
+  font: italic normal bold 17px "Roboto";
 }
 
 .ruleGame p {
   color: #868686;
-  font: italic normal normal 17px Roboto;
+  font: italic normal normal 17px "Roboto";
 }
 
 .numberAllGame {
   display: flex;
-  gap: 15px;
   margin: 22px 0px;
+  gap: 15px;
 }
 
 .numberAllGame .numberGame {
@@ -183,13 +184,12 @@ main {
 
   width: 65px;
   height: 65px;
-
   border-radius: 50px;
-  background: #ADC0C4;
 
   color: #FFFFFF;
-  font: normal normal bold 20px Roboto;
+  font: normal normal bold 20px "Roboto";
 
+  background: #ADC0C4;
   cursor: pointer;
 }
 
@@ -203,27 +203,32 @@ main {
   margin-top: 50px;
 }
 
-.footerGame .backgroundTransparentGame {
+.footerGame .divButtonTransparentGame {
   display: flex;
   gap: 30px;
 }
 
-.footerGame .backgroundTransparentGame button {
+.footerGame .buttonTransparentGame {
   width: auto;
   height: 52px;
-  padding: 0px 30px;
   border: 1px solid #27C383;
   border-radius: 10px;
-
-  background: transparent;
+  padding: 0px 30px;
 
   color: #27C383;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: medium;
   font-size: 16px;
+  font-family: "Roboto";
+
+  background: transparent;
+  cursor: pointer;
 }
 
-.footerGame .backgroundTransparentGame button:hover {
-  background: #27C383;
+.footerGame .buttonTransparentGame:hover {
   color: #FFFFFF;
+  background: #27C383;
 }
 
 .containerCart {
