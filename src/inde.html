@@ -20,19 +20,24 @@
   <div>
     <header>
       <section class="headerLeft">
-        <div>
-          <h1>TGL</h1>
-          <div class="divYellow">.</div>
-        </div>
-        <h2>Home</h2>
+        <a id="menuSelected">
+          TGL <div>borderBottomYellow</div>
+        </a>
+
+        <a>
+          Home <div hidden>borderBottomYellow</div>
+        </a>
       </section>
 
       <section class="headerRight">
-        <h2>Account</h2>
-        <div class="divLogOut">
-          <h2>Log out</h2>
+        <a>
+          Account <div hidden>borderBottomYellow</div>
+        </a>
+
+        <a class="flexDirectionRow">
+          Log out <div hidden>borderBottomYellow</div>
           <img src="./assets/arrowRight.svg" alt="arrow">
-        </div>
+        </a>
       </section>
     </header>
 
@@ -47,15 +52,15 @@
         </div>
 
         <div class="gameTypeGame">
-          <button type="submit" class="lotofacil">
+          <button type="submit" class="lotofacil" data-bt="lotofacil">
             Lotofácil
           </button>
 
-          <button type="submit" class="megasena">
+          <button type="submit" class="megasena" data-bt="megasena">
             Mega-Sena
           </button>
 
-          <button type="submit" class="quina">
+          <button type="submit" class="quina" data-bt="quina">
             Quina
           </button>
         </div>
