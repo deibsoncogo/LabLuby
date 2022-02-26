@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <div>
+  <div> <!-- div para justify-content space-between -->
     <header>
       <section class="headerLeft">
         <a id="menuSelected">
@@ -42,160 +42,178 @@
     </header>
 
     <main>
-      <section class="containerGame">
-        <div class="headerGame">
-          <p>
-            <strong >NEW BET</strong> FOR MEGA-SENA
-          </p>
+      <section class="mainGame">
+        <p class="mainGameTitle">
+          <strong >NEW BET</strong> FOR MEGA-SENA
+        </p>
 
-          <p>Choose a gema</p>
-        </div>
+        <p class="mainGameSubTitle">Choose a gema</p>
 
-        <div class="gameTypeGame">
-          <button type="submit" class="lotofacil" data-bt="lotofacil">
+        <div class="mainGameType">
+          <a data-bt="lotofacil" class="mainGameType lotofacil" id="active">
             Lotofácil
-          </button>
+          </a>
 
-          <button type="submit" class="megasena" data-bt="megasena">
+          <a data-bt="megasena" class="mainGameType megasena">
             Mega-Sena
-          </button>
+          </a>
 
-          <button type="submit" class="quina" data-bt="quina">
+          <a data-bt="quina" class="mainGameType quina">
             Quina
-          </button>
+          </a>
         </div>
 
-        <div class="ruleGame">
+        <div class="mainGameRule">
           <strong>Fill your bet</strong>
           <p>Escolha 6 números dos 60 disponíveis na mega-sena. Ganhe com 6, 5 ou 4 acertos. São realizados dois sorteios semanais para você apostar e torcer para ficar milionário.</p>
         </div>
 
-        <div class="numberAllGame">
-          <!-- div.numberGame{$}*60 -->
-          <div class="numberGame">01</div>
-          <div class="numberGame">02</div>
-          <div class="numberGame">03</div>
-          <div class="numberGame">04</div>
-          <div class="numberGame">05</div>
-          <div class="numberGame">06</div>
-          <div class="numberGame">07</div>
-          <div class="numberGame">08</div>
-          <div class="numberGame">09</div>
-          <div class="numberGame">10</div>
-          <div class="numberGame">11</div>
-          <div class="numberGame">12</div>
-          <div class="numberGame">13</div>
-          <div class="numberGame">14</div>
-          <div class="numberGame">15</div>
-          <div class="numberGame">16</div>
-          <div class="numberGame">17</div>
-          <div class="numberGame">18</div>
-          <div class="numberGame">19</div>
-          <div class="numberGame">20</div>
-          <div class="numberGame">21</div>
-          <div class="numberGame">22</div>
-          <div class="numberGame">23</div>
-          <div class="numberGame">24</div>
-          <div class="numberGame">25</div>
-          <div class="numberGame">26</div>
-          <div class="numberGame">27</div>
-          <div class="numberGame">28</div>
-          <div class="numberGame">29</div>
-          <div class="numberGame">30</div>
-          <div class="numberGame">31</div>
-          <div class="numberGame">32</div>
-          <div class="numberGame">33</div>
-          <div class="numberGame">34</div>
-          <div class="numberGame">35</div>
-          <div class="numberGame">36</div>
-          <div class="numberGame">37</div>
-          <div class="numberGame">38</div>
-          <div class="numberGame">39</div>
-          <div class="numberGame">40</div>
-          <div class="numberGame">41</div>
-          <div class="numberGame">42</div>
-          <div class="numberGame">43</div>
-          <div class="numberGame">44</div>
-          <div class="numberGame">45</div>
-          <div class="numberGame">46</div>
-          <div class="numberGame">47</div>
-          <div class="numberGame">48</div>
-          <div class="numberGame">49</div>
-          <div class="numberGame">50</div>
-          <div class="numberGame">51</div>
-          <div class="numberGame">52</div>
-          <div class="numberGame">53</div>
-          <div class="numberGame">54</div>
-          <div class="numberGame">55</div>
-          <div class="numberGame">56</div>
-          <div class="numberGame">57</div>
-          <div class="numberGame">58</div>
-          <div class="numberGame">59</div>
-          <div class="numberGame">60</div>
+        <div class="mainGameNumberAll">
+          <a data-btNumber="01" class="mainGameNumber">01</a>
+          <a data-btNumber="02" class="mainGameNumber">02</a>
+          <a data-btNumber="03" class="mainGameNumber">03</a>
+          <a data-btNumber="04" class="mainGameNumber">04</a>
+          <a data-btNumber="05" class="mainGameNumber">05</a>
+          <a data-btNumber="06" class="mainGameNumber">06</a>
+          <a data-btNumber="07" class="mainGameNumber">07</a>
+          <a data-btNumber="08" class="mainGameNumber">08</a>
+          <a data-btNumber="09" class="mainGameNumber">09</a>
+          <a data-btNumber="10" class="mainGameNumber">10</a>
+          <a data-btNumber="11" class="mainGameNumber">11</a>
+          <a data-btNumber="12" class="mainGameNumber">12</a>
+          <a data-btNumber="13" class="mainGameNumber">13</a>
+          <a data-btNumber="14" class="mainGameNumber">14</a>
+          <a data-btNumber="15" class="mainGameNumber">15</a>
+          <a data-btNumber="16" class="mainGameNumber">16</a>
+          <a data-btNumber="17" class="mainGameNumber">17</a>
+          <a data-btNumber="18" class="mainGameNumber">18</a>
+          <a data-btNumber="19" class="mainGameNumber">19</a>
+          <a data-btNumber="20" class="mainGameNumber">20</a>
+          <a data-btNumber="21" class="mainGameNumber">21</a>
+          <a data-btNumber="22" class="mainGameNumber">22</a>
+          <a data-btNumber="23" class="mainGameNumber">23</a>
+          <a data-btNumber="24" class="mainGameNumber">24</a>
+          <a data-btNumber="25" class="mainGameNumber">25</a>
+          <a data-btNumber="26" class="mainGameNumber">26</a>
+          <a data-btNumber="27" class="mainGameNumber">27</a>
+          <a data-btNumber="28" class="mainGameNumber">28</a>
+          <a data-btNumber="29" class="mainGameNumber">29</a>
+          <a data-btNumber="30" class="mainGameNumber">30</a>
+          <a data-btNumber="31" class="mainGameNumber">31</a>
+          <a data-btNumber="32" class="mainGameNumber">32</a>
+          <a data-btNumber="33" class="mainGameNumber">33</a>
+          <a data-btNumber="34" class="mainGameNumber">34</a>
+          <a data-btNumber="35" class="mainGameNumber">35</a>
+          <a data-btNumber="36" class="mainGameNumber">36</a>
+          <a data-btNumber="37" class="mainGameNumber">37</a>
+          <a data-btNumber="38" class="mainGameNumber">38</a>
+          <a data-btNumber="39" class="mainGameNumber">39</a>
+          <a data-btNumber="40" class="mainGameNumber">40</a>
+          <a data-btNumber="41" class="mainGameNumber">41</a>
+          <a data-btNumber="42" class="mainGameNumber">42</a>
+          <a data-btNumber="43" class="mainGameNumber">43</a>
+          <a data-btNumber="44" class="mainGameNumber">44</a>
+          <a data-btNumber="45" class="mainGameNumber">45</a>
+          <a data-btNumber="46" class="mainGameNumber">46</a>
+          <a data-btNumber="47" class="mainGameNumber">47</a>
+          <a data-btNumber="48" class="mainGameNumber">48</a>
+          <a data-btNumber="49" class="mainGameNumber">49</a>
+          <a data-btNumber="50" class="mainGameNumber">50</a>
+          <a data-btNumber="51" class="mainGameNumber">51</a>
+          <a data-btNumber="52" class="mainGameNumber">52</a>
+          <a data-btNumber="53" class="mainGameNumber">53</a>
+          <a data-btNumber="54" class="mainGameNumber">54</a>
+          <a data-btNumber="55" class="mainGameNumber">55</a>
+          <a data-btNumber="56" class="mainGameNumber">56</a>
+          <a data-btNumber="57" class="mainGameNumber">57</a>
+          <a data-btNumber="58" class="mainGameNumber">58</a>
+          <a data-btNumber="59" class="mainGameNumber">59</a>
+          <a data-btNumber="60" class="mainGameNumber">60</a>
         </div>
 
-        <div class="footerGame">
-          <div class="divButtonTransparentGame">
-            <button class="buttonTransparentGame" type="submit">Complete game</button>
-            <button class="buttonTransparentGame" type="submit">Clear game</button>
+        <div class="mainGameButtonDiverse">
+          <div class="mainGameButtonDiv">
+            <a data-bt="completeGame" class="mainGameButton transparent">Complete game</a>
+            <a data-bt="clearGame" class="mainGameButton transparent" >Clear game</a>
           </div>
 
-          <a href="" class="buttonGreenGame">
-            <img src="./assets/cart.svg" alt="cart">
-            Add to cart
-          </a>
+          <div class="mainGameButtonDiv">
+            <a data-bt="addToCart" class="mainGameButton">
+              <img src="./assets/cart.svg" alt="cart">
+              Add to cart
+            </a>
+          </div>
         </div>
       </section>
 
-      <section class="containerCart">
-        <div>
-          <strong class="headerCart">CART</strong>
+      <section class="mainCart">
+        <div class="mainCartDiv"> <!-- div para justify-content: space-between -->
+          <strong class="mainCartTitle">CART</strong>
 
-          <div class="gameAllCart">
-            <div class="gameCart lotofacil">
-              <a href="" class="trashCart">
+          <div class="mainCartGameAll">
+            <div class="mainCartGame"> <!-- LOTOFACIL -->
+              <a class="mainCartGameTrash">
                 <img src="./assets/trash.svg" alt="delete">
               </a>
 
-              <div class="borderCart">.</div>
+              <div class="mainCartGameBorder lotofacil">BORDER</div>
 
-              <div class="valueCart">
-                <div class="numberCart">
+              <div class="mainCartGameValue">
+                <div class="mainCartGameNumber">
                   01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15
                 </div>
 
-                <div class="valueExtraCart">
-                  <p>Lotofácil</p> <p>R$ 2,50</p>
+                <div class="mainCartGameAmount">
+                  <strong class="lotofacil">Lotofácil</strong> <p>R$ 2,50</p>
                 </div>
               </div>
             </div>
 
-            <div class="gameCart megasena">
-              <a href="" class="trashCart">
+            <div class="mainCartGame"> <!-- MEGA-SENA -->
+              <a class="mainCartGameTrash">
                 <img src="./assets/trash.svg" alt="delete">
               </a>
 
-              <div class="borderCart">.</div>
+              <div class="mainCartGameBorder megasena">BORDER</div>
 
-              <div class="valueCart">
-                <div class="numberCart">
+              <div class="mainCartGameValue">
+                <div class="mainCartGameNumber">
                   01, 02, 03, 04, 05, 06
                 </div>
 
-                <div class="valueExtraCart">
-                  <p>Mega-Sena</p> <p>R$ 4,50</p>
+                <div class="mainCartGameAmount">
+                  <strong class="megasena">Mega-Sena</strong> <p>R$ 4,50</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mainCartGame"> <!-- QUINA -->
+              <a class="mainCartGameTrash">
+                <img src="./assets/trash.svg" alt="delete">
+              </a>
+
+              <div class="mainCartGameBorder quina">BORDER</div>
+
+              <div class="mainCartGameValue">
+                <div class="mainCartGameNumber">
+                  01, 02, 03, 04, 05
+                </div>
+
+                <div class="mainCartGameAmount">
+                  <strong class="quina">Quina</strong> <p>R$ 8,23</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="footerCart">
-          <div class="totalCart">
-            <p><strong>CART</strong> TOTAL: R$ 7,00</p>
+        <div class="mainCartDiv"> <!-- div para justify-content: space-between -->
+          <div class="mainCartTotal">
+            <strong>CART</strong>
+            <p>TOTAL: R$ 7,00</p>
           </div>
 
-          <a href="" class="saveCart">
+          <a class="mainCartSave">
             Save
             <img src="./assets/arrowRightGreen.svg" alt="arrow">
           </a>

@@ -12,22 +12,34 @@ body {
   flex-direction: column;
   justify-content: space-between;
 
-  width: 100vw;
+  width: 90vw;
   min-width: 800px;
   max-width: 1366px;
 
   margin: 20px auto;
   border: 2px solid #EBEBEB;
 
-  background: #F7F7F7;
+  background-color: #F7F7F7;
 }
 
-a {
+a, img {
   cursor: pointer;
 }
 
 .flexDirectionRow {
   flex-direction: row;
+}
+
+.lotofacil {
+  color: #7F3992;
+}
+
+.megasena {
+  color: #01AC66;
+}
+
+.quina {
+  color: #F79C31;
 }
 
 /* HEADER -------------------------------------- */
@@ -90,49 +102,59 @@ header section a:hover {
 
 main {
   display: flex;
-  min-width: 500px;
-  margin: 0px 100px;
+  align-items: flex-start;
+  justify-content: center;
+
+  /* EXCLUIR DEPOIS DUAS LINHAS */
+  width: 100%;
+  padding: 10px;
 }
 
 /* MAIN GAME ----------------------------------- */
 
-.containerGame {
-  width: 70%;
-  margin-top: 50px;
-  padding-right: 10px;
-}
-
-.headerGame {
+.mainGame {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-start;
+
+  width: 70%;
+  margin-top: 50px;
+  margin-right: 10px;
+  margin-left: 6%;
 }
 
-.headerGame p {
+.mainGameTitle {
   color: #707070;
   font: italic normal 300 24px "Roboto";
 }
 
-.headerGame strong {
+.mainGameTitle strong {
   color: #707070;
   font: italic normal bold 24px "Roboto";
 }
 
-.headerGame p:nth-child(2) {
+.mainGameSubTitle {
   margin-top: 50px;
 
   color: #868686;
   font: italic normal bold 17px "Roboto";
 }
 
-.gameTypeGame {
+.mainGameType {
   display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 
   margin: 20px 0px;
   gap: 50px;
 }
 
-.gameTypeGame button {
+.mainGameType a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 113px;
   height: 34px;
   border: 0;
@@ -140,52 +162,64 @@ main {
 
   color: #ffffff;
   font: italic normal bold 14px "Roboto";
-
-  background: transparent;
-  cursor: pointer;
 }
 
-.gameTypeGame button.lotofacil {
+.mainGameType .mainGameType.lotofacil {
   border: 2px solid #7F3992;
   color: #7F3992;
 }
 
-.gameTypeGame button.lotofacil:hover {
+.mainGameType .mainGameType.lotofacil#active {
   color: #ffffff;
-  background: #7F3992;
+  background-color: #7F3992;
 }
 
-.gameTypeGame button.megasena {
+.mainGameType .mainGameType.lotofacil:hover {
+  color: #ffffff;
+  background-color: #7F3992;
+}
+
+.mainGameType .mainGameType.megasena {
   border: 2px solid #01AC66;
   color: #01AC66;
 }
 
-.gameTypeGame button.megasena:hover {
+.mainGameType .mainGameType.megasena#active {
   color: #ffffff;
-  background: #01AC66;
+  background-color: #01AC66;
 }
 
-.gameTypeGame button.quina {
+.mainGameType .mainGameType.megasena:hover {
+  color: #ffffff;
+  background-color: #01AC66;
+}
+
+.mainGameType .mainGameType.quina {
   border: 2px solid #F79C31;
   color: #F79C31;
 }
 
-.gameTypeGame button.quina:hover {
+.mainGameType .mainGameType.quina#active {
   color: #ffffff;
-  background: #F79C31;
+  background-color: #F79C31;
 }
 
-.ruleGame strong {
+.mainGameType .mainGameType.quina:hover {
+  color: #ffffff;
+  background-color: #F79C31;
+}
+
+.mainGameRule strong {
   color: #868686;
   font: italic normal bold 17px "Roboto";
 }
 
-.ruleGame p {
+.mainGameRule p {
   color: #868686;
   font: italic normal normal 17px "Roboto";
 }
 
-.numberAllGame {
+.mainGameNumberAll {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -196,7 +230,7 @@ main {
   gap: 10px;
 }
 
-.numberAllGame .numberGame {
+.mainGameNumber {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -208,62 +242,42 @@ main {
   color: #FFFFFF;
   font: normal normal bold 20px "Roboto";
 
-  background: #ADC0C4;
-  cursor: pointer;
+  background-color: #ADC0C4;
 }
 
-.numberAllGame .numberGame:hover {
-  background: #9faeb1;
+.mainGameNumber:hover {
+  background-color: #9faeb1;
 }
 
-.footerGame {
+.mainGameButtonDiverse {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-top: 50px;
-}
 
-.footerGame .divButtonTransparentGame {
-  display: flex;
+  width: 100%;
   gap: 30px;
 }
 
-.footerGame .buttonTransparentGame {
-  width: auto;
-  min-width: 100px;
-  height: 52px;
-  border: 1px solid #27C383;
-  border-radius: 10px;
-  padding: 0px 30px;
+.mainGameButtonDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  color: #27C383;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: medium;
-  font-size: 16px;
-  font-family: "Roboto";
-
-  background: transparent;
-  cursor: pointer;
+  gap: 30px;
 }
 
-.footerGame .buttonTransparentGame:hover {
-  color: #FFFFFF;
-  background: #27C383;
-}
-
-.footerGame .buttonGreenGame {
+.mainGameButton {
   display: flex;
   align-items: center;
   justify-content: center;
 
   width: auto;
-  min-width: 175px;
+  min-width: 100px;
   height: 52px;
-  margin-left: 20px;
+  padding: 0px 20px;
   border: 1px solid #27C383;
   border-radius: 10px;
-  padding: 0px 30px;
-  gap: 25px;
+  gap: 10px;
 
   color: #FFFFFF;
   font-style: normal;
@@ -272,34 +286,58 @@ main {
   font-size: 16px;
   font-family: "Roboto";
 
-  background: #27C383;
-  cursor: pointer;
+  background-color: #27C383;
 }
 
-.footerGame .buttonGreenGame:hover {
-  background: #21AC72;
+.mainGameButton:hover {
+  background-color: #21AC72;
+}
+
+.mainGameButton.transparent {
+  color: #27C383;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: medium;
+  font-size: 16px;
+  font-family: "Roboto";
+
+  background-color: transparent;
+}
+
+.mainGameButton.transparent:hover {
+  color: #FFFFFF;
+  background-color: #27C383;
 }
 
 /* MAIN CART ----------------------------------- */
 
-.containerCart {
+.mainCart {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
 
   width: 30%;
   min-width: 275px;
   height: 50vh;
-  min-height: 400px;
+  min-height: 475px;
   max-height: 600px;
   margin-top: 30px;
   border: 1px solid #E2E2E2;
   border-radius: 10px;
+  margin-right: 6%;
 
-  background: #FFFFFF;
+  background-color: #FFFFFF;
 }
 
-.headerCart {
+.mainCartDiv {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.mainCartTitle {
   display: flex;
   margin: 20px;
 
@@ -307,120 +345,112 @@ main {
   font: italic normal bold 24px "Roboto";
 }
 
-.gameAllCart {
+.mainCartGameAll {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 
   margin: 0px 20px;
   gap: 20px;
 }
 
-.gameCart {
+.mainCartGame {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-.trashCart {
+.mainCartGameTrash {
   font-size: 0px;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
   transition: filter(0.2s);
 }
 
-.trashCart:hover {
+.mainCartGameTrash:hover {
   filter: brightness(0.7);
 }
 
-.borderCart {
-  display: block;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+.mainCartGameBorder {
   width: 4px;
-  height: 90px;
-  margin: 2px 10px 2px 3px;
+  min-width: 4px;
+  margin-left: 2px;
+  margin-right: 10px;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
 
   color: transparent;
+  font-size: 0px;
 }
 
-.lotofacil .borderCart {
-  background: #7F3992;
+.mainCartGameBorder.lotofacil {
+  height: 86px;
+  background-color: #7F3992;
 }
 
-.megasena .borderCart {
-  background: #01AC66;
+.mainCartGameBorder.megasena {
+  height: 60px;
+  background-color: #01AC66;
 }
 
-.quina .borderCart {
-  background: #F79C31;
+.mainCartGameBorder.quina {
+  height: 60px;
+  background-color: #F79C31;
 }
 
-.valueCart {
+.mainCartGameValue {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 
-  gap: 5px
+  gap: 8px;
 }
 
-.numberCart {
+.mainCartGameNumber {
   margin-bottom: 5px;
 
   color: #868686;
   font: italic normal bold 15px "Roboto";
 }
 
-.valueExtraCart {
+.mainCartGameAmount {
   display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 20px;
 }
 
-.valueExtraCart p:nth-child(1) {
+.mainCartGameAmount strong {
+  width: 100px;
   font: italic normal bold 16px "Roboto";
 }
 
-.lotofacil .valueExtraCart p:nth-child(1) {
-  color: #7F3992;
-}
-
-.megasena .valueExtraCart p:nth-child(1) {
-  color: #01AC66;
-}
-
-.quina .valueExtraCart p:nth-child(1) {
-  color: #F79C31;
-}
-
-
-.valueExtraCart p:nth-child(2) {
+.mainCartGameAmount p {
   color: #868686;
   font: normal normal normal 16px "Roboto";
 }
 
-.totalCart {
+.mainCartTotal {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
-  margin-left: 20px;
-  margin-bottom: 30px;
+  margin: 20px;
+  gap: 10px;
 }
 
-.totalCart strong {
+.mainCartTotal strong {
   color: #707070;
   font: italic normal bold 24px "Roboto";
 }
 
-.totalCart p {
+.mainCartTotal p {
   color: #707070;
   font: normal normal 300 24px "Roboto";
 }
 
-.saveCart {
+.mainCartSave {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -437,15 +467,11 @@ main {
   font: italic normal bold 35px "Roboto";
 
   background: #F4F4F4;
-  cursor: pointer;
 }
 
-.saveCart img {
-  fill: #27C383;
-}
-
-.saveCart:hover {
-  background: #ebe7e7;
+.mainCartSave:hover {
+  color: #F4F4F4;
+  background: #27C383;
 }
 
 /* FOOTER -------------------------------------- */
