@@ -1,3 +1,24 @@
+:root {
+  --lotofacil: #7F3992;
+  --megasena: #01AC66;
+  --quina: #F79C31;
+
+  --white100: #FFFFFF;
+  --white200: #F7F7F7;
+  --white300: #F4F4F4;
+  --white400: #EBEBEB;
+  --white500: #E2E2E2;
+  --grey100: #868686;
+  --grey200: #888888;
+  --grey300: #707070;
+  --grey400: #494747;
+  --blue100: #ADC0C4;
+  --blue200: #96a7aa;
+  --yellow100: #B5C401;
+  --green100: #27C383;
+  --green200: #21a76f;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,9 +38,9 @@ body {
   max-width: 1366px;
 
   margin: 20px auto;
-  border: 2px solid #EBEBEB;
+  border: 2px solid var(--white400);
 
-  background-color: #F7F7F7;
+  background-color: var(--white200);
 }
 
 a, img, svg, path {
@@ -31,15 +52,15 @@ a, img, svg, path {
 }
 
 .lotofacil {
-  color: #7F3992;
+  color: var(--lotofacil);
 }
 
 .megasena {
-  color: #01AC66;
+  color: var(--megasena);
 }
 
 .quina {
-  color: #F79C31;
+  color: var(--quina);
 }
 
 /* HEADER -------------------------------------- */
@@ -50,7 +71,7 @@ header {
   justify-content: space-between;
 
   padding: 8px 5px;
-  border-bottom: 2px solid #EBEBEB;
+  border-bottom: 2px solid var(--white400);
 }
 
 header section {
@@ -69,16 +90,16 @@ header section a {
   justify-content: center;
   text-align: center;
 
-  color: #707070;
+  color: var(--grey300);
   font: italic normal bold 20px "Roboto";
 
   white-space: nowrap;
-  fill: #707070;
+  fill: var(--grey300);
 }
 
 header section a:hover {
-  color: #525151 !important;
-  fill: #525151 !important;
+  color: var(--grey400) !important;
+  fill: var(--grey400) !important;
 }
 
 header section a svg {
@@ -86,7 +107,7 @@ header section a svg {
 }
 
 #menuSelected {
-  color: #707070;
+  color: var(--grey300);
   font: italic normal bold 44px "Roboto";
 }
 
@@ -101,7 +122,7 @@ header section a svg {
   color: transparent;
   font-size: 0px;
 
-  background-color: #B5C401;
+  background-color: var(--yellow100);
 }
 
 /* MAIN ---------------------------------------- */
@@ -131,19 +152,19 @@ main {
 }
 
 .mainGameTitle {
-  color: #707070;
+  color: var(--grey300);
   font: italic normal 300 24px "Roboto";
 }
 
 .mainGameTitle strong {
-  color: #707070;
+  color: var(--grey300);
   font: italic normal bold 24px "Roboto";
 }
 
 .mainGameSubTitle {
   margin-top: 50px;
 
-  color: #868686;
+  color: var(--grey100);
   font: italic normal bold 17px "Roboto";
 }
 
@@ -166,62 +187,64 @@ main {
   border: 0;
   border-radius: 50px;
 
-  color: #ffffff;
+  color: var(--white100);
   font: italic normal bold 14px "Roboto";
+
+  background-color: var(--white100);
 }
 
 .mainGameType .mainGameType.lotofacil {
-  border: 2px solid #7F3992;
-  color: #7F3992;
+  border: 2px solid var(--lotofacil);
+  color: var(--lotofacil);
 }
 
 .mainGameType .mainGameType.lotofacil#active {
-  color: #ffffff;
-  background-color: #7F3992;
+  color: var(--white100);
+  background-color: var(--lotofacil);
 }
 
 .mainGameType .mainGameType.lotofacil:hover {
-  color: #ffffff;
-  background-color: #7F3992;
+  color: var(--white100);
+  background-color: var(--lotofacil);
 }
 
 .mainGameType .mainGameType.megasena {
-  border: 2px solid #01AC66;
-  color: #01AC66;
+  border: 2px solid var(--megasena);
+  color: var(--megasena);
 }
 
 .mainGameType .mainGameType.megasena#active {
-  color: #ffffff;
-  background-color: #01AC66;
+  color: var(--white100);
+  background-color: var(--megasena);
 }
 
 .mainGameType .mainGameType.megasena:hover {
-  color: #ffffff;
-  background-color: #01AC66;
+  color: var(--white100);
+  background-color: var(--megasena);
 }
 
 .mainGameType .mainGameType.quina {
-  border: 2px solid #F79C31;
-  color: #F79C31;
+  border: 2px solid var(--quina);
+  color: var(--quina);
 }
 
 .mainGameType .mainGameType.quina#active {
-  color: #ffffff;
-  background-color: #F79C31;
+  color: var(--white100);
+  background-color: var(--quina);
 }
 
 .mainGameType .mainGameType.quina:hover {
-  color: #ffffff;
-  background-color: #F79C31;
+  color: var(--white100);
+  background-color: var(--quina);
 }
 
 .mainGameRule strong {
-  color: #868686;
+  color: var(--grey100);
   font: italic normal bold 17px "Roboto";
 }
 
 .mainGameRule p {
-  color: #868686;
+  color: var(--grey100);
   font: italic normal normal 17px "Roboto";
 }
 
@@ -245,14 +268,14 @@ main {
   height: 50px;
   border-radius: 50px;
 
-  color: #FFFFFF;
+  color: var(--white100);
   font: normal normal bold 20px "Roboto";
 
-  background-color: #ADC0C4;
+  background-color: var(--blue100);
 }
 
 .mainGameNumber:hover {
-  background-color: #9faeb1;
+  background-color: var(--blue200);
 }
 
 .mainGameButtonDiverse {
@@ -281,27 +304,27 @@ main {
   min-width: 100px;
   height: 52px;
   padding: 0px 20px;
-  border: 1px solid #27C383;
+  border: 1px solid var(--green100);
   border-radius: 10px;
   gap: 10px;
 
-  color: #FFFFFF;
+  color: var(--white100);
   font-style: normal;
   font-weight: normal;
   font-variant: bold;
   font-size: 16px;
   font-family: "Roboto";
 
-  fill: #FFFFFF;
-  background-color: #27C383;
+  fill: var(--white100);
+  background-color: var(--green100);
 }
 
 .mainGameButton:hover {
-  background-color: #21AC72;
+  background-color: var(--green200);
 }
 
 .mainGameButton.transparent {
-  color: #27C383;
+  color: var(--green100);
   font-style: normal;
   font-weight: normal;
   font-variant: medium;
@@ -312,8 +335,8 @@ main {
 }
 
 .mainGameButton.transparent:hover {
-  color: #FFFFFF;
-  background-color: #27C383;
+  color: var(--white100);
+  background-color: var(--green100);
 }
 
 /* MAIN CART ----------------------------------- */
@@ -330,11 +353,11 @@ main {
   min-height: 475px;
   max-height: 600px;
   margin-top: 30px;
-  border: 1px solid #E2E2E2;
+  border: 1px solid var(--white500);
   border-radius: 10px;
   margin-right: 6%;
 
-  background-color: #FFFFFF;
+  background-color: var(--white100);
 }
 
 .mainCartDiv {
@@ -348,7 +371,7 @@ main {
   display: flex;
   margin: 20px;
 
-  color: #707070;
+  color: var(--grey300);
   font: italic normal bold 24px "Roboto";
 }
 
@@ -370,12 +393,11 @@ main {
 
 .mainCartGameTrash {
   font-size: 0px;
-  fill: #888888;
-  transition: filter(0.2s);
+  fill: var(--grey200);
 }
 
 .mainCartGameTrash:hover {
-  filter: brightness(0.7);
+  fill: var(--grey300);
 }
 
 .mainCartGameBorder {
@@ -392,17 +414,17 @@ main {
 
 .mainCartGameBorder.lotofacil {
   height: 86px;
-  background-color: #7F3992;
+  background-color: var(--lotofacil);
 }
 
 .mainCartGameBorder.megasena {
   height: 60px;
-  background-color: #01AC66;
+  background-color: var(--megasena);
 }
 
 .mainCartGameBorder.quina {
   height: 60px;
-  background-color: #F79C31;
+  background-color: var(--quina);
 }
 
 .mainCartGameValue {
@@ -417,7 +439,7 @@ main {
 .mainCartGameNumber {
   margin-bottom: 5px;
 
-  color: #868686;
+  color: var(--grey100);
   font: italic normal bold 15px "Roboto";
 }
 
@@ -435,7 +457,7 @@ main {
 }
 
 .mainCartGameAmount p {
-  color: #868686;
+  color: var(--grey100);
   font: normal normal normal 16px "Roboto";
 }
 
@@ -449,12 +471,12 @@ main {
 }
 
 .mainCartTotal strong {
-  color: #707070;
+  color: var(--grey300);
   font: italic normal bold 24px "Roboto";
 }
 
 .mainCartTotal p {
-  color: #707070;
+  color: var(--grey300);
   font: normal normal 300 24px "Roboto";
 }
 
@@ -466,23 +488,23 @@ main {
   height: 10vh;
   min-height: 50px;
   max-height: 70px;
-  border-top: 1px solid #E2E2E2;
+  border-top: 1px solid var(--white500);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   gap: 10px;
 
-  color: #27C383;
+  color: var(--green100);
   font: italic normal bold 35px "Roboto";
 
-  background: #F4F4F4;
-  fill: #27C383;
+  background: var(--white300);
+  fill: var(--green100);
 }
 
 .mainCartSave:hover {
-  color: #F4F4F4;
-  background: #27C383;
-  fill: #F4F4F4;
-  border-top: 1px solid #27C383;
+  color: var(--white300);
+  background: var(--green100);
+  fill: var(--white300);
+  border-top: 1px solid var(--green100);
 }
 
 /* FOOTER -------------------------------------- */
@@ -495,8 +517,8 @@ footer {
   height: 10vh;
   max-height: 70px;
   margin-top: 20px;
-  border-top: 2px solid #EBEBEB;
+  border-top: 2px solid var(--white400);
 
-  color: #707070;
+  color: var(--grey300);
   font: normal normal normal 10px "Roboto";
 }
