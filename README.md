@@ -37,11 +37,11 @@ function ExecuteApiFake() {
 Depois de instalar o [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) basta você clicar com o botão direito encima do arquivo `html` e depois em `Open with Live Serve`.
 
 ## Imagens
-### Tela de única com o carrinho vazio
-![Tela de única com o carrinho vazio](./src/assets/prints/print1.png)
+### Página única com o carrinho vazio
+![Página única com o carrinho vazio](./src/assets/prints/print1.png)
 
-### Tela de única clicando no botão complete game
-![Tela de única clicando no botão complete game](./src/assets/prints/print2.png)
+### Página única clicando no botão complete game
+![Página única clicando no botão complete game](./src/assets/prints/print2.png)
 
-### Tela de única com apostas salva
-![Tela de única com apostas salva](./src/assets/prints/print3.png)
+### Página única com apostas no carrinho
+![Página única com apostas no carrinho](./src/assets/prints/print3.png)
