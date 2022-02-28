@@ -48,91 +48,32 @@
     <main>
       <section class="mainGame">
         <p class="mainGameTitle">
-          <strong >NEW BET</strong> FOR MEGA-SENA
+          <strong >NEW BET</strong> FOR <em data-js="name">.</em>
         </p>
 
-        <p class="mainGameSubTitle">Choose a gema</p>
+        <p class="mainGameSubTitle">Choose a game</p>
 
         <div class="mainGameType">
-          <a data-bt="lotofacil" class="mainGameType lotofacil" id="active">
+          <a data-bt="lotofacil" data-js="mainGameType" class="mainGameType lotofacil">
             Lotofácil
           </a>
 
-          <a data-bt="megasena" class="mainGameType megasena">
+          <a data-bt="megasena" data-js="mainGameType" class="mainGameType megasena">
             Mega-Sena
           </a>
 
-          <a data-bt="quina" class="mainGameType quina">
+          <a data-bt="quina" data-js="mainGameType" class="mainGameType quina">
             Quina
           </a>
         </div>
 
         <div class="mainGameRule">
           <strong>Fill your bet</strong>
-          <p>Escolha 6 números dos 60 disponíveis na mega-sena. Ganhe com 6, 5 ou 4 acertos. São realizados dois sorteios semanais para você apostar e torcer para ficar milionário.</p>
+          <p data-js="rule">.</p>
         </div>
 
-        <div class="mainGameNumberAll">
-          <a data-btNumber="01" class="mainGameNumber">01</a>
-          <a data-btNumber="02" class="mainGameNumber">02</a>
-          <a data-btNumber="03" class="mainGameNumber">03</a>
-          <a data-btNumber="04" class="mainGameNumber">04</a>
-          <a data-btNumber="05" class="mainGameNumber">05</a>
-          <a data-btNumber="06" class="mainGameNumber">06</a>
-          <a data-btNumber="07" class="mainGameNumber">07</a>
-          <a data-btNumber="08" class="mainGameNumber">08</a>
-          <a data-btNumber="09" class="mainGameNumber">09</a>
-          <a data-btNumber="10" class="mainGameNumber">10</a>
-          <a data-btNumber="11" class="mainGameNumber">11</a>
-          <a data-btNumber="12" class="mainGameNumber">12</a>
-          <a data-btNumber="13" class="mainGameNumber">13</a>
-          <a data-btNumber="14" class="mainGameNumber">14</a>
-          <a data-btNumber="15" class="mainGameNumber">15</a>
-          <a data-btNumber="16" class="mainGameNumber">16</a>
-          <a data-btNumber="17" class="mainGameNumber">17</a>
-          <a data-btNumber="18" class="mainGameNumber">18</a>
-          <a data-btNumber="19" class="mainGameNumber">19</a>
-          <a data-btNumber="20" class="mainGameNumber">20</a>
-          <a data-btNumber="21" class="mainGameNumber">21</a>
-          <a data-btNumber="22" class="mainGameNumber">22</a>
-          <a data-btNumber="23" class="mainGameNumber">23</a>
-          <a data-btNumber="24" class="mainGameNumber">24</a>
-          <a data-btNumber="25" class="mainGameNumber">25</a>
-          <a data-btNumber="26" class="mainGameNumber">26</a>
-          <a data-btNumber="27" class="mainGameNumber">27</a>
-          <a data-btNumber="28" class="mainGameNumber">28</a>
-          <a data-btNumber="29" class="mainGameNumber">29</a>
-          <a data-btNumber="30" class="mainGameNumber">30</a>
-          <a data-btNumber="31" class="mainGameNumber">31</a>
-          <a data-btNumber="32" class="mainGameNumber">32</a>
-          <a data-btNumber="33" class="mainGameNumber">33</a>
-          <a data-btNumber="34" class="mainGameNumber">34</a>
-          <a data-btNumber="35" class="mainGameNumber">35</a>
-          <a data-btNumber="36" class="mainGameNumber">36</a>
-          <a data-btNumber="37" class="mainGameNumber">37</a>
-          <a data-btNumber="38" class="mainGameNumber">38</a>
-          <a data-btNumber="39" class="mainGameNumber">39</a>
-          <a data-btNumber="40" class="mainGameNumber">40</a>
-          <a data-btNumber="41" class="mainGameNumber">41</a>
-          <a data-btNumber="42" class="mainGameNumber">42</a>
-          <a data-btNumber="43" class="mainGameNumber">43</a>
-          <a data-btNumber="44" class="mainGameNumber">44</a>
-          <a data-btNumber="45" class="mainGameNumber">45</a>
-          <a data-btNumber="46" class="mainGameNumber">46</a>
-          <a data-btNumber="47" class="mainGameNumber">47</a>
-          <a data-btNumber="48" class="mainGameNumber">48</a>
-          <a data-btNumber="49" class="mainGameNumber">49</a>
-          <a data-btNumber="50" class="mainGameNumber">50</a>
-          <a data-btNumber="51" class="mainGameNumber">51</a>
-          <a data-btNumber="52" class="mainGameNumber">52</a>
-          <a data-btNumber="53" class="mainGameNumber">53</a>
-          <a data-btNumber="54" class="mainGameNumber">54</a>
-          <a data-btNumber="55" class="mainGameNumber">55</a>
-          <a data-btNumber="56" class="mainGameNumber">56</a>
-          <a data-btNumber="57" class="mainGameNumber">57</a>
-          <a data-btNumber="58" class="mainGameNumber">58</a>
-          <a data-btNumber="59" class="mainGameNumber">59</a>
-          <a data-btNumber="60" class="mainGameNumber">60</a>
+        <div data-js="mainGameNumberAll" class="mainGameNumberAll">
+          <!-- aqui é inserido uma tag a com os números -->
         </div>
 
         <div class="mainGameButtonDiverse">
@@ -158,79 +99,18 @@
         <div class="mainCartDiv"> <!-- div para justify-content: space-between -->
           <strong class="mainCartTitle">CART</strong>
 
-          <div class="mainCartGameAll">
-            <div class="mainCartGame"> <!-- LOTOFACIL -->
-              <a class="mainCartGameTrash">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
-                  <path d="M0 0h24v24H0V0z" fill="none"/>
-                  <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>
-                </svg>
-              </a>
-
-              <div class="mainCartGameBorder lotofacil">BORDER</div>
-
-              <div class="mainCartGameValue">
-                <div class="mainCartGameNumber">
-                  01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15
-                </div>
-
-                <div class="mainCartGameAmount">
-                  <strong class="lotofacil">Lotofácil</strong> <p>R$ 2,50</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="mainCartGame"> <!-- MEGA-SENA -->
-              <a class="mainCartGameTrash">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
-                  <path d="M0 0h24v24H0V0z" fill="none"/>
-                  <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>
-                </svg>
-              </a>
-
-              <div class="mainCartGameBorder megasena">BORDER</div>
-
-              <div class="mainCartGameValue">
-                <div class="mainCartGameNumber">
-                  01, 02, 03, 04, 05, 06
-                </div>
-
-                <div class="mainCartGameAmount">
-                  <strong class="megasena">Mega-Sena</strong> <p>R$ 4,50</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="mainCartGame"> <!-- QUINA -->
-              <a class="mainCartGameTrash">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
-                  <path d="M0 0h24v24H0V0z" fill="none"/>
-                  <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>
-                </svg>
-              </a>
-
-              <div class="mainCartGameBorder quina">BORDER</div>
-
-              <div class="mainCartGameValue">
-                <div class="mainCartGameNumber">
-                  01, 02, 03, 04, 05
-                </div>
-
-                <div class="mainCartGameAmount">
-                  <strong class="quina">Quina</strong> <p>R$ 8,23</p>
-                </div>
-              </div>
-            </div>
+          <div data-js="mainCartGameAll" class="mainCartGameAll">
+            <!-- aqui é inserido os jogos selecionado -->
           </div>
         </div>
 
         <div class="mainCartDiv"> <!-- div para justify-content: space-between -->
           <div class="mainCartTotal">
             <strong>CART</strong>
-            <p>TOTAL: R$ 7,00</p>
+            <p>TOTAL: R$ <p data-js="valueTotal">0.00</p></p>
           </div>
 
-          <a class="mainCartSave">
+          <a data-bt="save" class="mainCartSave">
             Save
 
             <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="36px" viewBox="0 0 24 24" width="36px">
