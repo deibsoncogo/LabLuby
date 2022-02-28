@@ -49,6 +49,9 @@
   function ExecuteApiFake() {
     let ajax = new XMLHttpRequest();
 
+    // let url = "../doc/games.json";
+    let url = "https://lublubydesafiofinal.free.beeceptor.com/";
+
     // cria um evento para acontecer quando a requisição finalizar
     ajax.onreadystatechange = () => {
       if(ajax.readyState == 4 && ajax.status == 200) {
@@ -57,8 +60,7 @@
       }
     };
 
-    ajax.open("GET", "../doc/games.json", true);
-    ajax.setRequestHeader();
+    ajax.open("GET", url, true);
     ajax.send();
   }
 
