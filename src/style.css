@@ -483,15 +483,18 @@ main {
   justify-content: flex-start;
 
   margin: 20px;
-  gap: 10px;
 }
 
 .mainCartTotal strong {
+  margin-right: 10px;
+
   color: var(--grey300);
   font: italic normal bold 24px "Roboto";
 }
 
 .mainCartTotal p {
+  margin-right: 5px;
+
   color: var(--grey300);
   font: normal normal 300 24px "Roboto";
 }

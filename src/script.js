@@ -6,6 +6,14 @@
   let numberSelected = new Array();
   let database =  new Object();
 
+  function ToggleMoneyFormatting(amount) {
+    if (typeof amount === "string") {
+      return Number(amount.replace(/[^\d,]/g, '').replace(',', '.'));
+    }
+
+    return amount.toLocaleString("pt-br",{ style: "currency", currency: "BRL" })
+  }
+
   // função que vai adicionar a seleção de um número
   function AddSelectNumber(element) {
     element.setAttribute("id", "active");
@@ -154,9 +162,9 @@
     }
 
     // adiciona o valor da aposta no valor total do carrinho
-    let valueTotal = Number(doc.querySelector(`[data-js="valueTotal"]`).innerHTML);
+    let valueTotal = ToggleMoneyFormatting(doc.querySelector(`[data-js="valueTotal"]`).innerHTML);
     valueTotal += database.types[`${gameSelected}`].price;
-    doc.querySelector(`[data-js="valueTotal"]`).innerHTML = valueTotal.toFixed(2);
+    doc.querySelector(`[data-js="valueTotal"]`).innerHTML = ToggleMoneyFormatting(valueTotal);
 
     // adiciona a aposta no carrinho de compras
     doc.querySelector(`[data-js="mainCartGameAll"]`).innerHTML += `
@@ -173,7 +181,7 @@
 
         <div class="mainCartGameAmount">
           <strong data-js="gameType" class="${gameSelected}">${database.types[`${gameSelected}`].name}</strong>
-          <p>R$<p data-js="value">${database.types[`${gameSelected}`].price.toFixed(2)}</p></p>
+          <p data-js="value">${ToggleMoneyFormatting(database.types[`${gameSelected}`].price)}</p></p>
         </div>
       </div>
     </a>
@@ -186,10 +194,10 @@
       element.querySelector(`[data-js="trash"]`).addEventListener("click", (event) => {
         event.preventDefault();
 
-        valueTotal = Number(doc.querySelector(`[data-js="valueTotal"]`).innerHTML);
-        valueTotal -= Number(element.querySelector(`[data-js="value"]`).innerHTML);
+        valueTotal = ToggleMoneyFormatting(doc.querySelector(`[data-js="valueTotal"]`).innerHTML);
+        valueTotal -= ToggleMoneyFormatting(element.querySelector(`[data-js="value"]`).innerHTML);
 
-        doc.querySelector(`[data-js="valueTotal"]`).innerHTML = valueTotal.toFixed(2);
+        doc.querySelector(`[data-js="valueTotal"]`).innerHTML = ToggleMoneyFormatting(valueTotal);
 
         element.remove();
       });
@@ -200,7 +208,7 @@
     event.preventDefault();
 
     if (Number(doc.querySelector(`[data-js="valueTotal"]`).innerHTML) < database.minCartValue) {
-      win.alert(`O valor mínimo do carrinho é de R$ ${database.minCartValue.toFixed(2)}`)
+      win.alert(`O valor mínimo do carrinho é de ${ToggleMoneyFormatting(database.minCartValue)}`)
     }
   });
 
