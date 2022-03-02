@@ -392,6 +392,61 @@ main {
   overflow-y: auto;
 }
 
+.mainCartEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  gap: 5px;
+}
+
+.mainCartEmpty strong {
+  margin-top: 10px;
+
+  color: var(--grey300);
+  font: italic normal bold 16px "Roboto";
+
+  position: absolute;
+  top: 230px;
+}
+
+.mainCartEmpty div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  height: 12px;
+  border-radius: 50px;
+
+  color: transparent;
+  font-size: 0px;
+
+  background-color: var(--white500);
+}
+
+.mainCartEmpty div:nth-child(1) {
+  width: 240px;
+}
+
+.mainCartEmpty div:nth-child(2) {
+  width: 190px;
+}
+
+.mainCartEmpty div:nth-child(3) {
+  width: 220px;
+}
+
+.mainCartEmpty div:nth-child(4) {
+  width: 250px;
+}
+
+.mainCartEmpty div:nth-child(5) {
+  width: 200px;
+}
+
 .mainCartGame {
   display: flex;
   align-items: center;

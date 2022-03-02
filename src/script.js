@@ -5,6 +5,7 @@
   let gameSelected = "lotofacil";
   let numberSelected = new Array();
   let database =  new Object();
+  let gameCount = 0;
 
   function ToggleMoneyFormatting(amount) {
     if (typeof amount === "string") {
@@ -166,6 +167,9 @@
     valueTotal += database.types[`${gameSelected}`].price;
     doc.querySelector(`[data-js="valueTotal"]`).innerHTML = ToggleMoneyFormatting(valueTotal);
 
+    // vai remove o aviso de carrinho vazio
+    doc.querySelector(`[data-js="mainCartEmpty"]`).innerHTML = "";
+
     // adiciona a aposta no carrinho de compras
     doc.querySelector(`[data-js="mainCartGameAll"]`).innerHTML += `
     <a data-js="mainCartGame" class="mainCartGame">
@@ -189,6 +193,7 @@
 
     RemoveSelectionAllNumber();
 
+
     // evento que vai remove um jogo do carrinho de compras
     doc.querySelectorAll(`[data-js="mainCartGame"]`).forEach((element) => {
       element.querySelector(`[data-js="trash"]`).addEventListener("click", (event) => {
@@ -200,6 +205,18 @@
         doc.querySelector(`[data-js="valueTotal"]`).innerHTML = ToggleMoneyFormatting(valueTotal);
 
         element.remove();
+
+        if (doc.querySelectorAll(`[data-js="mainCartGame"]`).length == 0) {
+          doc.querySelector(`[data-js="mainCartEmpty"]`).innerHTML = `
+          <div class="scratch1">.</div>
+          <div class="scratch2">.</div>
+          <div class="scratch3">.</div>
+          <div class="scratch4">.</div>
+          <div class="scratch5">.</div>
+
+          <strong>Seu carrinho está vazio</strong>
+        `;
+        }
       });
     });
   });
