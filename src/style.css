@@ -40,7 +40,7 @@ body {
   background-color: var(--white200);
 }
 
-a, img, svg, path {
+a, svg, path {
   cursor: pointer;
 }
 
@@ -73,19 +73,19 @@ header section a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
 
   color: var(--grey300);
   font: italic normal bold 20px "Roboto";
-
+  text-align: center;
   white-space: nowrap;
+
   fill: var(--grey300);
 }
 
-header section a:hover {
+/* header section a:hover {
   color: var(--grey400) !important;
   fill: var(--grey400) !important;
-}
+} */
 
 header section a svg {
   margin-left: 10px;
@@ -116,10 +116,6 @@ main {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-
-  /* EXCLUIR DEPOIS DUAS LINHAS */
-  width: 100%;
-  padding: 10px;
 }
 
 /* MAIN GAME ----------------------------------- */
@@ -211,7 +207,7 @@ main {
   gap: 10px;
 }
 
-.mainGameNumber {
+.mainGameNumberAll a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -226,11 +222,8 @@ main {
   background-color: var(--blue100);
 }
 
-.mainGameNumber:hover {
-  background-color: var(--blue200);
-}
-
-.mainGameNumber#active {
+.mainGameNumberAll a:hover,
+.mainGameNumberAll a#active {
   background-color: var(--blue200);
 }
 
@@ -251,7 +244,7 @@ main {
   gap: 30px;
 }
 
-.mainGameButton {
+.mainGameButtonDiverse a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -275,11 +268,11 @@ main {
   background-color: var(--green100);
 }
 
-.mainGameButton:hover {
+.mainGameButtonDiverse a:hover {
   background-color: var(--green200);
 }
 
-.mainGameButton.transparent {
+.mainGameButtonDiverse a.transparent {
   color: var(--green100);
   font-style: normal;
   font-weight: normal;
@@ -290,7 +283,7 @@ main {
   background-color: transparent;
 }
 
-.mainGameButton.transparent:hover {
+.mainGameButtonDiverse a.transparent:hover {
   color: var(--white100);
   background-color: var(--green100);
 }

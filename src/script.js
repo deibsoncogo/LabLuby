@@ -101,7 +101,9 @@
   function CreateButtonGameType() {
     for (const index in database.types) {
       doc.querySelector(`[data-js="mainGameButtonType"]`).innerHTML += `
-        <a data-js="buttonGameType" data-bt="buttonGameType${index}">${database.types[index].type}</a>
+        <a data-js="buttonGameType" data-bt="buttonGameType${index}">
+          ${database.types[index].type}
+        </a>
       `;
 
       doc.querySelector(`[data-bt="buttonGameType${index}"]`).style.cssText = `
@@ -147,7 +149,7 @@
       const numberFormatted = ("00" + index).slice(-2);
 
       doc.querySelector(`[data-js="mainGameNumberAll"]`).innerHTML += `
-        <a data-bt="number${numberFormatted}" data-js="mainGameNumber" class="mainGameNumber">${numberFormatted}</a>
+        <a data-bt="number${numberFormatted}" data-js="mainGameNumber">${numberFormatted}</a>
       `;
     }
 
