@@ -1,18 +1,39 @@
 (function(doc, win) {
   "use strict";
 
-   // não utilizar caracteres e acentos
-  let gameSelected = "lotofacil";
+  let gameSelected = new Array(0, 0);
   let numberSelected = new Array();
   let database =  new Object();
-  let gameCount = 0;
 
+  // função que vai criar o aviso de carrinho vazio
+  function CartEmpty() {
+    if (doc.querySelectorAll(`[data-js="mainCartGame"]`).length == 0) {
+      doc.querySelector(`[data-js="mainCartGameAll"]`).innerHTML = `
+        <div data-js="mainCartEmpty" class="mainCartEmpty">
+          <div class="scratch1">.</div>
+          <div class="scratch2">.</div>
+          <div class="scratch3">.</div>
+          <div class="scratch4">.</div>
+          <div class="scratch5">.</div>
+
+          <strong>Your shopping cart is empty</strong>
+        </div>
+      `;
+    }
+  }
+
+  // calcula a quantidade de número que falta selecionar
+  function NumberPending() {
+    return database.types[`${gameSelected[1]}`]["max-number"] - numberSelected.length;
+  }
+
+  // função que vai colocar ou remove a formatação monetária dos valores
   function ToggleMoneyFormatting(amount) {
     if (typeof amount === "string") {
       return Number(amount.replace(/[^\d,]/g, '').replace(',', '.'));
     }
 
-    return amount.toLocaleString("pt-br",{ style: "currency", currency: "BRL" })
+    return amount.toLocaleString("pt-br",{ style: "currency", currency: "BRL" });
   }
 
   // função que vai adicionar a seleção de um número
@@ -38,8 +59,8 @@
         // identifica se deve ou pode selecionar o número
         if (element.hasAttribute("id", "active")) {
           RemoveSelectNumber(element);
-        } else if (numberSelected.length == database.types[`${gameSelected}`].minNumber) {
-          win.alert("Você já selecionou a quantidade máxima de números")
+        } else if (numberSelected.length == database.types[`${gameSelected[1]}`]["max-number"]) {
+          win.alert("Você já selecionou a quantidade máxima de números!");
         } else {
           AddSelectNumber(element);
         }
@@ -58,39 +79,71 @@
   function ExecuteApiFake() {
     let ajax = new XMLHttpRequest();
 
-    // let url = "../doc/games.json";
-    let url = "https://lublubydesafiofinal.free.beeceptor.com/";
-
     // cria um evento para acontecer quando a requisição finalizar
     ajax.onreadystatechange = () => {
       if(ajax.readyState == 4 && ajax.status == 200) {
         database = JSON.parse(ajax.responseText);
+
+        CartEmpty();
+        CreateButtonGameType();
         HandleAdjustGameByType();
       }
     };
 
+    let url = "./services/games.json";
+    // let url = "https://provafinallabluby.free.beeceptor.com";
+
     ajax.open("GET", url, true);
     ajax.send();
+  }
+
+  // função responsável por criar os botões do tipo de jogo
+  function CreateButtonGameType() {
+    for (const index in database.types) {
+      doc.querySelector(`[data-js="mainGameButtonType"]`).innerHTML += `
+        <a data-js="buttonGameType" data-bt="buttonGameType${index}">${database.types[index].type}</a>
+      `;
+
+      doc.querySelector(`[data-bt="buttonGameType${index}"]`).style.cssText = `
+        border: 2px solid ${database.types[index].color};
+        color: ${database.types[index].color};
+      `;
+    }
+
+    doc.querySelectorAll(`[data-js="buttonGameType"]`).forEach((element, index) => {
+      element.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        gameSelected.shift();
+        gameSelected.push(index);
+        HandleAdjustGameByType();
+      });
+    });
   }
 
   // função que vai ajustar a página para o tipo do jogo selecionado
   function HandleAdjustGameByType() {
     numberSelected = [];
 
-    // remove a seleção de todos botões de tipo de jogo
-    doc.querySelectorAll(`[data-js="mainGameType"]`).forEach((element) => {
-      if (element.hasAttribute("id", "active")) {
-        element.removeAttribute("id", "active")
-      };
-    });
+    // ajusta a seleção do botão do tipo de jogo
+    doc.querySelector(`[data-bt="buttonGameType${gameSelected[0]}"]`).style.cssText = `
+      border: 2px solid ${database.types[gameSelected[0]].color};
+      color: ${database.types[gameSelected[0]].color};
+      background-color = #FFFFFF;
+    `;
 
-    doc.querySelector(`[data-bt="${gameSelected}"]`).setAttribute("id", "active");
-    doc.querySelector(`[data-js="name"]`).innerHTML = database.types[`${gameSelected}`].name.toUpperCase();
-    doc.querySelector(`[data-js="rule"]`).innerHTML = database.types[`${gameSelected}`].description;
+    doc.querySelector(`[data-bt="buttonGameType${gameSelected[1]}"]`).style.cssText = `
+      border: 2px solid ${database.types[gameSelected[1]].color};
+      color: #FFFFFF;
+      background-color: ${database.types[gameSelected[1]].color};
+    `;
+
+    doc.querySelector(`[data-js="name"]`).innerHTML = database.types[`${gameSelected[1]}`].type.toUpperCase();
+    doc.querySelector(`[data-js="rule"]`).innerHTML = database.types[`${gameSelected[1]}`].description;
     doc.querySelector(`[data-js="mainGameNumberAll"]`).innerHTML = "";
 
     // for que vai adicionar a quantidade de números necessário do jogo
-    for (let index = 1; index <= database.types[`${gameSelected}`].range; index++) {
+    for (let index = 1; index <= database.types[`${gameSelected[1]}`].range; index++) {
       const numberFormatted = ("00" + index).slice(-2);
 
       doc.querySelector(`[data-js="mainGameNumberAll"]`).innerHTML += `
@@ -101,39 +154,15 @@
     ToggleSelectionNumber();
   }
 
-  // seleciona o tipo de jogo lotofacil
-  doc.querySelector(`[data-bt="lotofacil"]`).addEventListener("click", (event) => {
-    event.preventDefault();
-
-    gameSelected = "lotofacil";
-    HandleAdjustGameByType();
-  });
-
-  // seleciona o tipo de jogo megasena
-  doc.querySelector(`[data-bt="megasena"]`).addEventListener("click", (event) => {
-    event.preventDefault();
-
-    gameSelected = "megasena";
-    HandleAdjustGameByType();
-  });
-
-  // seleciona o tipo de jogo quina
-  doc.querySelector(`[data-bt="quina"]`).addEventListener("click", (event) => {
-    event.preventDefault();
-
-    gameSelected = "quina";
-    HandleAdjustGameByType();
-  });
-
   // selecionar a quantidade faltante de número do jogo
   doc.querySelector(`[data-bt="completeGame"]`).addEventListener("click", (event) => {
     event.preventDefault();
 
-    let numberPending = database.types[`${gameSelected}`].minNumber - numberSelected.length;
+    let numberPending = NumberPending();
 
     // vai gerar e selecionar um número até o numberPending zerar
     while (numberPending > 0) {
-      const numberRandom = Math.floor(Math.random() * (database.types[`${gameSelected}`].range - 1)) + 1;
+      const numberRandom = Math.floor(Math.random() * (database.types[`${gameSelected[1]}`].range - 1)) + 1;
       const numberRandomFormatted = ("00" + numberRandom).slice(-2);
 
       // verifica se o número aleatório está selecionado
@@ -156,43 +185,47 @@
     event.preventDefault();
 
     // vai verificar se existe a quantidade minima de numero selecionado
-    const numberPending = database.types[`${gameSelected}`].minNumber - numberSelected.length;
+    let numberPending = NumberPending();
     if (numberPending !== 0) {
       const plural = numberPending > 1 ? "s" : "";
-      return win.alert(`Falta selecionar ${numberPending} número${plural}`)
+      return win.alert(`Falta selecionar ${numberPending} número${plural}!`)
     }
 
     // adiciona o valor da aposta no valor total do carrinho
     let valueTotal = ToggleMoneyFormatting(doc.querySelector(`[data-js="valueTotal"]`).innerHTML);
-    valueTotal += database.types[`${gameSelected}`].price;
+    valueTotal += database.types[`${gameSelected[1]}`].price;
     doc.querySelector(`[data-js="valueTotal"]`).innerHTML = ToggleMoneyFormatting(valueTotal);
 
     // vai remove o aviso de carrinho vazio
-    doc.querySelector(`[data-js="mainCartEmpty"]`).innerHTML = "";
+    if (doc.querySelectorAll(`[data-js="mainCartGame"]`).length == 0) {
+      doc.querySelector(`[data-js="mainCartEmpty"]`).remove();
+    }
 
     // adiciona a aposta no carrinho de compras
     doc.querySelector(`[data-js="mainCartGameAll"]`).innerHTML += `
-    <a data-js="mainCartGame" class="mainCartGame">
-      <svg data-js="trash" class="mainCartGameTrash" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
-        <path d="M0 0h24v24H0V0z" fill="none"/>
-        <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>
-      </svg>
+      <a data-js="mainCartGame" class="mainCartGame">
+        <svg data-js="trash" class="mainCartGameTrash" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px">
+          <path d="M0 0h24v24H0V0z" fill="none"/>
+          <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/>
+        </svg>
 
-      <div class="mainCartGameBorder ${gameSelected}">BORDER</div>
+        <div class="mainCartGameBorder" style="background-color: ${database.types[`${gameSelected[1]}`].color}; ${numberSelected.length < 10 && "height: 60px;"}">BORDER</div>
 
-      <div class="mainCartGameValue">
-        <div class="mainCartGameNumber">${numberSelected.sort().join(", ")}</div>
+        <div class="mainCartGameValue">
+          <div class="mainCartGameNumber">${numberSelected.sort().join(", ")}</div>
 
-        <div class="mainCartGameAmount">
-          <strong data-js="gameType" class="${gameSelected}">${database.types[`${gameSelected}`].name}</strong>
-          <p data-js="value">${ToggleMoneyFormatting(database.types[`${gameSelected}`].price)}</p></p>
+          <div class="mainCartGameAmount">
+            <strong data-js="gameType" style="color: ${database.types[`${gameSelected[1]}`].color};">
+              ${database.types[`${gameSelected[1]}`].type}
+            </strong>
+
+            <p data-js="value">${ToggleMoneyFormatting(database.types[`${gameSelected[1]}`].price)}</p>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
     `;
 
     RemoveSelectionAllNumber();
-
 
     // evento que vai remove um jogo do carrinho de compras
     doc.querySelectorAll(`[data-js="mainCartGame"]`).forEach((element) => {
@@ -206,26 +239,17 @@
 
         element.remove();
 
-        if (doc.querySelectorAll(`[data-js="mainCartGame"]`).length == 0) {
-          doc.querySelector(`[data-js="mainCartEmpty"]`).innerHTML = `
-          <div class="scratch1">.</div>
-          <div class="scratch2">.</div>
-          <div class="scratch3">.</div>
-          <div class="scratch4">.</div>
-          <div class="scratch5">.</div>
-
-          <strong>Seu carrinho está vazio</strong>
-        `;
-        }
+        CartEmpty();
       });
     });
   });
 
+  // evento que vai verificar se o valor mínimo do carrinho foi atingindo
   doc.querySelector(`[data-bt="save"]`).addEventListener("click", (event) => {
     event.preventDefault();
 
-    if (Number(doc.querySelector(`[data-js="valueTotal"]`).innerHTML) < database.minCartValue) {
-      win.alert(`O valor mínimo do carrinho é de ${ToggleMoneyFormatting(database.minCartValue)}`)
+    if (ToggleMoneyFormatting(doc.querySelector(`[data-js="valueTotal"]`).innerHTML) < database["min-cart-value"]) {
+      win.alert(`O valor mínimo do carrinho é de ${ToggleMoneyFormatting(database["min-cart-value"])}!`)
     }
   });
 

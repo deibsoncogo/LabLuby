@@ -1,8 +1,4 @@
 :root {
-  --lotofacil: #7F3992;
-  --megasena: #01AC66;
-  --quina: #F79C31;
-
   --white100: #FFFFFF;
   --white200: #F7F7F7;
   --white300: #F4F4F4;
@@ -24,6 +20,7 @@
   margin: 0;
   padding: 0;
 
+  user-select: none;
   text-decoration: none;
   cursor: default;
 }
@@ -49,18 +46,6 @@ a, img, svg, path {
 
 .flexDirectionRow {
   flex-direction: row;
-}
-
-.lotofacil {
-  color: var(--lotofacil);
-}
-
-.megasena {
-  color: var(--megasena);
-}
-
-.quina {
-  color: var(--quina);
 }
 
 /* HEADER -------------------------------------- */
@@ -168,75 +153,42 @@ main {
   font: italic normal bold 17px "Roboto";
 }
 
-.mainGameType {
+.mainGameButtonType {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
 
   margin: 20px 0px;
-  gap: 50px;
+  gap: 10px;
 }
 
-.mainGameType a {
+.mainGameButtonType a {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 113px;
+  width: auto;
   height: 34px;
-  border: 0;
+  margin-right: 30px;
   border-radius: 50px;
+  padding: 0px 30px;
 
-  color: var(--white100);
   font: italic normal bold 14px "Roboto";
+  white-space: nowrap;
 
   background-color: var(--white100);
 }
 
-.mainGameType .lotofacil {
-  border: 2px solid var(--lotofacil);
-  color: var(--lotofacil);
+.mainGameButtonType a:last-child {
+  margin: 0;
 }
 
-.mainGameType .lotofacil#active {
+/* .mainGameButtonType a:hover {
   color: var(--white100);
-  background-color: var(--lotofacil);
-}
-
-.mainGameType .lotofacil:hover {
-  color: var(--white100);
-  background-color: var(--lotofacil);
-}
-
-.mainGameType.megasena {
-  border: 2px solid var(--megasena);
-  color: var(--megasena);
-}
-
-.mainGameType.megasena#active {
-  color: var(--white100);
-  background-color: var(--megasena);
-}
-
-.mainGameType.megasena:hover {
-  color: var(--white100);
-  background-color: var(--megasena);
-}
-
-.mainGameType.quina {
-  border: 2px solid var(--quina);
-  color: var(--quina);
-}
-
-.mainGameType.quina#active {
-  color: var(--white100);
-  background-color: var(--quina);
-}
-
-.mainGameType.quina:hover {
-  color: var(--white100);
-  background-color: var(--quina);
-}
+  background-color: #000;
+} */
 
 .mainGameRule strong {
   color: var(--grey100);
@@ -305,7 +257,7 @@ main {
   justify-content: center;
 
   width: auto;
-  min-width: 100px;
+  min-width: 120px;
   height: 52px;
   padding: 0px 20px;
   border: 1px solid var(--green100);
@@ -407,6 +359,7 @@ main {
 
   color: var(--grey300);
   font: italic normal bold 16px "Roboto";
+  white-space: nowrap;
 
   position: absolute;
   top: 230px;
@@ -467,6 +420,7 @@ main {
 
 .mainCartGameBorder {
   width: 4px;
+  height: 86px;
   min-width: 4px;
   margin-left: 2px;
   margin-right: 10px;
@@ -475,21 +429,6 @@ main {
 
   color: transparent;
   font-size: 0px;
-}
-
-.mainCartGameBorder.lotofacil {
-  height: 86px;
-  background-color: var(--lotofacil);
-}
-
-.mainCartGameBorder.megasena {
-  height: 60px;
-  background-color: var(--megasena);
-}
-
-.mainCartGameBorder.quina {
-  height: 60px;
-  background-color: var(--quina);
 }
 
 .mainCartGameValue {
