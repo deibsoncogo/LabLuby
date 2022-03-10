@@ -8,3 +8,5 @@ Route.get('/', async () => {
 Route.get('/userAll', async () => {
   return Database.from('users').select('*')
 })
+
+Route.post('/login', 'AuthController.login')
