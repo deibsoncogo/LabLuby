@@ -1,6 +1,8 @@
 # Adonis V5 - Luby Software - Manoel Neto
 Criação de uma aplicação com o [Adonis V5](https://docs.adonisjs.com/guides/introduction) junto do Manuel Neto
 
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Adonis%20V5%20LabLuby&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fdeibsoncogo%2FAdonisV5LabLuby%2Fmaster%2FInsomnia-All_2022-03-10.json)
+
 Para criar os arquivos iniciais da aplicação utilizamos o seguinte comando, depois informamos que será do tipo `api` o nome `adonisv5labluby` e definimos utilizar o `Eslint` e o `Prettier`.
 
 ```bash
