@@ -1,12 +1,14 @@
 import Route from '@ioc:Adonis/Core/Route'
-import Database from '@ioc:Adonis/Lucid/Database'
+import '../app/Modules/User/routers'
 
-Route.get('/', async () => {
+Route.any('/:name?', async ({ params }) => {
+  if (params.name) {
+    return { message: `Hello world, ${params.name}` }
+  }
+
   return { message: 'Hello world' }
-})
+}).where('name', /^[a-z]|[A-Z]+$/)
 
-Route.get('/userAll', async () => {
-  return Database.from('users').select('*')
+Route.get('/coringa/*', async ({ params }) => {
+  return { coringa: params['*'] }
 })
-
-Route.post('/login', 'AuthController.login')
