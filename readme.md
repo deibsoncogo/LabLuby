@@ -1,6 +1,6 @@
-# Prova final - Fundamentos conteúdo inicial - LabLub
-Resolução do prova final proposto da trilha de conteúdo inicial de JavaScript da LabLuby.
-Que é a construção de uma página web com HTML, CSS e JavaScript puro.
+# Prova de JavaScript - Fundamentos conteúdo inicial - LabLub
+Resolução da prova sobre JavaScript proposto da trilha de conteúdo inicial da LabLuby.
+Que é a construção de uma página web com HTML, CSS e JavaScript puro controlando um site de apostas.
 
 ## Execução principal
 Você vai precisar de um executador como o [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) basta você clicar com o botão direito encima do arquivo `html` e depois em `Open with Live Serve`.
