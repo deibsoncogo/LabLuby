@@ -7,3 +7,7 @@ Route.get('/', async () => {
 Route.group(() => {
   Route.resource('/user', 'UsersController').apiOnly()
 })
+
+Route.group(() => {
+  Route.resource('/role', 'RolesController').apiOnly()
+})
