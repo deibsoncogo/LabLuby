@@ -11,3 +11,7 @@ Route.group(() => {
 Route.group(() => {
   Route.resource('/role', 'RolesController').apiOnly()
 })
+
+Route.group(() => {
+  Route.resource('/cart', 'CartsController').apiOnly()
+})
