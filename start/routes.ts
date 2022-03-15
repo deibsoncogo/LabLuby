@@ -19,3 +19,7 @@ Route.group(() => {
 Route.group(() => {
   Route.resource('/game', 'GamesController').apiOnly()
 })
+
+Route.group(() => {
+  Route.resource('/bet', 'BetsController').apiOnly()
+})
