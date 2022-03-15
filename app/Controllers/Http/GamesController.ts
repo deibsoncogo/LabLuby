@@ -16,7 +16,9 @@ export default class GamesController {
 
   public async show({ params, response }: HttpContextContract) {
     const game = await Game.findOrFail(params.id)
-    return response.status(200).json(game)
+    const bet = await game.related('bet').query()
+
+    return response.status(200).json({ game, bet })
   }
 
   public async update({ params, request, response }: HttpContextContract) {

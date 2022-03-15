@@ -16,7 +16,9 @@ export default class RolesController {
 
   public async show({ params, response }: HttpContextContract) {
     const role = await Role.findOrFail(params.id)
-    return response.status(200).json(role)
+    const user = await role.related('user').query()
+
+    return response.status(200).json({ role, user })
   }
 
   public async update({ params, request, response }: HttpContextContract) {

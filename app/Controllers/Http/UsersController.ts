@@ -8,15 +8,19 @@ export default class UsersController {
   }
 
   public async store({ request, response }: HttpContextContract) {
-    const data = request.only(['name', 'email', 'password'])
+    const { roleId, ...data } = request.only(['name', 'email', 'password', 'roleId'])
     const user = await User.create(data)
+    const role = await user?.related('role').attach(roleId.split(','))
 
-    return response.status(201).json(user)
+    return response.status(201).json({ user, role })
   }
 
   public async show({ params, response }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
-    return response.status(200).json(user)
+    const role = await user.related('role').query()
+    const bet = await user.related('bet').query()
+
+    return response.status(200).json({ user, role, bet })
   }
 
   public async update({ params, request, response }: HttpContextContract) {
@@ -31,6 +35,8 @@ export default class UsersController {
 
   public async destroy({ params }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
+
+    await user.related('role').detach()
     await user.delete()
   }
 }

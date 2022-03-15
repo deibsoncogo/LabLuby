@@ -13,6 +13,10 @@ Route.group(() => {
 })
 
 Route.group(() => {
+  Route.resource('/user/role', 'UsersRolesController').apiOnly().only(['store', 'destroy'])
+})
+
+Route.group(() => {
   Route.resource('/cart', 'CartsController').apiOnly()
 })
 

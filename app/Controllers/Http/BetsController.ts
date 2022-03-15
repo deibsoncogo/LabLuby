@@ -16,7 +16,11 @@ export default class BetsController {
 
   public async show({ params, response }: HttpContextContract) {
     const bet = await Bet.findOrFail(params.id)
-    return response.status(200).json(bet)
+
+    const user = await bet.related('user').query()
+    const game = await bet.related('game').query()
+
+    return response.status(200).json({ bet, user, game })
   }
 
   public async update({ params, request, response }: HttpContextContract) {
