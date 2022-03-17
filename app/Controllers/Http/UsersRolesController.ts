@@ -3,17 +3,16 @@ import User from 'App/Models/User'
 
 export default class UsersRolesController {
   public async store({ request, response }: HttpContextContract) {
-    const { userId, roleId } = request.only(['userId', 'roleId'])
-    const user = await User.find(userId)
-    const role = await user?.related('role').attach(roleId.split(','))
-
-    return response.status(201).json({ user, role })
+    const { userId, roleId } = request.all()
+    const user = await User.findOrFail(userId)
+    const roles = await user.related('roles').attach(roleId.split(','))
+    return response.status(201).json({ user, roles })
   }
 
-  public async destroy({ params, request }: HttpContextContract) {
-    const { roleId } = request.only(['userId', 'roleId'])
-    const user = await User.find(params.userId)
-
-    await user?.related('role').detach(roleId.split(','))
+  public async destroy({ params, request, response }: HttpContextContract) {
+    const { roleId } = request.all()
+    const user = await User.findOrFail(params.id)
+    await user.related('roles').detach(roleId.split(','))
+    return response.status(204)
   }
 }

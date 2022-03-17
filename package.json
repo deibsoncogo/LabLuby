@@ -11,7 +11,9 @@
     "build": "node ace build --production",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "run": "node ace migration:run",
+    "reset": "node ace migration:reset"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.3.0",

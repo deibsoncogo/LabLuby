@@ -12,13 +12,13 @@ export default class Bet extends BaseModel {
   public item: string
 
   @belongsTo(() => User)
-  public user: BelongsTo<typeof User>
+  public users: BelongsTo<typeof User>
 
   @column()
   public userId: uuid
 
   @belongsTo(() => Game)
-  public game: BelongsTo<typeof Game>
+  public games: BelongsTo<typeof Game>
 
   @column()
   public gameId: uuid

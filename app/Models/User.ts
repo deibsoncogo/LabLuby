@@ -35,13 +35,13 @@ export default class User extends BaseModel {
     pivotTable: 'users_roles',
     pivotTimestamps: true,
   })
-  public role: ManyToMany<typeof Role>
+  public roles: ManyToMany<typeof Role>
 
   @hasMany(() => Bet, {
     foreignKey: 'userId',
     localKey: 'id',
   })
-  public bet: HasMany<typeof Bet>
+  public bets: HasMany<typeof Bet>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

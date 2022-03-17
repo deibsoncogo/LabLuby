@@ -18,7 +18,7 @@ export default class Role extends BaseModel {
     pivotTable: 'users_roles',
     pivotTimestamps: true,
   })
-  public user: ManyToMany<typeof User>
+  public users: ManyToMany<typeof User>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

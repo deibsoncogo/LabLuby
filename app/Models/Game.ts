@@ -29,7 +29,7 @@ export default class Game extends BaseModel {
     foreignKey: 'gameId',
     localKey: 'id',
   })
-  public bet: HasMany<typeof Bet>
+  public bets: HasMany<typeof Bet>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

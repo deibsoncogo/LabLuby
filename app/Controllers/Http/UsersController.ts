@@ -3,40 +3,35 @@ import User from 'App/Models/User'
 
 export default class UsersController {
   public async index({ response }: HttpContextContract) {
-    const user = await User.all()
-    return response.status(200).json(user)
+    const users = await User.all()
+    return response.status(200).json(users)
   }
 
   public async store({ request, response }: HttpContextContract) {
     const { roleId, ...data } = request.only(['name', 'email', 'password', 'roleId'])
     const user = await User.create(data)
-    const role = await user?.related('role').attach(roleId.split(','))
-
-    return response.status(201).json({ user, role })
+    const roles = await user.related('roles').attach(roleId.split(','))
+    return response.status(201).json({ user, roles })
   }
 
   public async show({ params, response }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
-    const role = await user.related('role').query()
-    const bet = await user.related('bet').query()
-
-    return response.status(200).json({ user, role, bet })
+    const roles = await user.related('roles').query()
+    const bets = await user.related('bets').query()
+    return response.status(200).json({ user, roles, bets })
   }
 
   public async update({ params, request, response }: HttpContextContract) {
     const data = request.only(['name', 'email', 'password'])
     const user = await User.findOrFail(params.id)
-
-    user.merge(data)
-    await user.save()
-
-    return response.status(200).json(user)
+    await user.merge(data).save()
+    return response.status(201).json(user)
   }
 
-  public async destroy({ params }: HttpContextContract) {
+  public async destroy({ params, response }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
-
-    await user.related('role').detach()
+    await user.related('roles').detach()
     await user.delete()
+    return response.status(204)
   }
 }
