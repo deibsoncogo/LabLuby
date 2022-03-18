@@ -3,7 +3,7 @@ import { BaseModel, beforeCreate, column, ManyToMany, manyToMany } from '@ioc:Ad
 import { v4 as uuid } from 'uuid'
 import User from './User'
 
-export default class Role extends BaseModel {
+export default class Rule extends BaseModel {
   @column({ isPrimary: true })
   public id: uuid
 
@@ -12,10 +12,10 @@ export default class Role extends BaseModel {
 
   @manyToMany(() => User, {
     localKey: 'id',
-    pivotForeignKey: 'role_id',
+    pivotForeignKey: 'rule_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'user_id',
-    pivotTable: 'users_roles',
+    pivotTable: 'users_rules',
     pivotTimestamps: true,
   })
   public users: ManyToMany<typeof User>
@@ -27,7 +27,7 @@ export default class Role extends BaseModel {
   public updatedAt: DateTime
 
   @beforeCreate()
-  public static assignUuid(role: Role) {
-    role.id = uuid()
+  public static assignUuid(rule: Rule) {
+    rule.id = uuid()
   }
 }

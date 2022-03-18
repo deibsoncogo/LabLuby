@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class UsersRoles extends BaseSchema {
-  protected tableName = 'users_roles'
+export default class UsersRules extends BaseSchema {
+  protected tableName = 'users_rules'
 
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
@@ -15,14 +15,14 @@ export default class UsersRoles extends BaseSchema {
         .onDelete('CASCADE')
 
       table
-        .uuid('role_id')
+        .uuid('rule_id')
         .notNullable()
         .references('id')
-        .inTable('roles')
+        .inTable('rules')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
 
-      table.unique(['user_id', 'role_id'])
+      table.unique(['user_id', 'rule_id'])
       table.timestamp('created_at', { useTz: true }).defaultTo('now()')
       table.timestamp('updated_at', { useTz: true }).defaultTo('now()')
     })

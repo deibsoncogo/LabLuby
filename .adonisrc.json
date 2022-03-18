@@ -15,7 +15,19 @@
   },
   "preloads": [
     "./start/routes",
-    "./start/kernel"
+    "./start/kernel",
+    {
+      "file": "./app/Validators/StringArrayValidator.ts",
+      "environment": [
+        "web"
+      ]
+    },
+    {
+      "file": "./app/Validators/NumberIntegerValidator.ts",
+      "environment": [
+        "web"
+      ]
+    }
   ],
   "providers": [
     "./providers/AppProvider",

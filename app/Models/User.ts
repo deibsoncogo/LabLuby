@@ -10,7 +10,7 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuid } from 'uuid'
 import Bet from './Bet'
-import Role from './Role'
+import Rule from './Rule'
 
 export default class User extends BaseModel {
   public static table = 'users'
@@ -27,15 +27,15 @@ export default class User extends BaseModel {
   @column()
   public password: string
 
-  @manyToMany(() => Role, {
+  @manyToMany(() => Rule, {
     localKey: 'id',
     pivotForeignKey: 'user_id',
     relatedKey: 'id',
-    pivotRelatedForeignKey: 'role_id',
-    pivotTable: 'users_roles',
+    pivotRelatedForeignKey: 'rule_id',
+    pivotTable: 'users_rules',
     pivotTimestamps: true,
   })
-  public roles: ManyToMany<typeof Role>
+  public rules: ManyToMany<typeof Rule>
 
   @hasMany(() => Bet, {
     foreignKey: 'userId',

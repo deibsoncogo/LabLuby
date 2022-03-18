@@ -9,11 +9,11 @@ Route.group(() => {
 })
 
 Route.group(() => {
-  Route.resource('/role', 'RolesController').apiOnly()
+  Route.resource('/rule', 'RulesController').apiOnly()
 })
 
 Route.group(() => {
-  Route.resource('/user/role', 'UsersRolesController').apiOnly().only(['store', 'destroy'])
+  Route.resource('/user/rule', 'UsersRulesController').apiOnly().only(['store', 'destroy'])
 })
 
 Route.group(() => {
