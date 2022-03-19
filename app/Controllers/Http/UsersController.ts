@@ -20,9 +20,13 @@ export default class UsersController {
 
   public async show({ params, request, response }: HttpContextContract) {
     await request.validate(UserIdValidator)
+
+    let dateFilter = new Date()
+    dateFilter.setDate(new Date().getDate() - 30)
+
     const user = await User.findOrFail(params.id)
     const rules = await user.related('rules').query()
-    const bets = await user.related('bets').query()
+    const bets = await user.related('bets').query().where('created_at', '>=', dateFilter)
     return response.status(200).json({ user, rules, bets })
   }
 
