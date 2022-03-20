@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import {
   BaseModel,
   beforeCreate,
+  beforeSave,
   column,
   HasMany,
   hasMany,
@@ -11,6 +12,7 @@ import {
 import { v4 as uuid } from 'uuid'
 import Bet from './Bet'
 import Rule from './Rule'
+import Hash from '@ioc:Adonis/Core/Hash'
 
 export default class User extends BaseModel {
   public static table = 'users'
@@ -52,5 +54,12 @@ export default class User extends BaseModel {
   @beforeCreate()
   public static assignUuid(user: User) {
     user.id = uuid()
+  }
+
+  @beforeSave()
+  public static async hashPassword(user: User) {
+    if (user.$dirty.password) {
+      user.password = await Hash.make(user.password)
+    }
   }
 }

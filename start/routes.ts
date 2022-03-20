@@ -8,6 +8,8 @@ Route.group(() => {
   Route.resource('/user', 'UsersController').apiOnly()
 })
 
+Route.post('/user/login', 'AuthController.store')
+
 Route.group(() => {
   Route.resource('/rule', 'RulesController').apiOnly()
 })

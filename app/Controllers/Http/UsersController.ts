@@ -14,8 +14,8 @@ export default class UsersController {
     await request.validate(UserStoreValidator)
     const { ruleId, ...data } = request.only(['name', 'email', 'password', 'ruleId'])
     const user = await User.create(data)
-    const rules = await user.related('rules').attach(ruleId.split(','))
-    return response.status(201).json({ user, rules })
+    await user.related('rules').attach(ruleId.split(','))
+    return response.status(201).json(user)
   }
 
   public async show({ params, request, response }: HttpContextContract) {

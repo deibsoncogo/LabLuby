@@ -266,7 +266,7 @@
           "name": "force",
           "propertyName": "force",
           "type": "boolean",
-          "description": "Explicitly force to run migrations in production"
+          "description": "Explictly force to run migrations in production"
         },
         {
           "name": "dry-run",
