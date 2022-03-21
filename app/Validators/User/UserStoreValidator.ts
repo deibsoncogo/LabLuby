@@ -24,7 +24,5 @@ export class UserStoreValidator extends CustomMessageValidator {
       rules.maxLength(20),
       rules.regex(/([0-9]{2,})([a-z]{2,})([A-Z]{2,})/gm),
     ]),
-
-    ruleId: schema.string({ trim: true }, [rules.stringArray('uuid', 1, 10, true)]),
   })
 }

@@ -12,9 +12,8 @@ export default class UsersController {
 
   public async store({ request, response }: HttpContextContract) {
     await request.validate(UserStoreValidator)
-    const { ruleId, ...data } = request.only(['name', 'email', 'password', 'ruleId'])
+    const data = request.only(['name', 'email', 'password'])
     const user = await User.create(data)
-    await user.related('rules').attach(ruleId.split(','))
     return response.status(201).json(user)
   }
 
@@ -41,7 +40,6 @@ export default class UsersController {
   public async destroy({ params, request, response }: HttpContextContract) {
     await request.validate(UserIdValidator)
     const user = await User.findOrFail(params.id)
-    await user.related('rules').detach()
     await user.delete()
     return response.status(204)
   }
