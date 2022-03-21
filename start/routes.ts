@@ -7,10 +7,12 @@ Route.get('/', async () => {
 Route.group(() => {
   Route.post('/user', 'UsersController.store')
   Route.post('/user/login', 'AuthController.store')
+  Route.post('/resetPassword', 'ResetPasswordController.store')
 })
 
 Route.group(() => {
   Route.resource('/user', 'UsersController').apiOnly().except(['store', 'destroy'])
+  Route.patch('/resetPassword', 'ResetPasswordController.update')
   Route.resource('/rule', 'RulesController').apiOnly().except(['destroy'])
   Route.resource('/user/rule', 'UsersRulesController').apiOnly().only(['store'])
   Route.resource('/cart', 'CartsController').apiOnly().except(['destroy'])
