@@ -3,6 +3,8 @@ import Bet from 'App/Models/Bet'
 import { BetIdValidator } from 'App/Validators/Bet/BetIdValidator'
 import { BetStoreValidator } from 'App/Validators/Bet/BetStoreValidator'
 import { BetUpdateValidator } from 'App/Validators/Bet/BetUpdateValidator'
+import Mail from '@ioc:Adonis/Addons/Mail'
+import User from 'App/Models/User'
 
 export default class BetsController {
   public async index({ response }: HttpContextContract) {
@@ -14,6 +16,17 @@ export default class BetsController {
     await request.validate(BetStoreValidator)
     const data = request.only(['item', 'userId', 'gameId'])
     const bet = await Bet.create(data)
+
+    const user = await User.findOrFail(data.userId)
+
+    await Mail.send((message) => {
+      message
+        .from('noreply@provaadonisv5labluby.com')
+        .to(user.email)
+        .subject('Prova Adonis V5 LabLub - Nova aposta')
+        .htmlView('emails/new_bet', { name: user.name, bet })
+    })
+
     return response.status(201).json(bet)
   }
 
