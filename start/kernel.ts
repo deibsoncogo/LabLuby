@@ -1,6 +1,6 @@
 import Server from '@ioc:Adonis/Core/Server'
-import cron from 'node-cron'
-import { ReminderToBetTask } from 'App/Tasks/ReminderToBetTask'
+// import cron from 'node-cron'
+// import { ReminderToBetTask } from 'App/Tasks/ReminderToBetTask'
 Server.middleware.register([() => import('@ioc:Adonis/Core/BodyParser')])
 
 Server.middleware.registerNamed({
@@ -8,6 +8,7 @@ Server.middleware.registerNamed({
   ruleLevelAdmin: () => import('../app/Middleware/RuleLevelAdmin'),
 })
 
-cron.schedule('* 09:00 * * *', async () => {
-  await new ReminderToBetTask().execute()
-})
+// cron.schedule('* 9 * * *', async () => {
+//   console.log('schedule, ReminderToBetTask =>', new Date())
+//   await new ReminderToBetTask().execute()
+// })

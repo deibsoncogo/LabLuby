@@ -13,16 +13,22 @@ export default class UsersController {
 
   public async store({ request, response }: HttpContextContract) {
     await request.validate(UserStoreValidator)
-    const data = request.only(['name', 'email', 'password'])
-    const user = await User.create(data)
 
-    await Mail.send((message) => {
-      message
-        .from('noreply@provaadonisv5labluby.com')
-        .to(user.email)
-        .subject('Prova Adonis V5 LabLub - Novo cadastro')
-        .htmlView('emails/new_user', { name: user.name, password: data.password })
-    })
+    const { name, email, password } = request.all()
+    const user = await User.create({ name, email, password })
+
+    try {
+      await Mail.send((message) => {
+        message
+          .from('contact@teste.com', 'Prova Adonis V5 LabLuby')
+          .replyTo('noreply@teste.com', 'Prova Adonis V5 LabLuby')
+          .to(user.email)
+          .subject('Novo cadastro')
+          .htmlView('emails/new_user', { name: user.name, password })
+      })
+    } catch (error) {
+      return response.status(502).json(user)
+    }
 
     return response.status(201).json(user)
   }
@@ -30,27 +36,36 @@ export default class UsersController {
   public async show({ params, request, response }: HttpContextContract) {
     await request.validate(UserIdValidator)
 
+    const user = await User.findOrFail(params.id)
+
+    const rules = await user.related('rules').query()
+
     let dateFilter = new Date()
     dateFilter.setDate(new Date().getDate() - 30)
-
-    const user = await User.findOrFail(params.id)
-    const rules = await user.related('rules').query()
     const bets = await user.related('bets').query().where('created_at', '>=', dateFilter)
+
     return response.status(200).json({ user, rules, bets })
   }
 
   public async update({ params, request, response }: HttpContextContract) {
     await request.validate(UserUpdateValidator)
-    const data = request.only(['name', 'email', 'password'])
+
+    const { name, email, password } = request.all()
+
     const user = await User.findOrFail(params.id)
-    await user.merge(data).save()
+
+    await user.merge({ name, email, password }).save()
+
     return response.status(201).json(user)
   }
 
   public async destroy({ params, request, response }: HttpContextContract) {
     await request.validate(UserIdValidator)
+
     const user = await User.findOrFail(params.id)
+
     await user.delete()
+
     return response.status(204)
   }
 }
