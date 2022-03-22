@@ -4,7 +4,7 @@ module.exports = {
   password: 'docker',
   database: 'JestLabLubyDB',
   dialect: 'postgres',
-  operatorsAliases: false,
+  // operatorsAliases: false,
   logging: false,
   define: {
     timestamps: true,
