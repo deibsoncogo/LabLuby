@@ -14,9 +14,10 @@ export class ReminderToBetTask {
       if (bets.length === 0) {
         await Mail.send((message) => {
           message
-            .from('noreply@provaadonisv5labluby.com')
+            .from('contact@teste.com', 'Prova Adonis V5 LabLuby')
+            .replyTo('noreply@teste.com', 'Prova Adonis V5 LabLuby')
             .to(user.email)
-            .subject('Lembrete de aposta - Prova Adonis V5 LabLub')
+            .subject('Lembrete')
             .htmlView('emails/reminder_to_bet', { name: user.name })
         })
       }
