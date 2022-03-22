@@ -2,6 +2,8 @@
 Resolução da prova sobre o Adonis V5 proposto da trilha dev backend da LabLuby.
 Que é a construção de uma API com o Adonis V5 e Docker para armazenar apostas e jogos de sorte.
 
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Prova%20Adonis%20V5%20LabLuby&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fdeibsoncogo%2FProvaAdonisV5LabLuby%2Fmaster%2Fdocs%2Finsomnia.json%3Ftoken%3DGHSAT0AAAAAABSIBN7GZFOQADLAWG2R4AHYYR2AT4Q)
+
 ## Banco de dados
 Para criar o container utilizando o `Docker` basta executar este comando:
 ```bash
