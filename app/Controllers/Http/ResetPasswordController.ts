@@ -23,9 +23,10 @@ export default class ResetPasswordController {
 
     await Mail.send((message) => {
       message
-        .from('noreply@provaadonisv5labluby.com')
+        .from('contact@teste.com', 'Prova Adonis V5 LabLuby')
+        .replyTo('noreply@teste.com', 'Prova Adonis V5 LabLuby')
         .to(user.email)
-        .subject('Prova Adonis V5 LabLub - Resetar senha')
+        .subject('Nova senha')
         .htmlView('emails/reset_password', {
           name: user.name,
           url: `https://provaadonisv5labluby.com/resetPassword/${token.token}`,
