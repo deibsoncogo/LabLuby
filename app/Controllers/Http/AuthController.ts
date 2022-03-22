@@ -3,8 +3,7 @@ import User from 'App/Models/User'
 
 export default class AuthController {
   public async store({ auth, request, response }: HttpContextContract) {
-    const email = request.input('email')
-    const password = request.input('password')
+    const { email, password } = request.all()
 
     try {
       const user = await User.findByOrFail('email', email)

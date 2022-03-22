@@ -10,7 +10,7 @@ export default class ResetPasswordController {
 
     const { email } = request.all()
 
-    const user = await User.findBy('email', email)
+    const user = await User.findByOrFail('email', email)
 
     if (!user) {
       return response.status(401).json({ message: 'Não existe este e-mail registrado' })
@@ -21,17 +21,21 @@ export default class ResetPasswordController {
       name: 'Reset password to user',
     })
 
-    await Mail.send((message) => {
-      message
-        .from('contact@teste.com', 'Prova Adonis V5 LabLuby')
-        .replyTo('noreply@teste.com', 'Prova Adonis V5 LabLuby')
-        .to(user.email)
-        .subject('Nova senha')
-        .htmlView('emails/reset_password', {
-          name: user.name,
-          url: `https://provaadonisv5labluby.com/resetPassword/${token.token}`,
-        })
-    })
+    try {
+      await Mail.send((message) => {
+        message
+          .from('contact@teste.com', 'Prova Adonis V5 LabLuby')
+          .replyTo('noreply@teste.com', 'Prova Adonis V5 LabLuby')
+          .to(user.email)
+          .subject('Nova senha')
+          .htmlView('emails/reset_password', {
+            name: user.name,
+            url: `https://provaadonisv5labluby.com/resetPassword/${token.token}`,
+          })
+      })
+    } catch (error) {
+      return response.status(50201).json({ error: 'Erro inesperado ao enviar o e-mail' })
+    }
 
     return response.status(201).json(token)
   }

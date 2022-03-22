@@ -10,7 +10,7 @@ export class ResetPasswordStoreValidator extends CustomMessageValidator {
   public schema = schema.create({
     email: schema.string({ trim: true }, [
       rules.email(),
-      rules.unique({ table: 'users', column: 'email' }),
+      rules.exists({ table: 'users', column: 'email' }),
     ]),
   })
 }

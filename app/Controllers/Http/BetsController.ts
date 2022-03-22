@@ -17,6 +17,7 @@ export default class BetsController {
     await request.validate(BetStoreValidator)
 
     const { item, userId, gameId } = request.all()
+
     const bet = await Bet.create({ item, userId, gameId })
 
     const user = await User.findOrFail(userId)
