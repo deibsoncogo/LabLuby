@@ -12,6 +12,6 @@ export default class RuleLevelAdmin {
 
     if (isAuthorized) return next()
 
-    return response.status(404).json({ message: 'O usuário não é autorizado' })
+    return response.status(403).json({ message: 'O usuário não é autorizado' })
   }
 }

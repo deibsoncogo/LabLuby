@@ -9,13 +9,15 @@ export default class AuthController {
       const user = await User.findByOrFail('email', email)
 
       const token = await auth.use('api').attempt(email, password, {
-        expiresIn: '30mins',
+        expiresIn: '6hours',
         name: user?.serialize().email,
       })
 
-      return { token, user: user?.serialize() }
+      const rules = await user.related('rules').query()
+
+      return { token, user: user?.serialize(), rules }
     } catch (error) {
-      return response.badRequest('Credenciais inválidas')
+      return response.status(401).json({ error: 'Credencial inválida' })
     }
   }
 }
