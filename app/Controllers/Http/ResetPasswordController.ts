@@ -10,14 +10,16 @@ export default class ResetPasswordController {
 
     const { email } = request.all()
 
-    const user = await User.findByOrFail('email', email)
+    const user = await User.findBy('email', email)
 
     if (!user) {
-      return response.status(401).json({ message: 'Não existe este e-mail registrado' })
+      return response.status(401).json({
+        message: 'Iremos enviar um e-mail para realizar a alteração da senha caso ele seja válido',
+      })
     }
 
     const token = await auth.use('api').generate(user, {
-      expiresIn: '1days',
+      expiresIn: '40mins',
       name: 'Reset password to user',
     })
 
@@ -34,10 +36,12 @@ export default class ResetPasswordController {
           })
       })
     } catch (error) {
-      return response.status(50201).json({ error: 'Erro inesperado ao enviar o e-mail' })
+      return response.status(502).json({ error: 'Falha com o serviço de envio de e-mail' })
     }
 
-    return response.status(201).json(token)
+    return response.status(201).json({
+      message: 'Iremos enviar um e-mail para realizar a alteração da senha caso ele seja válido',
+    })
   }
 
   public async update({ auth, request, response }: HttpContextContract) {
@@ -46,6 +50,8 @@ export default class ResetPasswordController {
     const { password } = request.all()
 
     const user = await User.findOrFail(auth.user?.id)
+
+    await auth.use('api').revoke()
 
     user.password = password
     await user.save()
