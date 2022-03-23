@@ -6,12 +6,23 @@
   "repository": "git@github.com:deibsoncogo/JestLabLuby.git",
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js --ignore tests",
+    "start": "node src/server.js",
+    "pretest": "NODE_ENV=test & sequelize db:migrate",
+    "test": "NODE_ENV=test & jest",
+    "posttest": "NODE_ENV=test & sequelize db:migrate:undo:all"
+  },
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "sequelize": "^6.17.0"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.4.1"
+    "jest": "^27.5.1",
+    "sequelize-cli": "^6.4.1",
+    "sqlite3": "^5.0.2"
   }
 }
