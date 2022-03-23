@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon'
+// eslint-disable-next-line prettier/prettier
 import { BaseModel, beforeCreate, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import { v4 as uuid } from 'uuid'
 import Bet from './Bet'
