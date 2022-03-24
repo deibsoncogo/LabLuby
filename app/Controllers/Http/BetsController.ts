@@ -5,6 +5,8 @@ import { BetStoreValidator } from 'App/Validators/Bet/BetStoreValidator'
 import { BetUpdateValidator } from 'App/Validators/Bet/BetUpdateValidator'
 import Mail from '@ioc:Adonis/Addons/Mail'
 import User from 'App/Models/User'
+import Game from 'App/Models/Game'
+import Cart from 'App/Models/Cart'
 
 export default class BetsController {
   public async index({ response }: HttpContextContract) {
@@ -16,10 +18,30 @@ export default class BetsController {
   public async store({ request, response }: HttpContextContract) {
     await request.validate(BetStoreValidator)
 
-    const { item, userId, gameId } = request.all()
+    const { valueCart, userId, games } = request.all()
 
-    const bet = await Bet.create({ item, userId, gameId })
+    const cart = await Cart.query().orderBy('createdAt', 'desc').first()
 
+    if (!cart || valueCart < cart?.minValue) {
+      return response.status(401).json({ error: 'Valor mínimo do carrinho não atingido' })
+    }
+
+    const betAll = []
+    for (const index in games) {
+      const itemLength = games[index].item.split(',').length
+      const game = await Game.findOrFail(games[index].gameId)
+
+      if (itemLength !== Number(game.maxNumber)) {
+        return response.status(401).json({ error: 'Quantidade de número do jogo inválido' })
+      }
+
+      const bet = await Bet.create({ userId, item: games[index].item, gameId: games[index].gameId })
+
+      betAll.push(bet)
+    }
+
+    const betLength = betAll.length
+    const plural = betLength > 1 ? 's' : ''
     const user = await User.findOrFail(userId)
 
     try {
@@ -29,13 +51,13 @@ export default class BetsController {
           .replyTo('noreply@teste.com', 'Prova Adonis V5 LabLuby')
           .to(user.email)
           .subject('Nova aposta')
-          .htmlView('emails/new_bet', { name: user.name, bet })
+          .htmlView('emails/new_bet', { name: user.name, betLength, plural })
       })
     } catch (error) {
-      return response.status(502).json(bet)
+      return response.status(502).json({ userId, betAll })
     }
 
-    return response.status(201).json(bet)
+    return response.status(201).json({ userId, betAll })
   }
 
   public async show({ params, request, response }: HttpContextContract) {

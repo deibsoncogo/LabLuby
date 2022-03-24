@@ -8,16 +8,22 @@ export class BetStoreValidator extends CustomMessageValidator {
   }
 
   public schema = schema.create({
-    item: schema.string({ trim: true }, [rules.regex(/^[\d,]+$/gm)]),
+    valueCart: schema.number([rules.unsigned(), rules.numberInteger()]),
 
     userId: schema.string({ trim: true }, [
       rules.uuid(),
       rules.exists({ table: 'users', column: 'id' }),
     ]),
 
-    gameId: schema.string({ trim: true }, [
-      rules.uuid(),
-      rules.exists({ table: 'games', column: 'id' }),
-    ]),
+    games: schema.array().members(
+      schema.object().members({
+        item: schema.string({ trim: true }, [rules.regex(/^[\d,]+$/gm)]),
+
+        gameId: schema.string({ trim: true }, [
+          rules.uuid(),
+          rules.exists({ table: 'games', column: 'id' }),
+        ]),
+      })
+    ),
   })
 }
