@@ -15,7 +15,7 @@ export default class AuthController {
 
       const rules = await user.related('rules').query()
 
-      return { token, user: user?.serialize(), rules }
+      return response.status(201).json({ token, user: user?.serialize(), rules })
     } catch (error) {
       return response.status(401).json({ error: 'Credencial inválida' })
     }

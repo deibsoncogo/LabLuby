@@ -54,3 +54,15 @@ test.group('User', () => {
       })
   })
 })
+
+test.group('Authenticate', () => {
+  test('It must be possible to create a valid authentication', async () => {
+    await supertest(baseUrl)
+      .post('/user/login')
+      .send({
+        email: 'devprimeiro@outlook.com',
+        password: '11aaAA',
+      })
+      .expect(201)
+  })
+})
