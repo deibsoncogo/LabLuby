@@ -3,7 +3,7 @@ import supertest from 'supertest'
 
 const baseUrl = `http://${process.env.HOST}:${process.env.PORT}`
 
-let user, token, game
+let user, token, game, cart
 
 test.group('User', () => {
   test('It must be possible to register a new user', async () => {
@@ -112,5 +112,53 @@ test.group('Game', () => {
       .delete(`/game/${game.body.id}`)
       .set({ Authorization: `Bearer ${token.body.token.token}` })
       .expect(204)
+  })
+})
+
+test.group('Cart', () => {
+  test('It must be possible to register a new cart', async () => {
+    cart = await supertest(baseUrl)
+      .post('/cart')
+      .set({ Authorization: `Bearer ${token.body.token.token}` })
+      .send({ minValue: 5 })
+      .expect(201)
+  })
+})
+
+test.group('Bet', (group) => {
+  group.before(async () => {
+    game = await supertest(baseUrl)
+      .post('/game')
+      .set({ Authorization: `Bearer ${token.body.token.token}` })
+      .send({
+        type: 'Tipo Primeiro',
+        description: 'Descrição Primeiro',
+        range: 60,
+        price: 3.5,
+        maxNumber: 6,
+        color: '#ABCDEF',
+      })
+      .expect(201)
+  })
+
+  test('It must be possible to register a new game', async () => {
+    await supertest(baseUrl)
+      .post('/bet')
+      .set({ Authorization: `Bearer ${token.body.token.token}` })
+      .send({
+        valueCart: 7,
+        userId: user.body.id,
+        games: [
+          {
+            item: '1,2,3,4,5,6',
+            gameId: game.body.id,
+          },
+          {
+            item: '1,2,3,4,5,6',
+            gameId: game.body.id,
+          },
+        ],
+      })
+      .expect(201)
   })
 })
