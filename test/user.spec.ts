@@ -1,9 +1,16 @@
+import Rule from 'App/Models/Rule'
 import test from 'japa'
 import supertest from 'supertest'
 
 const baseUrl = `http://${process.env.HOST}:${process.env.PORT}`
 
-test.group('User', () => {
+test.group('User', (group) => {
+  group.before(async () => {
+    const rule = new Rule()
+    rule.level = 'play'
+    await rule.save()
+  })
+
   test('It must be possible to register a new user', async () => {
     await supertest(baseUrl)
       .post('/user')
