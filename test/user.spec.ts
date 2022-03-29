@@ -3,11 +3,9 @@ import supertest from 'supertest'
 
 const baseUrl = `http://${process.env.HOST}:${process.env.PORT}`
 
-let user, token, game, cart
-
 test.group('User', () => {
   test('It must be possible to register a new user', async () => {
-    user = await supertest(baseUrl)
+    await supertest(baseUrl)
       .post('/user')
       .send({
         name: 'Usuário Primeiro',
@@ -15,14 +13,14 @@ test.group('User', () => {
         password: '11aaAA',
       })
       .expect(201)
-  })
+  }).timeout(1000 * 30)
 
   test('It should not be possible to use an invalid name', async () => {
     await supertest(baseUrl)
       .post('/user')
       .send({
-        name: 'Usuário Primeiro 1',
-        email: 'devprimeiro1@outlook.com',
+        name: 'Invalid Name 1',
+        email: 'invalidName@outlook.com',
         password: '11aaAA',
       })
       .expect((log) => {
@@ -30,12 +28,12 @@ test.group('User', () => {
       })
   })
 
-  test('It should not be possible to register an existing email', async () => {
+  test('It should not be possible to use an invalid email', async () => {
     await supertest(baseUrl)
       .post('/user')
       .send({
-        name: 'Usuário Primeiro',
-        email: 'devprimeiro@outlook.com',
+        name: 'Invalid Email',
+        email: 'invalidEmail@outlook',
         password: '11aaAA',
       })
       .expect((log) => {
@@ -47,118 +45,12 @@ test.group('User', () => {
     await supertest(baseUrl)
       .post('/user')
       .send({
-        name: 'Usuário Primeiro',
-        email: 'devprimeiro3@outlook.com',
+        name: 'Weak Password',
+        email: 'weakpassword@outlook.com',
         password: '112233',
       })
       .expect((log) => {
         return log.text.includes('password')
       })
-  })
-})
-
-test.group('Authenticate', () => {
-  test('It must be possible to create a valid authentication', async () => {
-    token = await supertest(baseUrl)
-      .post('/user/login')
-      .send({
-        email: 'devprimeiro@outlook.com',
-        password: '11aaAA',
-      })
-      .expect(201)
-  })
-})
-
-test.group('Game', () => {
-  test('It should be possible to list all games', async () => {
-    await supertest(baseUrl)
-      .get('/game')
-      .set({ Authorization: `Bearer ${token.body.token.token}` })
-      .expect(200)
-  })
-
-  test('It should be possible to create a game', async () => {
-    game = await supertest(baseUrl)
-      .post('/game')
-      .set({ Authorization: `Bearer ${token.body.token.token}` })
-      .send({
-        type: 'Tipo Primeiro',
-        description: 'Descrição Primeiro',
-        range: 60,
-        price: 3.5,
-        maxNumber: 6,
-        color: '#ABCDEF',
-      })
-      .expect(201)
-  })
-
-  test('It should be possible to list a game', async () => {
-    await supertest(baseUrl)
-      .get(`/game/${game.body.id}`)
-      .set({ Authorization: `Bearer ${token.body.token.token}` })
-      .expect(200)
-  })
-
-  test('It should be possible to edit a game', async () => {
-    await supertest(baseUrl)
-      .put(`/game/${game.body.id}`)
-      .set({ Authorization: `Bearer ${token.body.token.token}` })
-      .send({ type: 'Tipo Primeiro Alterado' })
-      .expect(201)
-  })
-
-  test('It should be possible to delete a game', async () => {
-    await supertest(baseUrl)
-      .delete(`/game/${game.body.id}`)
-      .set({ Authorization: `Bearer ${token.body.token.token}` })
-      .expect(204)
-  })
-})
-
-test.group('Cart', () => {
-  test('It must be possible to register a new cart', async () => {
-    cart = await supertest(baseUrl)
-      .post('/cart')
-      .set({ Authorization: `Bearer ${token.body.token.token}` })
-      .send({ minValue: 5 })
-      .expect(201)
-  })
-})
-
-test.group('Bet', (group) => {
-  group.before(async () => {
-    game = await supertest(baseUrl)
-      .post('/game')
-      .set({ Authorization: `Bearer ${token.body.token.token}` })
-      .send({
-        type: 'Tipo Primeiro',
-        description: 'Descrição Primeiro',
-        range: 60,
-        price: 3.5,
-        maxNumber: 6,
-        color: '#ABCDEF',
-      })
-      .expect(201)
-  })
-
-  test('It must be possible to register a new game', async () => {
-    await supertest(baseUrl)
-      .post('/bet')
-      .set({ Authorization: `Bearer ${token.body.token.token}` })
-      .send({
-        valueCart: 7,
-        userId: user.body.id,
-        games: [
-          {
-            item: '1,2,3,4,5,6',
-            gameId: game.body.id,
-          },
-          {
-            item: '1,2,3,4,5,6',
-            gameId: game.body.id,
-          },
-        ],
-      })
-      .expect(201)
   })
 })
