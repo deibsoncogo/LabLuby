@@ -18,7 +18,13 @@ export default class BetsController {
   public async store({ request, response }: HttpContextContract) {
     await request.validate(BetStoreValidator)
 
-    const { valueCart, userId, games } = request.all()
+    const { userId, games } = request.all()
+
+    let valueCart = 0
+    for (const item of games) {
+      const game = await Game.findOrFail(item.gameId)
+      valueCart += Number(game.price)
+    }
 
     const cart = await Cart.query().orderBy('createdAt', 'desc').first()
 

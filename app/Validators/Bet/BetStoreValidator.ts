@@ -8,8 +8,6 @@ export class BetStoreValidator extends CustomMessageValidator {
   }
 
   public schema = schema.create({
-    valueCart: schema.number([rules.unsigned(), rules.numberInteger()]),
-
     userId: schema.string({ trim: true }, [
       rules.uuid(),
       rules.exists({ table: 'users', column: 'id' }),
