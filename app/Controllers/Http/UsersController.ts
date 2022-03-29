@@ -4,6 +4,7 @@ import { UserIdValidator } from 'App/Validators/User/UserIdValidator'
 import { UserUpdateValidator } from 'App/Validators/User/UserUpdateValidator'
 import { UserStoreValidator } from 'App/Validators/User/UserStoreValidator'
 import Mail from '@ioc:Adonis/Addons/Mail'
+import Rule from 'App/Models/Rule'
 
 export default class UsersController {
   public async index({ response }: HttpContextContract) {
@@ -17,6 +18,9 @@ export default class UsersController {
     const { name, email, password } = request.all()
     const user = await User.create({ name, email, password })
 
+    const rule = await Rule.findByOrFail('level', 'play')
+    await user.related('rules').attach([rule.id])
+
     try {
       await Mail.send((message) => {
         message
@@ -27,10 +31,10 @@ export default class UsersController {
           .htmlView('emails/new_user', { name: user.name, password })
       })
     } catch (error) {
-      return response.status(502).json(user)
+      return response.status(502).json({ user, rule })
     }
 
-    return response.status(201).json(user)
+    return response.status(201).json({ user, rule })
   }
 
   public async show({ params, request, response }: HttpContextContract) {
