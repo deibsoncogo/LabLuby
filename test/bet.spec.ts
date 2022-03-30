@@ -21,7 +21,7 @@ test.group('Bet', (group) => {
     user.password = '22bbBB'
     await user.save()
 
-    // await user.related('rules').attach([rule.id])
+    await user.related('rules').attach([rule.id])
 
     const responseToken = await supertest(baseUrl)
       .post('/user/login')
@@ -55,8 +55,6 @@ test.group('Bet', (group) => {
   })
 
   test('It must be possible to register a new game', async () => {
-    console.log('token.token =>', token.token)
-
     await supertest(baseUrl)
       .post('/bet')
       .set({ Authorization: `Bearer ${token.token}` })

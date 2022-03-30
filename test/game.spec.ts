@@ -24,7 +24,7 @@ test.group('Game', (group) => {
     user.password = '22bbBB'
     await user.save()
 
-    await user.related('rules').attach([ruleAdmin.id])
+    await user.related('rules').attach([rulePlay.id, ruleAdmin.id])
 
     const responseToken = await supertest(baseUrl)
       .post('/user/login')

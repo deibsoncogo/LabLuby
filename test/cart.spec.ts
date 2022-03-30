@@ -19,6 +19,8 @@ test.group('Cart', (group) => {
     user.password = '22bbBB'
     await user.save()
 
+    await user.related('rules').attach([rule.id])
+
     const responseToken = await supertest(baseUrl)
       .post('/user/login')
       .send({
