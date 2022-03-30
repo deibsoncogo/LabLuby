@@ -29,7 +29,7 @@ export default class BetsController {
     const cart = await Cart.query().orderBy('createdAt', 'desc').first()
 
     if (!cart || valueCart < cart?.minValue) {
-      return response.status(401).json({ error: 'Valor mínimo do carrinho não atingido' })
+      return response.status(406).json({ error: 'Valor mínimo do carrinho não atingido' })
     }
 
     const betAll = []
@@ -38,12 +38,12 @@ export default class BetsController {
       const game = await Game.findOrFail(games[index].gameId)
 
       if (itemLength !== Number(game.maxNumber)) {
-        return response.status(401).json({ error: 'Quantidade de número do jogo inválido' })
+        return response.status(406).json({ error: 'Quantidade de número do jogo inválido' })
       }
 
       const bet = await Bet.create({ userId, item: games[index].item, gameId: games[index].gameId })
 
-      betAll.push(bet)
+      bet ?? betAll.push(bet)
     }
 
     const betLength = betAll.length

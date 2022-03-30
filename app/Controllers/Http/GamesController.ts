@@ -6,7 +6,7 @@ import { GameUpdateValidator } from 'App/Validators/Game/GameUpdateValidator'
 
 export default class GamesController {
   public async index({ response }: HttpContextContract) {
-    const games = await Game.all()
+    const games = await Game.query().orderBy('createdAt', 'asc')
 
     return response.status(200).json(games)
   }

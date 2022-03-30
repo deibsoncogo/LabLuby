@@ -43,14 +43,14 @@ test.group('Game', (group) => {
     await rulePlay.delete()
   })
 
-  test('It should be possible to list all games', async () => {
+  test('It should be possible to list games', async () => {
     await supertest(baseUrl)
       .get('/game')
       .set({ Authorization: `Bearer ${token.token}` })
       .expect(200)
   })
 
-  test('It should be possible to create a game', async () => {
+  test('It should be possible to create game', async () => {
     const { body } = await supertest(baseUrl)
       .post('/game')
       .set({ Authorization: `Bearer ${token.token}` })
@@ -67,14 +67,14 @@ test.group('Game', (group) => {
     game = body
   })
 
-  test('It should be possible to list a game', async () => {
+  test('It should be possible to show game', async () => {
     await supertest(baseUrl)
       .get(`/game/${game.id}`)
       .set({ Authorization: `Bearer ${token.token}` })
       .expect(200)
   })
 
-  test('It should be possible to edit a game', async () => {
+  test('It should be possible to update game', async () => {
     await supertest(baseUrl)
       .put(`/game/${game.id}`)
       .set({ Authorization: `Bearer ${token.token}` })
@@ -82,7 +82,7 @@ test.group('Game', (group) => {
       .expect(201)
   })
 
-  test('It should be possible to delete a game', async () => {
+  test('It should be possible to delete game', async () => {
     await supertest(baseUrl)
       .delete(`/game/${game.id}`)
       .set({ Authorization: `Bearer ${token.token}` })
