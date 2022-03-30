@@ -26,6 +26,12 @@ Para iniciar o servidor podemos utilizar o atalho `yarn dev` ou o seguinte coman
 yarn node ace serve --watch
 ```
 
+### Teste
+Para executar os teste você pode utilizar este atalho `yarn test` ou comando abaixo, vale notar que ele precisa ser rodado com as `migrations` não criada e no final ele vai desfazer elas.
+```bash
+node -r @adonisjs/assembler/build/register japaFile.ts
+```
+
 ## Ferramentas e dependências utilizado
 As ferramentas utilizadas foram: `Yarn`, `Node JS`, `TypeScript`, `Adonis V5`, `Docker`, `Insomnia` e `Beekeeper Studio`
 
