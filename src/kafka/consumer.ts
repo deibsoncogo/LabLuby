@@ -1,9 +1,4 @@
 import { Kafka, Consumer } from "kafkajs";
-import { socketServer } from "../server";
-
-interface IConsumer {
-  groupId: string,
-}
 
 interface IConsume {
   topic: string,
@@ -13,8 +8,12 @@ interface IConsume {
 export class ConsumerClass {
   private consumer: Consumer;
 
-  constructor({ groupId }: IConsumer) {
-    const kafka = new Kafka({ brokers: ["workshop_kafka_1:29092"] });
+  constructor(groupId: string) {
+    const kafka = new Kafka({
+      clientId: "ConsumerProvaKafkaLabLuby",
+      brokers: ["kafka3:9092", "kafka4:9092"],
+    });
+
     this.consumer = kafka.consumer({ groupId });
   }
 
@@ -24,9 +23,11 @@ export class ConsumerClass {
 
     await this.consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
-        console.log({ value: message.value?.toString() });
-
-        socketServer.emit("newPercentage", message.value?.toString());
+        console.log({
+          topic: topic.toString(),
+          partition: partition.toString(),
+          message: message.value.toString(),
+        });
       },
     });
   }
