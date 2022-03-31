@@ -5,12 +5,8 @@ import express from "express";
 import "express-async-errors";
 import cors from "cors";
 import { Server } from "socket.io";
-import { ConsumerClass } from "./kafka/consumer";
 import { ErrorMiddleware } from "./middleware/errorMiddleware";
 import { indexRouter } from "./routes";
-
-const consumerPercentages = new ConsumerClass({ groupId: "percentagesGroup" });
-consumerPercentages.consume({ topic: "newPercentage", fromBeginning: false });
 
 const app = express();
 
