@@ -17,6 +17,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "no-shadow": "off",
     "class-methods-use-this": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],

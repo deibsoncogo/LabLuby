@@ -1,19 +1,23 @@
-import { Kafka, Producer as KafkaProducer, Message } from "kafkajs";
+import { Kafka, Producer, Message } from "kafkajs";
 
-interface IProducerProps {
+interface IProducer {
   topic: string,
   messages: Message[],
 }
 
-export default class Producer {
-  private producer: KafkaProducer;
+export class ProducerClass {
+  private producer: Producer;
 
   constructor() {
-    const kafka = new Kafka({ brokers: ["kafka:29092"] });
+    const kafka = new Kafka({
+      clientId: "ProducerProvaKafkaLabLuby",
+      brokers: ["kafka1:9092", "kafka2:9092"],
+    });
+
     this.producer = kafka.producer();
   }
 
-  public async produce({ topic, messages }: IProducerProps) {
+  public async execute({ topic, messages }: IProducer) {
     await this.producer.connect();
     await this.producer.send({ topic, messages });
     await this.producer.disconnect();

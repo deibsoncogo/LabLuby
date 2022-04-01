@@ -1,19 +1,21 @@
 import { Request, Response } from "express";
-import Producer from "../kafka/producer";
+import { ProducerClass } from "../kafka/producer";
 
-class PurchaseController {
-  public async purchase(request: Request, response: Response): Promise<Response> {
+export class TransactionController {
+  public async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { id, quantity, purchaseId } = request.body;
 
-      console.log("purchaseId =>", purchaseId);
-
       const data = JSON.stringify({ id, quantity, purchaseId });
 
-      const producer = new Producer();
+      const producerClass = new ProducerClass();
 
-      producer.produce({ topic: "new-purchase", messages: [{ value: data }] });
-      producer.produce({
+      producerClass.execute({
+        topic: "new-purchase",
+        messages: [{ value: data }],
+      });
+
+      producerClass.execute({
         topic: "product-bought",
         messages: [{ value: JSON.stringify({ productId: id, purchaseId }) }],
       });
@@ -24,5 +26,3 @@ class PurchaseController {
     }
   }
 }
-
-export default PurchaseController;

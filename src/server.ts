@@ -1,27 +1,17 @@
 import express from "express";
 import cors from "cors";
-import { Server } from "socket.io";
-import PurchaseController from "./controllers/purchaseController";
-import Consumer from "./kafka/consumer";
-
-const consumerPercentages = new Consumer({ groupId: "percentages-group" });
-consumerPercentages.consume({ topic: "new-percentage", fromBeginning: false });
-
-const purchaseController = new PurchaseController();
+import { ConsumerClass } from "./kafka/consumer";
+import { indexRouter } from "./routes";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(indexRouter);
 
-app.post("/purchase", purchaseController.purchase);
+const consumerClass = new ConsumerClass({ groupId: "percentages-group" });
+consumerClass.execute({ topic: "new-percentage", fromBeginning: false });
 
-const server = app.listen(3001, () => {
-  console.log("Server is running on port 3001");
-});
-
-export const socketServer = new Server(server);
-
-socketServer.on("connection", (socket) => {
-  console.log("Connected to client");
+app.listen(3333, () => {
+  console.log("Server is running on port 3333");
 });

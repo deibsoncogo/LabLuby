@@ -1,34 +1,33 @@
-import { Kafka, Consumer as KafkaConsumer } from "kafkajs";
-import { socketServer } from "../server";
+import { Kafka, Consumer } from "kafkajs";
 
-interface IConsumer {
+interface IConsumerConstructor {
   groupId: string,
 }
 
-interface IConsume {
+interface IConsumer {
   topic: string,
   fromBeginning: boolean,
 }
 
-export default class Consumer {
-  private consumer: KafkaConsumer;
+export class ConsumerClass {
+  private consumer: Consumer;
 
-  constructor({ groupId }: IConsumer) {
-    const kafka = new Kafka({ brokers: ["workshop_kafka_1:29092"] });
+  constructor({ groupId }: IConsumerConstructor) {
+    const kafka = new Kafka({
+      clientId: "ConsumerProvaKafkaLabLuby",
+      brokers: ["kafka3:9092", "kafka4:9092"],
+    });
+
     this.consumer = kafka.consumer({ groupId });
   }
 
-  public async consume({ topic, fromBeginning }: IConsume) {
+  public async execute({ topic, fromBeginning }: IConsumer) {
     await this.consumer.connect();
     await this.consumer.subscribe({ topic, fromBeginning });
 
-    console.log(`Consuming topic ${topic}`);
-
     await this.consumer.run({
-      eachBatch: async ({ topic, partition, message }) => {
-        console.log({ value: message.value?.toString() });
-
-        socketServer.emit("new-percentage", message.value?.toString());
+      eachMessage: async ({ topic, partition, message }) => {
+        console.log({ topic, partition, value: message.value?.toString() });
       },
     });
   }
