@@ -7,11 +7,25 @@ import { resetPassword } from "./emails/resetPassword";
 export function SendEmailUtils(message: Buffer) {
   const messageJson = JSON.parse(message.toString());
 
+  function teste() {
+    if (messageJson.type === "newUser") {
+      return newUser(messageJson);
+    } if (messageJson.type === "resetPassword") {
+      return resetPassword(messageJson);
+    } if (messageJson.type === "newBet") {
+      return newBet(messageJson);
+    } if (messageJson.type === "reminderToBet") {
+      return reminderToBet(messageJson);
+    }
+
+    return null;
+  }
+
   const data = {
     from: "Prova Adonis V5 LabLuby <contact@teste.com>",
     to: `${messageJson.name} <${messageJson.email}>`,
     subject: messageJson.subject,
-    html: newUser(messageJson),
+    html: teste(),
   };
 
   mailgun({
