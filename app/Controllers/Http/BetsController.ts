@@ -63,6 +63,28 @@ export default class BetsController {
       messages: [{ value: JSON.stringify(message) }],
     })
 
+    const users = await User.all()
+
+    for (const userAdmin of users) {
+      const isAdmin = await userAdmin.related('rules').query().where('level', '=', 'admin')
+
+      if (isAdmin) {
+        const messageAdmin = {
+          type: 'newBetAdmin',
+          subject: 'Nova aposta - Admin',
+          email: userAdmin.email,
+          name: user.name,
+          betLength,
+          plural,
+        }
+
+        await request.producer.send({
+          topic: 'MicroServiceEmail',
+          messages: [{ value: JSON.stringify(messageAdmin) }],
+        })
+      }
+    }
+
     return response.status(201).json({ userId, betAll })
   }
 

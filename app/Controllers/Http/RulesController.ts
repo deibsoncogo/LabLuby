@@ -6,7 +6,7 @@ import { RuleUpdateValidator } from 'App/Validators/Rule/RuleUpdateValidator'
 
 export default class RulesController {
   public async index({ response }: HttpContextContract) {
-    const rules = await Rule.all()
+    const rules = await Rule.query().orderBy('createdAt', 'asc')
 
     return response.status(200).json(rules)
   }
