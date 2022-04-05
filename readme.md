@@ -5,9 +5,16 @@ Que é a construção de uma API com o Adonis V5 e Docker para armazenar apostas
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Prova%20Adonis%20V5%20LabLuby&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fdeibsoncogo%2FProvaAdonisV5LabLuby%2Fmaster%2Fdocs%2Finsomnia.json%3Ftoken%3DGHSAT0AAAAAABSIBN7GZFOQADLAWG2R4AHYYR2AT4Q)
 
 ## Banco de dados
-Para criar o container utilizando o `Docker` basta executar este comando:
-```bash
-docker run --name ProvaAdonisV5LabLuby -e POSTGRES_DB=ProvaAdonisV5LabLubyDB -e POSTGRES_USER=ProvaAdonisV5LabLuby -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+Para lidar com o docker-compose temos os seguintes comandos:
+```typescript
+// para criar e executar os container em segundo plano
+docker-compose up -d
+
+// para executar os container
+docker-compose start
+
+// para interromper a execução dos container
+docker-compose stop
 ```
 
 Depois execute este atalho `yarn db:run` para criar as tabelas ou o seguinte comando:

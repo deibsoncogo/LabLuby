@@ -1,12 +1,11 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Bet from 'App/Models/Bet'
-import { BetIdValidator } from 'App/Validators/Bet/BetIdValidator'
-import { BetStoreValidator } from 'App/Validators/Bet/BetStoreValidator'
-import { BetUpdateValidator } from 'App/Validators/Bet/BetUpdateValidator'
-import Mail from '@ioc:Adonis/Addons/Mail'
 import User from 'App/Models/User'
 import Game from 'App/Models/Game'
 import Cart from 'App/Models/Cart'
+import { BetIdValidator } from 'App/Validators/Bet/BetIdValidator'
+import { BetStoreValidator } from 'App/Validators/Bet/BetStoreValidator'
+import { BetUpdateValidator } from 'App/Validators/Bet/BetUpdateValidator'
 
 export default class BetsController {
   public async index({ response }: HttpContextContract) {
@@ -43,25 +42,26 @@ export default class BetsController {
 
       const bet = await Bet.create({ userId, item: games[index].item, gameId: games[index].gameId })
 
-      bet ?? betAll.push(bet)
+      betAll.push(bet)
     }
 
     const betLength = betAll.length
     const plural = betLength > 1 ? 's' : ''
     const user = await User.findOrFail(userId)
 
-    try {
-      await Mail.send((message) => {
-        message
-          .from('contact@teste.com', 'Prova Adonis V5 LabLuby')
-          .replyTo('noreply@teste.com', 'Prova Adonis V5 LabLuby')
-          .to(user.email)
-          .subject('Nova aposta')
-          .htmlView('emails/new_bet', { name: user.name, betLength, plural })
-      })
-    } catch (error) {
-      return response.status(502).json({ userId, betAll })
+    const message = {
+      type: 'newBet',
+      subject: 'Nova aposta',
+      email: user.email,
+      name: user.name,
+      betLength,
+      plural,
     }
+
+    await request.producer.send({
+      topic: 'MicroServiceEmail',
+      messages: [{ value: JSON.stringify(message) }],
+    })
 
     return response.status(201).json({ userId, betAll })
   }

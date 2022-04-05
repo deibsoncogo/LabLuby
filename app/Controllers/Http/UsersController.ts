@@ -1,10 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
+import Rule from 'App/Models/Rule'
 import { UserIdValidator } from 'App/Validators/User/UserIdValidator'
 import { UserUpdateValidator } from 'App/Validators/User/UserUpdateValidator'
 import { UserStoreValidator } from 'App/Validators/User/UserStoreValidator'
-import Mail from '@ioc:Adonis/Addons/Mail'
-import Rule from 'App/Models/Rule'
 
 export default class UsersController {
   public async index({ response }: HttpContextContract) {
@@ -21,18 +20,12 @@ export default class UsersController {
     const rule = await Rule.findByOrFail('level', 'play')
     await user.related('rules').attach([rule.id])
 
-    try {
-      await Mail.send((message) => {
-        message
-          .from('contact@teste.com', 'Prova Adonis V5 LabLuby')
-          .replyTo('noreply@teste.com', 'Prova Adonis V5 LabLuby')
-          .to(user.email)
-          .subject('Novo cadastro')
-          .htmlView('emails/new_user', { name: user.name, password })
-      })
-    } catch (error) {
-      return response.status(502).json({ user, rule })
-    }
+    const message = { type: 'newUser', subject: 'Novo cadastro', email, name, password }
+
+    await request.producer.send({
+      topic: 'MicroServiceEmail',
+      messages: [{ value: JSON.stringify(message) }],
+    })
 
     return response.status(201).json({ user, rule })
   }

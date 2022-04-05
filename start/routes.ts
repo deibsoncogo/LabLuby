@@ -8,7 +8,7 @@ Route.group(() => {
   Route.post('/user', 'UsersController.store')
   Route.post('/user/login', 'AuthController.store')
   Route.post('/resetPassword', 'ResetPasswordController.store')
-})
+}).middleware('microService')
 
 Route.group(() => {
   Route.resource('/user', 'UsersController').apiOnly().except(['store', 'destroy'])
@@ -18,7 +18,7 @@ Route.group(() => {
   Route.resource('/cart', 'CartsController').apiOnly().except(['destroy'])
   Route.resource('/game', 'GamesController').apiOnly().except(['destroy'])
   Route.resource('/bet', 'BetsController').apiOnly().except(['destroy'])
-}).middleware('auth')
+}).middleware(['auth', 'microService'])
 
 Route.group(() => {
   Route.resource('/user', 'UsersController').apiOnly().only(['destroy'])
