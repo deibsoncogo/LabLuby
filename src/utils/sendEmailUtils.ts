@@ -1,5 +1,6 @@
 import mailgun from "mailgun-js";
 import { newBet } from "./emails/newBet";
+import { newBetAdmin } from "./emails/newBetAdmin";
 import { newUser } from "./emails/newUser";
 import { reminderToBet } from "./emails/reminderToBet";
 import { resetPassword } from "./emails/resetPassword";
@@ -7,13 +8,15 @@ import { resetPassword } from "./emails/resetPassword";
 export function SendEmailUtils(message: Buffer) {
   const messageJson = JSON.parse(message.toString());
 
-  function teste() {
+  function checkEmailType() {
     if (messageJson.type === "newUser") {
       return newUser(messageJson);
     } if (messageJson.type === "resetPassword") {
       return resetPassword(messageJson);
     } if (messageJson.type === "newBet") {
       return newBet(messageJson);
+    } if (messageJson.type === "newBetAdmin") {
+      return newBetAdmin(messageJson);
     } if (messageJson.type === "reminderToBet") {
       return reminderToBet(messageJson);
     }
@@ -25,7 +28,7 @@ export function SendEmailUtils(message: Buffer) {
     from: "Prova Adonis V5 LabLuby <contact@teste.com>",
     to: `${messageJson.name} <${messageJson.email}>`,
     subject: messageJson.subject,
-    html: teste(),
+    html: checkEmailType(),
   };
 
   mailgun({
