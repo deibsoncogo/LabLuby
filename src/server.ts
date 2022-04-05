@@ -1,17 +1,39 @@
 import express from "express";
-import cors from "cors";
-import { ConsumerClass } from "./kafka/consumer";
+import { Kafka, logLevel } from "kafkajs";
 import { indexRouter } from "./routes";
+import { SendEmailUtils } from "./utils/sendEmailUtils";
 
 const app = express();
 
-app.use(cors());
 app.use(express.json());
+
+const kafka = new Kafka({
+  clientId: "service",
+  brokers: ["localhost:9092"],
+  logLevel: logLevel.NOTHING,
+  retry: {
+    initialRetryTime: 100,
+    retries: 8,
+  },
+});
+
+const consumer = kafka.consumer({ groupId: "service-group" });
+
+async function run() {
+  await consumer.connect();
+  await consumer.subscribe({ topic: "MicroServiceEmail" });
+  await consumer.run({
+    eachMessage: async ({ topic, partition, message }) => {
+      console.log(`${topic} [${partition} | ${message.offset}]`);
+      SendEmailUtils(message.value);
+    },
+  });
+}
+
+run().catch(console.error);
+
 app.use(indexRouter);
 
-const consumerClass = new ConsumerClass({ groupId: "percentages-group" });
-consumerClass.execute({ topic: "new-percentage", fromBeginning: false });
-
-app.listen(3333, () => {
-  console.log("Server is running on port 3333");
+app.listen(2022, () => {
+  console.log("Server is running on port 2022");
 });
