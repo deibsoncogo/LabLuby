@@ -2,13 +2,13 @@ version: '3'
 
 services:
   zookeeper:
-    container_name: ZookeeperContainerProvaLubyCashLabLuby
+    container_name: ZookeeperProvaLubyCashLabLuby
     image: wurstmeister/zookeeper:latest
     ports:
       - "2181:2181"
 
   kafka:
-    container_name: KafkaContainerProvaLubyCashLabLuby
+    container_name: KafkaProvaLubyCashLabLuby
     image: wurstmeister/kafka:2.11-1.1.0
     ports:
       - "9092:9092"
@@ -20,7 +20,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   database:
-    container_name: DatabaseContainerProvaLubyCashLabLuby
+    container_name: DatabaseProvaLubyCashLabLuby
     image: postgres
     ports:
       - "5432:5432"
