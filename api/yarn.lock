@@ -517,6 +517,20 @@
     "@types/pino-std-serializers" "*"
     sonic-boom "^2.1.0"
 
+"@types/proxy-addr@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/proxy-addr/-/proxy-addr-2.0.0.tgz#ea11d870f7d70455ce408847de23ac7bdfdfcceb"
+  integrity sha512-JEm0kSrO3CjbFSLpYeYhCscS0vpW1mIWedhWuurJnYbMzY1vcm9fzJ6TL6SWq3m/m3g4KUV5JBT69mQSwUHZHg==
+  dependencies:
+    "@types/node" "*"
+
+"@types/source-map-support@^0.5.4":
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/@types/source-map-support/-/source-map-support-0.5.4.tgz#574ff6a8636bc0ebae78a8014136f749b3177d58"
+  integrity sha512-9zGujX1sOPg32XLyfgEB/0G9ZnrjthL/Iv1ZfuAjj8LEilHZEpQSQs1scpRXPhHzGYgWiLz9ldF1cI8JhL+yMw==
+  dependencies:
+    source-map "^0.6.0"
+
 "@types/validator@^13.7.1":
   version "13.7.2"
   resolved "https://registry.yarnpkg.com/@types/validator/-/validator-13.7.2.tgz#a2114225d9be743fb154b06c29b8257aaca42922"
