@@ -1,9 +1,8 @@
 import { Router } from "express";
+import { CreateOneClientController } from "../modules/clients/useCases/createOneClient/createOneClientController";
 
 const clientRouter = Router();
 
-clientRouter.get("/", (request, response) => response.status(200).json(
-  { message: "Hello world do client" },
-));
+clientRouter.post("/createOneClient", new CreateOneClientController().handle);
 
 export { clientRouter };

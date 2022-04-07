@@ -6,8 +6,8 @@ export class ClientEntity {
   @PrimaryColumn()
     id: string;
 
-  @Column()
-    full_name: string;
+  @Column({ name: "full_name" })
+    fullName: string;
 
   @Column()
     email: string;
@@ -18,8 +18,8 @@ export class ClientEntity {
   @Column()
     phone: number;
 
-  @Column()
-    cpf_numeric: number;
+  @Column({ name: "cpf_numeric" })
+    cpfNumeric: number;
 
   @Column()
     address: string;
@@ -30,29 +30,29 @@ export class ClientEntity {
   @Column()
     state: string;
 
-  @Column()
-    zip_code: number;
+  @Column({ name: "zip_code" })
+    zipCode: number;
 
-  @Column()
-    average_salary: number;
+  @Column({ name: "average_salary" })
+    averageSalary: number;
 
-  @Column()
-    current_balance: number;
+  @Column({ name: "current_balance" })
+    currentBalance: number;
 
   @Column()
     status: string;
 
-  @CreateDateColumn()
-    created_at: Date;
+  @CreateDateColumn({ name: "created_at" })
+    createdAt: Date;
 
-  @UpdateDateColumn()
-    updated_at: Date;
+  @UpdateDateColumn({ name: "updated_at" })
+    updatedAt: Date;
 
   constructor() {
     if (!this.id) {
       this.id = uuid();
-      this.created_at = new Date();
-      this.updated_at = new Date();
+      this.createdAt = new Date();
+      this.updatedAt = new Date();
     }
   }
 }
