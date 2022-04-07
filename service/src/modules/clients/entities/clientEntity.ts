@@ -1,61 +1,58 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
-import { v4 as uuid } from 'uuid'
+import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { v4 as uuid } from "uuid";
 
-@Entity('clients')
+@Entity("clients")
 export class ClientEntity {
-  @PrimaryGeneratedColumn('increment')
-    id: number
+  @PrimaryColumn()
+    id: string;
 
   @Column()
-    id_secure: string
+    full_name: string;
 
   @Column()
-    full_name: string
+    email: string;
 
   @Column()
-    email: string
+    password: string;
 
   @Column()
-    password: string
+    phone: number;
 
   @Column()
-    phone: number
+    cpf_numeric: number;
 
   @Column()
-    cpf_numeric: number
+    address: string;
 
   @Column()
-    address: string
+    city: string;
 
   @Column()
-    city: string
+    state: string;
 
   @Column()
-    state: string
+    zip_code: number;
 
   @Column()
-    zip_code: number
+    average_salary: number;
 
   @Column()
-    current_balance: number
+    current_balance: number;
 
   @Column()
-    average_salary: number
-
-  @Column()
-    status: string
+    status: string;
 
   @CreateDateColumn()
-    created_at: Date
+    created_at: Date;
 
   @UpdateDateColumn()
-    updated_at: Date
+    updated_at: Date;
 
   constructor() {
     if (!this.id) {
-      this.id_secure = uuid()
-      this.created_at = new Date()
-      this.updated_at = new Date()
+      this.id = uuid();
+      this.created_at = new Date();
+      this.updated_at = new Date();
     }
   }
 }

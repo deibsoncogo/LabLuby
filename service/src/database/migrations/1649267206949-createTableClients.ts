@@ -1,89 +1,83 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm'
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class createTableClients1649267206949 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'clients',
+        name: "clients",
         columns: [
           {
-            name: 'id',
-            type: 'numeric',
+            name: "id",
+            type: "uuid",
             isPrimary: true,
+          },
+          {
+            name: "full_name",
+            type: "varchar",
+          },
+          {
+            name: "email",
+            type: "varchar",
             isUnique: true,
           },
           {
-            name: 'id_secure',
-            type: 'uuid',
+            name: "password",
+            type: "varchar",
+          },
+          {
+            name: "phone",
+            type: "numeric",
             isUnique: true,
           },
           {
-            name: 'full_name',
-            type: 'varchar',
-          },
-          {
-            name: 'email',
-            type: 'varchar',
+            name: "cpf_numeric",
+            type: "numeric",
             isUnique: true,
           },
           {
-            name: 'password',
-            type: 'varchar',
+            name: "address",
+            type: "varchar",
           },
           {
-            name: 'phone',
-            type: 'numeric',
-            isUnique: true,
+            name: "city",
+            type: "varchar",
           },
           {
-            name: 'cpf_numeric',
-            type: 'numeric',
-            isUnique: true,
+            name: "state",
+            type: "varchar",
           },
           {
-            name: 'address',
-            type: 'varchar',
+            name: "zip_code",
+            type: "numeric",
           },
           {
-            name: 'city',
-            type: 'varchar',
+            name: "average_salary",
+            type: "numeric",
           },
           {
-            name: 'state',
-            type: 'varchar',
+            name: "current_balance",
+            type: "numeric",
           },
           {
-            name: 'zip_code',
-            type: 'numeric',
+            name: "status",
+            type: "varchar",
           },
           {
-            name: 'current_balance',
-            type: 'numeric',
+            name: "created_at",
+            type: "timestamp",
+            default: "now()",
           },
           {
-            name: 'average_salary',
-            type: 'numeric',
-          },
-          {
-            name: 'status',
-            type: 'varchar',
-          },
-          {
-            name: 'created_at',
-            type: 'timestamp',
-            default: 'now()',
-          },
-          {
-            name: 'updated_at',
-            type: 'timestamp',
-            default: 'now()',
+            name: "updated_at",
+            type: "timestamp",
+            default: "now()",
           },
         ],
       }),
-    )
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('clients')
+    await queryRunner.dropTable("clients");
   }
 }
