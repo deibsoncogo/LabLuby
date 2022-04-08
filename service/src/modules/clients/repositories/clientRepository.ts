@@ -79,6 +79,8 @@ export class ClientRepository implements IClientRepository {
 
     await this.clientRepository.save(client);
 
+    delete client.password;
+
     return client;
   }
 }

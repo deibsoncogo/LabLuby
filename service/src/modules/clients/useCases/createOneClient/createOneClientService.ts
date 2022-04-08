@@ -1,3 +1,4 @@
+import { hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/appError";
 import { ICreateOneClientDto } from "../../dtos/iCreateOneClientDto";
@@ -37,10 +38,12 @@ export class CreateOneClientService {
       // criar o envio de e-mail de cadastro reprovado
     }
 
+    const passwordHash = await hash(password, 8);
+
     const client = await this.clientRepository.createOneClient({
       fullName,
       email,
-      password,
+      password: passwordHash,
       phone,
       cpfNumeric,
       address,
