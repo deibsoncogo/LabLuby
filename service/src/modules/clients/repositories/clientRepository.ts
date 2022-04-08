@@ -1,5 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 import { ICreateOneClientDto } from "../dtos/iCreateOneClientDto";
+import { IFindAllFilterClientDto } from "../dtos/iFindAllFilterClientDto";
 import { ClientEntity } from "../entities/clientEntity";
 import { IClientRepository } from "./iClientRepository";
 
@@ -24,6 +25,37 @@ export class ClientRepository implements IClientRepository {
     const client = await this.clientRepository.findOne({ email });
 
     return client;
+  }
+
+  async findAllFilterClient({
+    fullName, email, phone, cpfNumeric, address, city, state, zipCode,
+    averageSalary, currentBalance, status, createdAtFrom, createdAtTo,
+  }: IFindAllFilterClientDto): Promise<ClientEntity[]> {
+    const clientsQuery = this.clientRepository
+      .createQueryBuilder("clients")
+      .addOrderBy("clients.createdAt", "ASC");
+
+    fullName && clientsQuery.andWhere("clients.fullName = :fullName", { fullName });
+    email && clientsQuery.andWhere("clients.email = :email", { email });
+    phone && clientsQuery.andWhere("clients.phone = :phone", { phone });
+    cpfNumeric && clientsQuery.andWhere("clients.cpfNumeric = :cpfNumeric", { cpfNumeric });
+    address && clientsQuery.andWhere("clients.address = :address", { address });
+    city && clientsQuery.andWhere("clients.city = :city", { city });
+    state && clientsQuery.andWhere("clients.state = :state", { state });
+    zipCode && clientsQuery.andWhere("clients.zipCode = :zipCode", { zipCode });
+    status && clientsQuery.andWhere("clients.status = :status", { status });
+    averageSalary && clientsQuery
+      .andWhere("clients.averageSalary = :averageSalary", { averageSalary });
+    currentBalance && clientsQuery
+      .andWhere("clients.currentBalance = :currentBalance", { currentBalance });
+    createdAtFrom && clientsQuery
+      .andWhere("clients.createdAt >= :createdAtFrom", { createdAtFrom });
+    createdAtTo && clientsQuery
+      .andWhere("clients.createdAt <= :createdAtTo", { createdAtTo });
+
+    const clientsGetMany = await clientsQuery.getMany();
+
+    return clientsGetMany;
   }
 
   async createOneClient({

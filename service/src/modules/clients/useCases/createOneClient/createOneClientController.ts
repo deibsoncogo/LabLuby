@@ -18,13 +18,13 @@ export class CreateOneClientController {
       const schema = yup.object().shape({
         fullName: yup.string().required().matches(/[\s]/g, "Deve conter um espaço no nome"),
         email: yup.string().required().email(),
+        phone: yup.number().required().integer().positive(),
         cpfNumeric: yup.number().required().integer().positive(),
         address: yup.string().required().min(5).max(100),
         city: yup.string().required().min(5).max(100),
         state: yup.string().required().min(5).max(100),
         zipCode: yup.number().required().integer().positive(),
         averageSalary: yup.number().required().integer().positive(),
-        phone: yup.number().required().integer().positive(),
         password: yup.string().required().min(6).max(100)
           .matches(/[0-9]{2,}/gm, "A senha deve possuir pelo menos dois números")
           .matches(/[a-z]{2,}/gm, "A senha deve possuir pelo menos duas letras minusculas")

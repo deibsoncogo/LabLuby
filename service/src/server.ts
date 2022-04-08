@@ -8,6 +8,8 @@ import { indexRouter } from "./routes";
 
 const app = express();
 
+process.env.TZ = "America/Sao_Paulo";
+
 app.use(express.json());
 app.use(indexRouter);
 app.use(ErrorMiddleware);
