@@ -15,7 +15,7 @@ export class CreateOneClientController {
     try {
       YupSetLocale();
 
-      const schema = yup.object().shape({
+      yup.object().shape({
         fullName: yup.string().required().matches(/[\s]/g, "Deve conter um espaço no nome"),
         email: yup.string().required().email(),
         phone: yup.number().required().integer().positive(),
@@ -29,11 +29,9 @@ export class CreateOneClientController {
           .matches(/[0-9]{2,}/gm, "A senha deve possuir pelo menos dois números")
           .matches(/[a-z]{2,}/gm, "A senha deve possuir pelo menos duas letras minusculas")
           .matches(/[A-Z]{2,}/gm, "A senha deve possuir pelo menos duas letras maiúsculas"),
-      });
-
-      await schema.validate(request.body, { abortEarly: true });
+      }).validate(request.body, { abortEarly: true });
     } catch (error) {
-      throw new AppError({ item: error.path, description: error.errors[0] });
+      throw new AppError({ item: error.path, description: error.errors[0] }, 422);
     }
 
     const createOneClientService = container.resolve(CreateOneClientService);
