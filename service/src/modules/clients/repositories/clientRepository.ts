@@ -10,6 +10,10 @@ export class ClientRepository implements IClientRepository {
 
   constructor() { this.clientRepository = getRepository(ClientEntity); }
 
+  async deleteOneIdClient(id: string): Promise<void> {
+    await this.clientRepository.delete({ id });
+  }
+
   async findOneIdClient(id: string): Promise<ClientEntity> {
     const client = await this.clientRepository.findOne({ id });
 
