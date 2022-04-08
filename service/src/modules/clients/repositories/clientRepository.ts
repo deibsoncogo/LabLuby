@@ -1,6 +1,7 @@
 import { getRepository, Repository } from "typeorm";
 import { ICreateOneClientDto } from "../dtos/iCreateOneClientDto";
 import { IFindAllFilterClientDto } from "../dtos/iFindAllFilterClientDto";
+import { IUpdateOneClientDto } from "../dtos/iUpdateOneClientDto";
 import { ClientEntity } from "../entities/clientEntity";
 import { IClientRepository } from "./iClientRepository";
 
@@ -8,6 +9,12 @@ export class ClientRepository implements IClientRepository {
   private clientRepository: Repository<ClientEntity>;
 
   constructor() { this.clientRepository = getRepository(ClientEntity); }
+
+  async findOneIdClient(id: string): Promise<ClientEntity> {
+    const client = await this.clientRepository.findOne({ id });
+
+    return client;
+  }
 
   async findOneCpfNumericClient(cpfNumeric: number): Promise<ClientEntity> {
     const client = await this.clientRepository.findOne({ cpfNumeric });
@@ -23,6 +30,29 @@ export class ClientRepository implements IClientRepository {
 
   async findOneEmailClient(email: string): Promise<ClientEntity> {
     const client = await this.clientRepository.findOne({ email });
+
+    return client;
+  }
+
+  async updateOneClient({
+    id, fullName, email, passwordNew, phone,
+    cpfNumeric, address, city, state, zipCode, averageSalary,
+  }: IUpdateOneClientDto): Promise<ClientEntity> {
+    const client = await this.clientRepository.findOne({ id });
+
+    client.fullName = fullName || client.fullName;
+    client.email = email || client.email;
+    client.password = passwordNew || client.password;
+    client.phone = phone || client.phone;
+    client.cpfNumeric = cpfNumeric || client.cpfNumeric;
+    client.address = address || client.address;
+    client.city = city || client.city;
+    client.state = state || client.state;
+    client.zipCode = zipCode || client.zipCode;
+    client.averageSalary = averageSalary || client.averageSalary;
+    client.updatedAt = new Date();
+
+    await this.clientRepository.save(client);
 
     return client;
   }

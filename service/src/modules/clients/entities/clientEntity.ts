@@ -12,7 +12,8 @@ export class ClientEntity {
   @Column()
     email: string;
 
-  @Column({ select: false })
+  // @Column({ select: false })
+  @Column()
     password: string;
 
   @Column()
