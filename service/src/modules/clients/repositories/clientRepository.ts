@@ -10,6 +10,27 @@ export class ClientRepository implements IClientRepository {
 
   constructor() { this.clientRepository = getRepository(ClientEntity); }
 
+  async validateStatusAllClient(): Promise<ClientEntity[]> {
+    const clients = await this.clientRepository.find({ status: "desaproved" });
+
+    const clientsReevaluated = [];
+
+    for (const client of clients) {
+      if (client.averageSalary >= 250) {
+        client.currentBalance = 200;
+        client.status = "approved";
+
+        await this.clientRepository.save(client);
+
+        clientsReevaluated.push(client);
+
+        // criar o envio de e-mail de cadastro reavaliado e aprovado
+      }
+    }
+
+    return clientsReevaluated;
+  }
+
   async deleteOneIdClient(id: string): Promise<void> {
     await this.clientRepository.delete({ id });
   }

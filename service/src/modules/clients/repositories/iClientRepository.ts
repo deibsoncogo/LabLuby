@@ -4,6 +4,7 @@ import { IUpdateOneClientDto } from "../dtos/iUpdateOneClientDto";
 import { ClientEntity } from "../entities/clientEntity";
 
 export interface IClientRepository {
+  validateStatusAllClient(): Promise<ClientEntity[]>;
   deleteOneIdClient(id: string): Promise<void>;
   findOneIdClient(id: string): Promise<ClientEntity>;
   findOneCpfNumericClient(cpfNumeric: number): Promise<ClientEntity>;
