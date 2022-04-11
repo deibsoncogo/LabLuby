@@ -23,8 +23,6 @@ export class ClientRepository implements IClientRepository {
         await this.clientRepository.save(client);
 
         clientsReevaluated.push(client);
-
-        // criar o envio de e-mail de cadastro reavaliado e aprovado
       }
     }
 
