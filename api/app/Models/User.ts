@@ -1,8 +1,8 @@
-import { DateTime } from 'luxon'
-// eslint-disable-next-line max-len
-import { BaseModel, beforeCreate, beforeFetch, beforeFind, beforeSave, column, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
-import { v4 } from 'uuid'
 import Hash from '@ioc:Adonis/Core/Hash'
+import { BaseModel, beforeCreate, beforeFetch, beforeFind, beforeSave, column, ManyToMany, manyToMany, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
+import { DateTime } from 'luxon'
+import { v4 } from 'uuid'
+import Rule from './Rule'
 
 type UserQuery = ModelQueryBuilderContract<typeof User>
 
@@ -23,6 +23,16 @@ export default class User extends BaseModel {
 
   @column()
   public clientId: string
+
+  @manyToMany(() => Rule, {
+    localKey: 'id',
+    pivotForeignKey: 'user_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'rule_id',
+    pivotTable: 'users_rules',
+    pivotTimestamps: true,
+  })
+  public rules: ManyToMany<typeof Rule>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -24,8 +24,9 @@ export default class UsersController {
     await request.validate(IdUserValidator)
 
     const user = await User.findOrFail(params.id)
+    const rules = await user.related('rules').query()
 
-    return response.status(200).json(user)
+    return response.status(200).json({ user, rules })
   }
 
   public async update ({ params, request, response }: HttpContextContract) {

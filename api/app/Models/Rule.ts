@@ -1,6 +1,7 @@
-import { BaseModel, beforeCreate, beforeFetch, beforeFind, column, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeCreate, beforeFetch, beforeFind, column, ManyToMany, manyToMany, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { v4 as uuid } from 'uuid'
+import User from './User'
 
 type PostQuery = ModelQueryBuilderContract<typeof Rule>
 
@@ -12,6 +13,16 @@ export default class Rule extends BaseModel {
 
   @column()
   public name: string
+
+  @manyToMany(() => User, {
+    localKey: 'id',
+    pivotForeignKey: 'rule_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'user_id',
+    pivotTable: 'users_rules',
+    pivotTimestamps: true,
+  })
+  public users: ManyToMany<typeof User>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

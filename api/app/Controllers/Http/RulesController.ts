@@ -23,8 +23,9 @@ export default class RulesController {
     await request.validate(IdRuleValidator)
 
     const rule = await Rule.findOrFail(params.id)
+    const users = await rule.related('users').query()
 
-    return response.status(200).json(rule)
+    return response.status(200).json({ rule, users })
   }
 
   public async update ({ params, request, response }: HttpContextContract) {
