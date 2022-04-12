@@ -1,11 +1,11 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
-import {StoreUserValidator, UpdateUserValidator, IdUserValidator} from 'App/Validators/User'
+import {StoreUserValidator, UpdateUserValidator, IdUserValidator} from 'App/Validators/UserValidator'
 import Hash from '@ioc:Adonis/Core/Hash'
 
 export default class UsersController {
   public async index ({ response }: HttpContextContract) {
-    const users = await User.all()
+    const users = await User.query()
 
     return response.status(200).json(users)
   }
