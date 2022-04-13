@@ -5,9 +5,19 @@ Route.get('/', async () => {
 })
 
 Route.group(() => {
-  Route.resource('/user', 'UsersController').apiOnly()
-  Route.resource('/rule', 'RulesController').apiOnly()
-  Route.resource('/userRule', 'UsersRulesController').only(['store', 'destroy'])
+  Route.post('/user', 'UsersController.store')
   Route.post('/section', 'AuthsController.store')
-  Route.delete('/section', 'AuthsController.destroy').middleware(['auth'])
 })
+
+Route.group(() => {
+  Route.group(() => {
+    Route.resource('/user', 'UsersController').only(['show', 'update', 'destroy'])
+    Route.delete('/section', 'AuthsController.destroy')
+  }).middleware(['authUser'])
+
+  Route.group(() => {
+    Route.get('/user', 'UsersController.index')
+    Route.resource('/rule', 'RulesController').apiOnly()
+    Route.resource('/userRule', 'UsersRulesController').only(['store', 'destroy'])
+  }).middleware(['authAdmin'])
+}).middleware(['auth'])
