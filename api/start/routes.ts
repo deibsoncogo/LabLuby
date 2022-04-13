@@ -8,4 +8,6 @@ Route.group(() => {
   Route.resource('/user', 'UsersController').apiOnly()
   Route.resource('/rule', 'RulesController').apiOnly()
   Route.resource('/userRule', 'UsersRulesController').only(['store', 'destroy'])
+  Route.post('/section', 'AuthsController.store')
+  Route.delete('/section', 'AuthsController.destroy').middleware(['auth'])
 })
