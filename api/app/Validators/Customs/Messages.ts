@@ -1,4 +1,4 @@
-export class CustomMessageValidator {
+export class MessagesValidator {
   public messages = {
     // formato dos dados
     'string': 'O formado do campo deve ser um texto',

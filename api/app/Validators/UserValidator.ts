@@ -1,8 +1,8 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { CustomMessageValidator } from './CustomMessageValidator'
+import { MessagesValidator } from './Customs/Messages'
 
-export class StoreUserValidator extends CustomMessageValidator{
+export class StoreUserValidator extends MessagesValidator {
   constructor (protected ctx: HttpContextContract) {
     super()
   }
@@ -27,7 +27,7 @@ export class StoreUserValidator extends CustomMessageValidator{
   })
 }
 
-export class UpdateUserValidator extends CustomMessageValidator{
+export class UpdateUserValidator extends MessagesValidator {
   constructor (protected ctx: HttpContextContract) {
     super()
   }
@@ -65,7 +65,7 @@ export class UpdateUserValidator extends CustomMessageValidator{
   })
 }
 
-export class IdUserValidator extends CustomMessageValidator{
+export class IdUserValidator extends MessagesValidator {
   constructor (protected ctx: HttpContextContract) {
     super()
   }

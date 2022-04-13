@@ -1,11 +1,12 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { CustomMessageValidator } from './CustomMessageValidator'
+import { MessagesValidator } from './Customs/Messages'
 
-export class StoreRuleValidator extends CustomMessageValidator{
+export class StoreRuleValidator extends MessagesValidator {
   constructor (protected ctx: HttpContextContract) {
     super()
   }
+  // messages
 
   public schema = schema.create({
     name: schema.string({ trim: true }, [
@@ -17,7 +18,7 @@ export class StoreRuleValidator extends CustomMessageValidator{
   })
 }
 
-export class UpdateRuleValidator extends CustomMessageValidator{
+export class UpdateRuleValidator extends MessagesValidator{
   constructor (protected ctx: HttpContextContract) {
     super()
   }
@@ -39,7 +40,7 @@ export class UpdateRuleValidator extends CustomMessageValidator{
   })
 }
 
-export class IdRuleValidator extends CustomMessageValidator{
+export class IdRuleValidator extends MessagesValidator{
   constructor (protected ctx: HttpContextContract) {
     super()
   }
