@@ -15,8 +15,8 @@ export default class UsersRules extends BaseSchema {
 
       table.unique(['user_id', 'rule_id'])
 
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
+      table.timestamp('created_at', { useTz: true }).defaultTo('now()')
+      table.timestamp('updated_at', { useTz: true }).defaultTo('now()')
     })
   }
 

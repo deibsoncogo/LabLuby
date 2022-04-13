@@ -1,10 +1,8 @@
 import Hash from '@ioc:Adonis/Core/Hash'
-import { BaseModel, beforeCreate, beforeFetch, beforeFind, beforeSave, column, ManyToMany, manyToMany, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeCreate, beforeSave, column, ManyToMany, manyToMany, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { v4 } from 'uuid'
 import Rule from './Rule'
-
-type UserQuery = ModelQueryBuilderContract<typeof User>
 
 export default class User extends BaseModel {
   public static table = 'users'
@@ -50,13 +48,5 @@ export default class User extends BaseModel {
     if (user.$dirty.password) {
       user.password = await Hash.make(user.password)
     }
-  }
-
-  @beforeFetch() @beforeFind()
-  public static beforeFetchFind (query: UserQuery) {
-    query
-      .andWhere('fullName', '!=', 'admin')
-      .andWhere('fullName', '!=', 'super')
-      .orderBy('createdAt', 'asc')
   }
 }

@@ -13,8 +13,8 @@ export default class ApiTokens extends BaseSchema {
       table.string('name').notNullable()
       table.string('type').notNullable()
       table.string('token', 64).notNullable().unique()
-      table.timestamp('expires_at', { useTz: true }).nullable()
-      table.timestamp('created_at', { useTz: true }).notNullable()
+      table.timestamp('expires_at', { useTz: true }).nullable().defaultTo('now()')
+      table.timestamp('created_at', { useTz: true }).notNullable().defaultTo('now()')
     })
   }
 

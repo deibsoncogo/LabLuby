@@ -7,6 +7,8 @@ import Rule from 'App/Models/Rule'
 export default class UsersController {
   public async index ({ response }: HttpContextContract) {
     const users = await User.query()
+      .andWhere('fullName', '!=', 'admin')
+      .orderBy('createdAt', 'asc')
 
     return response.status(200).json(users)
   }
