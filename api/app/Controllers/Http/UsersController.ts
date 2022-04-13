@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 import {StoreUserValidator, UpdateUserValidator, IdUserValidator} from 'App/Validators/UserValidator'
 import Hash from '@ioc:Adonis/Core/Hash'
+import Rule from 'App/Models/Rule'
 
 export default class UsersController {
   public async index ({ response }: HttpContextContract) {
@@ -17,7 +18,10 @@ export default class UsersController {
 
     const user = await User.create(data)
 
-    return response.status(201).json(user)
+    const rule = await Rule.findByOrFail('name', 'user')
+    await user.related('rules').attach([rule.id])
+
+    return response.status(201).json({ user, rule })
   }
 
   public async show ({ params, request, response }: HttpContextContract) {
