@@ -7,12 +7,14 @@ Route.get('/', async () => {
 Route.group(() => {
   Route.post('/user', 'UsersController.store')
   Route.post('/section', 'AuthsController.store')
+  Route.post('/resetPassword', 'ResetPasswordController.store')
 })
 
 Route.group(() => {
   Route.group(() => {
     Route.resource('/user', 'UsersController').only(['show', 'update', 'destroy'])
     Route.delete('/section', 'AuthsController.destroy')
+    Route.patch('/resetPassword', 'ResetPasswordController.update')
   }).middleware(['authUser'])
 
   Route.group(() => {
