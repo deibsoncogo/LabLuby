@@ -18,10 +18,8 @@ export class StoreRuleValidator extends MessagesValidator {
   })
 }
 
-export class UpdateRuleValidator extends MessagesValidator{
-  constructor (protected ctx: HttpContextContract) {
-    super()
-  }
+export class UpdateRuleValidator {
+  constructor (protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
     params: schema.object().members({
@@ -38,9 +36,19 @@ export class UpdateRuleValidator extends MessagesValidator{
       rules.unique({ table: 'rules', column: 'name' }),
     ]),
   })
+
+  public messages = {
+    'string': 'O formado do campo deve ser um texto',
+    'number': 'O formado do campo deve ser um número',
+    'exists': 'Não foi encontrado nenhum registro',
+    'required': 'Este campo é obrigatório',
+    'unique': 'Já existe este valor registrado no sistema',
+    'uuid': 'O formato do ID não é válido',
+    'name.regex': 'É permitido somente letras minusculas sem acento',
+  }
 }
 
-export class IdRuleValidator extends MessagesValidator{
+export class IdRuleValidator extends MessagesValidator {
   constructor (protected ctx: HttpContextContract) {
     super()
   }
