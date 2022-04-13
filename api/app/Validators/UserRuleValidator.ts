@@ -11,6 +11,7 @@ export class StoreUserRuleValidator extends CustomMessageValidator {
     userId: schema.string({ trim: true }, [
       rules.uuid(),
       rules.exists({ table: 'users', column: 'id' }),
+      rules.uniqueForeignKeyUser('rules', 'ruleId'),
     ]),
 
     ruleId: schema.string({ trim: true }, [

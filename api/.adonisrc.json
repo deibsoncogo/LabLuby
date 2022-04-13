@@ -15,7 +15,8 @@
   },
   "preloads": [
     "./start/routes",
-    "./start/kernel"
+    "./start/kernel",
+    { "file": "./app/Validators/Customs/UniqueForeignKeyUserValidator.ts", "environment": ["web"] }
   ],
   "providers": [
     "./providers/AppProvider",
