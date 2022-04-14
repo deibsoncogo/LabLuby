@@ -18,8 +18,8 @@ export default class AuthMiddleware {
     }
 
     throw new AuthenticationException(
-      'Unauthorized access',
-      'E_UNAUTHORIZED_ACCESS',
+      'Acesso não autorizado',
+      '401',
       guardLastAttempted,
       this.redirectTo,
     )
