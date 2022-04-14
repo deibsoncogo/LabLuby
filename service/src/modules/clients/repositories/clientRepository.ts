@@ -35,7 +35,6 @@ export class ClientRepository implements IClientRepository {
 
   async findOneIdClient(id: string): Promise<ClientEntity> {
     const client = await this.clientRepository.findOne({ id });
-
     return client;
   }
 

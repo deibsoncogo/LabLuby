@@ -12,7 +12,7 @@ export class CreateOneClientController {
     try {
       YupSetLocale();
 
-      yup.object().shape({
+      await yup.object().shape({
         userId: yup.string().required().uuid(),
         cpf: yup.number().required().integer().positive(),
         phone: yup.number().required().integer().positive(),
