@@ -6,21 +6,14 @@ export class ClientEntity {
   @PrimaryColumn()
     id: string;
 
-  @Column({ name: "full_name" })
-    fullName: string;
+  @Column({ name: "user_id" })
+    userId: string;
 
   @Column()
-    email: string;
-
-  // @Column({ select: false })
-  @Column()
-    password: string;
+    cpf: number;
 
   @Column()
     phone: number;
-
-  @Column({ name: "cpf_numeric" })
-    cpfNumeric: number;
 
   @Column()
     address: string;
