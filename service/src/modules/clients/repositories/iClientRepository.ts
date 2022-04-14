@@ -10,15 +10,14 @@ export interface IClientRepository {
   findOneCpfClient(cpfNumeric: number): Promise<ClientEntity>;
   findOneUserIdClient(userId: string): Promise<ClientEntity>;
 
-  updateOneClient({
-    id, fullName, email, passwordOld, passwordNew, phone,
-    cpfNumeric, address, city, state, zipCode, averageSalary,
-  }: IUpdateOneClientDto): Promise<ClientEntity>;
-
   findAllFilterClient({
     fullName, email, phone, cpfNumeric, address, city, state, zipCode,
     averageSalary, currentBalance, status, createdAtFrom, createdAtTo,
   }: IFindAllFilterClientDto): Promise<ClientEntity[]>;
+
+  updateOneClient(
+    { id, cpf, phone, address, city, state, zipCode, averageSalary }: IUpdateOneClientDto
+  ): Promise<ClientEntity>;
 
   createOneClient({
     userId, cpf, phone, address, city, state,

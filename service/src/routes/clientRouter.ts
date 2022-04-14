@@ -10,8 +10,8 @@ const clientRouter = Router();
 
 clientRouter.patch("/validateStatusAllClient", new ValidateStatusAllClientController().handle);
 clientRouter.delete("/deleteOneIdClient/:id", new DeleteOneIdClientController().handle);
-clientRouter.put("/updateOneClient/:id", new UpdateOneClientController().handle);
 clientRouter.get("/findAllFilterClient", new FindAllFilterClientController().handle);
+clientRouter.put("/:id", new UpdateOneClientController().handle);
 clientRouter.get("/:id", new FindOneIdClientController().handle);
 clientRouter.post("/", new CreateOneClientController().handle);
 

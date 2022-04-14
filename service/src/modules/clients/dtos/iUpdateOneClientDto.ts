@@ -1,11 +1,7 @@
 export interface IUpdateOneClientDto {
   id: string,
-  fullName: string,
-  email: string,
-  passwordOld: string,
-  passwordNew: string,
+  cpf: number,
   phone: number,
-  cpfNumeric: number,
   address: string,
   city: string,
   state: string,

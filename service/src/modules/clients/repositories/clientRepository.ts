@@ -48,29 +48,6 @@ export class ClientRepository implements IClientRepository {
     return client;
   }
 
-  async updateOneClient({
-    id, fullName, email, passwordNew, phone,
-    cpfNumeric, address, city, state, zipCode, averageSalary,
-  }: IUpdateOneClientDto): Promise<ClientEntity> {
-    const client = await this.clientRepository.findOne({ id });
-
-    client.fullName = fullName || client.fullName;
-    client.email = email || client.email;
-    client.password = passwordNew || client.password;
-    client.phone = phone || client.phone;
-    client.cpfNumeric = cpfNumeric || client.cpfNumeric;
-    client.address = address || client.address;
-    client.city = city || client.city;
-    client.state = state || client.state;
-    client.zipCode = zipCode || client.zipCode;
-    client.averageSalary = averageSalary || client.averageSalary;
-    client.updatedAt = new Date();
-
-    await this.clientRepository.save(client);
-
-    return client;
-  }
-
   async findAllFilterClient({
     fullName, email, phone, cpfNumeric, address, city, state, zipCode,
     averageSalary, currentBalance, status, createdAtFrom, createdAtTo,
@@ -100,6 +77,25 @@ export class ClientRepository implements IClientRepository {
     const clientsGetMany = await clientsQuery.getMany();
 
     return clientsGetMany;
+  }
+
+  async updateOneClient(
+    { id, cpf, phone, address, city, state, zipCode, averageSalary }: IUpdateOneClientDto,
+  ): Promise<ClientEntity> {
+    const client = await this.clientRepository.findOne({ id });
+
+    client.cpf = cpf || client.cpf;
+    client.phone = phone || client.phone;
+    client.address = address || client.address;
+    client.city = city || client.city;
+    client.state = state || client.state;
+    client.zipCode = zipCode || client.zipCode;
+    client.averageSalary = averageSalary || client.averageSalary;
+    client.updatedAt = new Date();
+
+    await this.clientRepository.save(client);
+
+    return client;
   }
 
   async createOneClient({
