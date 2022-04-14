@@ -1,9 +1,7 @@
 export interface ICreateOneClientDto {
-  fullName: string;
-  email: string;
-  password: string;
+  userId: string;
+  cpf: number;
   phone: number;
-  cpfNumeric: number;
   address: string;
   city: string;
   state: string;

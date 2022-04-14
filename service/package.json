@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "db": "yarn typeorm migration:revert & yarn typeorm migration:run & yarn dev",
     "dev": "ts-node-dev --inspect --transpile-only --respawn --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
   },

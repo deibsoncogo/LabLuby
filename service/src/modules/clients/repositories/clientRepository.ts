@@ -39,21 +39,13 @@ export class ClientRepository implements IClientRepository {
     return client;
   }
 
-  async findOneCpfNumericClient(cpfNumeric: number): Promise<ClientEntity> {
-    const client = await this.clientRepository.findOne({ cpfNumeric });
-
+  async findOneCpfClient(cpf: number): Promise<ClientEntity> {
+    const client = await this.clientRepository.findOne({ cpf });
     return client;
   }
 
-  async findOnePhoneClient(phone: number): Promise<ClientEntity> {
-    const client = await this.clientRepository.findOne({ phone });
-
-    return client;
-  }
-
-  async findOneEmailClient(email: string): Promise<ClientEntity> {
-    const client = await this.clientRepository.findOne({ email });
-
+  async findOneUserIdClient(userId: string): Promise<ClientEntity> {
+    const client = await this.clientRepository.findOne({ userId });
     return client;
   }
 
@@ -112,27 +104,14 @@ export class ClientRepository implements IClientRepository {
   }
 
   async createOneClient({
-    fullName, email, password, phone, cpfNumeric,
-    address, city, state, zipCode, averageSalary, currentBalance, status,
+    userId, cpf, phone, address, city, state,
+    zipCode, averageSalary, currentBalance, status,
   }: ICreateOneClientDto): Promise<ClientEntity> {
-    const client = this.clientRepository.create({
-      fullName,
-      email,
-      password,
-      phone,
-      cpfNumeric,
-      address,
-      city,
-      state,
-      zipCode,
-      averageSalary,
-      currentBalance,
-      status,
-    });
+    const client = this.clientRepository.create(
+      { userId, cpf, phone, address, city, state, zipCode, averageSalary, currentBalance, status },
+    );
 
     await this.clientRepository.save(client);
-
-    delete client.password;
 
     return client;
   }

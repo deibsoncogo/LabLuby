@@ -11,6 +11,6 @@ clientRouter.patch("/validateStatusAllClient", new ValidateStatusAllClientContro
 clientRouter.delete("/deleteOneIdClient/:id", new DeleteOneIdClientController().handle);
 clientRouter.put("/updateOneClient/:id", new UpdateOneClientController().handle);
 clientRouter.get("/findAllFilterClient", new FindAllFilterClientController().handle);
-clientRouter.post("/createOneClient", new CreateOneClientController().handle);
+clientRouter.post("/", new CreateOneClientController().handle);
 
 export { clientRouter };

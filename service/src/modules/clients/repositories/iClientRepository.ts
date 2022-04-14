@@ -7,9 +7,8 @@ export interface IClientRepository {
   validateStatusAllClient(): Promise<ClientEntity[]>;
   deleteOneIdClient(id: string): Promise<void>;
   findOneIdClient(id: string): Promise<ClientEntity>;
-  findOneCpfNumericClient(cpfNumeric: number): Promise<ClientEntity>;
-  findOnePhoneClient(phone: number): Promise<ClientEntity>;
-  findOneEmailClient(email: string): Promise<ClientEntity>;
+  findOneCpfClient(cpfNumeric: number): Promise<ClientEntity>;
+  findOneUserIdClient(userId: string): Promise<ClientEntity>;
 
   updateOneClient({
     id, fullName, email, passwordOld, passwordNew, phone,
@@ -22,7 +21,7 @@ export interface IClientRepository {
   }: IFindAllFilterClientDto): Promise<ClientEntity[]>;
 
   createOneClient({
-    fullName, email, password, phone, cpfNumeric,
-    address, city, state, zipCode, averageSalary, currentBalance, status,
+    userId, cpf, phone, address, city, state,
+    zipCode, averageSalary, currentBalance, status,
   }: ICreateOneClientDto): Promise<ClientEntity>;
 }
