@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 import { ICreateOneClientDto } from "../dtos/iCreateOneClientDto";
-import { IFindAllFilterClientDto } from "../dtos/iFindAllFilterClientDto";
+import { IFindFilterAllClientDto } from "../dtos/iFindFilterAllClientDto";
 import { IUpdateOneClientDto } from "../dtos/iUpdateOneClientDto";
 import { ClientEntity } from "../entities/clientEntity";
 import { IClientRepository } from "./iClientRepository";
@@ -48,35 +48,28 @@ export class ClientRepository implements IClientRepository {
     return client;
   }
 
-  async findAllFilterClient({
-    fullName, email, phone, cpfNumeric, address, city, state, zipCode,
-    averageSalary, currentBalance, status, createdAtFrom, createdAtTo,
-  }: IFindAllFilterClientDto): Promise<ClientEntity[]> {
-    const clientsQuery = this.clientRepository
-      .createQueryBuilder("clients")
-      .addOrderBy("clients.createdAt", "ASC");
+  async findFilterAllClient({
+    cpf, phone, address, city, state, zipCode, averageSalary,
+    currentBalance, status, createdAtFrom, createdAtTo,
+  }: IFindFilterAllClientDto): Promise<ClientEntity[]> {
+    const query = this.clientRepository
+      .createQueryBuilder("clients").addOrderBy("clients.createdAt", "ASC");
 
-    fullName && clientsQuery.andWhere("clients.fullName = :fullName", { fullName });
-    email && clientsQuery.andWhere("clients.email = :email", { email });
-    phone && clientsQuery.andWhere("clients.phone = :phone", { phone });
-    cpfNumeric && clientsQuery.andWhere("clients.cpfNumeric = :cpfNumeric", { cpfNumeric });
-    address && clientsQuery.andWhere("clients.address = :address", { address });
-    city && clientsQuery.andWhere("clients.city = :city", { city });
-    state && clientsQuery.andWhere("clients.state = :state", { state });
-    zipCode && clientsQuery.andWhere("clients.zipCode = :zipCode", { zipCode });
-    status && clientsQuery.andWhere("clients.status = :status", { status });
-    averageSalary && clientsQuery
-      .andWhere("clients.averageSalary = :averageSalary", { averageSalary });
-    currentBalance && clientsQuery
-      .andWhere("clients.currentBalance = :currentBalance", { currentBalance });
-    createdAtFrom && clientsQuery
-      .andWhere("clients.createdAt >= :createdAtFrom", { createdAtFrom });
-    createdAtTo && clientsQuery
-      .andWhere("clients.createdAt <= :createdAtTo", { createdAtTo });
+    cpf && query.andWhere("clients.cpf = :cpf", { cpf });
+    phone && query.andWhere("clients.phone = :phone", { phone });
+    address && query.andWhere("clients.address = :address", { address });
+    city && query.andWhere("clients.city = :city", { city });
+    state && query.andWhere("clients.state = :state", { state });
+    zipCode && query.andWhere("clients.zipCode = :zipCode", { zipCode });
+    averageSalary && query.andWhere("clients.averageSalary = :averageSalary", { averageSalary });
+    currentBalance && query.andWhere("clients.currentBalance = :currentBalance", { currentBalance });
+    status && query.andWhere("clients.status = :status", { status });
+    createdAtFrom && query.andWhere("clients.createdAt >= :createdAtFrom", { createdAtFrom });
+    createdAtTo && query.andWhere("clients.createdAt <= :createdAtTo", { createdAtTo });
 
-    const clientsGetMany = await clientsQuery.getMany();
+    const clients = await query.getMany();
 
-    return clientsGetMany;
+    return clients;
   }
 
   async updateOneClient(

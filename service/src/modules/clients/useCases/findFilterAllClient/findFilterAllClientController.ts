@@ -3,29 +3,27 @@ import { container } from "tsyringe";
 import * as yup from "yup";
 import { AppError } from "../../../../errors/appError";
 import { YupSetLocale } from "../../../../utils/yupSetLocale";
-import { FindAllFilterClientService } from "./findAllFilterClientService";
+import { FindFilterAllClientService } from "./findFilterAllClientService";
 
-export class FindAllFilterClientController {
+export class FindFilterAllClientController {
   async handle(request: Request, response: Response): Promise<Response> {
     const {
-      fullName, email, phone, cpfNumeric, address, city, state, zipCode,
-      averageSalary, currentBalance, status, createdAtFrom, createdAtTo,
+      cpf, phone, address, city, state, zipCode, averageSalary,
+      currentBalance, status, createdAtFrom, createdAtTo,
     } = request.query;
 
     try {
       YupSetLocale();
 
       await yup.object().shape({
-        fullName: yup.string().matches(/[\s]/g, "Deve conter um espaço no nome"),
-        email: yup.string().email(),
+        cpf: yup.number().integer().positive(),
         phone: yup.number().integer().positive(),
-        cpfNumeric: yup.number().integer().positive(),
         address: yup.string().min(5).max(100),
         city: yup.string().min(5).max(100),
         state: yup.string().min(5).max(100),
         zipCode: yup.number().integer().positive(),
-        averageSalary: yup.number().integer().positive(),
-        currentBalance: yup.number().integer().positive(),
+        averageSalary: yup.number().integer(),
+        currentBalance: yup.number().integer(),
         status: yup.string().min(2).max(50),
         createdAtFrom: yup.date(),
         createdAtTo: yup.date(),
@@ -34,14 +32,12 @@ export class FindAllFilterClientController {
       throw new AppError({ item: error.path, description: error.errors[0] }, 422);
     }
 
-    const findAllFilterClientService = container.resolve(FindAllFilterClientService);
+    const findFilterAllClientService = container.resolve(FindFilterAllClientService);
 
     return response.status(200).json(
-      await findAllFilterClientService.execute({
-        fullName: fullName as string,
-        email: email as string,
+      await findFilterAllClientService.execute({
+        cpf: Number(cpf as string),
         phone: Number(phone as string),
-        cpfNumeric: Number(cpfNumeric as string),
         address: address as string,
         city: city as string,
         state: state as string,

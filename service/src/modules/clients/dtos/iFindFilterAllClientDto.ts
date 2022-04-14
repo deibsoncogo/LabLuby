@@ -1,8 +1,6 @@
-export interface IFindAllFilterClientDto {
-  fullName: string;
-  email: string;
+export interface IFindFilterAllClientDto {
+  cpf: number;
   phone: number;
-  cpfNumeric: number;
   address: string;
   city: string;
   state: string;
