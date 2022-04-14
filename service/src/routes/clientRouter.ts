@@ -9,8 +9,8 @@ import { ValidateStatusAllClientController } from "../modules/clients/useCases/v
 const clientRouter = Router();
 
 clientRouter.patch("/validateStatusAllClient", new ValidateStatusAllClientController().handle);
-clientRouter.delete("/deleteOneIdClient/:id", new DeleteOneIdClientController().handle);
 clientRouter.get("/findAllFilterClient", new FindAllFilterClientController().handle);
+clientRouter.delete("/:id", new DeleteOneIdClientController().handle);
 clientRouter.put("/:id", new UpdateOneClientController().handle);
 clientRouter.get("/:id", new FindOneIdClientController().handle);
 clientRouter.post("/", new CreateOneClientController().handle);
