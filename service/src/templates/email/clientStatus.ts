@@ -1,5 +1,5 @@
 interface IMessageProps {
-  name: string,
+  fullName: string,
   status: string
 }
 
@@ -17,7 +17,7 @@ export function ClientStatus(messageProps: IMessageProps) {
   return `
     <h1>Lub Cash &#128176</h1>
 
-    <h2>Olá, ${messageProps.name}</h2>
+    <h2>Olá, ${messageProps.fullName}</h2>
 
     <p>O seu cadastro como cliente foi finalizado.</p>
     <p>${statusMessage}</p>

@@ -17,6 +17,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "consistent-return": "off",
     "no-await-in-loop": "off",
     "no-restricted-syntax": "off",
     "no-unused-expressions": "off",

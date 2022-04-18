@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/appError";
-// import { SendEmailUtils } from "../../../../utils/sendEmailUtils";
+import { SendEmailUtils } from "../../../../utils/sendEmailUtils";
 import { ICreateOneClientDto } from "../../dtos/iCreateOneClientDto";
 import { ClientEntity } from "../../entities/clientEntity";
 import { IClientRepository } from "../../repositories/iClientRepository";
@@ -12,7 +12,7 @@ export class CreateOneClientService {
   async execute(
     {
       userId, cpf, phone, address, city, state,
-      zipCode, averageSalary, currentBalance, status,
+      zipCode, averageSalary, currentBalance, status, fullName, email,
     }: ICreateOneClientDto,
   ): Promise<ClientEntity> {
     const userIdAlreadyExists = await this.clientRepository.findOneUserIdClient(userId);
@@ -30,16 +30,20 @@ export class CreateOneClientService {
     if (averageSalary >= 250) {
       currentBalance = 200;
       status = "approved";
-      // SendEmailUtils({ type: "ClientStatus", name: fullName, email, status: "approved" });
     } else {
       currentBalance = 0;
       status = "desaproved";
-      // SendEmailUtils({ type: "ClientStatus", name: fullName, email, status: "desaproved" });
     }
 
     const client = await this.clientRepository.createOneClient(
       { userId, cpf, phone, address, city, state, zipCode, averageSalary, currentBalance, status },
     );
+
+    if (client.status === "approved") {
+      SendEmailUtils({ type: "ClientStatus", fullName, email, status: "approved" });
+    } else if (client.status === "desaproved") {
+      SendEmailUtils({ type: "ClientStatus", fullName, email, status: "desaproved" });
+    }
 
     return client;
   }

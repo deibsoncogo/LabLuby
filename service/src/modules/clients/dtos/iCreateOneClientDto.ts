@@ -9,4 +9,6 @@ export interface ICreateOneClientDto {
   averageSalary: number;
   currentBalance?: number;
   status?: string;
+  fullName?: string;
+  email?: string;
 }
