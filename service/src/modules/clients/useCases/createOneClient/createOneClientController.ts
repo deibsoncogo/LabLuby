@@ -12,9 +12,6 @@ export class CreateOneClientController {
       zipCode, averageSalary, fullName, email,
     } = request.body;
 
-    console.log("userId =>", typeof userId, userId);
-    console.log("fullName =>", typeof fullName, fullName);
-
     try {
       YupSetLocale();
 
@@ -36,14 +33,10 @@ export class CreateOneClientController {
 
     const createOneClientService = container.resolve(CreateOneClientService);
 
-    try {
-      return response.status(201).json(
-        await createOneClientService.execute(
-          { userId, cpf, phone, address, city, state, zipCode, averageSalary, fullName, email },
-        ),
-      );
-    } catch (error) {
-      console.log("error");
-    }
+    return response.status(201).json(
+      await createOneClientService.execute(
+        { userId, cpf, phone, address, city, state, zipCode, averageSalary, fullName, email },
+      ),
+    );
   }
 }
