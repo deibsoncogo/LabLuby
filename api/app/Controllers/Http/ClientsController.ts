@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import User from 'App/Models/User'
 import { MicroServiceProducerUtils } from 'App/Utils/MicroServiceProducer'
 
 export default class ClientsController {
@@ -6,6 +7,15 @@ export default class ClientsController {
     const data = request.only(
       ['userId', 'cpf', 'phone', 'address', 'city', 'state', 'zipCode', 'averageSalary']
     )
+
+    const user = await User.findOrFail(data.userId)
+
+    const userKafka = {
+      fullName: user.fullName,
+      email: user.email,
+    }
+
+    Object.assign(data, userKafka)
 
     MicroServiceProducerUtils({ type: 'createClient', data })
 
