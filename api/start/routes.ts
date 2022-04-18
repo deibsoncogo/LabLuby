@@ -15,6 +15,7 @@ Route.group(() => {
     Route.resource('/user', 'UsersController').only(['show', 'update', 'destroy'])
     Route.delete('/section', 'AuthsController.destroy')
     Route.patch('/resetPassword', 'ResetPasswordController.update')
+    Route.resource('/client', 'ClientsController').apiOnly()
   }).middleware(['authUser'])
 
   Route.group(() => {
