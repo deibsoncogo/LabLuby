@@ -5,12 +5,12 @@ import axios from 'axios'
 export default class ClientsController {
   public async index ({ request, response }: HttpContextContract) {
     const {
-      cpf, phone, address, city, state, zipCode,
+      fullName, email, cpf, phone, address, city, state, zipCode,
       averageSalary, currentBalance, status, createdAtFrom, createdAtTo,
     } = request.all()
 
     const responseAxios = await axios.get(`${process.env.BASE_URL_MS}/client`, { params: {
-      cpf, phone, address, city, state, zipCode,
+      fullName, email, cpf, phone, address, city, state, zipCode,
       averageSalary, currentBalance, status, createdAtFrom, createdAtTo,
     }})
       .then((response) => {
@@ -28,8 +28,8 @@ export default class ClientsController {
     const user = await User.findOrFail(userId)
 
     const responseAxios = await axios.post(`${process.env.BASE_URL_MS}/client`, {
-      userId, cpf, phone, address, city, state, zipCode, averageSalary,
-      fullName: user.fullName, email: user.email,
+      userId, fullName: user.fullName, email: user.email, cpf,
+      phone, address, city, state, zipCode, averageSalary,
     })
       .then((response) => {
         return [response.status, response.data]
@@ -54,11 +54,16 @@ export default class ClientsController {
     return response.status(responseAxios[0]).json(responseAxios[1])
   }
 
-  public async update ({ params, request, response }: HttpContextContract) {
+  public async update ({ auth, params, request, response }: HttpContextContract) {
     const { cpf, phone, address, city, state, zipCode, averageSalary } = request.all()
 
+    const user = await User.findOrFail(auth.user?.id)
+
     const responseAxios = await axios.put(`${process.env.BASE_URL_MS}/client/${params.id}`, null, {
-      params: { cpf, phone, address, city, state, zipCode, averageSalary },
+      params: {
+        fullName: user.fullName, email: user.email, cpf, phone,
+        address, city, state, zipCode, averageSalary,
+      },
     })
       .then((response) => {
         return [response.status, response.data]

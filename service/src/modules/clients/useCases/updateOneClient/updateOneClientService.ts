@@ -25,7 +25,7 @@ export class UpdateOneClientService {
       throw new AppError("Não existe um usuário com este ID", 406);
     }
 
-    if (email) {
+    if (email && email !== idExists.email) {
       const emailAlreadyExists = await this.clientRepository.findOneEmailClient(email);
 
       if (emailAlreadyExists) {
