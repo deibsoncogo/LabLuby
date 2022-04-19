@@ -3,6 +3,7 @@ import User from 'App/Models/User'
 import {StoreUserValidator, UpdateUserValidator, IdUserValidator} from 'App/Validators/UserValidator'
 import Hash from '@ioc:Adonis/Core/Hash'
 import Rule from 'App/Models/Rule'
+import axios from 'axios'
 
 export default class UsersController {
   public async index ({ response }: HttpContextContract) {
@@ -49,6 +50,16 @@ export default class UsersController {
     }
 
     await user.merge({fullName: data.fullName,email: data.email,password: data.passwordNew }).save()
+
+    if (user.clientId) {
+      await axios.put(`${process.env.BASE_URL_MS}/client/${user.clientId}`, null, {
+        params: { fullName: user.fullName, email: user.email },
+      })
+        .then()
+        .catch((error) => {
+          console.log(error.response.status, error.response.data)
+        })
+    }
 
     return response.status(201).json(user)
   }
