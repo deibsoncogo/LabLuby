@@ -53,4 +53,30 @@ export default class ClientsController {
 
     return response.status(responseAxios[0]).json(responseAxios[1])
   }
+
+  public async update ({ params, request, response }: HttpContextContract) {
+    const { cpf, phone, address, city, state, zipCode, averageSalary } = request.all()
+
+    const responseAxios = await axios.put(`${process.env.BASE_URL_MS}/client/${params.id}`, null, {
+      params: { cpf, phone, address, city, state, zipCode, averageSalary },
+    })
+      .then((response) => {
+        return [response.status, response.data]
+      }).catch((error) => {
+        return [error.response.status, error.response.data]
+      })
+
+    return response.status(responseAxios[0]).json(responseAxios[1])
+  }
+
+  public async destroy ({ params, response }: HttpContextContract) {
+    const responseAxios = await axios.delete(`${process.env.BASE_URL_MS}/client/${params.id}`)
+      .then((response) => {
+        return [response.status, response.data]
+      }).catch((error) => {
+        return [error.response.status, error.response.data]
+      })
+
+    return response.status(responseAxios[0]).json(responseAxios[1])
+  }
 }
