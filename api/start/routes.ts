@@ -15,7 +15,7 @@ Route.group(() => {
     Route.resource('/user', 'UsersController').only(['show', 'update', 'destroy'])
     Route.delete('/section', 'AuthsController.destroy')
     Route.patch('/resetPassword', 'ResetPasswordController.update')
-    Route.resource('/client', 'ClientsController').apiOnly()
+    Route.resource('/client', 'ClientsController').apiOnly().except(['index'])
     Route.patch('/revalidateStatusClient', 'RevalidateStatusClientController.update')
   }).middleware(['authUser'])
 
@@ -23,5 +23,6 @@ Route.group(() => {
     Route.get('/user', 'UsersController.index')
     Route.resource('/rule', 'RulesController').apiOnly()
     Route.resource('/userRule', 'UsersRulesController').only(['store', 'destroy'])
+    Route.resource('/client', 'ClientsController').only(['index'])
   }).middleware(['authAdmin'])
 }).middleware(['auth'])
