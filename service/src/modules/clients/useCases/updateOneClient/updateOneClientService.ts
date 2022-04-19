@@ -8,10 +8,14 @@ import { IClientRepository } from "../../repositories/iClientRepository";
 export class UpdateOneClientService {
   constructor(@inject("ClientRepository") private clientRepository: IClientRepository) {}
 
-  async execute(
-    { id, cpf, phone, address, city, state, zipCode, averageSalary }: IUpdateOneClientDto,
-  ): Promise<ClientEntity> {
-    if (!cpf && !phone && !address && !city && !state && !zipCode && !averageSalary) {
+  async execute({
+    id, fullName, email, cpf, phone, address,
+    city, state, zipCode, averageSalary,
+  }: IUpdateOneClientDto): Promise<ClientEntity> {
+    if (
+      !fullName && !email && !cpf && !phone && !address
+      && !city && !state && !zipCode && !averageSalary
+    ) {
       throw new AppError("Não foi informado nenhum dado para alteração", 200);
     }
 
@@ -19,6 +23,14 @@ export class UpdateOneClientService {
 
     if (!idExists) {
       throw new AppError("Não existe um usuário com este ID", 406);
+    }
+
+    if (email) {
+      const emailAlreadyExists = await this.clientRepository.findOneEmailClient(email);
+
+      if (emailAlreadyExists) {
+        throw new AppError("Já existe este e-mail registrado", 406);
+      }
     }
 
     if (cpf) {
@@ -30,7 +42,7 @@ export class UpdateOneClientService {
     }
 
     const client = await this.clientRepository.updateOneClient(
-      { id, cpf, phone, address, city, state, zipCode, averageSalary },
+      { id, fullName, email, cpf, phone, address, city, state, zipCode, averageSalary },
     );
 
     return client;

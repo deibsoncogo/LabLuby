@@ -8,7 +8,10 @@ import { UpdateOneClientService } from "./updateOneClientService";
 export class UpdateOneClientController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { cpf, phone, address, city, state, zipCode, averageSalary } = request.query;
+    const {
+      fullName, email, cpf, phone, address,
+      city, state, zipCode, averageSalary,
+    } = request.query;
 
     try {
       YupSetLocale();
@@ -18,6 +21,8 @@ export class UpdateOneClientController {
       ).validate(request.params, { abortEarly: true });
 
       await yup.object().shape({
+        fullName: yup.string().min(3).max(100),
+        email: yup.string().email(),
         cpf: yup.number().integer().positive(),
         phone: yup.number().integer().positive(),
         address: yup.string().min(5).max(100),
@@ -35,6 +40,8 @@ export class UpdateOneClientController {
     return response.status(201).json(
       await updateOneClientService.execute({
         id: id as string,
+        fullName: fullName as string,
+        email: email as string,
         cpf: Number(cpf as string),
         phone: Number(phone as string),
         address: address as string,

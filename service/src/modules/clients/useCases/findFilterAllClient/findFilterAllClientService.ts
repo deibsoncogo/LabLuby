@@ -9,7 +9,7 @@ export class FindFilterAllClientService {
   constructor(@inject("ClientRepository") private clientRepository: IClientRepository) {}
 
   async execute({
-    cpf, phone, address, city, state, zipCode, averageSalary,
+    fullName, email, cpf, phone, address, city, state, zipCode, averageSalary,
     currentBalance, status, createdAtFrom, createdAtTo,
   }: IFindFilterAllClientDto): Promise<ClientEntity[]> {
     if (createdAtFrom && createdAtTo && createdAtFrom > createdAtTo) {
@@ -17,6 +17,8 @@ export class FindFilterAllClientService {
     }
 
     const clients = await this.clientRepository.findFilterAllClient({
+      fullName,
+      email,
       cpf,
       phone,
       address,

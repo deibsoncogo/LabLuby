@@ -9,6 +9,12 @@ export class ClientEntity {
   @Column({ name: "user_id" })
     userId: string;
 
+  @Column({ name: "full_name" })
+    fullName: string;
+
+  @Column()
+    email: string;
+
   @Column()
     cpf: number;
 

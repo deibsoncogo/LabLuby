@@ -18,6 +18,15 @@ export class clients1649940274000 implements MigrationInterface {
             isUnique: true,
           },
           {
+            name: "full_name",
+            type: "varchar",
+          },
+          {
+            name: "email",
+            type: "varchar",
+            isUnique: true,
+          },
+          {
             name: "cpf",
             type: "numeric",
             isUnique: true,

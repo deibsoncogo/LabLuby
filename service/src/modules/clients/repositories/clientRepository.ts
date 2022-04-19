@@ -43,18 +43,25 @@ export class ClientRepository implements IClientRepository {
     return client;
   }
 
+  async findOneEmailClient(email: string): Promise<ClientEntity> {
+    const client = await this.clientRepository.findOne({ email });
+    return client;
+  }
+
   async findOneUserIdClient(userId: string): Promise<ClientEntity> {
     const client = await this.clientRepository.findOne({ userId });
     return client;
   }
 
   async findFilterAllClient({
-    cpf, phone, address, city, state, zipCode, averageSalary,
+    fullName, email, cpf, phone, address, city, state, zipCode, averageSalary,
     currentBalance, status, createdAtFrom, createdAtTo,
   }: IFindFilterAllClientDto): Promise<ClientEntity[]> {
     const query = this.clientRepository
       .createQueryBuilder("clients").addOrderBy("clients.createdAt", "ASC");
 
+    fullName && query.andWhere("clients.fullName = :fullName", { fullName });
+    email && query.andWhere("clients.email = :email", { email });
     cpf && query.andWhere("clients.cpf = :cpf", { cpf });
     phone && query.andWhere("clients.phone = :phone", { phone });
     address && query.andWhere("clients.address = :address", { address });
@@ -72,11 +79,14 @@ export class ClientRepository implements IClientRepository {
     return clients;
   }
 
-  async updateOneClient(
-    { id, cpf, phone, address, city, state, zipCode, averageSalary }: IUpdateOneClientDto,
-  ): Promise<ClientEntity> {
+  async updateOneClient({
+    id, fullName, email, cpf, phone, address,
+    city, state, zipCode, averageSalary,
+  }: IUpdateOneClientDto): Promise<ClientEntity> {
     const client = await this.clientRepository.findOne({ id });
 
+    client.fullName = fullName || client.fullName;
+    client.email = email || client.email;
     client.cpf = cpf || client.cpf;
     client.phone = phone || client.phone;
     client.address = address || client.address;
@@ -92,12 +102,23 @@ export class ClientRepository implements IClientRepository {
   }
 
   async createOneClient({
-    userId, cpf, phone, address, city, state,
+    userId, fullName, email, cpf, phone, address, city, state,
     zipCode, averageSalary, currentBalance, status,
   }: ICreateOneClientDto): Promise<ClientEntity> {
-    const client = this.clientRepository.create(
-      { userId, cpf, phone, address, city, state, zipCode, averageSalary, currentBalance, status },
-    );
+    const client = this.clientRepository.create({
+      userId,
+      fullName,
+      email,
+      cpf,
+      phone,
+      address,
+      city,
+      state,
+      zipCode,
+      averageSalary,
+      currentBalance,
+      status,
+    });
 
     await this.clientRepository.save(client);
 

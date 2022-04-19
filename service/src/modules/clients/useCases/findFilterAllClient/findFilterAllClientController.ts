@@ -8,7 +8,7 @@ import { FindFilterAllClientService } from "./findFilterAllClientService";
 export class FindFilterAllClientController {
   async handle(request: Request, response: Response): Promise<Response> {
     const {
-      cpf, phone, address, city, state, zipCode, averageSalary,
+      fullName, email, cpf, phone, address, city, state, zipCode, averageSalary,
       currentBalance, status, createdAtFrom, createdAtTo,
     } = request.query;
 
@@ -16,6 +16,8 @@ export class FindFilterAllClientController {
       YupSetLocale();
 
       await yup.object().shape({
+        fullName: yup.string().min(3).max(100),
+        email: yup.string().email(),
         cpf: yup.number().integer().positive(),
         phone: yup.number().integer().positive(),
         address: yup.string().min(5).max(100),
@@ -36,6 +38,8 @@ export class FindFilterAllClientController {
 
     return response.status(200).json(
       await findFilterAllClientService.execute({
+        fullName: fullName as string,
+        email: email as string,
         cpf: Number(cpf as string),
         phone: Number(phone as string),
         address: address as string,
