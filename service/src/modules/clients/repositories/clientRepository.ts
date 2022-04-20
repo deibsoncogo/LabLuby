@@ -1,6 +1,7 @@
 import { getRepository, Repository } from "typeorm";
 import { ICreateOneClientDto } from "../dtos/iCreateOneClientDto";
 import { IFindFilterAllClientDto } from "../dtos/iFindFilterAllClientDto";
+import { IUpdateCurrentBalanceOneClientDto } from "../dtos/iUpdateCurrentBalanceOneClientDto";
 import { IUpdateOneClientDto } from "../dtos/iUpdateOneClientDto";
 import { ClientEntity } from "../entities/clientEntity";
 import { IClientRepository } from "./iClientRepository";
@@ -50,6 +51,18 @@ export class ClientRepository implements IClientRepository {
 
   async findOneUserIdClient(userId: string): Promise<ClientEntity> {
     const client = await this.clientRepository.findOne({ userId });
+    return client;
+  }
+
+  async updateCurrentBalanceOneClient(
+    { cpf, amount }: IUpdateCurrentBalanceOneClientDto,
+  ): Promise<ClientEntity> {
+    const client = await this.clientRepository.findOne({ cpf });
+
+    client.currentBalance += amount;
+
+    await this.clientRepository.save(client);
+
     return client;
   }
 

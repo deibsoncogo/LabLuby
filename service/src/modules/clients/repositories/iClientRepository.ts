@@ -1,5 +1,6 @@
 import { ICreateOneClientDto } from "../dtos/iCreateOneClientDto";
 import { IFindFilterAllClientDto } from "../dtos/iFindFilterAllClientDto";
+import { IUpdateCurrentBalanceOneClientDto } from "../dtos/iUpdateCurrentBalanceOneClientDto";
 import { IUpdateOneClientDto } from "../dtos/iUpdateOneClientDto";
 import { ClientEntity } from "../entities/clientEntity";
 
@@ -10,6 +11,10 @@ export interface IClientRepository {
   findOneCpfClient(cpfNumeric: number): Promise<ClientEntity>;
   findOneEmailClient(email: string): Promise<ClientEntity>;
   findOneUserIdClient(userId: string): Promise<ClientEntity>;
+
+  updateCurrentBalanceOneClient(
+    { cpf, amount }: IUpdateCurrentBalanceOneClientDto
+  ): Promise<ClientEntity>;
 
   findFilterAllClient({
     fullName, email, cpf, phone, address, city, state, zipCode, averageSalary,

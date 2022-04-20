@@ -28,12 +28,12 @@ export class clients1649940274000 implements MigrationInterface {
           },
           {
             name: "cpf",
-            type: "numeric",
+            type: "float",
             isUnique: true,
           },
           {
             name: "phone",
-            type: "numeric",
+            type: "float",
           },
           {
             name: "address",
@@ -49,15 +49,15 @@ export class clients1649940274000 implements MigrationInterface {
           },
           {
             name: "zip_code",
-            type: "numeric",
+            type: "float",
           },
           {
             name: "average_salary",
-            type: "numeric",
+            type: "float",
           },
           {
             name: "current_balance",
-            type: "numeric",
+            type: "float",
           },
           {
             name: "status",
