@@ -60,6 +60,7 @@ export class ClientRepository implements IClientRepository {
     const client = await this.clientRepository.findOne({ cpf });
 
     client.currentBalance += amount;
+    client.currentBalance = Number(client.currentBalance.toFixed(2));
 
     await this.clientRepository.save(client);
 
