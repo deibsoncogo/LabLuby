@@ -19,7 +19,16 @@ export class UpdateCurrentBalanceOneClientService {
       throw new AppError("Este cliente não possui autorização para executar transações", 409);
     }
 
-    const client = await this.clientRepository.updateCurrentBalanceOneClient({ cpf, amount });
+    cpfExists.currentBalance += amount;
+    cpfExists.currentBalance = Number(cpfExists.currentBalance.toFixed(2));
+
+    if (cpfExists.currentBalance < 0) {
+      throw new AppError("O cliente não possui saldo suficiente", 409);
+    }
+
+    const client = await this.clientRepository.updateCurrentBalanceOneClient(
+      { cpf, amount: cpfExists.currentBalance },
+    );
 
     return client;
   }

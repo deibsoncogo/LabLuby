@@ -1,5 +1,5 @@
 import Hash from '@ioc:Adonis/Core/Hash'
-import { BaseModel, beforeCreate, beforeSave, column, ManyToMany, manyToMany, ModelQueryBuilderContract } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeCreate, beforeSave, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { v4 } from 'uuid'
 import Rule from './Rule'

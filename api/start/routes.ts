@@ -17,6 +17,7 @@ Route.group(() => {
     Route.patch('/resetPassword', 'ResetPasswordController.update')
     Route.resource('/client', 'ClientsController').apiOnly().except(['index'])
     Route.patch('/revalidateStatusClient', 'RevalidateStatusClientController.update')
+    Route.resource('/transaction', 'TransactionsController').only(['store'])
   }).middleware(['authUser'])
 
   Route.group(() => {
