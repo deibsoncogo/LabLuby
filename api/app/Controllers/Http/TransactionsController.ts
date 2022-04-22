@@ -80,4 +80,21 @@ export default class TransactionsController {
 
     return response.status(201).json(transaction)
   }
+
+  public async show ({ params, response }: HttpContextContract) {
+    const transaction = await Transaction.query()
+      .orWhere('clientIdFrom', '=', params.id)
+      .orWhere('clientIdTo', '=', params.id)
+      .orderBy('createdAt', 'asc')
+
+    const client = await axios
+      .get(`${process.env.BASE_URL_MS}/client/${params.id}`)
+      .then((response) => {
+        return [response.status, response.data]
+      }).catch((error) => {
+        return [error.response.status, error.response.data]
+      })
+
+    return response.status(200).json({ transaction, currentBalance: client[1].currentBalance})
+  }
 }

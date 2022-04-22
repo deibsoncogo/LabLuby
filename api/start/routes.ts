@@ -25,5 +25,6 @@ Route.group(() => {
     Route.resource('/rule', 'RulesController').apiOnly()
     Route.resource('/userRule', 'UsersRulesController').only(['store', 'destroy'])
     Route.resource('/client', 'ClientsController').only(['index'])
+    Route.resource('/transaction', 'TransactionsController').only(['show'])
   }).middleware(['authAdmin'])
 }).middleware(['auth'])
