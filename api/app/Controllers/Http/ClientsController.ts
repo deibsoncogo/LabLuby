@@ -54,10 +54,10 @@ export default class ClientsController {
     return response.status(responseAxios[0]).json(responseAxios[1])
   }
 
-  public async update ({ auth, params, request, response }: HttpContextContract) {
+  public async update ({ params, request, response }: HttpContextContract) {
     const { cpf, phone, address, city, state, zipCode, averageSalary } = request.all()
 
-    const user = await User.findOrFail(auth.user?.id)
+    const user = await User.findByOrFail('clientId', params.id)
 
     const responseAxios = await axios.put(`${process.env.BASE_URL_MS}/client/${params.id}`, null, {
       params: {
