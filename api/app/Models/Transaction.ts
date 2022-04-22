@@ -15,10 +15,10 @@ export default class Transaction extends BaseModel {
   public amount: number
 
   @column()
-  public clientCpfFrom: number
+  public clientIdFrom: string
 
   @column()
-  public clientCpfTo: number
+  public clientIdTo: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
