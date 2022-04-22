@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Transaction from 'App/Models/Transaction'
+import { DateTransactionValidator } from 'App/Validators/TransactionValidator'
 import axios from 'axios'
 
 export default class TransactionsController {
@@ -81,10 +82,24 @@ export default class TransactionsController {
     return response.status(201).json(transaction)
   }
 
-  public async show ({ params, response }: HttpContextContract) {
+  public async show ({ params, request, response }: HttpContextContract) {
+    await request.validate(DateTransactionValidator)
+
+    const { createdAtFrom, createdAtTo } = request.all()
+
+    if (createdAtFrom > createdAtTo) {
+      return response.status(406).json({ error: 'Datas informada de forma invertida' })
+    }
+
     const transaction = await Transaction.query()
-      .orWhere('clientIdFrom', '=', params.id)
-      .orWhere('clientIdTo', '=', params.id)
+      .where((query) => {
+        createdAtFrom && query.andWhere('createdAt', '>=', new Date(`${createdAtFrom} 00:00:00`))
+        createdAtTo && query.andWhere('createdAt', '<=', new Date(`${createdAtTo} 23:59:59`))
+      })
+      .where((query) => {
+        query.orWhere('clientIdFrom', params.id)
+        query.orWhere('clientIdTo', params.id)
+      })
       .orderBy('createdAt', 'asc')
 
     const client = await axios

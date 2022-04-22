@@ -1,13 +1,25 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
-import {StoreUserValidator, UpdateUserValidator, IdUserValidator} from 'App/Validators/UserValidator'
+import {StoreUserValidator, UpdateUserValidator, IdUserValidator, DateUserValidator} from 'App/Validators/UserValidator'
 import Hash from '@ioc:Adonis/Core/Hash'
 import Rule from 'App/Models/Rule'
 import axios from 'axios'
 
 export default class UsersController {
-  public async index ({ response }: HttpContextContract) {
+  public async index ({ request, response }: HttpContextContract) {
+    await request.validate(DateUserValidator)
+
+    const { createdAtFrom, createdAtTo } = request.all()
+
+    if (createdAtFrom > createdAtTo) {
+      return response.status(406).json({ error: 'Datas informada de forma invertida' })
+    }
+
     const users = await User.query()
+      .where((query) => {
+        createdAtFrom && query.andWhere('createdAt', '>=', new Date(`${createdAtFrom} 00:00:00`))
+        createdAtTo && query.andWhere('createdAt', '<=', new Date(`${createdAtTo} 23:59:59`))
+      })
       .andWhere('fullName', '!=', 'admin')
       .orderBy('createdAt', 'asc')
 

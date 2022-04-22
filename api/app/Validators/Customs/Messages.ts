@@ -3,6 +3,7 @@ export class MessagesValidator {
     'string': 'O formado do campo deve ser um texto',
     'number': 'O formado do campo deve ser um número',
 
+    'date.format': 'Formato da data é inválido',
     'email': 'Formato do e-mail é inválido',
     'exists': 'Não foi encontrado nenhum registro',
     'required': 'Este campo é obrigatório',

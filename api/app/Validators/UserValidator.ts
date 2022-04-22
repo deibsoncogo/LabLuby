@@ -79,3 +79,14 @@ export class IdUserValidator extends MessagesValidator {
     }),
   })
 }
+
+export class DateUserValidator extends MessagesValidator {
+  constructor (protected ctx: HttpContextContract) {
+    super()
+  }
+
+  public schema = schema.create({
+    createdAtFrom: schema.date.optional(),
+    createdAtTo: schema.date.optional(),
+  })
+}
