@@ -8,13 +8,15 @@ export class StoreUserRuleValidator extends MessagesValidator {
   }
 
   public schema = schema.create({
-    userId: schema.string({ trim: true }, [
+    userId: schema.string([
+      rules.trim(),
       rules.uuid(),
       rules.exists({ table: 'users', column: 'id' }),
       rules.uniqueForeignKeyUser('rules', 'ruleId'),
     ]),
 
-    ruleId: schema.string({ trim: true }, [
+    ruleId: schema.string([
+      rules.trim(),
       rules.uuid(),
       rules.exists({ table: 'rules', column: 'id' }),
     ]),
@@ -28,13 +30,15 @@ export class DestroyUserRuleValidator extends MessagesValidator {
 
   public schema = schema.create({
     params: schema.object().members({
-      id: schema.string({ trim: true }, [
+      id: schema.string([
+        rules.trim(),
         rules.uuid(),
         rules.exists({ table: 'users', column: 'id' }),
       ]),
     }),
 
-    ruleId: schema.string({ trim: true }, [
+    ruleId: schema.string([
+      rules.trim(),
       rules.uuid(),
       rules.exists({ table: 'rules', column: 'id' }),
     ]),

@@ -6,10 +6,10 @@ export class StoreRuleValidator extends MessagesValidator {
   constructor (protected ctx: HttpContextContract) {
     super()
   }
-  // messages
 
   public schema = schema.create({
-    name: schema.string({ trim: true }, [
+    name: schema.string([
+      rules.trim(),
       rules.minLength(3),
       rules.maxLength(50),
       rules.regex(/^[a-z]+$/g),
@@ -23,13 +23,15 @@ export class UpdateRuleValidator {
 
   public schema = schema.create({
     params: schema.object().members({
-      id: schema.string({ trim: true }, [
+      id: schema.string([
+        rules.trim(),
         rules.uuid(),
         rules.exists({ table: 'rules', column: 'id' }),
       ]),
     }),
 
-    name: schema.string.optional({ trim: true }, [
+    name: schema.string.optional([
+      rules.trim(),
       rules.minLength(3),
       rules.maxLength(50),
       rules.regex(/^[a-z]+$/g),
@@ -55,7 +57,8 @@ export class IdRuleValidator extends MessagesValidator {
 
   public schema = schema.create({
     params: schema.object().members({
-      id: schema.string({ trim: true }, [
+      id: schema.string([
+        rules.trim(),
         rules.uuid(),
         rules.exists({ table: 'rules', column: 'id' }),
       ]),
