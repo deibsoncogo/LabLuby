@@ -12,7 +12,7 @@ export class StoreUserValidator extends MessagesValidator {
       rules.trim(),
       rules.minLength(3),
       rules.maxLength(100),
-      rules.regex(/^[a-zà-äè-ëì-ïò-öù-ü\s]+$/gi),
+      rules.regex(/^[a-zà-äè-ëì-ïò-öù-üç\s]+$/gi),
     ]),
 
     email: schema.string([
