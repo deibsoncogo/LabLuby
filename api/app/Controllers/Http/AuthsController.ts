@@ -17,7 +17,7 @@ export default class AuthsController {
 
       return response.status(201).json({ token, user, rules })
     } catch (error) {
-      return response.status(401).json({ error: 'Credencial inválida' })
+      return response.status(401).json({ erro: 'Credencial inválida' })
     }
   }
 
