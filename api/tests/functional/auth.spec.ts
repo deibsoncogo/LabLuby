@@ -41,8 +41,8 @@ test.group('Auth - Destroy', () => {
 test.group('Auth - Authentications to be used in other tests', () => {
   test('It must be possible to authenticate a user', async ({ client }) => {
     const response = await client.post('/section').form({
-      email: 'test@test.com',
-      password: '12teST',
+      email: 'devterceiro@outlook.com',
+      password: '33ccCC',
     })
 
     tokenTest = response.body().token.token

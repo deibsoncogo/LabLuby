@@ -9,12 +9,12 @@ export default class UserSeeder extends BaseSeeder {
 
   public async run () {
     await User.updateOrCreateMany('email', [{
-      fullName: 'test',
-      email: 'test@test.com',
-      password: '12teST',
+      fullName: 'Usuário Terceiro',
+      email: 'devterceiro@outlook.com',
+      password: '33ccCC',
     }])
 
-    const user = await User.findBy('fullName', 'test')
+    const user = await User.findBy('fullName', 'Usuário Terceiro')
     const ruleUser = await Rule.findBy('name', 'user')
 
     await UserRule.updateOrCreateMany(['userId', 'ruleId'], [
