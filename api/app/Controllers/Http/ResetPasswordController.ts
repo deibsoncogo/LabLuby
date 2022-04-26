@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
+import { MicroServiceProducerUtils } from 'App/Utils/MicroServiceProducer'
 
 export default class ResetPasswordController {
   public async store ({ auth, request, response }: HttpContextContract) {
@@ -18,9 +19,17 @@ export default class ResetPasswordController {
       name: 'Reset password to user',
     })
 
-    // implementar envio do e-mail
+    const messageEmail = {
+      type: 'resetPassword',
+      subject: 'Nova senha',
+      email: user.email,
+      name: user.fullName,
+      url: `https://provaadonisv5labluby.com/resetPassword/${token.token}`,
+    }
 
-    return response.status(201).json({ message, token })
+    await MicroServiceProducerUtils({type: 'resetPassword', data: messageEmail})
+
+    return response.status(201).json({ message })
   }
 
   public async update ({ auth, request, response }: HttpContextContract) {
