@@ -33,7 +33,7 @@ export class CreateOneClientService {
       throw new AppError("Já existe este CPF registrado", 406);
     }
 
-    if (averageSalary >= 250) {
+    if (averageSalary >= 500) {
       currentBalance = 200;
       status = "approved";
     } else {
