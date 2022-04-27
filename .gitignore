@@ -1,7 +1,17 @@
 node_modules
 dist
 build
+DS_Store
+coverage
+nyc_output
+idea
+project
+classpath
+c9
+settings
 notes.md
 **.log
 **.env
 **.txt
+**.launch
+**.sublime-workspace
