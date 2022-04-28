@@ -1,0 +1,30 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UsersEntity {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+type Query {
+  findUsers: [UsersEntity!]!
+  findUser(id: String!): UsersEntity!
+}
+
+type Mutation {
+  createUser(data: CreateUserDto!): UsersEntity!
+  updateUser(id: String!, data: UpdateUserDto!): UsersEntity!
+  deleteUser(id: String!): Boolean!
+}
+
+input CreateUserDto {
+  name: ID!
+  email: ID!
+}
+
+input UpdateUserDto {
+  name: ID!
+  email: ID!
+}

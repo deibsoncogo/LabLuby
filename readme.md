@@ -1,1 +1,1 @@
-# GraphQL - Lab Luby
+# Nets JS e GraphQL - Lab Luby
