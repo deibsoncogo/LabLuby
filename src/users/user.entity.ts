@@ -9,8 +9,10 @@ export class UserEntity {
   id: string;
 
   @Column()
+  @Field(() => String)
   name: string;
 
   @Column()
+  @Field(() => String)
   email: string;
 }
