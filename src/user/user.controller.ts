@@ -18,8 +18,8 @@ export class UserController {
   }
 
   @Get(":id")
-  findUser(@Param() id: string) {
-    return this.userResolver.findUser(id);
+  findIdUser(@Param() id: string) {
+    return this.userResolver.findIdUser(id);
   }
 
   @Put(":id")
