@@ -10,6 +10,7 @@ classpath
 c9
 settings
 notes.md
+schema.gql
 **.log
 **.env
 **.txt
