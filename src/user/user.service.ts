@@ -71,6 +71,8 @@ export class UserService {
 
     const userDelete = await this.userRepository.delete(user);
 
+    console.log("userDelete =>", typeof userDelete, userDelete);
+
     if (!userDelete) {
       throw new InternalServerErrorException("Erro ao excluir o usuário");
     }
