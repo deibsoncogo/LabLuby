@@ -33,8 +33,7 @@ export class UserResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteUser(@Args("id") id: string): Promise<boolean> {
-    const user = await this.userService.deleteUser(id);
-    return user;
+  async deleteUser(@Args("id") id: string): Promise<void> {
+    await this.userService.deleteUser(id);
   }
 }

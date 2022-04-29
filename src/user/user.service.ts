@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, NotAcceptableException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "./dto/createUser.dto";
@@ -15,10 +15,14 @@ export class UserService {
   async createUser(data: CreateUserDto): Promise<UserEntity> {
     const user = await this.userRepository.create(data);
 
+    if (!user) {
+      throw new InternalServerErrorException("Erro ao criar o usuário");
+    }
+
     const userSave = await this.userRepository.save(user);
 
     if (!userSave) {
-      throw new InternalServerErrorException("Problema ao salvar o usuário");
+      throw new InternalServerErrorException("Erro ao salvar o usuário");
     }
 
     return user;
@@ -26,6 +30,11 @@ export class UserService {
 
   async findUsers(): Promise<UserEntity[]> {
     const users = await this.userRepository.find();
+
+    if (!users) {
+      throw new InternalServerErrorException("Erro ao listar todos usuários");
+    }
+
     return users;
   }
 
@@ -33,7 +42,7 @@ export class UserService {
     const user = await this.userRepository.findOne(id);
 
     if (!user) {
-      throw new NotFoundException("Usuário não encontrado");
+      throw new NotAcceptableException("Usuário não encontrado");
     }
 
     return user;
@@ -42,22 +51,28 @@ export class UserService {
   async updateUser(id: string, data: UpdateUserDto): Promise<UserEntity> {
     const user = await this.findIdUser(id);
 
-    await this.userRepository.update(user, { ...data });
+    const userUpdate = await this.userRepository.update(user, { ...data });
 
-    const userUpdate = await this.userRepository.create({ ...user, ...data });
+    if (!userUpdate) {
+      throw new InternalServerErrorException("Erro ao atualizar o usuário");
+    }
 
-    return userUpdate;
+    const userCreate = await this.userRepository.create({ ...user, ...data });
+
+    if (!userCreate) {
+      throw new InternalServerErrorException("Erro ao atualizar/recriar o usuário");
+    }
+
+    return userCreate;
   }
 
-  async deleteUser(id: string): Promise<boolean> {
+  async deleteUser(id: string): Promise<void> {
     const user = await this.findIdUser(id);
 
     const userDelete = await this.userRepository.delete(user);
 
-    if (userDelete) {
-      return true;
+    if (!userDelete) {
+      throw new InternalServerErrorException("Erro ao excluir o usuário");
     }
-
-    return false;
   }
 }
