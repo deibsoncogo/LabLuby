@@ -1,0 +1,9 @@
+-- CreateTable
+CREATE TABLE "Carts" (
+    "id" TEXT NOT NULL,
+    "min_value" DOUBLE PRECISION NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Carts_pkey" PRIMARY KEY ("id")
+);

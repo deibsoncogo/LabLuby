@@ -48,3 +48,10 @@ model Games {
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now()) @updatedAt()
 }
+
+model Carts {
+  id         String   @id @default(uuid())
+  min_value  Float
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt()
+}

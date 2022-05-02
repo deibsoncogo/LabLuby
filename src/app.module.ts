@@ -10,6 +10,7 @@ import { RuleModule } from "./rule/rule.module";
 import { UserModule } from "./user/user.module";
 import { UserRuleModule } from './user-rule/user-rule.module';
 import { GameModule } from './game/game.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { GameModule } from './game/game.module';
     RuleModule,
     UserRuleModule,
     GameModule,
+    CartModule,
   ],
   providers: [AppService, AppResolver],
   controllers: [AppController],
