@@ -1,8 +1,9 @@
 import { Injectable } from "@nestjs/common";
+import { AppEntity } from "./app.entity";
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return "Hello World!";
+  async findApps(): Promise<AppEntity[]> {
+    return [{ message: "Hello world" }];
   }
 }

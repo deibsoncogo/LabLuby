@@ -1,12 +1,13 @@
-import { Controller, Get } from "@nestjs/common";
-import { AppService } from "./app.service";
+import { Controller, Get, Res } from "@nestjs/common";
+import { Response } from "express";
+import { AppResolver } from "./app.resolver";
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private resolver: AppResolver) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async findApps(@Res() response: Response): Promise<Response> {
+    return response.status(200).json(await this.resolver.findApps());
   }
 }
