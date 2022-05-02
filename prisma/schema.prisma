@@ -34,3 +34,15 @@ model Users_Rules {
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 }
+
+model Games {
+  id          String   @id @default(uuid())
+  name        String   @unique()
+  description String
+  range       Int
+  price       Float
+  max_number  Int
+  color       String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt()
+}
