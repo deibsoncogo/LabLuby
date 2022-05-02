@@ -6,23 +6,23 @@ import { UserResolver } from "./user.resolver";
 
 @Controller("user")
 export class UserController {
-  constructor(private userResolve: UserResolver) {}
+  constructor(private resolve: UserResolver) {}
 
   @Post()
   async createUser(@Req() request: Request, @Res() response: Response): Promise<Response> {
     const { name, email, password }: CreateUserDto = request.body;
-    return response.status(201).json(await this.userResolve.createUser({ name, email, password }));
+    return response.status(201).json(await this.resolve.createUser({ name, email, password }));
   }
 
   @Get()
   async findUsers(@Res() response: Response): Promise<Response> {
-    return response.status(200).json(await this.userResolve.findUsers());
+    return response.status(200).json(await this.resolve.findUsers());
   }
 
   @Get(":id")
   async findIdUser(@Req() request: Request, @Res() response: Response): Promise<Response> {
     const { id } = request.params;
-    return response.status(200).json(await this.userResolve.findIdUser(id));
+    return response.status(200).json(await this.resolve.findIdUser(id));
   }
 
   @Put(":id")
@@ -30,12 +30,12 @@ export class UserController {
     const { name, email, password }: UpdateUserDto = request.query;
     const { id } = request.params;
 
-    return response.status(201).json(await this.userResolve.updateUser(id, { name, email, password }));
+    return response.status(201).json(await this.resolve.updateUser(id, { name, email, password }));
   }
 
   @Delete(":id")
   async deleteUser(@Req() request: Request, @Res() response: Response): Promise<Response> {
     const { id } = request.params;
-    return response.status(205).json(await this.userResolve.deleteUser(id));
+    return response.status(205).json(await this.resolve.deleteUser(id));
   }
 }

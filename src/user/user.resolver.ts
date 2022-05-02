@@ -6,35 +6,35 @@ import { UserService } from "./user.service";
 
 @Resolver()
 export class UserResolver {
-  constructor(private userService: UserService) {}
+  constructor(private service: UserService) {}
 
   @Mutation(() => UserEntity)
   async createUser(@Args("data") data: CreateUserDto): Promise<UserEntity> {
-    const user = await this.userService.createUser(data);
+    const user = await this.service.createUser(data);
     return user;
   }
 
   @Query(() => [UserEntity])
   async findUsers(): Promise<UserEntity[]> {
-    const users = await this.userService.findUsers();
+    const users = await this.service.findUsers();
     return users;
   }
 
   @Query(() => UserEntity)
   async findIdUser(@Args("id") id: string): Promise<UserEntity> {
-    const users = await this.userService.findIdUser(id);
+    const users = await this.service.findIdUser(id);
     return users;
   }
 
   @Mutation(() => UserEntity)
   async updateUser(@Args("id") id: string, @Args("data") data: UpdateUserDto): Promise<UserEntity> {
-    const users = await this.userService.updateUser(id, data);
+    const users = await this.service.updateUser(id, data);
     return users;
   }
 
   @Mutation(() => UserEntity)
   async deleteUser(@Args("id") id: string): Promise<UserEntity> {
-    const users = await this.userService.deleteUser(id);
+    const users = await this.service.deleteUser(id);
     return users;
   }
 }
