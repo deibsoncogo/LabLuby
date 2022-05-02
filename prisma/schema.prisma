@@ -8,17 +8,29 @@ datasource db {
 }
 
 model Users {
-  id         String   @id @default(uuid())
-  name       String
-  email      String   @unique
-  password   String
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  id          String        @id @default(uuid())
+  name        String
+  email       String        @unique
+  password    String
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @default(now())
+  Users_Rules Users_Rules[]
 }
 
 model Rules {
+  id          String        @id @default(uuid())
+  name        String        @unique()
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @default(now())
+  Users_Rules Users_Rules[]
+}
+
+model Users_Rules {
   id         String   @id @default(uuid())
-  name       String   @unique()
+  user       Users?   @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  user_id    String
+  rule       Rules?   @relation(fields: [rule_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  rule_id    String
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 }

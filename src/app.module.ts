@@ -8,6 +8,7 @@ import { AppService } from "./app.service";
 import { DatabaseModule } from "./database/database.module";
 import { RuleModule } from "./rule/rule.module";
 import { UserModule } from "./user/user.module";
+import { UserRuleModule } from './user-rule/user-rule.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from "./user/user.module";
     }),
     UserModule,
     RuleModule,
+    UserRuleModule,
   ],
   providers: [AppService, AppResolver],
   controllers: [AppController],
