@@ -11,6 +11,7 @@ import { UserModule } from "./user/user.module";
 import { UserRuleModule } from './user-rule/user-rule.module';
 import { GameModule } from './game/game.module';
 import { CartModule } from './cart/cart.module';
+import { BetModule } from './bet/bet.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CartModule } from './cart/cart.module';
     UserRuleModule,
     GameModule,
     CartModule,
+    BetModule,
   ],
   providers: [AppService, AppResolver],
   controllers: [AppController],

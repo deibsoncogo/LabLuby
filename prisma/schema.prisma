@@ -15,6 +15,7 @@ model Users {
   created_at  DateTime      @default(now())
   updated_at  DateTime      @default(now()) @updatedAt()
   Users_Rules Users_Rules[]
+  Bets        Bets[]
 }
 
 model Rules {
@@ -47,11 +48,23 @@ model Games {
   color       String
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now()) @updatedAt()
+  Bets        Bets[]
 }
 
 model Carts {
   id         String   @id @default(uuid())
   min_value  Float
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt()
+}
+
+model Bets {
+  id         String   @id @default(uuid())
+  item       String
+  user       Users?   @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  user_id    String
+  game       Games?   @relation(fields: [game_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  game_id    String
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt()
 }
