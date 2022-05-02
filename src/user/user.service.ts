@@ -31,7 +31,10 @@ export class UserService {
   }
 
   async findIdUser(id: string): Promise<UserEntity> {
-    const user = await this.database.users.findUnique({ where: { id } });
+    const user = await this.database.users.findUnique({
+      where: { id },
+      include: { Users_Rules: { include: { rule: true } } },
+    });
 
     if (!user) {
       throw new NotAcceptableException("Não foi encontrado nenhum usuário com este ID");

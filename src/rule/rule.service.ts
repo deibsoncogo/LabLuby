@@ -31,7 +31,10 @@ export class RuleService {
   }
 
   async findIdRule(id: string): Promise<RuleEntity> {
-    const rule = await this.database.rules.findUnique({ where: { id } });
+    const rule = await this.database.rules.findUnique({
+      where: { id },
+      include: { Users_Rules: { include: { user: true } } },
+    });
 
     if (!rule) {
       throw new NotAcceptableException("Não foi encontrado nenhuma regra com este ID");
