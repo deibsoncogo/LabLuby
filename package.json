@@ -8,8 +8,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "migrate": "prisma migrate dev",
-    "studio": "prisma studio",
+    "db": "yarn db:reset -f && yarn db:run && yarn start:dev",
+    "db:reset": "prisma migrate reset",
+    "db:run": "prisma migrate dev",
+    "db:view": "prisma studio",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
