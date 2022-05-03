@@ -14,7 +14,7 @@ export class UserRuleService {
   }
 
   async findUsersRules(): Promise<UserRuleEntity[]> {
-    const usersRules = await this.database.users_Rules.findMany();
+    const usersRules = await this.database.users_Rules.findMany({ orderBy: { created_at: "desc" } });
     return usersRules;
   }
 

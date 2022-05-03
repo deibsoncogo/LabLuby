@@ -60,7 +60,7 @@ export class BetService {
   }
 
   async findBets(): Promise<BetEntity[]> {
-    const bet = await this.database.bets.findMany();
+    const bet = await this.database.bets.findMany({ orderBy: { created_at: "desc" } });
     return bet;
   }
 

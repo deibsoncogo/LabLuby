@@ -21,7 +21,7 @@ export class UserService {
   }
 
   async findUsers(): Promise<UserEntity[]> {
-    const users = await this.database.users.findMany({ orderBy: { created_at: "asc" } });
+    const users = await this.database.users.findMany({ orderBy: { created_at: "desc" } });
 
     if (!users) {
       throw new InternalServerErrorException("Erro inesperado ao buscar todos usuários");
