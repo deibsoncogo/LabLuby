@@ -8,10 +8,10 @@ import { UpdateBetDto } from "./dto/updateBet.dto";
 export class BetResolver {
   constructor(private service: BetService) {}
 
-  @Mutation(() => BetEntity)
-  async createBet(@Args("data") data: CreateBetDto): Promise<BetEntity> {
-    const bet = await this.service.createBet(data);
-    return bet;
+  @Mutation(() => [BetEntity])
+  async createBet(@Args("data") data: CreateBetDto): Promise<BetEntity[]> {
+    const bets = await this.service.createBet(data);
+    return bets;
   }
 
   @Query(() => [BetEntity])

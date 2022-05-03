@@ -10,8 +10,8 @@ export class BetController {
 
   @Post()
   async createBet(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { item, user_id, game_id }: CreateBetDto = request.body;
-    return response.status(201).json(await this.resolver.createBet({ item, user_id, game_id }));
+    const { user_id, bets }: CreateBetDto = request.body;
+    return response.status(201).json(await this.resolver.createBet({ user_id, bets }));
   }
 
   @Get()
