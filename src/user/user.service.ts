@@ -43,6 +43,19 @@ export class UserService {
     return user;
   }
 
+  async findEmailUser(email: string): Promise<UserEntity> {
+    const user = await this.database.users.findUnique({
+      where: { email },
+      include: { Users_Rules: { include: { rule: true } }, Bets: { include: { game: true } } },
+    });
+
+    if (!user) {
+      throw new NotAcceptableException("Não foi encontrado nenhum usuário com este e-mail");
+    }
+
+    return user;
+  }
+
   async updateUser(id: string, data: UpdateUserDto): Promise<UserEntity> {
     await this.findIdUser(id);
     await this.hasEmailAlreadyExistsUser(data.email);
