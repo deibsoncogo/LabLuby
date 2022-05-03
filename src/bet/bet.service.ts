@@ -1,4 +1,4 @@
-import { Injectable, NotAcceptableException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, NotAcceptableException } from "@nestjs/common";
 import { CartService } from "src/cart/cart.service";
 import { DatabaseService } from "src/database/database.service";
 import { GameService } from "src/game/game.service";
@@ -12,10 +12,10 @@ export class BetService {
   constructor(private database: DatabaseService, private userService: UserService, private gameService: GameService, private cartService: CartService) {}
 
   async createBet(data: CreateBetDto): Promise<BetEntity[]> {
-    // user
+    /** user */
     await this.userService.findIdUser(data.user_id);
 
-    // cart
+    /** cart */
     let valueCartTotal = 0;
     for (const bet of data.bets) {
       const game = await this.gameService.findIdGame(bet.game_id);
@@ -28,7 +28,7 @@ export class BetService {
       throw new NotAcceptableException("Valor mínimo do carrinho não atingido");
     }
 
-    // game
+    /** game */
     const bets: BetEntity[] = [];
     for (const bet of data.bets) {
       const game = await this.gameService.findIdGame(bet.game_id);
@@ -56,12 +56,21 @@ export class BetService {
       bets.push(betCreate);
     }
 
+    if (!bets) {
+      throw new InternalServerErrorException("Erro inesperado ao criar as apostas");
+    }
+
     return bets;
   }
 
   async findBets(): Promise<BetEntity[]> {
-    const bet = await this.database.bets.findMany({ orderBy: { created_at: "desc" } });
-    return bet;
+    const bets = await this.database.bets.findMany({ orderBy: { created_at: "desc" } });
+
+    if (!bets) {
+      throw new InternalServerErrorException("Erro inesperado ao listar as apostas");
+    }
+
+    return bets;
   }
 
   async findIdBet(id: string): Promise<BetEntity> {
@@ -69,16 +78,35 @@ export class BetService {
       where: { id },
       include: { user: true, game: true },
     });
+
+    if (!bet) {
+      throw new NotAcceptableException("Não foi encontrado nenhuma aposta com este ID");
+    }
+
     return bet;
   }
 
   async updateBet(id: string, data: UpdateBetDto): Promise<BetEntity> {
+    await this.findIdBet(id);
+
     const bet = await this.database.bets.update({ where: { id }, data });
+
+    if (!bet) {
+      throw new InternalServerErrorException("Erro inesperado ao alterar a aposta");
+    }
+
     return bet;
   }
 
   async deleteBet(id: string): Promise<BetEntity> {
+    await this.findIdBet(id);
+
     const bet = await this.database.bets.delete({ where: { id } });
+
+    if (!bet) {
+      throw new InternalServerErrorException("Erro inesperado ao excluir a aposta");
+    }
+
     return bet;
   }
 }
