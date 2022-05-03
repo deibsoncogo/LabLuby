@@ -1,51 +1,37 @@
 import { Injectable, NotAcceptableException } from "@nestjs/common";
+import { CartService } from "src/cart/cart.service";
 import { DatabaseService } from "src/database/database.service";
+import { GameService } from "src/game/game.service";
+import { UserService } from "src/user/user.service";
 import { BetEntity } from "./bet.entity";
 import { CreateBetDto } from "./dto/createBet.dto";
 import { UpdateBetDto } from "./dto/updateBet.dto";
 
 @Injectable()
 export class BetService {
-  constructor(private database: DatabaseService) {}
+  constructor(private database: DatabaseService, private userService: UserService, private gameService: GameService, private cartService: CartService) {}
 
   async createBet(data: CreateBetDto): Promise<BetEntity[]> {
     // user
-    const user = await this.database.users.findUnique({ where: { id: data.user_id } });
-
-    if (!user) {
-      throw new NotAcceptableException("Não foi encontrado nenhum usuário com este ID");
-    }
+    await this.userService.findIdUser(data.user_id);
 
     // cart
     let valueCartTotal = 0;
     for (const bet of data.bets) {
-      const game = await this.database.games.findUnique({ where: { id: bet.game_id } });
-
-      if (!game) {
-        throw new NotAcceptableException("Não foi encontrado nenhum jogo com este ID");
-      }
-
+      const game = await this.gameService.findIdGame(bet.game_id);
       valueCartTotal += game.price;
     }
 
-    const cart = await this.database.carts.findFirst({ orderBy: { created_at: "desc" } });
+    const cart = await this.cartService.findCarts();
 
-    if (!cart) {
-      throw new NotAcceptableException("Não foi encontrado nenhum carrinho cadastrado");
-    }
-
-    if (valueCartTotal < cart.min_value) {
+    if (valueCartTotal < cart[0].min_value) {
       throw new NotAcceptableException("Valor mínimo do carrinho não atingido");
     }
 
     // game
     const bets: BetEntity[] = [];
     for (const bet of data.bets) {
-      const game = await this.database.games.findUnique({ where: { id: bet.game_id } });
-
-      if (!game) {
-        throw new NotAcceptableException("Não foi encontrado nenhum jogo com este ID");
-      }
+      const game = await this.gameService.findIdGame(bet.game_id);
 
       const items = bet.items.split(",");
 

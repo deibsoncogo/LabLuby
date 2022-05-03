@@ -19,7 +19,7 @@ export class CartService {
   }
 
   async findCarts(): Promise<CartEntity[]> {
-    const carts = await this.database.carts.findMany();
+    const carts = await this.database.carts.findMany({ orderBy: { created_at: "desc" } });
 
     if (!carts) {
       throw new InternalServerErrorException("Erro inesperado ao listar os carrinhos");
