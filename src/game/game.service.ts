@@ -31,7 +31,10 @@ export class GameService {
   }
 
   async findIdGame(id: string): Promise<GameEntity> {
-    const game = await this.database.games.findUnique({ where: { id } });
+    const game = await this.database.games.findUnique({
+      where: { id },
+      include: { Bets: { include: { user: true } } },
+    });
 
     if (!game) {
       throw new NotAcceptableException("Não foi encontrado nenhum jogo com este ID");

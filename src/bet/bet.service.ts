@@ -65,7 +65,10 @@ export class BetService {
   }
 
   async findIdBet(id: string): Promise<BetEntity> {
-    const bet = await this.database.bets.findUnique({ where: { id } });
+    const bet = await this.database.bets.findUnique({
+      where: { id },
+      include: { user: true, game: true },
+    });
     return bet;
   }
 

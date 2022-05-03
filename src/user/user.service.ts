@@ -33,7 +33,7 @@ export class UserService {
   async findIdUser(id: string): Promise<UserEntity> {
     const user = await this.database.users.findUnique({
       where: { id },
-      include: { Users_Rules: { include: { rule: true } } },
+      include: { Users_Rules: { include: { rule: true } }, Bets: { include: { game: true } } },
     });
 
     if (!user) {
