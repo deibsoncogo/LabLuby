@@ -3,6 +3,7 @@ import { JwtService } from "@nestjs/jwt";
 import { DatabaseService } from "src/database/database.service";
 import { UserEntity } from "src/user/user.entity";
 import { CreateAuthDto } from "./dto/createAuth.dto";
+import { compare } from "bcryptjs";
 
 type IReturn = {
   token: string;
@@ -19,7 +20,9 @@ export class AuthService {
       include: { Users_Rules: { include: { rule: true } } },
     });
 
-    if (!user || user.password !== data.password) {
+    const passwordCompare = await compare(data.password, user.password);
+
+    if (!user || !passwordCompare) {
       throw new UnauthorizedException("Credencial inválida");
     }
 

@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { CreateGameDto } from "../../src/game/dto/createGame.dto";
 import { CreateRuleDto } from "../../src/rule/dto/createRule.dto";
 import { CreateUserDto } from "../../src/user/dto/createUser.dto";
+import { hash } from "bcryptjs";
 
 type IFactories = {
   users: CreateUserDto[];
@@ -62,6 +63,9 @@ export async function ProductionSeed() {
   try {
     //** vai atualizar ou adicionar o usuário dentro do Factories.users */
     for (const user of Factories.users) {
+      const passwordHash = await hash(user.password, 8);
+      user.password = passwordHash;
+
       await prisma.users.upsert({ where: { email: user.email }, update: user, create: user });
     }
 

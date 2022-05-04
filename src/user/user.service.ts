@@ -1,4 +1,5 @@
 import { Injectable, InternalServerErrorException, NotAcceptableException } from "@nestjs/common";
+import { hash } from "bcryptjs";
 import { DatabaseService } from "src/database/database.service";
 import { CreateUserDto } from "./dto/createUser.dto";
 import { UpdateUserDto } from "./dto/updateUser.dto";
@@ -10,6 +11,9 @@ export class UserService {
 
   async createUser(data: CreateUserDto): Promise<UserEntity> {
     await this.hasEmailAlreadyExistsUser(data.email);
+
+    const passwordHash = await hash(data.password, 8);
+    data.password = passwordHash;
 
     const user = await this.database.users.create({ data });
 
