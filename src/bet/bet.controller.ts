@@ -1,7 +1,8 @@
-import { Controller, Post, Get, Put, Delete, Req, Res } from "@nestjs/common";
-import { Request, Response } from "express";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res } from "@nestjs/common";
+import { Response } from "express";
 import { BetResolver } from "./bet.resolver";
 import { CreateBetDto } from "./dto/createBet.dto";
+import { IdBetDto } from "./dto/idUser.dto";
 import { UpdateBetDto } from "./dto/updateBet.dto";
 
 @Controller("bet")
@@ -9,8 +10,8 @@ export class BetController {
   constructor(private resolver: BetResolver) {}
 
   @Post()
-  async createBet(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { user_id, bets }: CreateBetDto = request.body;
+  async createBet(@Body() body: CreateBetDto, @Res() response: Response): Promise<Response> {
+    const { user_id, bets } = body;
     return response.status(201).json(await this.resolver.createBet({ user_id, bets }));
   }
 
@@ -20,21 +21,26 @@ export class BetController {
   }
 
   @Get(":id")
-  async findIdBet(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { id } = request.params;
+  async findIdBet(@Param() param: IdBetDto, @Res() response: Response): Promise<Response> {
+    const { id } = param;
     return response.status(200).json(await this.resolver.findIdBet(id));
   }
 
   @Put(":id")
-  async updateBet(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { id } = request.params;
-    const { item, user_id, game_id }: UpdateBetDto = request.query;
+  async updateBet(
+    @Param() param: IdBetDto,
+    @Query() query: UpdateBetDto,
+    @Res() response: Response,
+  ): Promise<Response> {
+    const { id } = param;
+    const { item, user_id, game_id } = query;
+
     return response.status(201).json(await this.resolver.updateBet(id, { item, user_id, game_id }));
   }
 
   @Delete(":id")
-  async deleteBet(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { id } = request.params;
+  async deleteBet(@Param() param: IdBetDto, @Res() response: Response): Promise<Response> {
+    const { id } = param;
     return response.status(205).json(await this.resolver.deleteBet(id));
   }
 }

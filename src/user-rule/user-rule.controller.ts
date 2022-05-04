@@ -1,5 +1,5 @@
-import { Controller, Delete, Get, Post, Req, Res } from "@nestjs/common";
-import { Request, Response } from "express";
+import { Body, Controller, Delete, Get, Post, Res } from "@nestjs/common";
+import { Response } from "express";
 import { CreateUserRuleDto } from "./dto/createUserRule.dto";
 import { DeleteUserRuleDto } from "./dto/deleteUserRule.dto";
 import { UserRuleResolver } from "./user-rule.resolver";
@@ -9,8 +9,8 @@ export class UserRuleController {
   constructor(private resolver: UserRuleResolver) {}
 
   @Post()
-  async createUserRule(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { user_id, rule_id }: CreateUserRuleDto = request.body;
+  async createUserRule(@Body() body: CreateUserRuleDto, @Res() response: Response): Promise<Response> {
+    const { user_id, rule_id } = body;
     return response.status(201).json(await this.resolver.createUserRule({ user_id, rule_id }));
   }
 
@@ -20,8 +20,8 @@ export class UserRuleController {
   }
 
   @Delete()
-  async deleteUserRule(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { user_id, rule_id }: DeleteUserRuleDto = request.body;
+  async deleteUserRule(@Body() body: DeleteUserRuleDto, @Res() response: Response): Promise<Response> {
+    const { user_id, rule_id } = body;
     return response.status(205).json(await this.resolver.deleteUserRule({ user_id, rule_id }));
   }
 }

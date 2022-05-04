@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Post, Put, Req, Res } from "@nestjs/common";
-import { Request, Response } from "express";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res } from "@nestjs/common";
+import { Response } from "express";
 import { CreateUserDto } from "./dto/createUser.dto";
+import { IdUserDto } from "./dto/idUser.dto";
 import { UpdateUserDto } from "./dto/updateUser.dto";
 import { UserResolver } from "./user.resolver";
 
@@ -10,7 +11,8 @@ export class UserController {
 
   @Post()
   async createUser(@Body() body: CreateUserDto, @Res() response: Response): Promise<Response> {
-    return response.status(201).json(await this.resolve.createUser(body));
+    const { name, email, password } = body;
+    return response.status(201).json(await this.resolve.createUser({ name, email, password }));
   }
 
   @Get()
@@ -19,22 +21,26 @@ export class UserController {
   }
 
   @Get(":id")
-  async findIdUser(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { id } = request.params;
+  async findIdUser(@Param() param: IdUserDto, @Res() response: Response): Promise<Response> {
+    const { id } = param;
     return response.status(200).json(await this.resolve.findIdUser(id));
   }
 
   @Put(":id")
-  async updateUser(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { name, email, password }: UpdateUserDto = request.query;
-    const { id } = request.params;
+  async updateUser(
+    @Param() param: IdUserDto,
+    @Query() query: UpdateUserDto,
+    @Res() response: Response,
+  ): Promise<Response> {
+    const { id } = param;
+    const { name, email, password } = query;
 
     return response.status(201).json(await this.resolve.updateUser(id, { name, email, password }));
   }
 
   @Delete(":id")
-  async deleteUser(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { id } = request.params;
+  async deleteUser(@Param() param: IdUserDto, @Res() response: Response): Promise<Response> {
+    const { id } = param;
     return response.status(205).json(await this.resolve.deleteUser(id));
   }
 }

@@ -10,15 +10,15 @@ export class UpdateUserDto {
   name?: string;
 
   @IsOptional()
-  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @IsString({ message: "Deve ser do tipo texto" })
+  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @IsEmail({}, { message: "Formato do e-mail inválido" })
   @Field(() => String)
   email?: string;
 
   @IsOptional()
-  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @IsString({ message: "Deve ser do tipo texto" })
+  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @Field(() => String)
   password?: string;
 }

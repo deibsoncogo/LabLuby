@@ -10,15 +10,15 @@ export class UpdateBetDto {
   item?: string;
 
   @IsOptional()
-  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @IsString({ message: "Deve ser do tipo texto" })
+  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @IsUUID("4", { message: "Formato do ID inválido" })
   @Field(() => String)
   user_id?: string;
 
   @IsOptional()
-  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @IsString({ message: "Deve ser do tipo texto" })
+  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @IsUUID("4", { message: "Formato do ID inválido" })
   @Field(() => String)
   game_id?: string;

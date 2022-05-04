@@ -1,6 +1,7 @@
-import { Controller, Delete, Get, Post, Put, Req, Res } from "@nestjs/common";
-import { Request, Response } from "express";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res } from "@nestjs/common";
+import { Response } from "express";
 import { CreateGameDto } from "./dto/createGame.dto";
+import { IdGameDto } from "./dto/idGame.dto";
 import { UpdateGameDto } from "./dto/updateGame.dto";
 import { GameResolver } from "./game.resolver";
 
@@ -9,9 +10,11 @@ export class GameController {
   constructor(private resolver: GameResolver) {}
 
   @Post()
-  async createGame(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { name, description, range, price, max_number, color }: CreateGameDto = request.body;
-    return response.status(201).json(await this.resolver.createGame({ name, description, range, price, max_number, color }));
+  async createGame(@Body() body: CreateGameDto, @Res() response: Response): Promise<Response> {
+    const { name, description, range, price, max_number, color } = body;
+    return response
+      .status(201)
+      .json(await this.resolver.createGame({ name, description, range, price, max_number, color }));
   }
 
   @Get()
@@ -20,15 +23,20 @@ export class GameController {
   }
 
   @Get(":id")
-  async findIdGame(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { id } = request.params;
+  async findIdGame(@Param() param: IdGameDto, @Res() response: Response): Promise<Response> {
+    const { id } = param;
     return response.status(200).json(await this.resolver.findIdGame(id));
   }
 
   @Put(":id")
-  async updateGame(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { id } = request.params;
-    const { name, description, range, price, max_number, color }: UpdateGameDto = request.query;
+  async updateGame(
+    @Param() param: IdGameDto,
+    @Query() query: UpdateGameDto,
+    @Res() response: Response,
+  ): Promise<Response> {
+    const { id } = param;
+    const { name, description, range, price, max_number, color } = query;
+
     return response.status(201).json(
       await this.resolver.updateGame(id, {
         name,
@@ -42,8 +50,8 @@ export class GameController {
   }
 
   @Delete(":id")
-  async deleteGame(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { id } = request.params;
+  async deleteGame(@Param() param: IdGameDto, @Res() response: Response): Promise<Response> {
+    const { id } = param;
     return response.status(205).json(await this.resolver.deleteGame(id));
   }
 }

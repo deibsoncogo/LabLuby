@@ -3,8 +3,8 @@ import { IsNotEmpty, IsString, IsUUID } from "class-validator";
 
 @InputType()
 export class CreateBetDto {
-  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @IsString({ message: "Deve ser do tipo texto" })
+  @IsNotEmpty({ message: "Deve ser informado um valor" })
   @IsUUID("4", { message: "Formato do ID inválido" })
   @Field(() => String)
   user_id: string;

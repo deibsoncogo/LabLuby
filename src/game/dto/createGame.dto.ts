@@ -14,20 +14,20 @@ export class CreateGameDto {
   description: string;
 
   @IsNumber({ allowInfinity: false, maxDecimalPlaces: 0 }, { message: "Deve ser do tipo número" })
-  @IsPositive({ message: "Deve ser maior que 0" })
   @IsNotEmpty({ message: "Deve ser informado um valor" })
+  @IsPositive({ message: "Deve ser maior que 0" })
   @Field(() => Number)
   range: number;
 
-  @IsNumber({ allowInfinity: false, maxDecimalPlaces: 0 }, { message: "Deve ser do tipo número" })
-  @IsPositive({ message: "Deve ser maior que 0" })
+  @IsNumber({ allowInfinity: false, maxDecimalPlaces: 2 }, { message: "Deve ser do tipo número" })
   @IsNotEmpty({ message: "Deve ser informado um valor" })
+  @IsPositive({ message: "Deve ser maior que 0" })
   @Field(() => Number)
   price: number;
 
-  @IsNumber({ allowInfinity: false, maxDecimalPlaces: 2 }, { message: "Deve ser do tipo número" })
-  @IsPositive({ message: "Deve ser maior que 0" })
+  @IsNumber({ allowInfinity: false, maxDecimalPlaces: 0 }, { message: "Deve ser do tipo número" })
   @IsNotEmpty({ message: "Deve ser informado um valor" })
+  @IsPositive({ message: "Deve ser maior que 0" })
   @Field(() => Number)
   max_number: number;
 
