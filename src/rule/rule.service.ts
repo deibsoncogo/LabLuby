@@ -21,7 +21,7 @@ export class RuleService {
   }
 
   async findRules(): Promise<RuleEntity[]> {
-    const rules = await this.database.rules.findMany({ orderBy: { created_at: "desc" } });
+    const rules = await this.database.rules.findMany({ orderBy: { created_at: "asc" } });
 
     if (!rules) {
       throw new InternalServerErrorException("Erro inesperado ao buscar todas regras");

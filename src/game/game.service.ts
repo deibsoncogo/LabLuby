@@ -21,7 +21,7 @@ export class GameService {
   }
 
   async findGames(): Promise<GameEntity[]> {
-    const games = await this.database.games.findMany({ orderBy: { created_at: "desc" } });
+    const games = await this.database.games.findMany({ orderBy: { created_at: "asc" } });
 
     if (!games) {
       throw new InternalServerErrorException("Erro inesperado ao listar os jogos");
