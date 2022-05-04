@@ -13,6 +13,18 @@ export class UserService {
 
     const user = await this.database.users.create({ data });
 
+    const rule = await this.database.rules.findUnique({ where: { name: "player" } });
+
+    if (!rule) {
+      throw new InternalServerErrorException("Erro inesperado ao buscar o nível de acesso base");
+    }
+
+    const userRule = await this.database.users_Rules.create({ data: { user_id: user.id, rule_id: rule.id } });
+
+    if (!userRule) {
+      throw new InternalServerErrorException("Erro inesperado ao vincular o nível de acesso base ao usuário");
+    }
+
     if (!user) {
       throw new InternalServerErrorException("Erro inesperado ao criar o usuário");
     }
