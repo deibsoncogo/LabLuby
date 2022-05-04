@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Post, Put, Req, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post, Put, Req, Res } from "@nestjs/common";
 import { Request, Response } from "express";
 import { CreateUserDto } from "./dto/createUser.dto";
 import { UpdateUserDto } from "./dto/updateUser.dto";
@@ -9,9 +9,8 @@ export class UserController {
   constructor(private resolve: UserResolver) {}
 
   @Post()
-  async createUser(@Req() request: Request, @Res() response: Response): Promise<Response> {
-    const { name, email, password }: CreateUserDto = request.body;
-    return response.status(201).json(await this.resolve.createUser({ name, email, password }));
+  async createUser(@Body() body: CreateUserDto, @Res() response: Response): Promise<Response> {
+    return response.status(201).json(await this.resolve.createUser(body));
   }
 
   @Get()
