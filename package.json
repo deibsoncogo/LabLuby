@@ -25,7 +25,9 @@
     "test:watch": "cls && jest --watch",
     "test:cov": "cls && jest --coverage",
     "test:debug": "cls && node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "cls && jest --config ./test/jest-e2e.json"
+    "test:e2e": "cls && jest --config ./test/jest.e2e.json",
+    "test:e2e:watch": "cls && jest --watch --config ./test/jest.e2e.json",
+    "test:e2e:cov": "cls && jest --coverage --config ./test/jest.e2e.json"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.9",
