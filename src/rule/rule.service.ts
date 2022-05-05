@@ -40,6 +40,10 @@ export class RuleService {
       throw new NotAcceptableException("Não foi encontrado nenhuma regra com este ID");
     }
 
+    rule.Users_Rules.forEach((rule) => {
+      delete rule.user.password;
+    });
+
     return rule;
   }
 

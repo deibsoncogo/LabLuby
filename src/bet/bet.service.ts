@@ -9,7 +9,12 @@ import { UpdateBetDto } from "./dto/updateBet.dto";
 
 @Injectable()
 export class BetService {
-  constructor(private database: DatabaseService, private userService: UserService, private gameService: GameService, private cartService: CartService) {}
+  constructor(
+    private database: DatabaseService,
+    private userService: UserService,
+    private gameService: GameService,
+    private cartService: CartService,
+  ) {}
 
   async createBet(data: CreateBetDto): Promise<BetEntity[]> {
     /** user */
@@ -82,6 +87,8 @@ export class BetService {
     if (!bet) {
       throw new NotAcceptableException("Não foi encontrado nenhuma aposta com este ID");
     }
+
+    delete bet.user.password;
 
     return bet;
   }

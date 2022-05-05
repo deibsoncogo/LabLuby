@@ -10,6 +10,7 @@ export class UserRuleService {
 
   async createUserRule(data: CreateUserRuleDto): Promise<UserRuleEntity> {
     const userRule = await this.database.users_Rules.create({ data });
+
     return userRule;
   }
 
@@ -18,6 +19,11 @@ export class UserRuleService {
       orderBy: { created_at: "desc" },
       include: { user: true, rule: true },
     });
+
+    usersRules.forEach((userRule) => {
+      delete userRule.user.password;
+    });
+
     return usersRules;
   }
 
@@ -27,6 +33,7 @@ export class UserRuleService {
     });
 
     const userRule = await this.database.users_Rules.delete({ where: { id: userRuleFind.id } });
+
     return userRule;
   }
 }

@@ -32,6 +32,8 @@ export class AuthService {
       sub: user.id,
     });
 
+    delete user.password;
+
     return { token, user };
   }
 

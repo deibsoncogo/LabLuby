@@ -33,6 +33,8 @@ export class UserService {
       throw new InternalServerErrorException("Erro inesperado ao criar o usuário");
     }
 
+    delete user.password;
+
     return user;
   }
 
@@ -42,6 +44,10 @@ export class UserService {
     if (!users) {
       throw new InternalServerErrorException("Erro inesperado ao buscar todos usuários");
     }
+
+    users.forEach((user) => {
+      delete user.password;
+    });
 
     return users;
   }
@@ -56,6 +62,8 @@ export class UserService {
       throw new NotAcceptableException("Não foi encontrado nenhum usuário com este ID");
     }
 
+    delete user.password;
+
     return user;
   }
 
@@ -68,6 +76,8 @@ export class UserService {
     if (!user) {
       throw new NotAcceptableException("Não foi encontrado nenhum usuário com este e-mail");
     }
+
+    delete user.password;
 
     return user;
   }
@@ -82,6 +92,8 @@ export class UserService {
       throw new InternalServerErrorException("Erro inesperado ao atualizar o usuário");
     }
 
+    delete user.password;
+
     return user;
   }
 
@@ -93,6 +105,8 @@ export class UserService {
     if (!user) {
       throw new InternalServerErrorException("Erro inesperado ao excluir o usuário");
     }
+
+    delete user.password;
 
     return user;
   }

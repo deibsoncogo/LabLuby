@@ -40,6 +40,10 @@ export class GameService {
       throw new NotAcceptableException("Não foi encontrado nenhum jogo com este ID");
     }
 
+    game.Bets.forEach((bet) => {
+      delete bet.user.password;
+    });
+
     return game;
   }
 
