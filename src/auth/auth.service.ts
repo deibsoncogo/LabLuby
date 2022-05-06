@@ -20,7 +20,7 @@ export class AuthService {
       include: { Users_Rules: { include: { rule: true } } },
     });
 
-    const passwordCompare = await compare(data.password, user.password);
+    const passwordCompare = user && (await compare(data.password, user.password));
 
     if (!user || !passwordCompare) {
       throw new UnauthorizedException("Credencial inválida");

@@ -44,34 +44,24 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .exclude(
-        { path: "", method: RequestMethod.ALL },
-        { path: "user", method: RequestMethod.POST },
-        { path: "auth", method: RequestMethod.POST },
-      )
-      .forRoutes({ path: "*", method: RequestMethod.ALL });
+      .exclude("", "auth", { path: "user", method: RequestMethod.POST })
+      .forRoutes("*");
 
     consumer
       .apply(RulePlayerMiddleware)
-      .exclude(
-        { path: "", method: RequestMethod.ALL },
-        { path: "user", method: RequestMethod.POST },
-        { path: "auth", method: RequestMethod.POST },
-      )
-      .forRoutes({ path: "*", method: RequestMethod.ALL });
+      .exclude("", "auth", { path: "user", method: RequestMethod.POST })
+      .forRoutes("*");
 
     consumer
       .apply(RuleAdminMiddleware)
-      .exclude(
-        { path: "", method: RequestMethod.ALL },
-        { path: "user", method: RequestMethod.POST },
-        { path: "auth", method: RequestMethod.POST },
-        { path: "*/:id", method: RequestMethod.GET },
-      )
       .forRoutes(
+        "rule",
+        "userRule",
+        "cart",
+        "game",
+        { path: "user", method: RequestMethod.GET },
+        { path: "bet", method: RequestMethod.GET },
         { path: "*", method: RequestMethod.DELETE },
-        { path: "*", method: RequestMethod.GET },
-        { path: "rule", method: RequestMethod.ALL },
       );
   }
 }
