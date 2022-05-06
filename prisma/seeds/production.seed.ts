@@ -61,7 +61,8 @@ const prisma = new PrismaClient();
 
 export async function ProductionSeed() {
   try {
-    //** vai atualizar ou adicionar o usuário dentro do Factories.users */
+    prisma.$connect();
+
     for (const user of Factories.users) {
       const passwordHash = await hash(user.password, 8);
       user.password = passwordHash;
@@ -69,18 +70,15 @@ export async function ProductionSeed() {
       await prisma.users.upsert({ where: { email: user.email }, update: user, create: user });
     }
 
-    //** vai atualizar ou adicionar o regra dentro do Factories.rules */
     for (const rule of Factories.rules) {
       await prisma.rules.upsert({ where: { name: rule.name }, update: rule, create: rule });
     }
 
-    //** vai atualizar ou adicionar o jogo dentro do Factories.games */
     for (const game of Factories.games) {
       await prisma.games.upsert({ where: { name: game.name }, update: game, create: game });
     }
 
-    //** vai atualizar ou adicionar todos nível de acesso ao primeiro usuário */
-    const user = await prisma.users.findFirst();
+    const user = await prisma.users.findUnique({ where: { email: Factories.users[0].email } });
     const rules = await prisma.rules.findMany();
 
     for (const rule of rules) {
@@ -97,9 +95,12 @@ export async function ProductionSeed() {
     }
   } catch (error) {
     console.error(error);
+
     process.exit(1);
   } finally {
     prisma.$disconnect();
+
+    console.info("Seeders the production finished with success");
   }
 }
 
