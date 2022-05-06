@@ -20,7 +20,7 @@ export class GameResolver {
     return games;
   }
 
-  @Query(() => [GameEntity])
+  @Query(() => GameEntity)
   async findIdGame(@Args("id") id: string): Promise<GameEntity> {
     const game = await this.service.findIdGame(id);
     return game;
