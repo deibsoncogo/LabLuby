@@ -5,6 +5,7 @@ import { join } from "path";
 import { AppController } from "./app.controller";
 import { AppResolver } from "./app.resolver";
 import { AppService } from "./app.service";
+import { AuthModule } from "./auth/auth.module";
 import { BetModule } from "./bet/bet.module";
 import { CartModule } from "./cart/cart.module";
 import { DatabaseModule } from "./database/database.module";
@@ -26,6 +27,7 @@ import { UserModule } from "./user/user.module";
     GameModule,
     CartModule,
     BetModule,
+    AuthModule,
   ],
   providers: [AppService, AppResolver],
   controllers: [AppController],
