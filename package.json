@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "db": "cls && yarn db:reset -f && cls && yarn db:run && cls && yarn start:dev",
+    "db": "cls && yarn db:reset -f && yarn db:run && yarn seed:production && yarn start:dev",
     "db:reset": "cls && prisma migrate reset -f",
     "db:run": "cls && prisma migrate dev",
     "db:view": "cls && prisma studio",
