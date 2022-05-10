@@ -1,26 +1,37 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { UserService } from "src/user/user.service";
+import { compare } from "bcryptjs";
+import { DatabaseService } from "src/database/database.service";
+import { AuthEntity } from "./auth.entity";
+import { CreateAuthDto } from "./dto/createAuth.dto";
 
 @Injectable()
 export class AuthService {
-  constructor(private userService: UserService, private jwtService: JwtService) {}
+  constructor(private databaseService: DatabaseService, private jwtService: JwtService) {}
 
-  async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.userService.findEmailUser(email);
+  async createAuth(data: CreateAuthDto): Promise<AuthEntity> {
+    const user = await this.databaseService.users.findUnique({
+      where: { email: data.email },
+      include: { Users_Rules: { include: { rule: true } } },
+    });
 
-    if (user && user.password === password) {
-      delete user.password;
+    if (user) {
+      if (await compare(data.password, user.password)) {
+        const token = await this.jwtService.signAsync({
+          sub: user.id,
+          userName: user.name,
+        });
 
-      return user;
+        const rules = [];
+
+        user.Users_Rules.forEach((userRule) => {
+          rules.push(userRule.rule);
+        });
+
+        return { token, user, rules };
+      }
     }
 
-    return null;
-  }
-
-  async login(user: any) {
-    const payload = { userName: user.name, sub: user.id };
-
-    return { access_token: this.jwtService.sign(payload) };
+    throw new UnauthorizedException("Credencial inválida");
   }
 }
