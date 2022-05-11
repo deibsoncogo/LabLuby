@@ -9,11 +9,15 @@ export class CreateBetDto {
   @Field(() => String)
   user_id: string;
 
-  @Field(() => [String])
+  @Field(() => [IBet])
   bets: IBet[];
 }
 
-type IBet = {
+@InputType()
+export class IBet {
+  @Field(() => String)
   items: string;
+
+  @Field(() => String)
   game_id: string;
-};
+}
