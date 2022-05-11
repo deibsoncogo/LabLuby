@@ -1,5 +1,7 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 import { Bets } from "@prisma/client";
+import { GameEntity } from "src/game/game.entity";
+import { UserEntity } from "src/user/user.entity";
 
 @ObjectType()
 export class BetEntity implements Bets {
@@ -15,4 +17,8 @@ export class BetEntity implements Bets {
   created_at: Date;
 
   updated_at: Date;
+
+  user?: UserEntity;
+
+  game?: GameEntity;
 }
