@@ -4,7 +4,6 @@ import { APP_GUARD } from "@nestjs/core";
 import { GraphQLModule } from "@nestjs/graphql";
 import { JwtModule } from "@nestjs/jwt";
 import { join } from "path";
-import { AppController } from "./app.controller";
 import { AppResolver } from "./app.resolver";
 import { AppService } from "./app.service";
 import { AuthGuard } from "./auth/auth.guard";
@@ -37,6 +36,5 @@ import { UserModule } from "./user/user.module";
     AuthModule,
   ],
   providers: [AppService, AppResolver, { provide: APP_GUARD, useClass: AuthGuard }],
-  controllers: [AppController],
 })
 export class AppModule {}
