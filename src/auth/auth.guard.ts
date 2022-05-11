@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     private jwtService: JwtService,
   ) {}
 
-  canActivate(context: ExecutionContext): boolean {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const role = this.reflector.get<string>("AccessLevel", context.getHandler());
 
     if (role === AccessLevels.Public) {
@@ -42,23 +42,28 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException("Token inválido");
     }
 
-    this.databaseService.users
-      .findUnique({
-        where: { id: payload.sub },
-        include: { Users_Rules: { include: { rule: true } } },
-      })
-      .then((user) => {
-        user.Users_Rules.forEach((userRule) => {
-          if (role === userRule.rule.name) {
-            request.payload = payload;
-            return true;
-          }
-        });
-      })
-      .catch(() => {
-        throw new ForbiddenException("Acesso não autorizado");
-      });
+    const user = await this.databaseService.users.findUnique({
+      where: { id: payload.sub },
+      include: { Users_Rules: { include: { rule: true } } },
+    });
 
-    return false;
+    if (!user) {
+      throw new ForbiddenException("Erro ao autorizar o usuário");
+    }
+
+    let userAuthorized = false;
+
+    user.Users_Rules.forEach((userRule) => {
+      if (role === userRule.rule.name) {
+        userAuthorized = true;
+      }
+    });
+
+    if (userAuthorized) {
+      request.payload = payload;
+      return true;
+    }
+
+    throw new ForbiddenException("Acesso não autorizado");
   }
 }
