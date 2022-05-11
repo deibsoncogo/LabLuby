@@ -1,6 +1,7 @@
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { Module } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
+import { JwtModule } from "@nestjs/jwt";
 import { join } from "path";
 import { AppController } from "./app.controller";
 import { AppResolver } from "./app.resolver";
@@ -19,6 +20,10 @@ import { UserModule } from "./user/user.module";
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),
+    }),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
     }),
     DatabaseModule,
     UserModule,
