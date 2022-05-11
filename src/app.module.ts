@@ -1,11 +1,13 @@
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { Module } from "@nestjs/common";
+import { APP_GUARD } from "@nestjs/core";
 import { GraphQLModule } from "@nestjs/graphql";
 import { JwtModule } from "@nestjs/jwt";
 import { join } from "path";
 import { AppController } from "./app.controller";
 import { AppResolver } from "./app.resolver";
 import { AppService } from "./app.service";
+import { AuthGuard } from "./auth/auth.guard";
 import { AuthModule } from "./auth/auth.module";
 import { BetModule } from "./bet/bet.module";
 import { CartModule } from "./cart/cart.module";
@@ -34,7 +36,7 @@ import { UserModule } from "./user/user.module";
     BetModule,
     AuthModule,
   ],
-  providers: [AppService, AppResolver],
+  providers: [AppService, AppResolver, { provide: APP_GUARD, useClass: AuthGuard }],
   controllers: [AppController],
 })
 export class AppModule {}
