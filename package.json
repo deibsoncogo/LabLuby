@@ -29,6 +29,7 @@
   },
   "scripts": {
     "test:staged": "jest",
+    "test:watch": "jest --watch",
     "test": "jest"
   }
 }
