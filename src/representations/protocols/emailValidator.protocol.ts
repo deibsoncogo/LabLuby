@@ -1,3 +1,3 @@
-export interface EmailValidatorProtocol {
+export interface EmailValidator {
   isValid (email: string): boolean
 }
