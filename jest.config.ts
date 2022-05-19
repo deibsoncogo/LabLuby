@@ -1,4 +1,5 @@
 export default {
+  preset: "@shelf/jest-mongodb",
   roots: ["./src"],
   collectCoverageFrom: ["./src/**/*.ts"],
   coverageDirectory: "coverage",
