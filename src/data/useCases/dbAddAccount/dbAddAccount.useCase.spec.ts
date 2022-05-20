@@ -7,6 +7,19 @@ interface SubTypes {
   addAccountRepositoryStub: AddAccountRepository
 }
 
+const makeFakeAccountData = (): AddAccountModel => ({
+  name: "valid_name",
+  email: "valid_email",
+  password: "valid_password"
+})
+
+const makeFakeAccount = (): AccountModel => ({
+  id: "valid_id",
+  name: "valid_name",
+  email: "valid_email",
+  password: "hashed_password"
+})
+
 const makeEncrypter = (): Encrypter => {
   class EncrypterStub implements Encrypter {
     async encrypt (value: string): Promise<string> {
@@ -20,14 +33,7 @@ const makeEncrypter = (): Encrypter => {
 const makeAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
     async add (accountData: AddAccountModel): Promise<AccountModel> {
-      const fakeAccount = {
-        id: "valid_id",
-        name: "valid_name",
-        email: "valid_email",
-        password: "hashed_password"
-      }
-
-      return new Promise((resolve) => resolve(fakeAccount))
+      return new Promise((resolve) => resolve(makeFakeAccount()))
     }
   }
 
@@ -67,13 +73,7 @@ describe("DbAddAccount useCase", () => {
       .spyOn(encrypterStub, "encrypt")
       .mockReturnValueOnce(new Promise((resolve, reject) => { reject(new Error()) }))
 
-    const accountData = {
-      name: "valid_name",
-      email: "valid_email",
-      password: "valid_password"
-    }
-
-    const promise = sut.add(accountData)
+    const promise = sut.add(makeFakeAccountData())
 
     await expect(promise).rejects.toThrow()
   })
@@ -83,17 +83,11 @@ describe("DbAddAccount useCase", () => {
 
     const addSpy = jest.spyOn(addAccountRepositoryStub, "add")
 
-    const accountData = {
-      name: "valid_name",
-      email: "valid_email",
-      password: "valid_password"
-    }
-
-    await sut.add(accountData)
+    await sut.add(makeFakeAccountData())
 
     expect(addSpy).toHaveBeenCalledWith({
       name: "valid_name",
-      email: "valid_email",
+      email: "valid_email@mail.com",
       password: "hashed_password"
     })
   })
@@ -105,13 +99,7 @@ describe("DbAddAccount useCase", () => {
       .spyOn(addAccountRepositoryStub, "add")
       .mockReturnValueOnce(new Promise((resolve, reject) => { reject(new Error()) }))
 
-    const accountData = {
-      name: "valid_name",
-      email: "valid_email",
-      password: "valid_password"
-    }
-
-    const promise = sut.add(accountData)
+    const promise = sut.add(makeFakeAccountData())
 
     await expect(promise).rejects.toThrow()
   })
@@ -119,19 +107,8 @@ describe("DbAddAccount useCase", () => {
   test("Should return an account on success", async () => {
     const { sut } = makeSut()
 
-    const accountData = {
-      name: "valid_name",
-      email: "valid_email",
-      password: "valid_password"
-    }
+    const account = await sut.add(makeFakeAccountData())
 
-    const account = await sut.add(accountData)
-
-    expect(account).toEqual({
-      id: "valid_id",
-      name: "valid_name",
-      email: "valid_email",
-      password: "hashed_password"
-    })
+    expect(account).toEqual(makeFakeAccount())
   })
 })
