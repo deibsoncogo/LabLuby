@@ -21,7 +21,7 @@
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "import/prefer-default-export": "off", // importação única
-    "max-len": ["error", {"code": 103, "ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^import\\s.+\\sfrom\\s.+$" }], // tamanho máximo da linha
+    "max-len": ["error", {"code": 109, "ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^import\\s.+\\sfrom\\s.+$" }], // tamanho máximo da linha
     "linebreak-style": "off", // tipo de enter
     "no-console": "off", // console
     "quotes": ["error", "double"], // obriga a usar aspas duplas
