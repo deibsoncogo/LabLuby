@@ -1,5 +1,5 @@
 import validator from "validator"
-import { EmailValidator } from "../representations/protocols/emailValidator.protocol"
+import { EmailValidator } from "../presentations/protocols/emailValidator.protocol"
 
 export class EmailValidatorAdapter implements EmailValidator {
   isValid (email: string): boolean {

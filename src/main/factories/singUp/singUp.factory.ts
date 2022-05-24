@@ -2,8 +2,8 @@ import { DbAddAccount } from "../../../data/useCases/dbAddAccount/dbAddAccount.u
 import { BcryptAdapter } from "../../../infra/criptography/bcrypt.adapter"
 import { AccountMongoRepository } from "../../../infra/db/mongodb/accountRepository/account"
 import { LogMongoRepository } from "../../../infra/db/mongodb/logRepository/log"
-import { SignUpController } from "../../../representations/controllers/singUp/signUp.controller"
-import { Controller } from "../../../representations/protocols"
+import { SignUpController } from "../../../presentations/controllers/singUp/signUp.controller"
+import { Controller } from "../../../presentations/protocols"
 import { LogControllerDecorator } from "../../decorators/log.decorator"
 import { makeSingUpValidation } from "./singUp.validation.factory"
 

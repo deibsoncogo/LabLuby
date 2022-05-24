@@ -1,8 +1,6 @@
-import { EmailValidation } from "../../../representations/helpers/validators/email.validation"
-import { RequiredFieldValidation } from "../../../representations/helpers/validators/required.field.validation"
-import { Validation } from "../../../representations/helpers/validators/validation"
-import { ValidationComposite } from "../../../representations/helpers/validators/validation.composite"
-import { EmailValidator } from "../../../representations/protocols/emailValidator.protocol"
+import { EmailValidation, RequiredFieldValidation, ValidationComposite } from "../../../presentations/helpers/validators"
+import { EmailValidator } from "../../../presentations/protocols/emailValidator.protocol"
+import { Validation } from "../../../presentations/protocols/validation"
 import { makeLoginValidation } from "./login.validation.factory"
 
 jest.mock("../../../representations/helpers/validators/validation.composite")

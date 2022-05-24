@@ -1,9 +1,6 @@
-import { CompareFieldValidation } from "../../../representations/helpers/validators/compare.field.validation"
-import { EmailValidation } from "../../../representations/helpers/validators/email.validation"
-import { RequiredFieldValidation } from "../../../representations/helpers/validators/required.field.validation"
-import { Validation } from "../../../representations/helpers/validators/validation"
-import { ValidationComposite } from "../../../representations/helpers/validators/validation.composite"
-import { EmailValidator } from "../../../representations/protocols/emailValidator.protocol"
+import { CompareFieldValidation, EmailValidation, RequiredFieldValidation, ValidationComposite } from "../../../presentations/helpers/validators"
+import { EmailValidator } from "../../../presentations/protocols/emailValidator.protocol"
+import { Validation } from "../../../presentations/protocols/validation"
 import { makeSingUpController } from "./singUp.factory"
 
 jest.mock("../../../representations/helpers/validators/validation.composite")
