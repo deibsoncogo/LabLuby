@@ -6,3 +6,6 @@ build
 **.env
 **.txt
 notes.md
+jspm_packages
+.serverless
+.esbuild
