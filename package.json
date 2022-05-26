@@ -1,0 +1,10 @@
+{
+  "name": "serverlesslabluby",
+  "version": "1.0.0",
+  "description": "Criação e deploy de uma API com Node JS e TypeScript utilizando o framework Serverless",
+  "main": "index.js",
+  "repository": "git@github.com:deibsoncogo/ServerlessLabLuby.git",
+  "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "license": "MIT",
+  "private": true
+}
