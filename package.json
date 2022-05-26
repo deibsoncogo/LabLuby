@@ -8,6 +8,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "aws-lambda": "^1.0.7",
     "serverless": "^3.18.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.97",
+    "serverless-plugin-typescript": "^2.1.2",
+    "typescript": "^4.7.2"
   }
 }
