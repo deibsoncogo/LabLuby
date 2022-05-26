@@ -6,5 +6,8 @@
   "repository": "git@github.com:deibsoncogo/ServerlessModulo2LabLuby.git",
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "serverless": "^3.18.2"
+  }
 }
