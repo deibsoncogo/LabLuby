@@ -1,4 +1,4 @@
-# Módulo - Serverless / Lab Luby
+# Módulo 1 - Serverless / Lab Luby
 Criação e deploy de uma API com Node JS e TypeScript utilizando o framework Serverless
 
 ## Serverless - AWS Node.js Typescript

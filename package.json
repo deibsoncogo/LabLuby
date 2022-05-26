@@ -1,7 +1,7 @@
 {
-  "name": "serverlesslabluby",
+  "name": "serverlessmodulo1labluby",
   "version": "1.0.0",
-  "description": "Criação e deploy de uma API com Node JS e TypeScript utilizando o framework Serverless",
+  "description": "Criação e deploy de uma API com Node JS e TypeScript utilizando o framework Serverless, módulo 1",
   "main": "serverless.ts",
   "repository": "git@github.com:deibsoncogo/ServerlessLabLuby.git",
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
