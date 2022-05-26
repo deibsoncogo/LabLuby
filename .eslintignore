@@ -1,0 +1,12 @@
+node_modules
+coverage
+dist
+build
+**.log
+**.env
+**.txt
+notes.md
+jspm_packages
+.serverless
+.esbuild
+/*.js
