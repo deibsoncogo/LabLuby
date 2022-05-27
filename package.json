@@ -6,5 +6,9 @@
   "repository": "git@github.com:deibsoncogo/ServerlessModulo3LabLuby.git",
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "serverless": "^3.18.2"
+  }
 }
