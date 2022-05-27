@@ -7,3 +7,11 @@ DS_Store
 **.env
 **.txt
 notes.md
+/.nyc_output
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
