@@ -16,3 +16,4 @@ notes.md
 .settings/
 *.sublime-workspace
 .serverless
+schema.gql
