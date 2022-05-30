@@ -1,5 +1,5 @@
 # Prova Serverless - LabLuby
-Realização da prova com o Nest JS com GraphQL simulando uma api de apostas
+Realização da prova de serverless onde este micro serviço vai se comunicar o AWS da Amazon para criar um CRUD de users
 
 ## Nest JS
 

@@ -1,7 +1,7 @@
 {
-  "name": "provaserverlesslabluby",
+  "name": "provaserverlesslablubymicroserviceuser",
   "version": "1.0.0",
-  "description": "a",
+  "description": "Realização da prova de serverless onde este micro serviço vai se comunicar o AWS da Amazon para criar um CRUD de users",
   "main": "index.js",
   "repository": "git@github.com:deibsoncogo/ProvaServerlessLabLuby.git",
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
