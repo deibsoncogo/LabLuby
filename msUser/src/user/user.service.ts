@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException, NotAcceptableException } from "@nestjs/common"
 import { hash } from "bcryptjs"
-import { DatabaseService } from "src/database/database.service"
+import { DatabaseService } from "../database/database.service"
 import { CreateUserDto } from "./dto/createUser.dto"
 import { UpdateUserDto } from "./dto/updateUser.dto"
 import { UserEntity } from "./user.entity"
