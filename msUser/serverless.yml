@@ -1,4 +1,4 @@
-service: prova-serverless-lab-luby
+service: prova-serverless-lab-luby-user
 
 useDotenv: true
 
