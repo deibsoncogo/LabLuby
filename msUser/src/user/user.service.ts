@@ -82,6 +82,9 @@ export class UserService {
     await this.hasCpfAlreadyExistsUser(data.cpf)
     await this.hasEmailAlreadyExistsUser(data.email)
 
+    const passwordHash = await hash(data.password, 8)
+    data.password = passwordHash
+
     const user = await this.database.users.update({ where: { id }, data })
 
     if (!user) {
