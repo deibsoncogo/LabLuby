@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  database:
+    container_name: DatabaseProvaLiveCodeLabLuby
+    image: mysql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=ProvaLiveCodeLabLuby
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=ProvaLiveCodeLabLubyDB
