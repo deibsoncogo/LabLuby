@@ -1,5 +1,5 @@
 import { Response } from "express"
-import { Body, Controller, Delete, Get, Param, Post, Put, Res } from "@nestjs/common"
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res } from "@nestjs/common"
 import { AccessLevel, AccessLevels } from "../auth/accessLevel.decorator"
 import { CreateUserDto } from "./dto/createUser.dto"
 import { IdUserDto } from "./dto/idUser.dto"
@@ -34,13 +34,13 @@ export class UserController {
   @AccessLevel(AccessLevels.Private)
   async updateUser(
     @Param() param: IdUserDto,
-    @Body() body: UpdateUserDto,
+    @Query() query: UpdateUserDto,
     @Res() response: Response,
   ): Promise<Response> {
     const { id } = param
-    const { name, cpf, email, password } = body
+    const data = query
 
-    return response.status(201).json(await this.userService.updateUser(id, { name, cpf, email, password }))
+    return response.status(201).json(await this.userService.updateUser(id, data))
   }
 
   @Delete(":id")

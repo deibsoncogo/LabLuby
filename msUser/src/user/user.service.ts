@@ -79,11 +79,18 @@ export class UserService {
 
   async updateUser(id: string, data: UpdateUserDto): Promise<UserEntity> {
     await this.findIdUser(id)
-    await this.hasCpfAlreadyExistsUser(data.cpf)
-    await this.hasEmailAlreadyExistsUser(data.email)
 
-    const passwordHash = await hash(data.password, 8)
-    data.password = passwordHash
+    if (data.cpf) {
+      data.cpf = Number(data.cpf)
+      await this.hasCpfAlreadyExistsUser(data.cpf)
+    }
+
+    data.email && await this.hasEmailAlreadyExistsUser(data.email)
+
+    if (data.password) {
+      const passwordHash = await hash(data.password, 8)
+      data.password = passwordHash
+    }
 
     const user = await this.database.users.update({ where: { id }, data })
 

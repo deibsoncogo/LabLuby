@@ -17,6 +17,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "no-unused-expressions": "off",
     "import/no-extraneous-dependencies": "off",
     "no-param-reassign": "off",
     "@typescript-eslint/no-explicit-any": "off",
