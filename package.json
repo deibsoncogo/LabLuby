@@ -7,20 +7,21 @@
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
   "license": "MIT",
   "private": true,
-  "script": {
+  "scripts": {
     "db": "yarn db:revert && yarn db:run && yarn dev",
     "db:create": "yarn typeorm migration:create -n",
     "db:run": "yarn typeorm migration:run",
     "db:revert": "yarn typeorm migration:revert",
     "db:show": "yarn typeorm migration:show",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
-    "dev": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --inspect --transpile-only --respawn --ignore-watch node_modules src/server.ts"
   },
   "dependencies": {
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
+    "ts-node-dev": "^2.0.0",
     "tsyringe": "^4.7.0",
     "typeorm": "^0.2.41",
     "uuid": "^8.3.2",
