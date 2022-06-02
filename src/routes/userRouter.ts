@@ -1,5 +1,6 @@
 import { Router } from 'express'
+import { CreateUserController } from '../modules/users/useCases/createUser/createUserController'
 
 export const userRouter = Router()
 
-userRouter.get('/', (request, response) => response.status(200).json('Hello word User'))
+userRouter.post('/', new CreateUserController().handle)
