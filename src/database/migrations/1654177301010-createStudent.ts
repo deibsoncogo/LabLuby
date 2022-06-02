@@ -21,7 +21,6 @@ export class createStudent1654177301010 implements MigrationInterface {
           {
             name: "phone",
             type: "float",
-            isUnique: true,
             isNullable: false,
           },
           {
@@ -33,7 +32,7 @@ export class createStudent1654177301010 implements MigrationInterface {
           {
             name: "mother_name",
             type: "varchar",
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: "cpf",
@@ -51,7 +50,6 @@ export class createStudent1654177301010 implements MigrationInterface {
             name: "updated_at",
             type: "timestamp",
             default: "now()",
-            isUnique: true,
             isNullable: false,
           },
         ],
