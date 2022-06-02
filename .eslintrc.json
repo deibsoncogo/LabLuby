@@ -17,6 +17,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "class-methods-use-this": "off",
     "semi": ["error", "never"], // proíbe o uso de ponto e virgula
     "import/prefer-default-export": "off", // importação única
     "max-len": ["error", {"code": 109, "ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^import\\s.+\\sfrom\\s.+$" }], // tamanho máximo da linha

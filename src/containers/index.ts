@@ -1,5 +1,5 @@
-// import { container } from "tsyringe";
-// import { TesteRepository } from "../modules/teste/repositories/testeRepository";
-// import { ITesteRepository } from "../modules/teste/repositories/iTesteRepository";
+import { container } from "tsyringe"
+import { IStudentRepository } from "../modules/students/repositories/iStudentRepository"
+import { StudentRepository } from "../modules/students/repositories/studentRepository"
 
-// container.registerSingleton<ITesteRepository>("TesteRepository", TesteRepository);
+container.registerSingleton<IStudentRepository>("StudentRepository", StudentRepository)
