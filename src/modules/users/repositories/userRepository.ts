@@ -9,6 +9,16 @@ export class UserRepository implements IUserRepository {
 
   constructor() { this.userRepository = getRepository(UserEntity) }
 
+  async findUsers(): Promise<UserEntity[]> {
+    const usersFind = await this.userRepository.find()
+
+    if (!usersFind) {
+      throw new AppError('Erro inesperado ao buscar todos usuários', 500)
+    }
+
+    return usersFind
+  }
+
   findEmailUser(email: string): Promise<UserEntity> {
     const userFindOne = this.userRepository.findOne({ email })
 
