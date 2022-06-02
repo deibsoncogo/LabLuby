@@ -1,5 +1,5 @@
-// import { container } from 'tsyringe'
-// import { ITesteRepository } from '../modules/teste/repositories/iTesteRepository'
-// import { TesteRepository } from '../modules/teste/repositories/testeRepository'
+import { container } from 'tsyringe'
+import { IUserRepository } from '../modules/users/repositories/iUserRepository'
+import { UserRepository } from '../modules/users/repositories/userRepository'
 
-// container.registerSingleton<ITesteRepository>('TesteRepository', TesteRepository)
+container.registerSingleton<IUserRepository>('UserRepository', UserRepository)

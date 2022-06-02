@@ -1,7 +1,8 @@
 import { Router } from 'express'
+import { userRouter } from './userRouter'
 
-const indexRouter = Router()
+export const indexRouter = Router()
 
-indexRouter.get('/', (request, response) => response.status(200).json('Hello word'))
+indexRouter.get('/', (request, response) => response.status(200).json({ message: 'Hello word - Index' }))
 
-export { indexRouter }
+indexRouter.use('/user', userRouter)
