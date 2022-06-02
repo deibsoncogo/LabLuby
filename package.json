@@ -1,7 +1,7 @@
 {
   "name": "provalivecodelabluby",
   "version": "1.0.0",
-  "description": "a",
+  "description": "Realização da prova live code mostrando boa parte do que foi ensinado para poder passar para a próxima etapa do Lab Luby",
   "main": "index.js",
   "repository": "git@github.com:deibsoncogo/ProvaLiveCodeLabLuby.git",
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
