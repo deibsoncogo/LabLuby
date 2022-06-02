@@ -20,7 +20,7 @@ export class createUsers1654132905323 implements MigrationInterface {
           },
           {
             name: 'cpf',
-            type: 'integer',
+            type: 'float',
             isUnique: true,
             isNullable: false,
           },

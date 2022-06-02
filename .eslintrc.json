@@ -17,6 +17,8 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "no-param-reassign": "off",
+    "no-useless-constructor": "off",
     "class-methods-use-this": "off",
     "semi": ["error", "never"],
     "import/prefer-default-export": "off",
