@@ -1,0 +1,10 @@
+{
+  "name": "tclbackendlabluby",
+  "version": "1.0.0",
+  "description": "Realização do trabalho de conclusão do Lab Luby de backend falando sobre collection do Insomnia",
+  "main": "index.js",
+  "repository": "https://github.com/deibsoncogo/TCLBackendLabLuby.git",
+  "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "license": "MIT",
+  "private": true
+}
