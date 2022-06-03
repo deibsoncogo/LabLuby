@@ -1,10 +1,12 @@
 {
-  "name": "tclbackendlabluby",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "name": "tcllackendlabluby",
+  "version": "1.0.0",
+  "description": "Realização do trabalho de conclusão do Lab Luby da trilha backend",
+  "main": "index.js",
+  "repository": "git@github.com:deibsoncogo/TCLBackendLabLuby.git",
+  "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "license": "MIT",
   "private": true,
-  "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
