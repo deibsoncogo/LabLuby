@@ -1,9 +1,0 @@
-node_modules
-coverage
-temp
-dist
-build
-**.log
-**.env
-**.txt
-notes.md
