@@ -14,9 +14,9 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController)
   })
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!')
+  describe('Root', () => {
+    it('Should return "Hello world index"', () => {
+      expect(appController.app()).toMatchObject({ message: 'Hello world app' })
     })
   })
 })
