@@ -7,6 +7,7 @@ import { AppResolver } from './app.resolver'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { DatabaseModule } from './database/database.module'
+import { OtherModule } from './other/other.module'
 import { UserModule } from './user/user.module'
 
 @Module({
@@ -18,6 +19,7 @@ import { UserModule } from './user/user.module'
     DatabaseModule,
     UserModule,
     AuthModule,
+    OtherModule,
   ],
   providers: [AppService, AppResolver],
   controllers: [AppController],
