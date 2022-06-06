@@ -5,6 +5,7 @@ import { join } from 'path'
 import { AppController } from './app.controller'
 import { AppResolver } from './app.resolver'
 import { AppService } from './app.service'
+import { AuthModule } from './auth/auth.module'
 import { DatabaseModule } from './database/database.module'
 import { UserModule } from './user/user.module'
 
@@ -16,6 +17,7 @@ import { UserModule } from './user/user.module'
     }),
     DatabaseModule,
     UserModule,
+    AuthModule,
   ],
   providers: [AppService, AppResolver],
   controllers: [AppController],
