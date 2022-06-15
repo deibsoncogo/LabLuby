@@ -6,5 +6,5 @@ DS_Store
 **.log
 **.env
 **.txt
-notes.md
+!notes.md
 !remixEtherium.zip
