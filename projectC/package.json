@@ -9,5 +9,8 @@
   "private": true,
   "devDependencies": {
     "truffle": "^5.5.18"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "3.0.0-beta.0"
   }
 }
