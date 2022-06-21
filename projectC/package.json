@@ -6,5 +6,8 @@
   "repository": "git@github.com:deibsoncogo/BlockchainLabLuby.git",
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "truffle": "^5.5.18"
+  }
 }
