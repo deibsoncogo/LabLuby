@@ -14,8 +14,12 @@ const expect = chai.expect;
 contract("Token Test", async (accounts) => {
   const [deployerAccount, recipient, anotherAccount] = accounts;
 
+  beforeEach(async() => {
+    this.myToken = await Token.new(1000000);
+  });
+
   it("All tokens should be in my account", async () => {
-    let instance = await Token.deployed();
+    let instance = this.myToken;
     let totalSupply = await instance.totalSupply();
 
     // let balance = await instance.balanceOf(accounts[0]);
@@ -27,7 +31,7 @@ contract("Token Test", async (accounts) => {
   it("Is possible to send tokens between accounts", async() => {
     const sendTokens = 1;
 
-    let instance = await Token.deployed();
+    let instance = this.myToken;
     let totalSupply = await instance.totalSupply();
 
     expect(instance.balanceOf(deployerAccount)).to.eventually.be.a.bignumber.equal(totalSupply);
@@ -37,7 +41,7 @@ contract("Token Test", async (accounts) => {
   });
 
   it("Is not possible to send more tokens than available in total", async () => {
-    let instance = await Token.deployed();
+    let instance = this.myToken;
     let balanceOfDeployer = await instance.balanceOf(deployerAccount);
 
     expect(instance.transfer(recipient, new BN(balanceOfDeployer+1))).to.eventually.be.rejected;
