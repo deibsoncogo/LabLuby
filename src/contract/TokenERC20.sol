@@ -3,36 +3,16 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract DeibsonLabLubyToken is ERC20 {
-  /** método ágil de criar todas itens necessário do contrato
-  constructor() ERC20("Deibson Lab Luby", "DLL") {}
-  */
-
   // definindo as variáveis principais de forma privada
-  string private _name;
-  string private _symbol;
   uint256 private _totalSupply;
-  // uint8 private _decimals; // esta variável está sendo criada de forma estatica
 
   // serve para guardar valores
   mapping(address => uint256) private _balances; // vai guarda o saldo das carteiras
   mapping(address => mapping(address => uint256)) private _allowances; // vai guardar permições e seus valores
 
-  // cria um evento para ser executado futuramente
-  // event Transfer(address indexed _from, address indexed _to, uint256 _value);
-  // event Approval(address indexed _owner, address indexed _spender, uint256 _value);
-
   // vai criar o valor inicial do token
   constructor(uint256 initialSupply) ERC20("Deibson Lab Luby", "DLL") {
     _mint(msg.sender, initialSupply);
-  }
-
-  // criando funções para ler as variáveis principais privadas de forma externa
-  function name() public override view returns(string memory) {
-    return _name;
-  }
-
-  function symbol() public override view returns(string memory) {
-    return _symbol;
   }
 
   function totalSupply() public override view returns(uint256) {
@@ -41,7 +21,7 @@ contract DeibsonLabLubyToken is ERC20 {
 
   // criando a função que vai criar e ler a variável principal privada _decimals
   function decimals() public override pure returns(uint8) {
-    return 18;
+    return 6;
   }
 
   // vai retornar o saldo de uma carteira
