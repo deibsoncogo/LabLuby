@@ -1,0 +1,10 @@
+{
+  "name": "provablockchainlabluby",
+  "version": "1.0.0",
+  "description": "Realização da prova de blockchain do Lab Luby",
+  "main": "index.js",
+  "repository": "git@github.com:deibsoncogo/ProvaBlockchainLabLuby.git",
+  "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "license": "MIT",
+  "private": true
+}

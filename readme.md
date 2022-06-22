@@ -1,9 +1,2 @@
-# Titulo do repositório
-Descrição do repositório
-
-## Ajustes ao repositório atual
-[] Renomear titulo e descrição
-[] Criar estes arquivos
-    * package.json
-    * .env
-    * notes.md
+# Prova BLockchain - Lab Luby
+Realização da prova de blockchain do Lab Luby
