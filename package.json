@@ -6,5 +6,8 @@
   "repository": "git@github.com:deibsoncogo/ProvaBlockchainLabLuby.git",
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.6.0"
+  }
 }
