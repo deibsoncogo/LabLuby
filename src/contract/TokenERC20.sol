@@ -5,95 +5,98 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract DeibsonLabLubyToken is ERC20 {
-  // definindo as variáveis principais de forma privada
-  uint256 private _totalSupply;
+    // definindo variavies
+    uint256 private _totalSupply;
 
-  // serve para guardar valores
-  mapping(address => uint256) private _balances; // vai guarda o saldo das carteiras
-  mapping(address => mapping(address => uint256)) private _allowances; // vai guardar permições e seus valores
+    // serve para guardar valores
+    mapping(address => uint256) private _balances;
+    mapping(address => mapping(address => uint256)) private _allowances;
 
-  // vai criar o valor inicial do token
-  constructor(uint256 initialSupply) ERC20("Deibson Lab Luby", "DLL") {
-    _mint(msg.sender, initialSupply);
-  }
+    // serve para criar a moeda
+    constructor(uint256 initialSupply) ERC20("Deibson Lab Luby", "DLL") {
+        _mint(msg.sender, initialSupply);
+    }
 
-  function totalSupply() public override view returns(uint256) {
-    return _totalSupply;
-  }
+    // função que vai ler a quantidade de tokens disponivel
+    function totalSupply() public override view returns(uint256) {
+        return _totalSupply;
+    }
 
-  // criando a função que vai criar e ler a variável principal privada _decimals
-  function decimals() public override pure returns(uint8) {
-    return 6;
-  }
+    // função que vai criar e ler a variável principal privada _decimals
+    function decimals() public override pure returns(uint8) {
+        return 6;
+    }
 
-  // vai retornar o saldo de uma carteira
-  function balanceOf(address _owner) public override view returns(uint256) {
-    return _balances[_owner];
-  }
+    // função que le o saldo de uma carteira
+    function balanceOf(address _owner) public override view returns(uint256) {
+        return _balances[_owner];
+    }
 
-  // função que vai executar uma transferencia pelo dono
-  function transfer(address recipient, uint256 amount) public override returns(bool) {
-    _transfer(msg.sender, recipient, amount);
+    // função que vai transferir um valor do proprietário para outro
+    function transfer(address recipient, uint256 amount) public override returns(bool) {
+        _transfer(msg.sender, recipient, amount);
 
-    return true;
-  }
+        return true;
+    }
 
-  // função que vai executar uma transferencia por um terceiro
-  function transferFrom(address sender, address recipient, uint256 amount) public override returns(bool) {
-    require(_allowances[sender][msg.sender] >= amount, "ERC20: Valor maior que o autorizado");
+    // função que vai transferir um valor do de um cliente para outro
+    function transferFrom(address sender, address recipient, uint256 amount) public override returns(bool) {
+        require(_allowances[sender][msg.sender] >= amount, "ERC20: Valor maior que o autorizado");
 
-    _transfer(sender, recipient, amount);
-    _approve(sender, msg.sender, _allowances[sender][msg.sender] - amount);
+        _transfer(sender, recipient, amount);
+        _approve(sender, msg.sender, _allowances[sender][msg.sender] - amount);
 
-    return true;
-  }
+        return true;
+    }
 
-  // vai executar a transferencia de valor entre contas
-  function _transfer(address sender, address recipient, uint256 amount) internal override {
-    require(_balances[sender] >= amount, "ERC20: Saldo insuficiente para a tranferencia");
+    // função que executar uma transferencia de valor entre contas
+    function _transfer(address sender, address recipient, uint256 amount) internal override {
+        // verifica se possui saldo suficiente para a transferencia
+        require(_balances[sender] >= amount, "ERC20: Saldo insuficiente para a tranferencia");
 
-    // unchecked certifica que os valores são do tamanho de 256 caracteres
-    unchecked { _balances[sender] -= amount; } // executa a saída do valor na carteira
-    unchecked { _balances[recipient] += amount; } // executa a entrada do valor na carteira
+        // unchecked certifica que os valores são do tamanho de 256 caracteres
+        unchecked { _balances[sender] -= amount; }
+        unchecked { _balances[recipient] += amount; }
 
-    // emite o evento obrigatório valando que foi executado a transferencia
-    emit Transfer(sender, recipient, amount);
-  }
+        // emite o evento obrigatório valando que foi executado a transferencia
+        emit Transfer(sender, recipient, amount);
+    }
 
-  // função que vai definir uma autorização e seu valor
-  function approve(address spender, uint256 amount) public override returns(bool) {
-    _approve(msg.sender, spender, amount);
+    // função que vai autorizar tranferencias por terceiro
+    function approve(address spender, uint256 amount) public override returns(bool) {
+        _approve(msg.sender, spender, amount);
 
-    return true;
-  }
+        return true;
+    }
 
-  // função que vai aumentar o valor da autorização
-  function increaseAllowance(address spender, uint256 addedValue) public override returns(bool) {
-    _approve(msg.sender, spender, _allowances[msg.sender][spender] += addedValue);
+    // função que vai aumentar o valor de tranferencias autorizada por terceiro
+    function increaseAllowance(address spender, uint256 addedValue) public override returns(bool) {
+        _approve(msg.sender, spender, _allowances[msg.sender][spender] += addedValue);
 
-    return true;
-  }
+        return true;
+    }
 
-  // função que vai diminuir o valor da autorização
-  function decreaseAllowance(address spender, uint256 subtractedValue) public override returns(bool) {
-    require(_allowances[msg.sender][spender] >= subtractedValue, "ERC20: Valor a ser retinado maior que autorizado");
+    // função que vai diminuir o valor de tranferencias autorizada por terceiro
+    function decreaseAllowance(address spender, uint256 subtractedValue) public override returns(bool) {
+        require(_allowances[msg.sender][spender] >= subtractedValue, "ERC20: Valor a ser retinado maior que autorizado");
 
-    unchecked { _approve(msg.sender, spender, _allowances[msg.sender][spender] -= subtractedValue); }
+        _approve(msg.sender, spender, _allowances[msg.sender][spender] -= subtractedValue);
 
-    return true;
-  }
+        return true;
+    }
 
-  // função que executar a autorização com seu valor
-  function _approve(address owner, address spender, uint256 amount) internal override {
-    _allowances[owner][spender] = amount;
+    // função que definir um cliente autorizado e seu limite
+    function _approve(address owner, address spender, uint256 amount) internal override {
+        unchecked { _allowances[owner][spender] = amount; }
 
-    emit Approval(owner, spender, amount);
-  }
+        emit Approval(owner, spender, amount);
+    }
 
-  function _mint(address account, uint256 amount) internal override {
-    _totalSupply += amount;
-    _balances[account] += amount;
+    // função que vai definir o valor inicial do contrato
+    function _mint(address account, uint256 amount) internal override {
+        unchecked { _totalSupply += amount; }
+        unchecked { _balances[account] += amount; }
 
-    emit Transfer(address(0), account, amount);
-  }
+        emit Transfer(address(0), account, amount);
+    }
 }
