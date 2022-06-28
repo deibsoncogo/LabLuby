@@ -18,4 +18,13 @@ contract ProvaBlockchainLabLuby is ERC20 {
 
         _mint(msg.sender, _supplyInitial);
     }
+
+    // função que vai gerenciar a criação de moedas
+    function CreateCoin(address _account, uint256 _supply) external {
+        require(_supply <= supplyAvailable, "Saldo insuficiente para criacao destas moedas");
+
+        supplyAvailable -= _supply;
+
+        _mint(_account, _supply);
+    }
 }
