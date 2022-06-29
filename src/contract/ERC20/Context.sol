@@ -3,15 +3,12 @@
 
 pragma solidity ^0.8.0;
 
-/**
- * @dev Provides information about the current execution context, including the
- * sender of the transaction and its data. While these are generally available
- * via msg.sender and msg.data, they should not be accessed in such a direct
- * manner, since when dealing with meta-transactions the account sending and
- * paying for execution may not be the actual sender (as far as an application
- * is concerned).
+/** @dev Fornece informações sobre o contexto de execução atual, incluindo o remetente da transação
+ * e seus dados, embora estes estejam geralmente disponíveis via msg.sender e msg.data, eles não devem
+ * ser acessados de forma tão direta forma, pois ao tratar de meta-transações a conta que envia e pagando
+ * pela execução pode não ser o remetente real (No que diz respeito a um aplicativo está preocupado)
  *
- * This contract is only required for intermediate, library-like contracts.
+ * Este contrato é necessário apenas para contratos intermediários do tipo biblioteca
  */
 abstract contract Context {
     function _msgSender() internal view virtual returns (address) {

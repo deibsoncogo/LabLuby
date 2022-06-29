@@ -5,24 +5,14 @@ pragma solidity ^0.8.0;
 
 import "./IERC20.sol";
 
-/**
- * @dev Interface for the optional metadata functions from the ERC20 standard.
- *
- * _Available since v4.1._
- */
+/** @dev Interface para as funções opcionais de metadados do padrão ERC20 _Disponível desde a v4.1 */
 interface IERC20Metadata is IERC20 {
-    /**
-     * @dev Returns the name of the token.
-     */
+    /** @dev Retorna o nome do token */
     function name() external view returns (string memory);
 
-    /**
-     * @dev Returns the symbol of the token.
-     */
+    /** @dev Retorna o símbolo do token */
     function symbol() external view returns (string memory);
 
-    /**
-     * @dev Returns the decimals places of the token.
-     */
+    /** @dev Retorna as casas decimais do token */
     function decimals() external view returns (uint8);
 }

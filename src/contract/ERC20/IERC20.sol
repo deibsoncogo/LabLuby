@@ -3,80 +3,55 @@
 
 pragma solidity ^0.8.0;
 
-/**
- * @dev Interface of the ERC20 standard as defined in the EIP.
- */
+/** @dev Interface do padrão {ERC20} conforme definido no EIP */
 interface IERC20 {
-    /**
-     * @dev Emitted when `value` tokens are moved from one account (`from`) to
-     * another (`to`).
-     *
-     * Note that `value` may be zero.
+    /** @dev Emitido quando tokens `value` são movidos de uma conta (`from`) para outra (`to`)
+     * Nota: Esse `value` pode ser zero
      */
     event Transfer(address indexed from, address indexed to, uint256 value);
 
-    /**
-     * @dev Emitted when the allowance of a `spender` for an `owner` is set by
-     * a call to {approve}. `value` is the new allowance.
+    /** @dev Emitido quando a permissão de um `spender` para um `owner` é definida por uma chamada para {approve}
+     * `value` é o novo subsídio
      */
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
-    /**
-     * @dev Returns the amount of tokens in existence.
-     */
+    /** @dev Retorna a quantidade de tokens existentes */
     function totalSupply() external view returns (uint256);
 
-    /**
-     * @dev Returns the amount of tokens owned by `account`.
-     */
+    /** @dev Retorna a quantidade de tokens de propriedade de `account` */
     function balanceOf(address account) external view returns (uint256);
 
-    /**
-     * @dev Moves `amount` tokens from the caller's account to `to`.
-     *
-     * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * Emits a {Transfer} event.
+    /** @dev Move tokens `amount` da conta do chamador para `to`
+     * Retorna um valor booleano indicando se a operação foi bem-sucedida
+     * Emite um evento {Transfer}
      */
     function transfer(address to, uint256 amount) external returns (bool);
 
-    /**
-     * @dev Returns the remaining number of tokens that `spender` will be
-     * allowed to spend on behalf of `owner` through {transferFrom}. This is
-     * zero by default.
+    /** @dev Retorna o número restante de tokens que o `spender` será
+     * permitido gastar em nome do `proprietário` por meio de {transferFrom}
+     * Este é zero por padrão
      *
-     * This value changes when {approve} or {transferFrom} are called.
+     * Este valor muda quando {approve} ou {transferFrom} são chamados
      */
     function allowance(address owner, address spender) external view returns (uint256);
 
-    /**
-     * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.
+    /** @dev Define `amount` como a permissão de `spender` sobre os tokens do chamador
+     * Retorna um valor booleano indicando se a operação foi bem-sucedida
      *
-     * Returns a boolean value indicating whether the operation succeeded.
+     * Importante: Cuidado que alterar uma provisão com este método traz o risco
+     * que alguém pode usar tanto o antigo quanto o novo subsídio por ordenação de transação infeliz
+     * Uma solução possível para mitigar essa condição de corrida é primeiro reduzir a mesada do gastador
+     * para 0 e depois defina o valor desejado,https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
      *
-     * IMPORTANT: Beware that changing an allowance with this method brings the risk
-     * that someone may use both the old and the new allowance by unfortunate
-     * transaction ordering. One possible solution to mitigate this race
-     * condition is to first reduce the spender's allowance to 0 and set the
-     * desired value afterwards:
-     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
-     *
-     * Emits an {Approval} event.
+     * Emite um evento {Approval}
      */
     function approve(address spender, uint256 amount) external returns (bool);
 
-    /**
-     * @dev Moves `amount` tokens from `from` to `to` using the
-     * allowance mechanism. `amount` is then deducted from the caller's
-     * allowance.
+    /** @dev Move tokens `amount` de `from` para `to` usando a permissão
+     * mecanismo `amount` é então deduzido do subsídio do chamador
      *
-     * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * Emits a {Transfer} event.
+     * Retorna um valor booleano indicando se a operação foi bem-sucedida
+     * Emite um evento {Transfer}
      */
-    function transferFrom(
-        address from,
-        address to,
-        uint256 amount
-    ) external returns (bool);
+    function transferFrom(address from, address to, uint256 amount) external returns (bool);
 }
