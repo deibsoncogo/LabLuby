@@ -9,6 +9,9 @@ contract ProvaBlockchainLabLuby is ERC20 {
     address private owner;
     uint256 private supplyAvailable;
 
+    // definindo dicionário de informações
+    mapping(address => bool) private addressVip;
+
     // o constructor irá criar a moeda e definir informação importantes
     constructor(uint256 _supplyInitial, uint256 _supplyMax) ERC20("Deibson Lab Luby", "DLL") {
         require(_supplyInitial <= _supplyMax, "Valor inicial maior que o valor maximo");
@@ -26,5 +29,10 @@ contract ProvaBlockchainLabLuby is ERC20 {
         supplyAvailable -= _supply;
 
         _mint(_account, _supply);
+    }
+
+    // função que vai definir clientes vip
+    function ToggleVip(address _account, bool _status) external {
+        addressVip[_account] = _status;
     }
 }
