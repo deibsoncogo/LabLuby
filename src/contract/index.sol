@@ -9,6 +9,7 @@ contract ProvaBlockchainLabLuby is ERC20 {
     address private owner;
     uint256 private supplyAvailable;
     uint256 private taxPercentage;
+    bool private isTransactionsPause;
 
     // definindo dicionário de informações
     mapping(address => bool) private addressVip;
@@ -20,12 +21,19 @@ contract ProvaBlockchainLabLuby is ERC20 {
         owner = msg.sender;
         supplyAvailable = _supplyMax - _supplyInitial;
         taxPercentage = _taxPercentage;
+        isTransactionsPause = false;
 
         _mint(msg.sender, _supplyInitial);
     }
 
+    // verificadores para funções
+    modifier StatusTransactions() {
+        require(isTransactionsPause == false, "As transacoes estao pausadas");
+        _;
+    }
+
     // função que vai gerenciar a criação de moedas
-    function CreateCoin(address _account, uint256 _supply) external {
+    function CreateCoin(address _account, uint256 _supply) external StatusTransactions {
         require(_supply <= supplyAvailable, "Saldo insuficiente para criacao destas moedas");
 
         supplyAvailable -= _supply;
@@ -41,5 +49,10 @@ contract ProvaBlockchainLabLuby is ERC20 {
     // função que vai alterar a taxa das transações
     function UpdateTax(uint256 _taxPercentage) external {
         taxPercentage = _taxPercentage;
+    }
+
+    // função que vai alterar se as transações estão pausadas
+    function ToggleStatuTransaction() external {
+        isTransactionsPause = !isTransactionsPause;
     }
 }
