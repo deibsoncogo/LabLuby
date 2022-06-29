@@ -76,12 +76,12 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     /** @dev Ver {IERC20-totalSupply} */
     function totalSupply() public view virtual override returns (uint256) {
         return _totalSupply;
-    }
+    } /** Retorna a quantidade de tokens já criado */
 
     /** @dev Ver {IERC20-balanceOf} */
     function balanceOf(address account) public view virtual override returns (uint256) {
         return _balances[account];
-    }
+    } /** Retornar a quantidade de tokens de uma carteira */
 
     /** @dev Ver {IERC20-transfer}
      * Requisitos
@@ -92,12 +92,12 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         address owner = _msgSender();
         _transfer(owner, to, amount);
         return true;
-    }
+    } /** Transfere tokens da carteira do proprietário para outra */
 
     /** @dev Ver {IERC20-allowance} */
     function allowance(address owner, address spender) public view virtual override returns (uint256) {
         return _allowances[owner][spender];
-    }
+    } /** Verifica o saldo que o terceiro tem para poder transferir */
 
     /** @dev Ver {IERC20-approve}
      * Nota: Se `amount` for o máximo `uint256`, a permissão não será atualizada em `transferFrom`
@@ -110,7 +110,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         address owner = _msgSender();
         _approve(owner, spender, amount);
         return true;
-    }
+    } /** Autoriza um terceiro a realizar tranferencias definindo um valor */
 
     /** @dev Ver {IERC20-transferFrom}
      * Emite um evento {Approval} indicando a franquia atualizada
@@ -129,7 +129,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         _spendAllowance(from, spender, amount);
         _transfer(from, to, amount);
         return true;
-    }
+    } /** Transfere tokens da carteira de um terceiro para outra */
 
     /** @dev Aumenta atomicamente a permissão concedida ao `spender` pelo chamador
      * Esta é uma alternativa para {approve} que pode ser usada como mitigação para
@@ -144,7 +144,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         address owner = _msgSender();
         _approve(owner, spender, allowance(owner, spender) + addedValue);
         return true;
-    }
+    } /** Aumenta o valor de autorização de transferencia por terceiro */
 
     /** @dev Diminui atomicamente a permissão concedida ao `spender` pelo chamador
      * Esta é uma alternativa para {approve} que pode ser usada como mitigação para
@@ -162,7 +162,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         require(currentAllowance >= subtractedValue, "ERC20: decreased allowance below zero");
         unchecked { _approve(owner, spender, currentAllowance - subtractedValue); }
         return true;
-    }
+    } /** Diminui o valor de autorização de transferencia por terceiro */
 
     /** @dev Move `amount` de tokens de `from` para `to`
      * Esta função interna é equivalente a {transfer}, e pode ser usada para por exemplo
