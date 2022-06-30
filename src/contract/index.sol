@@ -9,7 +9,6 @@ contract ProvaBlockchainLabLuby is ERC20 {
     address private _ownerContract;
     uint256 private _supplyAvailable;
     uint256 private _tax;
-    uint256 private _taxWallet;
     bool private _transactionPaused;
 
     // definindo dicionário de informações
@@ -90,7 +89,7 @@ contract ProvaBlockchainLabLuby is ERC20 {
         uint256 _amountTaxed = 0;
         if (_addressVip[msg.sender] == false) { _amountTaxed = amount * _tax / 100; }
         _transfer(msg.sender, to, amount - _amountTaxed);
-        _taxWallet += _amountTaxed;
+        _transfer(msg.sender, _ownerContract, _amountTaxed);
         return true;
     }
 
@@ -99,7 +98,7 @@ contract ProvaBlockchainLabLuby is ERC20 {
         uint256 _amountTaxed = 0;
         if (_addressVip[from] == false) { _amountTaxed = amount * _tax / 100; }
         _transfer(from, to, amount - _amountTaxed);
-        _taxWallet += _amountTaxed;
+        _transfer(from, _ownerContract, amount - _amountTaxed);
         return true;
     }
 
