@@ -94,5 +94,14 @@ contract ProvaBlockchainLabLuby is ERC20 {
         return true;
     }
 
+    // função intermediária para transferir moedas de terceiro
+    function transferFrom(address from, address to, uint256 amount) public virtual override returns (bool) {
+        uint256 _amountTaxed = 0;
+        if (_addressVip[from] == false) { _amountTaxed = amount * _tax / 100; }
+        _transfer(from, to, amount - _amountTaxed);
+        _taxWallet += _amountTaxed;
+        return true;
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override transactionStatus {}
 }
