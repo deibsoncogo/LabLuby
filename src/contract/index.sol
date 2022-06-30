@@ -55,4 +55,6 @@ contract ProvaBlockchainLabLuby is ERC20 {
     function ToggleStatuTransaction() external {
         isTransactionsPause = !isTransactionsPause;
     }
+
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override StatusTransactions {}
 }
