@@ -39,6 +39,19 @@ contract ProvaBlockchainLabLuby is ERC20 {
         _;
     }
 
+    // função que vai aumentar supply disponivel para criar
+    function supplyMint(uint256 supply) public isOwnerContract(msg.sender) returns(bool) {
+        unchecked { _supplyAvailable += supply; }
+        return true;
+    }
+
+    // função que vai diminuir supply disponivel para criar
+    function supplyBurn(uint256 supply) public isOwnerContract(msg.sender) returns(bool) {
+        require(supply <= _supplyAvailable, "Nao e possivel retirar mais do que possui");
+        unchecked { _supplyAvailable -= supply; }
+        return true;
+    }
+
     // função que vai definir clientes vip
     function vipToggle(address account) public isOwnerContract(msg.sender) returns(bool) {
         require(account != _ownerContract, "O proprietario do contrato sempre sera vip");
