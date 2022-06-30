@@ -13,6 +13,7 @@ contract ProvaBlockchainLabLuby is ERC20 {
 
     // definindo dicionário de informações
     mapping(address => bool) private _addressVip;
+    mapping(address => mapping(uint256 => uint256)) private _donation;
 
     // o constructor irá criar a moeda e definir informação importantes
     constructor(uint256 supplyInitial, uint256 supplyMax, uint256 tax) ERC20("Deibson Lab Luby", "DLL") {
@@ -67,6 +68,17 @@ contract ProvaBlockchainLabLuby is ERC20 {
     // função que vai alterar se as transações estão pausadas
     function transactionPausedToggle() public isOwnerContract(msg.sender) {
         _transactionPaused = !_transactionPaused;
+    }
+
+    // função que vai transferir doações de ether
+    function donationEther(address payable to) public payable returns(bool) {
+        uint256 _valueMax = 1000000000000000000;
+        uint256 _monthSeconds = 2592000;
+        require(msg.value <= _valueMax, "E permitido doar somente 1 ether");
+        require(_donation[msg.sender][block.timestamp / _monthSeconds] < _valueMax, "Valor maximo de doacoes no mes atingindo");
+        to.transfer(msg.value);
+        _donation[msg.sender][block.timestamp / _monthSeconds] += msg.value;
+        return true;
     }
 
     // função intermediária para criar moedas
