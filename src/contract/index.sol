@@ -6,55 +6,71 @@ import "./ERC20/ERC20.sol";
 
 contract ProvaBlockchainLabLuby is ERC20 {
     // definindo variáveis
-    address private owner;
-    uint256 private supplyAvailable;
-    uint256 private taxPercentage;
-    bool private isTransactionsPause;
+    address private _ownerContract;
+    uint256 private _supplyAvailable;
+    uint256 private _tax;
+    uint256 private _taxWallet;
+    bool private _transactionPaused;
 
     // definindo dicionário de informações
-    mapping(address => bool) private addressVip;
+    mapping(address => bool) private _addressVip;
 
     // o constructor irá criar a moeda e definir informação importantes
-    constructor(uint256 _supplyInitial, uint256 _supplyMax, uint256 _taxPercentage) ERC20("Deibson Lab Luby", "DLL") {
-        require(_supplyInitial <= _supplyMax, "Valor inicial maior que o valor maximo");
+    constructor(uint256 supplyInitial, uint256 supplyMax, uint256 tax) ERC20("Deibson Lab Luby", "DLL") {
+        require(supplyInitial <= supplyMax, "Valor inicial maior que o valor maximo");
 
-        owner = msg.sender;
-        supplyAvailable = _supplyMax - _supplyInitial;
-        taxPercentage = _taxPercentage;
-        isTransactionsPause = false;
+        _ownerContract = msg.sender;
+        _addressVip[msg.sender] = true;
+        _supplyAvailable = supplyMax - supplyInitial;
+        _tax = tax;
+        _transactionPaused = false;
 
-        _mint(msg.sender, _supplyInitial);
+        _mint(msg.sender, supplyInitial);
     }
 
-    // verificadores para funções
-    modifier StatusTransactions() {
-        require(isTransactionsPause == false, "As transacoes estao pausadas");
+    // verificadores das funções
+    modifier isOwnerContract(address account) {
+        require(_ownerContract == account, "Voce nao possui autorizacao");
         _;
     }
 
-    // função que vai gerenciar a criação de moedas
-    function CreateCoin(address _account, uint256 _supply) external StatusTransactions {
-        require(_supply <= supplyAvailable, "Saldo insuficiente para criacao destas moedas");
-
-        supplyAvailable -= _supply;
-
-        _mint(_account, _supply);
+    modifier transactionStatus() {
+        require(_transactionPaused == false, "As transacoes estao pausadas");
+        _;
     }
 
     // função que vai definir clientes vip
-    function ToggleVip(address _account, bool _status) external {
-        addressVip[_account] = _status;
+    function vipToggle(address account) public isOwnerContract(msg.sender) returns(bool) {
+        require(account != _ownerContract, "O proprietario do contrato sempre sera vip");
+        _addressVip[account] = !_addressVip[account];
+        return _addressVip[account];
     }
 
     // função que vai alterar a taxa das transações
-    function UpdateTax(uint256 _taxPercentage) external {
-        taxPercentage = _taxPercentage;
+    function taxUpdate(uint256 tax) public isOwnerContract(msg.sender) {
+        require(tax > 0 || tax < 100, "Valor invalido");
+        _tax = tax;
     }
 
     // função que vai alterar se as transações estão pausadas
-    function ToggleStatuTransaction() external {
-        isTransactionsPause = !isTransactionsPause;
+    function transactionPausedToggle() public isOwnerContract(msg.sender) {
+        _transactionPaused = !_transactionPaused;
     }
 
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override StatusTransactions {}
+    // função intermediária para criar moedas
+    function mint(address account, uint256 amount) public isOwnerContract(msg.sender) returns(bool) {
+        require(amount <= _supplyAvailable, "Saldo insuficiente para criacao destas moedas");
+        _mint(account, amount);
+        _supplyAvailable -= amount;
+        return true;
+    }
+
+    // função intermediária para destruir moedas
+    function burn(address account, uint256 amount) public isOwnerContract(msg.sender) returns(bool) {
+        _burn(account, amount);
+        _supplyAvailable += amount;
+        return true;
+    }
+
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual override transactionStatus {}
 }
