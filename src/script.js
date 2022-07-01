@@ -12,11 +12,9 @@
         <div data-js="mainCartEmpty" class="mainCartEmpty">
           <div class="scratch1">.</div>
           <div class="scratch2">.</div>
-          <div class="scratch3">.</div>
+          <div class="scratch3">Your shopping cart is empty</div>
           <div class="scratch4">.</div>
           <div class="scratch5">.</div>
-
-          <strong>Your shopping cart is empty</strong>
         </div>
       `;
     }
