@@ -251,8 +251,15 @@
     event.preventDefault();
 
     if (ToggleMoneyFormatting(doc.querySelector(`[data-js="valueTotal"]`).innerHTML) < database["min-cart-value"]) {
-      win.alert(`O valor mínimo do carrinho é de ${ToggleMoneyFormatting(database["min-cart-value"])}!`)
+      return win.alert(`O valor mínimo do carrinho é de ${ToggleMoneyFormatting(database["min-cart-value"])}!`)
     }
+
+    win.alert("Compra finalizada com sucesso");
+
+    doc.querySelector(`[data-js="mainCartGameAll"]`).innerHTML = ""
+    doc.querySelector(`[data-js="valueTotal"]`).innerHTML = ToggleMoneyFormatting(0);;
+
+    CartEmpty();
   });
 
   ExecuteApiFake();
