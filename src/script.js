@@ -146,7 +146,9 @@
 
     // for que vai adicionar a quantidade de números necessário do jogo
     for (let index = 1; index <= database.types[`${gameSelected[1]}`].range; index++) {
-      const numberFormatted = ("00" + index).slice(-2);
+      let numberFormatted = index;
+
+      if (index < 10) { numberFormatted = ("00" + index).slice(-2) }
 
       doc.querySelector(`[data-js="mainGameNumberAll"]`).innerHTML += `
         <a data-bt="number${numberFormatted}" data-js="mainGameNumber">${numberFormatted}</a>
