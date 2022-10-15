@@ -1,0 +1,12 @@
+{
+  "name": "crudlabluby",
+  "version": "1.0.0",
+  "description": "Uma aplicação simples que vai mostrar como criar um CRUD com Node JS",
+  "main": "index.js",
+  "repository": "git@github.com:deibsoncogo/CrudLabLuby.git",
+  "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
