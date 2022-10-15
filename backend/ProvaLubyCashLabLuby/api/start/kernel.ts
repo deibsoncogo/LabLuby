@@ -1,0 +1,9 @@
+import Server from '@ioc:Adonis/Core/Server'
+
+Server.middleware.register([() => import('@ioc:Adonis/Core/BodyParser')])
+
+Server.middleware.registerNamed({
+  auth: () => import('../app/Middleware/Auth'),
+  authUser: () => import('../app/Middleware/AuthUser'),
+  authAdmin: () => import('../app/Middleware/AuthAdmin'),
+})

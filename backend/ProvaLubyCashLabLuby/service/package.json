@@ -1,0 +1,47 @@
+{
+  "name": "microserviceprovalubycashlabluby",
+  "version": "1.0.0",
+  "description": "Criação do microservice com Kafka para se comunicar com a API",
+  "main": "index.js",
+  "repository": "git@github.com:deibsoncogo/ProvaLubyCashLabLuby.git",
+  "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "db": "yarn typeorm migration:revert & yarn typeorm migration:run & yarn dev",
+    "dev": "ts-node-dev --inspect --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-async-errors": "^3.1.1",
+    "kafkajs": "^1.16.0",
+    "mailgun-js": "^0.22.0",
+    "pg": "^8.7.1",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.6.0",
+    "typeorm": "^0.2.41",
+    "uuid": "^8.3.2",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
+    "@types/mailgun-js": "^0.22.12",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.18.0",
+    "@typescript-eslint/parser": "^5.18.0",
+    "eslint": "^8.12.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-import-helpers": "^1.2.1",
+    "factory-girl": "^5.0.4",
+    "faker": "^6.6.6",
+    "jest": "^28.0.2",
+    "ts-jest": "^27.1.4",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.3"
+  }
+}

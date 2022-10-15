@@ -1,0 +1,11 @@
+{
+  "type": "postgres",
+  "port": 5434,
+  "host": "localhost",
+  "username": "ProvaLubyCashLabLubyService",
+  "password": "docker",
+  "database": "ProvaLubyCashLabLubyServiceDB",
+  "migrations": ["./src/database/migrations/*.ts"],
+  "cli": { "migrationsDir": "./src/database/migrations" },
+  "entities": ["./src/modules/**/entities/*.ts"]
+}
