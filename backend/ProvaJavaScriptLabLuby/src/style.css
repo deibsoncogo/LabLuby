@@ -1,0 +1,527 @@
+:root {
+  --white100: #FFFFFF;
+  --white200: #F7F7F7;
+  --white300: #F4F4F4;
+  --white400: #EBEBEB;
+  --white500: #E2E2E2;
+  --grey100: #868686;
+  --grey200: #888888;
+  --grey300: #707070;
+  --grey400: #494747;
+  --blue100: #ADC0C4;
+  --blue200: #758285;
+  --yellow100: #B5C401;
+  --green100: #27C383;
+  --green200: #21a76f;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  user-select: none;
+  text-decoration: none;
+  cursor: default;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 90vw;
+  min-width: 800px;
+  max-width: 1366px;
+
+  margin: 20px auto;
+  border: 2px solid var(--white400);
+
+  background-color: var(--white200);
+}
+
+a, svg, path {
+  cursor: pointer;
+}
+
+.flexDirectionRow {
+  flex-direction: row;
+}
+
+/* HEADER -------------------------------------- */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 8px 5px;
+  border-bottom: 2px solid var(--white400);
+}
+
+header section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0px 10%;
+  gap: 40%;
+}
+
+header section a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--grey300);
+  font: italic normal bold 20px "Roboto";
+  text-align: center;
+  white-space: nowrap;
+
+  fill: var(--grey300);
+}
+
+/* header section a:hover {
+  color: var(--grey400) !important;
+  fill: var(--grey400) !important;
+} */
+
+header section a svg {
+  margin-left: 10px;
+}
+
+#menuSelected {
+  color: var(--grey300);
+  font: italic normal bold 44px "Roboto";
+}
+
+#menuSelected div {
+  position: relative;
+  top: 13px;
+
+  width: calc(100% + 20px);
+  height: 7px;
+  border-radius: 50px;
+
+  color: transparent;
+  font-size: 0px;
+
+  background-color: var(--yellow100);
+}
+
+/* MAIN ---------------------------------------- */
+
+main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* MAIN GAME ----------------------------------- */
+
+.mainGame {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  width: 70%;
+  margin-top: 50px;
+  margin-right: 30px;
+  margin-left: 6%;
+}
+
+.mainGameTitle {
+  color: var(--grey300);
+  font: italic normal 300 24px "Roboto";
+}
+
+.mainGameTitle strong {
+  color: var(--grey300);
+  font: italic normal bold 24px "Roboto";
+}
+
+.mainGameSubTitle {
+  margin-top: 50px;
+
+  color: var(--grey100);
+  font: italic normal bold 17px "Roboto";
+}
+
+.mainGameButtonType {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  margin: 20px 0px;
+  gap: 10px;
+}
+
+.mainGameButtonType a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  height: 34px;
+  margin-right: 30px;
+  border-radius: 50px;
+  padding: 0px 30px;
+
+  font: italic normal bold 14px "Roboto";
+  white-space: nowrap;
+
+  background-color: var(--white100);
+}
+
+.mainGameButtonType a:last-child {
+  margin: 0;
+}
+
+/* .mainGameButtonType a:hover {
+  color: var(--white100);
+  background-color: #000;
+} */
+
+.mainGameRule strong {
+  color: var(--grey100);
+  font: italic normal bold 17px "Roboto";
+}
+
+.mainGameRule p {
+  color: var(--grey100);
+  font: italic normal normal 17px "Roboto";
+}
+
+.mainGameNumberAll {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  margin: 22px 0px;
+  gap: 10px;
+}
+
+.mainGameNumberAll a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+
+  color: var(--white100);
+  font: normal normal bold 20px "Roboto";
+
+  background-color: var(--blue100);
+}
+
+.mainGameNumberAll a:hover,
+.mainGameNumberAll a#active {
+  background-color: var(--blue200);
+}
+
+.mainGameButtonDiverse {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  gap: 30px;
+}
+
+.mainGameButtonDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 30px;
+}
+
+.mainGameButtonDiverse a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  min-width: 120px;
+  height: 52px;
+  padding: 0px 20px;
+  border: 1px solid var(--green100);
+  border-radius: 10px;
+  gap: 10px;
+
+  color: var(--white100);
+  font-style: normal;
+  font-weight: normal;
+  font-variant: bold;
+  font-size: 16px;
+  font-family: "Roboto";
+
+  fill: var(--white100);
+  background-color: var(--green100);
+}
+
+.mainGameButtonDiverse a:hover {
+  background-color: var(--green200);
+}
+
+.mainGameButtonDiverse a.transparent {
+  color: var(--green100);
+  font-style: normal;
+  font-weight: normal;
+  font-variant: medium;
+  font-size: 16px;
+  font-family: "Roboto";
+
+  background-color: transparent;
+}
+
+.mainGameButtonDiverse a.transparent:hover {
+  color: var(--white100);
+  background-color: var(--green100);
+}
+
+/* MAIN CART ----------------------------------- */
+
+.mainCart {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  width: 30%;
+  min-width: 330px;
+  height: 50vh;
+  min-height: 475px;
+  max-height: 600px;
+  margin-top: 30px;
+  border: 1px solid var(--white500);
+  border-radius: 10px;
+  margin-right: 6%;
+
+  background-color: var(--white100);
+}
+
+.mainCartDiv {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.mainCartTitle {
+  display: flex;
+  margin: 20px;
+
+  color: var(--grey300);
+  font: italic normal bold 24px "Roboto";
+}
+
+.mainCartGameAll {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  max-height: 250px;
+  margin: 0px 20px;
+  gap: 20px;
+
+  overflow-y: auto;
+}
+
+.mainCartEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  gap: 5px;
+}
+
+.mainCartEmpty div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  height: 12px;
+  border-radius: 50px;
+
+  color: transparent;
+  font-size: 0px;
+
+  background-color: var(--white500);
+}
+
+.mainCartEmpty div:nth-child(1) {
+  width: 240px;
+}
+
+.mainCartEmpty div:nth-child(2) {
+  width: 190px;
+}
+
+.mainCartEmpty div:nth-child(3) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 220px;
+
+  color: var(--grey300);
+  font: italic normal bold 16px "Roboto";
+  white-space: nowrap;
+}
+
+.mainCartEmpty div:nth-child(4) {
+  width: 250px;
+}
+
+.mainCartEmpty div:nth-child(5) {
+  width: 200px;
+}
+
+.mainCartGame {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  cursor: default;
+}
+
+.mainCartGameTrash {
+  width: 40px;
+  font-size: 0px;
+  fill: var(--grey200);
+}
+
+.mainCartGameTrash:hover {
+  fill: var(--grey300);
+}
+
+.mainCartGameBorder {
+  width: 4px;
+  height: 86px;
+  min-width: 4px;
+  margin-left: 2px;
+  margin-right: 10px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+
+  color: transparent;
+  font-size: 0px;
+}
+
+.mainCartGameValue {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  width: 200px;
+
+  gap: 8px;
+}
+
+.mainCartGameNumber {
+  margin-bottom: 5px;
+
+  color: var(--grey100);
+  font: italic normal bold 15px "Roboto";
+}
+
+.mainCartGameAmount {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.mainCartGameAmount strong {
+  width: 100px;
+  font: italic normal bold 16px "Roboto";
+}
+
+.mainCartGameAmount p {
+  color: var(--grey100);
+  font: normal normal normal 16px "Roboto";
+  margin-left: 5px;
+}
+
+.mainCartGameAmount p:nth-child(1) {
+  margin-left: 5px;
+}
+
+.mainCartTotal {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  margin: 20px;
+}
+
+.mainCartTotal strong {
+  margin-right: 10px;
+
+  color: var(--grey300);
+  font: italic normal bold 24px "Roboto";
+}
+
+.mainCartTotal p {
+  margin-right: 5px;
+
+  color: var(--grey300);
+  font: normal normal 300 24px "Roboto";
+}
+
+.mainCartSave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 10vh;
+  min-height: 50px;
+  max-height: 70px;
+  border-top: 1px solid var(--white500);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  gap: 10px;
+
+  color: var(--green100);
+  font: italic normal bold 35px "Roboto";
+
+  background: var(--white300);
+  fill: var(--green100);
+}
+
+.mainCartSave:hover {
+  color: var(--white300);
+  background: var(--green100);
+  fill: var(--white300);
+  border-top: 1px solid var(--green100);
+}
+
+/* FOOTER -------------------------------------- */
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 10vh;
+  max-height: 70px;
+  margin-top: 20px;
+  border-top: 2px solid var(--white400);
+
+  color: var(--grey300);
+  font: normal normal normal 10px "Roboto";
+}
