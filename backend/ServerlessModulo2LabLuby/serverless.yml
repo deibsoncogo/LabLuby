@@ -1,0 +1,41 @@
+service: serverlessmodulo2labluby
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  httpApi:
+    authorizers:
+      auth0:
+        identitySource: $request.header.Authorization
+        issuerUrl: https://deibsoncogo.us.auth0.com/
+        audience:
+          - serverlessmodulo2labluby
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get
+          authorizer: auth0
+
+  world:
+    handler: handler.world
+    events:
+      - httpApi:
+          path: /world
+          method: get
+          authorizer: auth0
+
+  post:
+    handler: handler.post
+    events:
+      - httpApi:
+          path: /post
+          method: post
+          authorizer: auth0
+
+plugins:
+  - serverless-plugin-typescript
