@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  database:
+    container_name: DatabaseProvaNestJSGraphQLLabLuby
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=ProvaNestJSGraphQLLabLuby
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=ProvaNestJSGraphQLLabLubyDB

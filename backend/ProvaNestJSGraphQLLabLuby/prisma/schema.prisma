@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id          String        @id @default(uuid())
+  name        String
+  email       String        @unique
+  password    String
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @default(now()) @updatedAt()
+  Users_Rules Users_Rules[]
+  Bets        Bets[]
+}
+
+model Rules {
+  id          String        @id @default(uuid())
+  name        String        @unique()
+  created_at  DateTime      @default(now())
+  updated_at  DateTime      @default(now()) @updatedAt()
+  Users_Rules Users_Rules[]
+}
+
+model Users_Rules {
+  id         String   @id @default(uuid())
+  user       Users?   @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user_id    String
+  rule       Rules?   @relation(fields: [rule_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  rule_id    String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt()
+
+  @@unique([user_id, rule_id])
+}
+
+model Games {
+  id          String   @id @default(uuid())
+  name        String   @unique()
+  description String
+  range       Int
+  price       Float
+  max_number  Int
+  color       String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt()
+  Bets        Bets[]
+}
+
+model Carts {
+  id         String   @id @default(uuid())
+  min_value  Float
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt()
+}
+
+model Bets {
+  id         String   @id @default(uuid())
+  item       String
+  user       Users?   @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  user_id    String
+  game       Games?   @relation(fields: [game_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  game_id    String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt()
+}
