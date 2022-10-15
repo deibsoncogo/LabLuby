@@ -1,0 +1,20 @@
+{
+  "name": "projectc",
+  "version": "1.0.0",
+  "description": "Criação de uma aplicação blockchain avançada",
+  "main": "index.js",
+  "repository": "git@github.com:deibsoncogo/BlockchainLabLuby.git",
+  "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "truffle": "^5.5.18"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "3.0.0-beta.0",
+    "chai": "^4.3.6",
+    "chai-as-promised": "^7.1.1",
+    "chai-bn": "^0.3.1",
+    "dotenv": "^16.0.1"
+  }
+}
