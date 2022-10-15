@@ -1,7 +1,5 @@
-# Programa LabLuby JS - Remoto
+# Teste lógico | Programa Lab Luby JavaScript
 Este teste lógico consiste na resolução de 10 métodos
-
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=LabLuby%20Teste%20L%C3%B3gico&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fdeibsoncogo%2FLabLubyTesteLogico%2Fmaster%2Fsrc%2Fassets%2FInsomniaLabLubyTesteLogico.json%3Ftoken%3DGHSAT0AAAAAABO7EHOY3PO3DFKFUUIHNG2UYPRLNEQ)
 
 ## Ambiente de trabalho
 Para instalar as dependências necessárias temos que executar o seguinte comando
@@ -20,9 +18,6 @@ O servidor vai rodar na porta 3333
   * As ferramentas utilizadas foram: `Yarn`, `Node JS`, `TypeScript`
   * As dependências utilizadas foram: `express`
   * Dependências usadas em modo de desenvolvimento: `eslint`, `ts-node-dev` e `typescript`
-
-## Documentação
-Endereço principal: `http://localhost/3333`
 
 ### Método 1
 Implemente um método que crie um novo array baseado nos valores passados
@@ -57,7 +52,7 @@ status(201).json([4, 3, 2, 1])
 
 ### Método 3
 Implemente um método que limpe os itens desnecessários de um array (false, undefined, strings vazias, zero, null)
-  * Entrada: [1, 2, '', undefined]
+  * Entrada: [1, 2, "", null]
   * Resultado: [1, 2]
 
 **POST** /method3
@@ -133,7 +128,7 @@ status(201).json(true)
 ```
 
 ### Método 8
-Implemente um método que remova os aninhamentos de um array de arrays para um array unico
+Implemente um método que remova os aninhamentos de um array de arrays para um array único
   * Entrada: [1, 2, [3], [4, 5]]
   * Resultado: [1, 2, 3, 4, 5]
 
