@@ -1,0 +1,35 @@
+service: serverlessmodulo3labluby
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - ec2:CreateNetworkInterface
+        - ec2:DescribeNetworkInterfaces
+        - ec2:DeleteNetworkInterface
+      Resource:
+        - "*"
+
+functions:
+  GetCustomers:
+    handler: handler.getCustomers
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+    vpc:
+      securityGroupIds:
+        - sg-0273f9da8ae5c9b88
+      subnetIds:
+        - subnet-0f42a972aadf1e7e8
+        - subnet-0744eceec13b5f2f2
+        - subnet-0808c54f250b95a64
+        - subnet-00a8dd6e3542c4619
+        - subnet-03e73e248a50ea5eb
+        - subnet-06d9de56b57421eed

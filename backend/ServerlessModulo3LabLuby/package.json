@@ -1,0 +1,14 @@
+{
+  "name": "serverlessmodulo3labluby",
+  "version": "1.0.0",
+  "description": "Criando um backend com AWS RDS, Lambda, Node JS e Serverless Framework",
+  "main": "index.js",
+  "repository": "git@github.com:deibsoncogo/ServerlessModulo3LabLuby.git",
+  "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "serverless": "^3.18.2"
+  }
+}
