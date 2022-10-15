@@ -1,0 +1,40 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "eslint-plugin-import-helpers"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "no-param-reassign": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "class-methods-use-this": "off",
+    "no-useless-constructor": "off",
+    "semi": ["error", "never"],
+    "import/prefer-default-export": "off",
+    "max-len": ["error", {"code": 109, "ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^import\\s.+\\sfrom\\s.+$" }],
+    "linebreak-style": "off",
+    "no-console": "off",
+    "quotes": ["error", "double"],
+    "object-curly-newline": ["error", { "multiline": true, "minProperties": 15 }],
+    "import-helpers/order-imports": ["warn", { "groups": [["/^react/", "/^next/", "/^express/", "/^typeorm/"], "module", ["parent", "sibling", "index"], ["/style/", "/css/"]], "newlinesBetween": "never", "alphabetize": { "order": "asc", "ignoreCase": true }}],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "import/extensions": ["error", "ignorePackages", { "ts": "never" }]
+  },
+  "settings": {
+    "import/resolver": { "typescript": {} }
+  }
+}
